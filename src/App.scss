@@ -1,0 +1,98 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.App {
+  outline: 2px solid black;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.object {
+  position: relative;
+  outline: 2px solid #3d00cb;
+  width: fit-content;
+  height: fit-content;
+
+  transition: all 0.4s ease-out;
+
+
+  &:hover {
+    outline: 5px solid yellow;
+  }
+
+}
+
+.meta {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.149);
+  display: grid;
+  grid-template-rows: auto auto auto;
+  width: 100%;
+}
+
+.App {
+
+  min-height: 200vh;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgreen;
+}
+
+
+
+.items {
+  position: relative;
+  outline: 2px solid white;
+  width: 50vw;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  transition: all 0.2s;
+  transform: scale(0.98);
+  will-change: transform;
+  user-select: none;
+  cursor: pointer;
+  padding: 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.items {
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.items::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+
+
+.smain {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}

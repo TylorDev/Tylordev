@@ -1,0 +1,21 @@
+.gallery-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    .slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .active {
+        transform: scale(1.1);
+    }
+}

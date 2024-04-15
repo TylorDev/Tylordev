@@ -5,13 +5,13 @@ const MousePositionContext = createContext();
 
 const MousePositionProvider = ({ children }) => {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const [Mposition, setPosition] = useState({
+  const [MousePosition, setPosition] = useState({
     x: 0,
     y: 0,
     xPercent: 0,
     yPercent: 0,
   });
-  const { x, y } = Mposition;
+  const { x, y } = MousePosition;
 
   const [center, setCenter] = useState({
     x: window.innerWidth / 2 + window.scrollX,
@@ -59,7 +59,7 @@ const MousePositionProvider = ({ children }) => {
       const yPercent = (e.clientY / window.innerHeight) * 100;
       setPosition({ x: e.clientX, y: e.clientY, xPercent, yPercent });
 
-      console.log("X:", e.clientX, "Y:", e.clientY); //
+      // console.log("X:", e.clientX, "Y:", e.clientY); //
     };
 
     window.addEventListener("mousemove", updateMousePosition);
@@ -69,7 +69,7 @@ const MousePositionProvider = ({ children }) => {
 
   return (
     <MousePositionContext.Provider
-      value={{ Mposition, rotate, center, changeCenter }}
+      value={{ MousePosition, rotate, center, changeCenter }}
     >
       {children}
     </MousePositionContext.Provider>

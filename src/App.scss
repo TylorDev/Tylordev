@@ -27,7 +27,7 @@ body {
 
 .object {
   position: relative;
-  outline: 2px solid #3d00cb;
+
   width: fit-content;
   height: fit-content;
 
@@ -46,6 +46,8 @@ body {
   display: grid;
   grid-template-rows: auto auto auto;
   width: 100%;
+  color: yellow;
+  text-shadow: 2px 2px 1px rgb(0, 0, 0);
 }
 
 .App {
@@ -56,43 +58,4 @@ body {
   justify-content: center;
   align-items: center;
   background-color: lightgreen;
-}
-
-
-
-.items {
-  position: relative;
-  outline: 2px solid white;
-  width: 50vw;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
-  transition: all 0.2s;
-  transform: scale(0.98);
-  will-change: transform;
-  user-select: none;
-  cursor: pointer;
-  padding: 0;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  display: grid;
-  grid-auto-flow: column;
-}
-
-.items {
-  -ms-overflow-style: none;
-  /* Internet Explorer 10+ */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
-.items::-webkit-scrollbar {
-  display: none;
-  /* Safari and Chrome */
-}
-
-
-.smain {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }

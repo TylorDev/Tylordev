@@ -6,7 +6,6 @@ function LocalObject({ children }) {
   const { rotate, center, changeCenter, Mposition } =
     useContext(MousePositionContext);
 
-  const [localRotation, setLocalRotation] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -16,6 +15,7 @@ function LocalObject({ children }) {
     x: 0,
   });
 
+  //Cambia el foco al contenedor que esta siendo enfocado por el mouse
   useEffect(() => {
     const handleHover = () => {
       changeCenter(containerPosition);
@@ -34,28 +34,30 @@ function LocalObject({ children }) {
       container.removeEventListener("mouseover", handleHover);
       container.removeEventListener("mouseout", handleMouseOut);
     };
-  }, [center]);
+  }, [center, Mposition, changeCenter, containerPosition]);
 
   useEffect(() => {
     if (containerRef.current) {
       setWidth(containerRef.current.clientWidth);
       setHeight(containerRef.current.clientHeight);
     }
-  }, []);
+  }, [Mposition]);
+
+  //Calcula la posision actual del contenedor y en relacion a su centro
   useEffect(() => {
-    const updateContainerPosition = () => {
+    const updateCointainerCenterPosition = () => {
       if (containerRef.current) {
         const { top, left } = containerRef.current.getBoundingClientRect();
         setContainerPosition({ y: top + height / 2, x: left + width / 2 });
       }
     };
 
-    updateContainerPosition();
+    updateCointainerCenterPosition();
 
-    window.addEventListener("resize", updateContainerPosition);
+    window.addEventListener("resize", updateCointainerCenterPosition);
 
     return () => {
-      window.removeEventListener("resize", updateContainerPosition);
+      window.removeEventListener("resize", updateCointainerCenterPosition);
     };
   }, [height, width]);
 
@@ -115,34 +117,49 @@ function LocalObject({ children }) {
         return { x: number / 5, y: number / 5 };
     }
   };
+
   return (
     <div
       ref={containerRef}
       className="object"
       style={{
-        transform: `perspective(1000px) rotate3d(1, 0, 0, ${
+        transform: `perspective(1500px) rotate3d(1, 0, 0, ${
           adjustPosition(position, rotate.x).x
         }deg)  rotate3d(0, 1, 0, ${adjustPosition(position, rotate.y).y}deg)`,
       }}
     >
-      <div className="meta">
-        {/* <p>
-          X: {containerPosition.x + width / 2} Y:
-          {containerPosition.y + height / 2}
-        </p>
-        <p>
-          CentroObjecto: Ancho: {width} Alto: {height}
-        </p>
-        <p>
-          Center X: {center.x} Y: {center.y}
-          viewport.
-        </p> */}
-
-        <p>El objeto está en {position} </p>
-      </div>
+      {/* {Metadata(containerPosition, width, height, center, position)} */}
 
       {children}
     </div>
   );
 }
 export default LocalObject;
+function Metadata(containerPosition, width, height, center, position) {
+  return (
+    <div className="meta">
+      <div>
+        <p>
+          X:{" "}
+          {containerPosition.x !== undefined && width !== undefined
+            ? (containerPosition.x + width / 2).toFixed(1)
+            : "N/A"}
+          Y:{" "}
+          {containerPosition.y !== undefined && height !== undefined
+            ? (containerPosition.y + height / 2).toFixed(1)
+            : "N/A"}
+        </p>
+        <p>
+          CentroObjecto: Ancho: {width !== undefined ? width.toFixed(1) : "N/A"}{" "}
+          Alto: {height !== undefined ? height.toFixed(1) : "N/A"}
+        </p>
+        <p>
+          Center X: {center.x !== undefined ? center.x.toFixed(1) : "N/A"} Y:{" "}
+          {center.y !== undefined ? center.y.toFixed(1) : "N/A"}
+          viewport.
+        </p>
+        <p>El objeto está en {position !== undefined ? position : "N/A"} </p>
+      </div>
+    </div>
+  );
+}

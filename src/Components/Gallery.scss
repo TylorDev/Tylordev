@@ -1,21 +1,70 @@
-.gallery-container {
+body {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #1d1d1d;
+
+}
+
+
+.BOX {
+
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+
+
+    img {
+        pointer-events: none;
+    }
+
+
+
+
+}
+
+
+.container {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
     width: 100%;
-    overflow: hidden;
-    position: relative;
+    height: 100%;
+    background-color: rgba(6, 255, 48, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-shadow: 2px 1px 1px white;
 
-    .slide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        outline: none;
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+    p {
+        margin: 0;
     }
 
-    .active {
-        transform: scale(1.1);
-    }
+    z-index: 999;
+
+
+}
+
+.caja {
+    width: 500px;
+    height: 100vh;
+    background-color: green;
+    outline: 3px solid rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+.caja2 {
+    background-color: rgb(75, 23, 6);
+}
+
+
+.caja3 {
+    background-color: rgb(150, 27, 103);
 }

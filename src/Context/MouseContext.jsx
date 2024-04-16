@@ -22,6 +22,52 @@ const MousePositionProvider = ({ children }) => {
     setCenter({ x: focus.x, y: focus.y });
   };
 
+  const [viewportSize, setViewportSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    // Función para manejar el evento de scroll
+    const handleScroll = () => {
+      // Verificar si se está haciendo scroll
+      if (!isScrolling) {
+        setIsScrolling(true);
+      }
+      // Reiniciar el temporizador para que después de un breve período sin hacer scroll, se marque como inactivo
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150); // Cambia este valor según tus necesidades
+    };
+
+    let timeout;
+
+    // Agregar el event listener al montar el componente
+    window.addEventListener("scroll", handleScroll);
+
+    // Eliminar el event listener al desmontar el componente
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isScrolling]); // Dependencia vacía para que solo se ejecute una vez al montar y desmontar el componente
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Limpia el evento de resize cuando el componente se desmonta
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Dependencia vacía para que solo se ejecute una vez al montar el componente
+
   useEffect(() => {
     const handleResize = () => {
       const viewportWidth = window.innerWidth;
@@ -69,7 +115,14 @@ const MousePositionProvider = ({ children }) => {
 
   return (
     <MousePositionContext.Provider
-      value={{ MousePosition, rotate, center, changeCenter }}
+      value={{
+        MousePosition,
+        rotate,
+        center,
+        changeCenter,
+        viewportSize,
+        isScrolling,
+      }}
     >
       {children}
     </MousePositionContext.Provider>

@@ -23,7 +23,11 @@ function Grid() {
   const imageElements = images.map((imageUrl, index) => (
     <LocalObject key={index}>
       <div>
-        <img style={{ width: "20vw", height: "50vh" }} src={imageUrl} alt="" />
+        <img
+          style={{ width: "100%", aspectRatio: "9/12" }}
+          src={imageUrl}
+          alt=""
+        />
       </div>
     </LocalObject>
   ));

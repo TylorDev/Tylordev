@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef, useEffect } from "react";
-import LocalObject from "../LocalObject";
+import LocalObject from "./LocalObject";
 import "./Row.scss";
 // import Grid from "./Grid";
 

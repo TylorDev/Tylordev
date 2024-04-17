@@ -128,7 +128,7 @@ function LocalObject({ children }) {
         }deg)  rotate3d(0, 1, 0, ${adjustPosition(position, rotate.y).y}deg)`,
       }}
     >
-      {/* {Metadata(containerPosition, width, height, center, position)} */}
+      {Metadata(containerPosition, width, height, center, position)}
 
       {children}
     </div>

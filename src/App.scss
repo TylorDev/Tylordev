@@ -33,10 +33,11 @@ body {
 
 .meta {
   position: absolute;
+  font-family: 'Courier New', Courier, monospace;
   background-color: rgba(255, 255, 255, 0.149);
   display: grid;
   grid-template-rows: auto auto auto;
   width: 100%;
-  color: yellow;
-  text-shadow: 2px 2px 1px rgb(0, 0, 0);
+  color: rgb(0, 73, 208);
+  text-shadow: 2px 2px 1px rgb(255, 255, 255);
 }

@@ -225,12 +225,34 @@ const Gallery = () => {
         //     outline: "2px solid red",
         //     backgroundImage:
         //       "url(https://i.pinimg.com/736x/1a/df/11/1adf119713b3a10e1389c185fd983139.jpg)",
+        //     backgroundSize: "contain",
         //   }}
         //   src={""}
         //   alt=""
         // ></div>
 
-        <Grid key={index}></Grid>
+        <div
+          key={index}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            width: "100%",
+            height: "100",
+            alignItems: "center",
+            justifyItems: "center",
+            outline: "2px solid red",
+          }}
+        >
+          {Array.from({ length: 9 }, (_, index) => (
+            <LocalObject key={index}>
+              <img
+                style={{ height: "15vw", aspectRatio: "1/1" }}
+                src={`https://via.placeholder.com/150?text=Image${index + 1}`}
+                alt=""
+              />
+            </LocalObject>
+          ))}
+        </div>
       ))}
     </div>
   );

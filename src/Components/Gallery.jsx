@@ -145,12 +145,12 @@ const Gallery = () => {
     const visiblePercentageX = (visibleWidth / metadata.width) * 100;
     const visiblePercentageY = (visibleHeight / metadata.height) * 100;
 
-    console.log(
-      "Porcentaje X visible:",
-      visiblePercentageX,
-      "Porcentaje Y visible:",
-      visiblePercentageY
-    );
+    // console.log(
+    //   "Porcentaje X visible:",
+    //   visiblePercentageX,
+    //   "Porcentaje Y visible:",
+    //   visiblePercentageY
+    // );
 
     setPorcentaje({ x: visiblePercentageX, y: visiblePercentageY });
 
@@ -235,7 +235,8 @@ const Gallery = () => {
           key={index}
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
+            gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+            gridTemplateRows: "1fr 1fr 1fr",
             width: "100%",
             height: "100",
             alignItems: "center",
@@ -243,10 +244,10 @@ const Gallery = () => {
             outline: "2px solid red",
           }}
         >
-          {Array.from({ length: 9 }, (_, index) => (
-            <LocalObject key={index}>
+          {Array.from({ length: 15 }, (_, index) => (
+            <LocalObject key={index} isDragging={dragging}>
               <img
-                style={{ height: "15vw", aspectRatio: "1/1" }}
+                style={{ height: "33vh", aspectRatio: "1/1" }}
                 src={`https://via.placeholder.com/150?text=Image${index + 1}`}
                 alt=""
               />

@@ -18,10 +18,6 @@ const MousePositionProvider = ({ children }) => {
     y: window.innerHeight / 2 + window.scrollY,
   });
 
-  const changeCenter = (focus) => {
-    setCenter({ x: focus.x, y: focus.y });
-  };
-
   const [viewportSize, setViewportSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -70,11 +66,8 @@ const MousePositionProvider = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-
-      const centerX = viewportWidth / 2;
-      const centerY = viewportHeight / 2;
+      const centerX = viewportSize.width / 2;
+      const centerY = viewportSize.height / 2;
 
       setCenter({ x: centerX, y: centerY });
     };
@@ -86,7 +79,7 @@ const MousePositionProvider = ({ children }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [viewportSize]);
 
   useEffect(() => {
     const changeRotate = () => {
@@ -119,7 +112,6 @@ const MousePositionProvider = ({ children }) => {
         MousePosition,
         rotate,
         center,
-        changeCenter,
         viewportSize,
         isScrolling,
       }}

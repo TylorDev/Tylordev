@@ -2,53 +2,89 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { MousePositionContext } from "../Context/MouseContext";
 
-function LocalObject({ children }) {
-  const { rotate, center, changeCenter, Mposition } =
-    useContext(MousePositionContext);
+function LocalObject({ children, isDragging }) {
+  const { rotate, center, MousePosition } = useContext(MousePositionContext);
 
-  const containerRef = useRef(null);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
-
-  const [containerPosition, setContainerPosition] = useState({
+  const objectRef = useRef(null);
+  const [metadata, setMetadata] = useState({
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: 0,
+    height: 0,
+  });
+  const [puntero, setPuntero] = useState("centro");
+  const [objectCenter, setObjectCenter] = useState({
     y: 0,
     x: 0,
   });
 
+  const [isOutside, setIsOutside] = useState(false);
+
   //Cambia el foco al contenedor que esta siendo enfocado por el mouse
   useEffect(() => {
-    const handleHover = () => {
-      changeCenter(containerPosition);
+    const handleMouseOut = (event) => {
+      // Verifica si el mouse está fuera del viewport
+      if (
+        event.clientY < 0 ||
+        event.clientY >= window.innerHeight ||
+        event.clientX < 0 ||
+        event.clientX >= window.innerWidth
+      ) {
+        // El mouse ha salido del viewport
+        console.log("El mouse ha salido del viewport");
+        setIsOutside(true);
+      } else {
+        setIsOutside(false);
+      }
     };
 
-    const handleMouseOut = () => {
-      changeCenter({ Mposition });
-    };
+    // Agregar un event listener para el evento "mouseout" en el documento
+    document.addEventListener("mouseout", handleMouseOut);
 
-    const container = containerRef.current;
-
-    container.addEventListener("mouseover", handleHover);
-    container.addEventListener("mouseout", handleMouseOut);
-
+    // Limpiar la suscripción cuando el componente se desmonte
     return () => {
-      container.removeEventListener("mouseover", handleHover);
-      container.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("mouseout", handleMouseOut);
     };
-  }, [center, Mposition, changeCenter, containerPosition]);
+  }, []); // El array vacío como segundo argumento asegura que este efecto se ejecute solo una vez, similar a componentDidMount
 
   useEffect(() => {
-    if (containerRef.current) {
-      setWidth(containerRef.current.clientWidth);
-      setHeight(containerRef.current.clientHeight);
-    }
-  }, [Mposition]);
+    const updateContainerPosition = () => {
+      const container = objectRef.current;
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        setMetadata({
+          top: rect.top,
+          left: rect.left,
+          bottom: rect.bottom,
+          right: rect.right,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    };
+
+    updateContainerPosition();
+
+    // Re-calculate position on resize or scroll
+    window.addEventListener("resize", updateContainerPosition);
+    window.addEventListener("scroll", updateContainerPosition);
+
+    return () => {
+      window.removeEventListener("resize", updateContainerPosition);
+      window.removeEventListener("scroll", updateContainerPosition);
+    };
+  }, [MousePosition]);
 
   //Calcula la posision actual del contenedor y en relacion a su centro
   useEffect(() => {
     const updateCointainerCenterPosition = () => {
-      if (containerRef.current) {
-        const { top, left } = containerRef.current.getBoundingClientRect();
-        setContainerPosition({ y: top + height / 2, x: left + width / 2 });
+      if (objectRef.current) {
+        setObjectCenter({
+          y: metadata.top + metadata.height / 2,
+          x: metadata.left + metadata.width / 2,
+        });
       }
     };
 
@@ -59,32 +95,84 @@ function LocalObject({ children }) {
     return () => {
       window.removeEventListener("resize", updateCointainerCenterPosition);
     };
-  }, [height, width]);
+  }, [metadata, MousePosition]);
 
-  const getPosition = (
-    objectPosition,
-    viewportCenter,
-    objectWidth,
-    objectHeight
-  ) => {
+  // const getPosition = (objectPosition, Focus, metadata) => {
+  //   const { x: objX, y: objY } = objectPosition;
+  //   const { x: focusX, y: focusY } = Focus;
+  //   const { height, width } = metadata;
+
+  //   const distance = {
+  //     x: objectPosition.x - Focus.x,
+  //     y: objectPosition.y - Focus.y,
+  //   };
+
+  //   const halfWidth = width / 2;
+  //   const halfHeight = height / 2;
+
+  //   const isAbove = objY < focusY - halfHeight;
+  //   const isBelow = objY > focusY + halfHeight;
+  //   const isLeft = objX < focusX - halfWidth;
+  //   const isRight = objX > focusX + halfWidth;
+
+  //   if (isAbove) {
+  //     if (isLeft) return "arriba izquierda";
+  //     if (isRight) return "arriba derecha";
+  //     return "arriba centro";
+  //   } else if (isBelow) {
+  //     if (isLeft) return "abajo izquierda";
+  //     if (isRight) return "abajo derecha";
+  //     return "abajo centro";
+  //   } else {
+  //     if (isLeft) return "izquierda";
+  //     if (isRight) return "derecha";
+  //     return "centro";
+  //   }
+  // };
+
+  const getPosition = (objectPosition, Focus, metadata) => {
     const { x: objX, y: objY } = objectPosition;
-    const { x: centerX, y: centerY } = viewportCenter;
+    const { x: focusX, y: focusY } = Focus;
+    const { height, width } = metadata;
+    const halfWidth = width / 2;
+    const halfHeight = height / 2;
 
-    const halfWidth = objectWidth / 2;
-    const halfHeight = objectHeight / 2;
+    const distance = {
+      x: objectPosition.x - Focus.x,
+      y: objectPosition.y - Focus.y,
+    };
 
-    const isAbove = objY < centerY - halfHeight;
-    const isBelow = objY > centerY + halfHeight;
-    const isLeft = objX < centerX - halfWidth;
-    const isRight = objX > centerX + halfWidth;
+    const isAbove = objY < focusY - halfHeight;
+    const isBelow = objY > focusY + halfHeight;
+    const isLeft = objX < focusX - halfWidth;
+    const isRight = objX > focusX + halfWidth;
 
     if (isAbove) {
-      if (isLeft) return "arriba izquierda";
-      if (isRight) return "arriba derecha";
+      if (isLeft) {
+        if (distance.y < 0 && distance.x >= -380 && distance.x <= -160) {
+          return "arriba izquierda";
+        }
+
+        return "top-corner-left";
+      }
+      if (isRight) {
+        if (distance.y < 0 && distance.x >= 160 && distance.x <= 380) {
+          return "arriba derecha";
+        }
+        return "top-corner-right";
+      }
       return "arriba centro";
-    } else if (isBelow) {
-      if (isLeft) return "abajo izquierda";
-      if (isRight) return "abajo derecha";
+    }
+
+    if (isBelow) {
+      if (isLeft) {
+        if (distance.y > 0 && distance.x < 0) return "bottom-corner-left";
+        return "abajo izquierda";
+      }
+      if (isRight) {
+        if (distance.y > 0 && distance.x > 0) return "bottom-corner-right";
+        return "abajo derecha";
+      }
       return "abajo centro";
     } else {
       if (isLeft) return "izquierda";
@@ -92,8 +180,15 @@ function LocalObject({ children }) {
       return "centro";
     }
   };
-
-  const position = getPosition(containerPosition, center, width, height);
+  useEffect(() => {
+    if (isOutside) {
+      const newPuntero = "centro";
+      setPuntero(newPuntero);
+    } else {
+      const newPuntero = getPosition(objectCenter, MousePosition, metadata);
+      setPuntero(newPuntero);
+    }
+  }, [objectCenter, MousePosition, metadata, center, isOutside]);
 
   const adjustPosition = (position, number) => {
     switch (position) {
@@ -115,51 +210,61 @@ function LocalObject({ children }) {
         return { x: 0, y: number - 30 };
       case "centro":
         return { x: number / 5, y: number / 5 };
+      default:
+        return { x: 0, y: 0 };
     }
   };
-
   return (
     <div
-      ref={containerRef}
+      ref={objectRef}
       className="object"
       style={{
-        transform: `perspective(1500px) rotate3d(1, 0, 0, ${
-          adjustPosition(position, rotate.x).x
-        }deg)  rotate3d(0, 1, 0, ${adjustPosition(position, rotate.y).y}deg)`,
+        transform: isDragging
+          ? `perspective(1500px) rotate3d(1, 0, 0,${rotate.x}deg)rotate3d(0, 1, 0,${rotate.y}deg)`
+          : `perspective(1500px) rotate3d(1, 0, 0, ${
+              adjustPosition(puntero, rotate.x).x
+            }deg) rotate3d(0, 1, 0, ${adjustPosition(puntero, rotate.y).y}deg)`,
       }}
     >
-      {Metadata(containerPosition, width, height, center, position)}
+      {Metadata(objectCenter, metadata, center, puntero, MousePosition)}
 
       {children}
     </div>
   );
 }
 export default LocalObject;
-function Metadata(containerPosition, width, height, center, position) {
+function Metadata(objectCenter, metadata, Foco, puntero, mouse) {
+  const { width, height } = metadata;
   return (
     <div className="meta">
-      <div>
-        <p>
-          X:{" "}
-          {containerPosition.x !== undefined && width !== undefined
-            ? (containerPosition.x + width / 2).toFixed(1)
-            : "N/A"}
-          Y:{" "}
-          {containerPosition.y !== undefined && height !== undefined
-            ? (containerPosition.y + height / 2).toFixed(1)
-            : "N/A"}
-        </p>
-        <p>
-          CentroObjecto: Ancho: {width !== undefined ? width.toFixed(1) : "N/A"}{" "}
-          Alto: {height !== undefined ? height.toFixed(1) : "N/A"}
-        </p>
-        <p>
-          Center X: {center.x !== undefined ? center.x.toFixed(1) : "N/A"} Y:{" "}
-          {center.y !== undefined ? center.y.toFixed(1) : "N/A"}
-          viewport.
-        </p>
-        <p>El objeto está en {position !== undefined ? position : "N/A"} </p>
-      </div>
+      <div> Posision objeto :[centro]</div>
+      <p>
+        X:
+        {objectCenter.x.toFixed(1)}
+        Y: {objectCenter.y.toFixed(1)}
+      </p>
+      <div>Dimensiones:[objeto]</div>
+      <p>Ancho: {width.toFixed(1)}</p>
+      <p>Alto: {height.toFixed(1)}</p>
+      <div>Posision Mouse</div>
+      <p>
+        X:
+        {mouse.x.toFixed(1)}
+        Y: {mouse.y.toFixed(1)}
+      </p>
+      {/* <div>Centro viewport</div>
+      <p>
+        X: {Foco.x.toFixed(1)} Y:
+        {Foco.y.toFixed(1)}
+      </p> */}
+      <div>Puntero:</div>
+      <p>{puntero !== undefined ? puntero : "N/A"} </p>
+      <div>Distancia del focus:</div>
+      <p>
+        X:
+        {(objectCenter.x - mouse.x).toFixed(2) + "px"}
+        Y: {(objectCenter.y - mouse.y).toFixed(2) + "px"}
+      </p>
     </div>
   );
 }

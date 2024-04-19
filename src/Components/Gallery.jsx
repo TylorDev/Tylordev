@@ -231,26 +231,15 @@ const Gallery = () => {
         //   alt=""
         // ></div>
 
-        <div
-          key={index}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
-            gridTemplateRows: "1fr 1fr 1fr",
-            width: "100%",
-            height: "100",
-            alignItems: "center",
-            justifyItems: "center",
-            outline: "2px solid red",
-          }}
-        >
+        <div key={index} className="Example">
           {Array.from({ length: 15 }, (_, index) => (
             <LocalObject key={index} isDragging={dragging}>
-              <img
-                style={{ height: "33vh", aspectRatio: "1/1" }}
-                src={`https://via.placeholder.com/150?text=Image${index + 1}`}
-                alt=""
-              />
+              <div className="image-ex">
+                <img
+                  src={`https://via.placeholder.com/150?text=Image${index + 1}`}
+                  alt=""
+                />
+              </div>
             </LocalObject>
           ))}
         </div>

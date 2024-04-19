@@ -83,9 +83,8 @@ const MousePositionProvider = ({ children }) => {
 
   useEffect(() => {
     const changeRotate = () => {
-      const newRotateY = (window.innerWidth / 2 - x) / 10; // Ajusta el divisor para cambiar la sensibilidad de la rotación
-      const newRotateX = (window.innerWidth / 2 - y) / 10; // Ajusta el divisor para cambiar la sensibilidad de la rotación
-
+      const newRotateY = Math.abs((window.innerWidth / 2 - x) / 10);
+      const newRotateX = Math.abs((window.innerWidth / 2 - y) / 10);
       setRotate({ x: newRotateX, y: newRotateY });
     };
 

@@ -3,7 +3,8 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { MousePositionContext } from "../Context/MouseContext";
 
 function LocalObject({ children, isDragging }) {
-  const { rotate, center, MousePosition } = useContext(MousePositionContext);
+  const { rotate, center, MousePosition, viewportSize } =
+    useContext(MousePositionContext);
 
   const objectRef = useRef(null);
   const [metadata, setMetadata] = useState({
@@ -130,88 +131,202 @@ function LocalObject({ children, isDragging }) {
   //   }
   // };
 
-  const getPosition = (objectPosition, Focus, metadata) => {
+  const getPosition = (objectPosition, Focus, metadata, viewportSize) => {
     const { x: objX, y: objY } = objectPosition;
     const { x: focusX, y: focusY } = Focus;
     const { height, width } = metadata;
-    const halfWidth = width / 2;
-    const halfHeight = height / 2;
 
-    const distance = {
-      x: objectPosition.x - Focus.x,
-      y: objectPosition.y - Focus.y,
-    };
+    const distanceX = objX - focusX;
+    const isAbove = objY < focusY - height / 2;
+    const isBelow = objY > focusY + height / 2;
+    const isLeft = objX < focusX - width / 2;
+    const isRight = objX > focusX + width / 2;
 
-    const isAbove = objY < focusY - halfHeight;
-    const isBelow = objY > focusY + halfHeight;
-    const isLeft = objX < focusX - halfWidth;
-    const isRight = objX > focusX + halfWidth;
+    const isLeftCorner =
+      distanceX >= -(viewportSize.width / 2 + width * 1.5) &&
+      distanceX <= -(viewportSize.width / 2 - width * 1.5);
+
+    const isRightCorner =
+      distanceX <= viewportSize.width / 2 + width * 1.5 &&
+      distanceX >= viewportSize.width / 2 - width * 1.5;
 
     if (isAbove) {
       if (isLeft) {
-        if (distance.y < 0 && distance.x >= -380 && distance.x <= -160) {
-          return "arriba izquierda";
+        //Se divide entre 5 por el numero de columnas, en este caso 5 visibles.
+        if (objX < viewportSize.width / 5 && isLeftCorner) {
+          return "arriba esquina izquierda";
         }
-
-        return "top-corner-left";
+        return "arriba izquierda";
       }
       if (isRight) {
-        if (distance.y < 0 && distance.x >= 160 && distance.x <= 380) {
-          return "arriba derecha";
+        if (objX > viewportSize.width / 1.25 && isRightCorner) {
+          return "arriba esquina derecha";
         }
-        return "top-corner-right";
+        return "arriba derecha";
       }
       return "arriba centro";
-    }
-
-    if (isBelow) {
+    } else if (isBelow) {
       if (isLeft) {
-        if (distance.y > 0 && distance.x < 0) return "bottom-corner-left";
+        if (objX < viewportSize.width / 5 && isLeftCorner) {
+          return "abajo esquina izquierda";
+        }
         return "abajo izquierda";
       }
       if (isRight) {
-        if (distance.y > 0 && distance.x > 0) return "bottom-corner-right";
+        if (objX > viewportSize.width / 1.25 && isRightCorner) {
+          return "abajo esquina derecha";
+        }
         return "abajo derecha";
       }
+
       return "abajo centro";
     } else {
-      if (isLeft) return "izquierda";
-      if (isRight) return "derecha";
-      return "centro";
+      if (isLeft) {
+        if (objX < viewportSize.width / 5 && isLeftCorner) {
+          return "borde izquierda";
+        }
+        return "izquierda";
+      }
+      if (isRight) {
+        if (objX > viewportSize.width / 1.25 && isRightCorner) {
+          return "borde derecha";
+        }
+        return "derecha";
+      }
+      return "centro ";
     }
   };
   useEffect(() => {
     if (isOutside) {
-      const newPuntero = "centro";
+      const newPuntero = getPosition(
+        objectCenter,
+        center,
+        metadata,
+        viewportSize
+      );
       setPuntero(newPuntero);
     } else {
-      const newPuntero = getPosition(objectCenter, MousePosition, metadata);
+      const newPuntero = getPosition(
+        objectCenter,
+        MousePosition,
+        metadata,
+        viewportSize
+      );
       setPuntero(newPuntero);
     }
-  }, [objectCenter, MousePosition, metadata, center, isOutside]);
+  }, [objectCenter, MousePosition, metadata, center, isOutside, viewportSize]);
 
-  const adjustPosition = (position, number) => {
-    switch (position) {
-      case "arriba izquierda":
-        return { x: -number, y: number + 30 };
-      case "arriba derecha":
-        return { x: -number, y: number - 30 };
-      case "arriba centro":
-        return { x: -number, y: number };
-      case "abajo izquierda":
-        return { x: number, y: number + 30 };
-      case "abajo derecha":
-        return { x: number, y: number - 30 };
-      case "abajo centro":
-        return { x: number, y: 0 };
-      case "izquierda":
-        return { x: 0, y: number + 30 };
-      case "derecha":
-        return { x: 0, y: number - 30 };
-      case "centro":
-        return { x: number / 5, y: number / 5 };
-      default:
-        return { x: 0, y: 0 };
+  const adjustPosition = (position, grados, idle = false) => {
+    if (idle) {
+      // Definición de las variables
+      const side = 35;
+      const CornerBorder = 45;
+      const numeroC = grados / 5;
+
+      switch (position) {
+        case "arriba izquierda":
+          return { x: -side, y: side };
+        case "arriba esquina izquierda":
+          return { x: -side, y: CornerBorder };
+        case "arriba derecha":
+          return { x: -side, y: -side };
+        case "arriba esquina derecha":
+          return { x: -side, y: -CornerBorder };
+        case "arriba centro":
+          return { x: -side, y: 0 };
+        case "abajo izquierda":
+          return { x: side, y: side };
+        case "abajo esquina izquierda":
+          return { x: side, y: CornerBorder };
+        case "abajo derecha":
+          return { x: side, y: -side };
+        case "abajo esquina derecha":
+          return { x: side, y: -CornerBorder };
+        case "abajo centro":
+          return { x: side, y: 0 };
+        case "izquierda":
+          return { x: 0, y: side };
+        case "borde izquierda":
+          return { x: 0, y: CornerBorder };
+        case "derecha":
+          return { x: 0, y: -side };
+        case "borde derecha":
+          return { x: 0, y: -CornerBorder };
+        case "centro":
+          return { x: numeroC, y: numeroC };
+        default:
+          return { x: 0, y: 0 };
+      }
+    } else {
+      const absGrados = Math.abs(grados);
+      const minvalue = 5;
+      const maxSide = 30;
+      const MaxCornerBorder = 45;
+      const lados = Math.min(absGrados + minvalue, maxSide) + maxSide;
+      const bordes = Math.min(absGrados + maxSide, MaxCornerBorder);
+      const esquinas = Math.min(absGrados, MaxCornerBorder) + MaxCornerBorder;
+
+      switch (position) {
+        case "arriba izquierda":
+          return {
+            x: -grados,
+            y: lados,
+          };
+        case "arriba esquina izquierda":
+          return {
+            x: -grados,
+            y: esquinas,
+          };
+        case "arriba derecha":
+          return {
+            x: -absGrados,
+            y: -lados,
+          };
+        case "arriba esquina derecha":
+          return {
+            x: -grados,
+            y: -esquinas,
+          };
+        case "arriba centro":
+          return { x: -grados, y: 0 };
+        case "abajo izquierda":
+          return {
+            x: grados,
+            y: lados,
+          };
+        case "abajo esquina izquierda":
+          return { x: grados, y: grados + maxSide };
+        case "abajo derecha":
+          return {
+            x: grados,
+            y: -lados,
+          };
+        case "abajo esquina derecha":
+          return {
+            x: grados,
+            y: -esquinas,
+          };
+        case "abajo centro":
+          return { x: grados, y: 0 };
+        case "izquierda":
+          return { x: 0, y: lados };
+        case "borde izquierda":
+          return {
+            x: 0,
+            y: bordes,
+          };
+        case "derecha":
+          return { x: 0, y: -lados };
+        case "borde derecha":
+          return {
+            x: 0,
+            y: -bordes,
+          };
+        case "centro":
+          return { x: grados / minvalue, y: grados / minvalue };
+        default:
+          return { x: 0, y: 0 };
+      }
     }
   };
   return (
@@ -222,22 +337,43 @@ function LocalObject({ children, isDragging }) {
         transform: isDragging
           ? `perspective(1500px) rotate3d(1, 0, 0,${rotate.x}deg)rotate3d(0, 1, 0,${rotate.y}deg)`
           : `perspective(1500px) rotate3d(1, 0, 0, ${
-              adjustPosition(puntero, rotate.x).x
-            }deg) rotate3d(0, 1, 0, ${adjustPosition(puntero, rotate.y).y}deg)`,
+              adjustPosition(puntero, rotate.x, isOutside).x
+            }deg) rotate3d(0, 1, 0, ${
+              adjustPosition(puntero, rotate.y, isOutside).y
+            }deg)`,
       }}
     >
-      {Metadata(objectCenter, metadata, center, puntero, MousePosition)}
-
+      {Metadata(
+        objectCenter,
+        metadata,
+        center,
+        puntero,
+        MousePosition,
+        isOutside,
+        adjustPosition(puntero, rotate.x, isOutside).x,
+        adjustPosition(puntero, rotate.y, isOutside).y
+      )}
       {children}
     </div>
   );
 }
 export default LocalObject;
-function Metadata(objectCenter, metadata, Foco, puntero, mouse) {
+
+function Metadata(
+  objectCenter,
+  metadata,
+
+  Foco,
+  puntero,
+  mouse,
+  isOutside,
+  rotationX,
+  rotationY
+) {
   const { width, height } = metadata;
   return (
     <div className="meta">
-      <div> Posision objeto :[centro]</div>
+      {/* <div> Posision objeto :[centro]</div>
       <p>
         X:
         {objectCenter.x.toFixed(1)}
@@ -251,20 +387,21 @@ function Metadata(objectCenter, metadata, Foco, puntero, mouse) {
         X:
         {mouse.x.toFixed(1)}
         Y: {mouse.y.toFixed(1)}
-      </p>
+      </p> */}
       {/* <div>Centro viewport</div>
       <p>
         X: {Foco.x.toFixed(1)} Y:
         {Foco.y.toFixed(1)}
       </p> */}
-      <div>Puntero:</div>
-      <p>{puntero !== undefined ? puntero : "N/A"} </p>
-      <div>Distancia del focus:</div>
+      {/* s */}
+      {/* <div>Distancia del focus:</div>
       <p>
         X:
-        {(objectCenter.x - mouse.x).toFixed(2) + "px"}
-        Y: {(objectCenter.y - mouse.y).toFixed(2) + "px"}
-      </p>
+        {(objectCenter.x - mouse.x).toFixed(1) + "px"}
+      </p> */}
+
+      <div>Puntero</div>
+      <p>{puntero}</p>
     </div>
   );
 }

@@ -22,7 +22,7 @@ body {
   width: fit-content;
   height: fit-content;
 
-  transition: all 0.4s ease-out;
+  transition: all 500ms ease-out;
 
 
   &:hover {
@@ -45,5 +45,31 @@ body {
 
   div {
     font-size: 0.8rem;
+  }
+}
+
+.Example {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  align-items: center;
+  justify-items: center;
+  outline: 2px solid #a601ff;
+}
+
+.image-ex {
+  outline: 2px solid rgb(255, 0, 0);
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

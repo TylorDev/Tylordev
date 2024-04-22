@@ -379,9 +379,7 @@ function Metadata(
         {objectCenter.x.toFixed(1)}
         Y: {objectCenter.y.toFixed(1)}
       </p>
-      <div>Dimensiones:[objeto]</div>
-      <p>Ancho: {width.toFixed(1)}</p>
-      <p>Alto: {height.toFixed(1)}</p>
+     
       <div>Posision Mouse</div>
       <p>
         X:
@@ -400,8 +398,11 @@ function Metadata(
         {(objectCenter.x - mouse.x).toFixed(1) + "px"}
       </p> */}
 
-      <div>Puntero</div>
-      <p>{puntero}</p>
+      {/* <div>Puntero</div> */}
+      {/* <p>{puntero}</p>
+      <div>Dimensiones:[objeto]</div>
+      <p>Ancho: {width.toFixed(1)}</p>
+      <p>Alto: {height.toFixed(1)}</p> */}
     </div>
   );
 }

@@ -1,27 +1,32 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState, useRef, useCallback, useContext } from "react";
-
 import "./Gallery.scss";
-
-// import Row from "./Row";
-// import { MousePositionContext } from "../Context/MouseContext";
 import LocalObject from "./LocalObject";
-import Grid from "./Grid";
 import { MousePositionContext } from "../Context/MouseContext";
-const Gallery = () => {
-  const { viewportSize, isScrolling, MousePosition } =
-    useContext(MousePositionContext);
 
-  const [Porcentaje, setPorcentaje] = useState({
-    x: 0,
-    y: 0,
+const Gallery = () => {
+  //Tamaño del viewport y Posicion en vivo de Mouse, Dependencias: [???]
+  const { viewportSize, MousePosition } = useContext(MousePositionContext);
+  const [center, setCenter] = useState({ x: 0, y: 0 });
+  //Porcentaje visible del Box en el viewport, Todavia no lo comprendo al 100%, es necesario rehacerlo. Dependencias: [???]
+  const [visibilidad, setVisibilidad] = useState({
+    x: "100",
+    y: "100",
   });
 
-  const [puntero, setPuntero] = useState({ x: 0, y: 0 });
+  //Direccion a la cual ocultar, Dependencias: [???]
+  const [puntero, setPuntero] = useState({ x: "centro", y: "centro" });
 
+  //Controla el evento dragging, Dependencias: [???]
   const [dragging, setDragging] = useState(false);
 
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
+  //Posision del ultimo click del mouse, Dependencias: [???]
+  const [lastClick, setLastclick] = useState({ x: 0, y: 0 });
+
+  //Referencia al box que contiene todo lo que sea arrastrable, Dependencias: [???]
+  const dragBoxAreaRef = useRef(null);
+
+  //Todos los datos sobre el Box, tamaño y posision, Dependencias: [???]
   const [metadata, setMetadata] = useState({
     top: 0,
     left: 0,
@@ -30,40 +35,84 @@ const Gallery = () => {
     width: 0,
     height: 0,
   });
-  const [position, setPosition] = useState({
-    x: -viewportSize.width,
-    y: -viewportSize.height,
-  });
-  const handleClick = useCallback(
-    (event) => {
-      // Actualizar las coordenadas absolutas solo si no se está arrastrando
-      if (!dragging) {
-        const x = event.clientX - metadata.left;
-        const y = event.clientY - metadata.top;
-        setCoordinates({ x, y });
-      }
-    },
-    [metadata, dragging]
-  );
 
-  const handleMouseDown = (event) => {
-    handleClick(event);
+  //Posision inicial del Box, Se ocupa para posisionar el box en el viewport, Dependencias: [???]
+  const [position, setPosition] = useState({
+    x: -metadata.width / 2,
+    y: -metadata.height / 2,
+  });
+
+  //Obtiene la posision del ultimo click. en la pantalla.
+  const handleClick = useCallback(() => {
+    if (!dragging) {
+      const x = MousePosition.x - metadata.left;
+      const y = MousePosition.y - metadata.top;
+      setLastclick({ x, y });
+    }
+  }, [metadata, dragging, MousePosition]);
+
+  const handleCenter = () => {
+    setCenter({ x: 0, y: 0 });
+  };
+  const handleMouseDown = () => {
+    handleClick();
     setDragging(true);
   };
 
-  const obtenerLado = (metadata, viewportSize) => {
-    const { left, top } = metadata;
+  const handlePuntero = (conteinersize, viewportSize) => {
+    const { left, top } = conteinersize;
     const { width, height } = viewportSize;
+    const center = { x: width / 2, y: height / 2 };
+    if (left < center.x) {
+      console.log("arriba");
+    }
 
-    let ladoX = left + width > 0 ? "left" : "right";
-    let ladoY = top + height > 0 ? "top" : "bottom";
+    let ladoX = left + width > 0 ? "right" : "left";
+    let ladoY = top + height > 0 ? "bottom" : "top";
 
     return { x: ladoX, y: ladoY };
   };
 
+  const convertPlaceholder = (number) => {
+    switch (number) {
+      case 1:
+        return "top";
+      case 2:
+        return "top";
+      case 3:
+        return "top";
+      case 4:
+        return "left";
+      case 5:
+        return "center";
+      case 6:
+        return "right";
+      case 7:
+        return "bottom";
+      case 8:
+        return "bottom";
+      case 9:
+        return "bottom";
+      default:
+        return "Invalid";
+    }
+  };
+
+  // Función para calcular la posición top
+  const teleport = (Porcentaje, position, viewportSize) => {
+    if (Porcentaje > 1510) {
+      return position - viewportSize;
+    } else if (Porcentaje < 1) {
+      return position + viewportSize;
+    } else {
+      return position;
+    }
+  };
+
+  //Obtiene todos los datos del Box, dimensiones y Posision
   useEffect(() => {
     const updateContainerPosition = () => {
-      const container = containerRef.current;
+      const container = dragBoxAreaRef.current;
       if (container) {
         const rect = container.getBoundingClientRect();
         setMetadata({
@@ -76,35 +125,22 @@ const Gallery = () => {
         });
       }
     };
-
     updateContainerPosition();
-
-    // Re-calculate position on resize or scroll
     window.addEventListener("resize", updateContainerPosition);
     window.addEventListener("scroll", updateContainerPosition);
-
     return () => {
       window.removeEventListener("resize", updateContainerPosition);
       window.removeEventListener("scroll", updateContainerPosition);
     };
-  }, [coordinates, MousePosition]);
+  }, [lastClick, MousePosition]);
 
-  useEffect(() => {
-    // Agregar un event listener para clics en el documento
-    document.addEventListener("click", handleClick);
-
-    // Remover el event listener cuando el componente se desmonte para evitar memory leaks
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, [handleClick]); // El segundo argumento de useEffect indica las dependencias, en este caso, vacío para que solo se ejecute una vez al montar el componente
-
+  //Mouse al box si draggin es true.
   useEffect(() => {
     const handleMouseMove = (event) => {
       if (dragging) {
         setPosition({
-          x: event.clientX - coordinates.x,
-          y: event.clientY - coordinates.y,
+          x: event.clientX - lastClick.x,
+          y: event.clientY - lastClick.y,
         });
       }
     };
@@ -122,18 +158,14 @@ const Gallery = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [dragging, coordinates]);
+  }, [dragging, lastClick]);
 
   useEffect(() => {
-    // Coordenadas del lado izquierdo y superior del contenedor
     const containerLeft = position.x;
     const containerTop = position.y;
+    const containerRight = position.x + metadata.width;
+    const containerBottom = position.y + metadata.height;
 
-    // Coordenadas del lado derecho e inferior del contenedor
-    const containerRight = position.x + metadata.width / 3;
-    const containerBottom = position.y + metadata.height / 3;
-
-    // Calcula el ancho y alto del contenedor visible
     const visibleWidth =
       Math.min(containerRight, viewportSize.width) +
       Math.max(containerLeft, metadata.width);
@@ -141,111 +173,97 @@ const Gallery = () => {
       Math.min(containerBottom, viewportSize.height) +
       Math.max(containerTop, metadata.height);
 
-    // Calcula el porcentaje de ancho y alto del contenedor visible
     const visiblePercentageX = (visibleWidth / metadata.width) * 100;
     const visiblePercentageY = (visibleHeight / metadata.height) * 100;
 
-    // console.log(
-    //   "Porcentaje X visible:",
-    //   visiblePercentageX,
-    //   "Porcentaje Y visible:",
-    //   visiblePercentageY
-    // );
+    setVisibilidad({ x: visiblePercentageX, y: visiblePercentageY });
 
-    setPorcentaje({ x: visiblePercentageX, y: visiblePercentageY });
-
-    setPuntero(obtenerLado(metadata, viewportSize));
-    // Aquí puedes hacer lo que necesites con el porcentaje visible
+    setPuntero(handlePuntero(metadata, viewportSize));
   }, [metadata, viewportSize, position]);
 
   return (
     <div
-      ref={containerRef}
+      ref={dragBoxAreaRef}
       className="BOX"
       style={{
-        // left: `${Math.max(
-        //   0,
-        //   Math.min(position.x, viewportSize.width - metadata.width)
-        // )}px`,
-        left: `${
-          Porcentaje.x > 115
-            ? position.x - viewportSize.width
-            : Porcentaje.x < 85
-            ? position.x + viewportSize.width
-            : position.x
-        }px`,
+        left: `${teleport(visibilidad.x, position.x, viewportSize.width)}px`,
 
-        top: `${
-          Porcentaje.y > 110
-            ? position.y - viewportSize.height
-            : Porcentaje.y < 85
-            ? position.y + viewportSize.height
-            : position.y
-        }px`,
+        top: `${teleport(visibilidad.y, position.y, viewportSize.height)}px`,
 
         position: "absolute",
         userSelect: "none",
       }}
       onMouseDown={handleMouseDown}
     >
-      <div className="container">
-        <p>Cordenanas globales del click:</p>
-        (X: {coordinates.x}, Y: {coordinates.y})<p></p>
-        <p>Posicion del conteiner:</p>
-        (X: {metadata.left} Y: {metadata.top} )<p>Dimenciones del conteiner:</p>
-        <p> Alto: {metadata.height}px</p>
-        <p> Ancho: {metadata.width}px</p>
-        <p>Dimenciones del viewport:</p>
-        <p> Alto: {viewportSize.height}px</p>
-        <p> Ancho: {viewportSize.width}px</p>
-        <p>Puntero</p>
-        {/* <span>
-          (X:{" "}
-          {metadata.left + viewportSize.width > 0
-            ? " cargar lado left"
-            : " cargar lado  right"}{" "}
-          Y:{" "}
-          {metadata.top + viewportSize.height > 0
-            ? " cargar lado  top"
-            : "  cargar  lado bottom"}{" "}
-          )
-        </span> */}
-        <p>
-          {puntero.x} {puntero.y}
-        </p>
-        <p>Visible :</p>
-        (x: {Porcentaje.x} %, y: {Porcentaje.y} %)<p></p>
-      </div>
-      {Array.from({ length: 9 }, (_, index) => (
-        // <div
-        //   key={index}
-        //   style={{
-        //     height: "100vh",
-        //     width: "100vw",
-        //     outline: "2px solid red",
-        //     backgroundImage:
-        //       "url(https://i.pinimg.com/736x/1a/df/11/1adf119713b3a10e1389c185fd983139.jpg)",
-        //     backgroundSize: "contain",
-        //   }}
-        //   src={""}
-        //   alt=""
-        // ></div>
-
-        <div key={index} className="Example">
-          {Array.from({ length: 15 }, (_, index) => (
-            <LocalObject key={index} isDragging={dragging}>
-              <div className="image-ex">
-                <img
-                  src={`https://via.placeholder.com/150?text=Image${index + 1}`}
-                  alt=""
-                />
-              </div>
-            </LocalObject>
-          ))}
-        </div>
-      ))}
+      <Meta
+        handleCenter={handleCenter}
+        puntero={puntero}
+        Porcentaje={visibilidad}
+        lastClick={lastClick}
+        metadata={metadata}
+        viewportSize={viewportSize}
+      />
+      <Grid dragging={dragging} nombre={convertPlaceholder} />
+      );
     </div>
   );
 };
 
 export default Gallery;
+
+function Meta({
+  puntero,
+  Porcentaje,
+  lastClick,
+  metadata,
+  viewportSize,
+  handleCenter,
+}) {
+  return (
+    <div className="container">
+      <button onClick={handleCenter}>Centrar</button>
+      <p>Puntero</p>
+      <p>
+        {puntero.x} {puntero.y}
+      </p>
+      <p>Visible :</p>
+      <div>viewport Centro</div>
+      <p>
+        X: {viewportSize.width + metadata.width / 15} Y:
+        {viewportSize.height + metadata.height / 5}
+      </p>
+      <p>Posicion del conteiner:</p>
+      (X: {metadata.left} Y: {metadata.top} )<p>Dimenciones del conteiner:</p>
+      (x: {Porcentaje.x} %, y: {Porcentaje.y} %)<p></p>
+      <p>Cordenanas globales del click:</p>
+      (X: {lastClick.x}, Y: {lastClick.y})<p></p>
+      <p> Alto: {metadata.height}px</p>
+      <p> Ancho: {metadata.width}px</p>
+      <p>Dimenciones del viewport:</p>
+      <p> Alto: {viewportSize.height}px</p>
+      <p> Ancho: {viewportSize.width}px</p>
+    </div>
+  );
+}
+
+// eslint-disable-next-line react/prop-types
+function Grid({ index, dragging, nombre }) {
+  return (
+    <div key={index} id={nombre(index + 1)} className={`Example `}>
+      {Array.from({ length: 50 }, (_, index) => (
+        <LocalObject key={index} isDragging={dragging}>
+          <div
+            className={`image-ex ${
+              index + 1 == 25 || index + 1 == 26 ? "center" : ""
+            }`}
+          >
+            <img
+              src={`https://via.placeholder.com/150?text=Image${index + 1}`}
+              alt=""
+            />
+          </div>
+        </LocalObject>
+      ))}
+    </div>
+  );
+}

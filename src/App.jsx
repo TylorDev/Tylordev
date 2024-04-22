@@ -1,19 +1,21 @@
 /* eslint-disable react/prop-types */
 import "./App.scss";
-import LocalObject from "./Components/LocalObject";
 
 import { MousePositionProvider } from "./Context/MouseContext";
 import Gallery from "./Components/Gallery";
-import { useRef, useState, useEffect } from "react";
+
 import MouseController from "./Components/MouseController";
+import { DragProvider } from "./Components/DragContext";
 
 function App() {
   return (
     <>
       <MousePositionProvider>
-        <MouseController>
-          <Gallery></Gallery>
-        </MouseController>
+        <DragProvider>
+          <MouseController>
+            <Gallery></Gallery>
+          </MouseController>
+        </DragProvider>
       </MousePositionProvider>
     </>
   );

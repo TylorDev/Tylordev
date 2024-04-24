@@ -4,7 +4,7 @@ import LocalObject from "./LocalObject";
 export function Grid({ index, dragging }) {
   return (
     <div key={index} className={`Example `}>
-      {Array.from({ length: 50 }, (_, index) => (
+      {Array.from({ length: 15 }, (_, index) => (
         <LocalObject key={index} isDragging={dragging}>
           <div
             className={`image-ex ${

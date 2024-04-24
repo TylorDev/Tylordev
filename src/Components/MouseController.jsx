@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Children } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./MouseController.scss";
 
 function MouseController({ children }) {

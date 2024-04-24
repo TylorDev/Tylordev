@@ -37,6 +37,7 @@ const DragProvider = ({ children }) => {
     y: 0,
   });
 
+  const [direction, setDirection] = useState("center");
   //Obtiene la posision del ultimo click. en la pantalla.
   const handleClick = useCallback(() => {
     if (!dragging) {
@@ -68,13 +69,14 @@ const DragProvider = ({ children }) => {
       }
     };
     updateContainerPosition();
+
     window.addEventListener("resize", updateContainerPosition);
     window.addEventListener("scroll", updateContainerPosition);
     return () => {
       window.removeEventListener("resize", updateContainerPosition);
       window.removeEventListener("scroll", updateContainerPosition);
     };
-  }, [lastClick, MousePosition]);
+  }, [lastClick, MousePosition, direction]);
 
   //Mouse al box si draggin es true.
   useEffect(() => {
@@ -102,9 +104,91 @@ const DragProvider = ({ children }) => {
     };
   }, [dragging, lastClick]);
 
+  const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
+  const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 });
+
+  const handleDown = (event) => {
+    const { clientX, clientY } = event;
+    setStartPosition({ x: clientX, y: clientY });
+    setCurrentPosition({ x: clientX, y: clientY });
+  };
+
+  const handleMouseMove = (event) => {
+    setCurrentPosition({ x: event.clientX, y: event.clientY });
+  };
+
+  const calculateDirection = () => {
+    const deltaX = currentPosition.x - startPosition.x;
+    const deltaY = currentPosition.y - startPosition.y;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX > 0) {
+        if (deltaY > 0) {
+          return "abajo derecha ";
+        } else if (deltaY < 0) {
+          return "arriba derecha";
+        } else {
+          return "derecha";
+        }
+      } else {
+        if (deltaY > 0) {
+          return "abajo izquierda";
+        } else if (deltaY < 0) {
+          return "arriba izquierda";
+        } else {
+          return "izquierda";
+        }
+      }
+    } else {
+      if (deltaY > 0) {
+        return "abajo";
+      } else if (deltaY < 0) {
+        return "arriba";
+      } else {
+        if (deltaX > 0) {
+          return "derecha";
+        } else if (deltaX < 0) {
+          return "izquierda";
+        } else {
+          return "estático"; // Puedes cambiar esto según tus necesidades
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    const direction = calculateDirection();
+    setDirection(direction);
+  }, [currentPosition, startPosition]);
+
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousedown", handleDown);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousedown", handleDown);
+    };
+  }, []);
+
+  const centrar = (posX, posY) => {
+    setPosition({
+      x: posX,
+      y: posY,
+    });
+  };
+
   return (
     <DragContext.Provider
-      value={{ dragBoxAreaRef, position, handleMouseDown, dragging }}
+      value={{
+        dragBoxAreaRef,
+        position,
+        handleMouseDown,
+        dragging,
+        direction,
+        metadata,
+        centrar,
+      }}
     >
       {children}
     </DragContext.Provider>

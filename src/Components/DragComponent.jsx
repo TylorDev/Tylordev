@@ -1,14 +1,15 @@
+import { useRef, useState, useEffect } from "react";
 import { Grid } from "./Grid";
 
 export function DragComponent({
-  dragBoxAreaRef,
+  AreaRef,
   position,
   handleMouseDown,
   dragging,
 }) {
   return (
     <div
-      ref={dragBoxAreaRef}
+      ref={AreaRef}
       className="BOX"
       style={{
         left: `${position.x}px`,

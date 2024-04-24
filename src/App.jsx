@@ -5,7 +5,7 @@ import { MousePositionProvider } from "./Context/MouseContext";
 import Gallery from "./Components/Gallery";
 
 import MouseController from "./Components/MouseController";
-import { DragProvider } from "./Components/DragContext";
+import { DragProvider } from "./Context/DragContext";
 
 function App() {
   return (

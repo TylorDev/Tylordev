@@ -7,7 +7,7 @@ import {
   useRef,
   useContext,
 } from "react";
-import { MousePositionContext } from "../Context/MouseContext";
+import { MousePositionContext } from "./MouseContext";
 
 const DragContext = createContext();
 
@@ -178,6 +178,45 @@ const DragProvider = ({ children }) => {
     });
   };
 
+  const [distance, setDistance] = useState({
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  });
+
+  const calculateDistance = () => {
+    // Obtenemos las coordenadas del elemento objetivo
+    const { top, left, bottom, right } =
+      dragBoxAreaRef.current.getBoundingClientRect();
+
+    // Obtenemos el ancho y alto del viewport
+    const viewportWidth =
+      window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+
+    // Calculamos la distancia desde el borde del viewport al elemento
+    setDistance({
+      top: Math.max(0, top), // La distancia no puede ser menor que 0
+      left: Math.max(0, left), // La distancia no puede ser menor que 0
+      bottom: Math.max(0, viewportHeight - bottom), // La distancia no puede ser menor que 0
+      right: Math.max(0, viewportWidth - right), // La distancia no puede ser menor que 0
+    });
+  };
+
+  useEffect(() => {
+    const handleMouseMove = () => {
+      calculateDistance();
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   return (
     <DragContext.Provider
       value={{
@@ -188,6 +227,7 @@ const DragProvider = ({ children }) => {
         direction,
         metadata,
         centrar,
+        distance,
       }}
     >
       {children}

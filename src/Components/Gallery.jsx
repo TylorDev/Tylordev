@@ -9,12 +9,14 @@ import { MousePositionContext } from "../Context/MouseContext";
 function Gallery() {
   const {
     dragBoxAreaRef,
-    position,
+    positionX,
+    positionY,
     handleMouseDown,
     dragging,
     direction,
     distance,
-    trasladar,
+    getMetadata,
+    infinite,
   } = useContext(DragContext);
   const { viewportSize } = useContext(MousePositionContext);
 
@@ -22,11 +24,11 @@ function Gallery() {
     <div className="Gallery">
       <DragComponent
         AreaRef={dragBoxAreaRef}
-        position={position}
+        position={{ x: positionX, y: positionY }}
         handleMouseDown={handleMouseDown}
         dragging={dragging}
       />
-
+      ss
       <ViewportDistance
         targetRef={dragBoxAreaRef}
         direction={direction}
@@ -34,11 +36,12 @@ function Gallery() {
       <KeyEventsComponent targetRef={dragBoxAreaRef}></KeyEventsComponent>
     </div>
   );
+  w;
 }
 export default Gallery;
 
 const ViewportDistance = ({ targetRef }) => {
-  const { direction, distance } = useContext(DragContext);
+  const { direction, distance, positionX, positionY } = useContext(DragContext);
 
   return (
     <div className="viewport-distance">
@@ -46,6 +49,9 @@ const ViewportDistance = ({ targetRef }) => {
       <div>Distance from left: {distance.left}px</div>
       <div>Distance from bottom: {distance.bottom}px</div>
       <div>Distance from right: {distance.right}px</div>
+      <div>
+        X: {positionX}, Y:{positionY}
+      </div>
       <div>{direction}</div>
     </div>
   );

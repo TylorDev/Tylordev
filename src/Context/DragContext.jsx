@@ -30,12 +30,16 @@ const DragProvider = ({ children }) => {
     width: 0,
     height: 0,
   });
-
-  //Posision inicial del Box, Se ocupa para posisionar el box en el viewport, Dependencias: [???]
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
+  const [distance, setDistance] = useState({
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   });
+  //Posision inicial del Box, Se ocupa para posisionar el box en el viewport, Dependencias: [???]
+  const [positionX, setPositionX] = useState(0);
+
+  const [positionY, setPositionY] = useState(0);
 
   const [direction, setDirection] = useState("center");
   //Obtiene la posision del ultimo click. en la pantalla.
@@ -54,9 +58,14 @@ const DragProvider = ({ children }) => {
 
   //Obtiene todos los datos del Box, dimensiones y Posision
   useEffect(() => {
-    const updateContainerPosition = () => {
+    const updateMetadata = () => {
       const container = dragBoxAreaRef.current;
       if (container) {
+        const viewportWidth =
+          window.innerWidth || document.documentElement.clientWidth;
+        const viewportHeight =
+          window.innerHeight || document.documentElement.clientHeight;
+        const { top, left, bottom, right } = container.getBoundingClientRect();
         const rect = container.getBoundingClientRect();
         setMetadata({
           top: rect.top,
@@ -66,28 +75,59 @@ const DragProvider = ({ children }) => {
           width: rect.width,
           height: rect.height,
         });
+
+        setDistance({
+          top: Math.max(-200, Math.min(top, 200)), // La distancia no puede ser menor que 0
+          left: left, // La distancia no puede ser menor que 0
+          bottom: Math.max(-200, Math.min(viewportHeight - bottom, 200)), // La distancia no puede ser menor que 0
+          right: Math.max(-200, Math.min(viewportWidth - right, 200)), // La distancia no puede ser menor que 0
+        });
       }
     };
-    updateContainerPosition();
+    updateMetadata();
 
-    window.addEventListener("resize", updateContainerPosition);
-    window.addEventListener("scroll", updateContainerPosition);
+    window.addEventListener("resize", updateMetadata);
+    window.addEventListener("scroll", updateMetadata);
     return () => {
-      window.removeEventListener("resize", updateContainerPosition);
-      window.removeEventListener("scroll", updateContainerPosition);
+      window.removeEventListener("resize", updateMetadata);
+      window.removeEventListener("scroll", updateMetadata);
     };
-  }, [lastClick, MousePosition, direction]);
+  }, [MousePosition]);
 
+  const getMetadata = (ref) => {
+    const container = ref.current;
+    let rect = 0;
+    if (container) {
+      rect = container.getBoundingClientRect();
+    }
+
+    return rect;
+  };
   //Mouse al box si draggin es true.
   useEffect(() => {
     const handleMouseMove = (event) => {
       if (dragging) {
-        setPosition({
-          x: event.clientX - lastClick.x,
-          y: event.clientY - lastClick.y,
-        });
+        setPositionX(event.clientX - lastClick.x);
+        setPositionY(event.clientY - lastClick.y);
       }
     };
+
+    const container = dragBoxAreaRef.current;
+    const viewportWidth =
+      window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    if (container) {
+      const { width } = container.getBoundingClientRect();
+      if (distance.left >= 600) {
+        setPositionX((prevPositionX) => prevPositionX - distance.left);
+      }
+      if (distance.left <= -1318) {
+        setPositionX((prevPositionX) =>
+          Math.max(viewportWidth / 2, prevPositionX + distance.left)
+        );
+      }
+    }
 
     const handleMouseUp = () => {
       setDragging(false);
@@ -102,7 +142,7 @@ const DragProvider = ({ children }) => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [dragging, lastClick]);
+  }, [dragging, lastClick, distance, direction]);
 
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
   const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 });
@@ -172,60 +212,20 @@ const DragProvider = ({ children }) => {
   }, []);
 
   const centrar = (posX, posY) => {
-    setPosition({
-      x: posX,
-      y: posY,
-    });
+    setPositionX(posX);
+    setPositionY(posY);
   };
-
-  const [distance, setDistance] = useState({
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  });
-
-  const calculateDistance = () => {
-    // Obtenemos las coordenadas del elemento objetivo
-    const { top, left, bottom, right } =
-      dragBoxAreaRef.current.getBoundingClientRect();
-
-    // Obtenemos el ancho y alto del viewport
-    const viewportWidth =
-      window.innerWidth || document.documentElement.clientWidth;
-    const viewportHeight =
-      window.innerHeight || document.documentElement.clientHeight;
-
-    // Calculamos la distancia desde el borde del viewport al elemento
-    setDistance({
-      top: Math.max(0, top), // La distancia no puede ser menor que 0
-      left: Math.max(0, left), // La distancia no puede ser menor que 0
-      bottom: Math.max(0, viewportHeight - bottom), // La distancia no puede ser menor que 0
-      right: Math.max(0, viewportWidth - right), // La distancia no puede ser menor que 0
-    });
-  };
-
-  useEffect(() => {
-    const handleMouseMove = () => {
-      calculateDistance();
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   return (
     <DragContext.Provider
       value={{
         dragBoxAreaRef,
-        position,
+        positionX,
+        positionY,
         handleMouseDown,
         dragging,
         direction,
-        metadata,
+        getMetadata,
         centrar,
         distance,
       }}
@@ -236,3 +236,5 @@ const DragProvider = ({ children }) => {
 };
 
 export { DragProvider, DragContext };
+
+//RESOLVER PARA QUE SE CALCULE LA DISTANCIA SOLO CUANDO SE HAGA CLICK Y DE DEJE DE HACER CLICK.

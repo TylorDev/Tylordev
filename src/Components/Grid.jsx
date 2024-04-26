@@ -1,20 +1,20 @@
 import LocalObject from "./LocalObject";
+import jsonData from "./../API/imagenes.json";
 
 // eslint-disable-next-line react/prop-types
 export function Grid({ index, dragging }) {
+  const { images } = jsonData.props.pageProps;
+
   return (
     <div key={index} className={`Example `}>
-      {Array.from({ length: 15 }, (_, index) => (
-        <LocalObject key={index} isDragging={dragging}>
+      {images.slice(0, 30).map((image, i) => (
+        <LocalObject key={i} isDragging={dragging}>
           <div
             className={`image-ex ${
-              index + 1 == 25 || index + 1 == 26 ? "center" : ""
+              i + 1 === 25 || i + 1 === 26 ? "center" : ""
             }`}
           >
-            <img
-              src={`https://via.placeholder.com/150?text=Image${index + 1}`}
-              alt=""
-            />
+            <img src={image.srcSet.original} alt={image.title} />
           </div>
         </LocalObject>
       ))}

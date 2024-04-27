@@ -28,7 +28,7 @@ function Gallery() {
         handleMouseDown={handleMouseDown}
         dragging={dragging}
       />
-      ss
+
       <ViewportDistance
         targetRef={dragBoxAreaRef}
         direction={direction}
@@ -36,7 +36,6 @@ function Gallery() {
       <KeyEventsComponent targetRef={dragBoxAreaRef}></KeyEventsComponent>
     </div>
   );
-  w;
 }
 export default Gallery;
 

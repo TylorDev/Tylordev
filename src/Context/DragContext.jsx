@@ -13,7 +13,7 @@ const DragContext = createContext();
 
 const DragProvider = ({ children }) => {
   //Tamaño del viewport y Posicion en vivo de Mouse, Dependencias: [???]
-  const { MousePosition } = useContext(MousePositionContext);
+  const { MousePosition, viewportSize } = useContext(MousePositionContext);
   //Porcentaje visible del Box en el viewport, Todavia no lo comprendo al 100%, es necesario rehacerlo. Dependencias: [???]
   //Controla el evento dragging, Dependencias: [???]
   const [dragging, setDragging] = useState(false);
@@ -107,27 +107,23 @@ const DragProvider = ({ children }) => {
   useEffect(() => {
     const handleMouseMove = (event) => {
       if (dragging) {
-        setPositionX(event.clientX - lastClick.x);
-        setPositionY(event.clientY - lastClick.y);
+        let nextPositionX = event.clientX - lastClick.x;
+        let nextPositionY = event.clientY - lastClick.y;
+        const { width, height } =
+          dragBoxAreaRef.current.getBoundingClientRect();
+        // Limitar la posición en el eje X entre -1450 y 0
+        nextPositionX = Math.max(
+          viewportSize.width - width,
+          Math.min(0, nextPositionX)
+        );
+        nextPositionY = Math.max(
+          viewportSize.height - height,
+          Math.min(0, nextPositionY)
+        );
+        setPositionX(nextPositionX);
+        setPositionY(nextPositionY);
       }
     };
-
-    const container = dragBoxAreaRef.current;
-    const viewportWidth =
-      window.innerWidth || document.documentElement.clientWidth;
-    const viewportHeight =
-      window.innerHeight || document.documentElement.clientHeight;
-    if (container) {
-      const { width } = container.getBoundingClientRect();
-      if (distance.left >= 600) {
-        setPositionX((prevPositionX) => prevPositionX - distance.left);
-      }
-      if (distance.left <= -1318) {
-        setPositionX((prevPositionX) =>
-          Math.max(viewportWidth / 2, prevPositionX + distance.left)
-        );
-      }
-    }
 
     const handleMouseUp = () => {
       setDragging(false);

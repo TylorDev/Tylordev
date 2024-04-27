@@ -14,7 +14,7 @@ export function Grid({ index, dragging }) {
               i + 1 === 25 || i + 1 === 26 ? "center" : ""
             }`}
           >
-            <img src={image.srcSet.original} alt={image.title} />
+            <img src={image.srcSet.lowRes} alt={image.title} />
           </div>
         </LocalObject>
       ))}

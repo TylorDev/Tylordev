@@ -9,11 +9,7 @@ export function Grid({ index, dragging }) {
     <div key={index} className={`Example `}>
       {images.slice(0, 30).map((image, i) => (
         <LocalObject key={i} isDragging={dragging}>
-          <div
-            className={`image-ex ${
-              i + 1 === 25 || i + 1 === 26 ? "center" : ""
-            }`}
-          >
+          <div className={`image-ex`}>
             <img src={image.srcSet.lowRes} alt={image.title} />
           </div>
         </LocalObject>

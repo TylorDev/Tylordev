@@ -53,6 +53,7 @@ const DragProvider = ({ children }) => {
 
   const handleMouseDown = () => {
     handleClick();
+
     setDragging(true);
   };
 
@@ -106,22 +107,24 @@ const DragProvider = ({ children }) => {
   //Mouse al box si draggin es true.
   useEffect(() => {
     const handleMouseMove = (event) => {
+      const { width, height } = dragBoxAreaRef.current.getBoundingClientRect();
+      const maxX = viewportSize.width - width;
+      const maxY = viewportSize.height - height;
       if (dragging) {
         let nextPositionX = event.clientX - lastClick.x;
         let nextPositionY = event.clientY - lastClick.y;
-        const { width, height } =
-          dragBoxAreaRef.current.getBoundingClientRect();
-        // Limitar la posición en el eje X entre -1450 y 0
-        nextPositionX = Math.max(
-          viewportSize.width - width,
-          Math.min(0, nextPositionX)
-        );
-        nextPositionY = Math.max(
-          viewportSize.height - height,
-          Math.min(0, nextPositionY)
-        );
+
+        nextPositionX = Math.max(maxX, Math.min(0, nextPositionX));
+        nextPositionY = Math.max(maxY, Math.min(0, nextPositionY));
         setPositionX(nextPositionX);
         setPositionY(nextPositionY);
+        setPositionX((prevPositionX) =>
+          prevPositionX === maxX ? 0 : prevPositionX
+        );
+
+        setPositionY((prevPositionY) =>
+          prevPositionY === maxY ? 0 : prevPositionY
+        );
       }
     };
 
@@ -138,7 +141,7 @@ const DragProvider = ({ children }) => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [dragging, lastClick, distance, direction]);
+  }, [dragging, lastClick, distance, direction, viewportSize]);
 
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
   const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 });
@@ -186,7 +189,7 @@ const DragProvider = ({ children }) => {
         } else if (deltaX < 0) {
           return "izquierda";
         } else {
-          return "estático"; // Puedes cambiar esto según tus necesidades
+          return "centro"; // Puedes cambiar esto según tus necesidades
         }
       }
     }

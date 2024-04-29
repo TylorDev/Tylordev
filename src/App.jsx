@@ -3,8 +3,6 @@ import "./App.scss";
 
 import { MousePositionProvider } from "./Context/MouseContext";
 import Gallery from "./Components/Gallery";
-
-import MouseController from "./Components/MouseController";
 import { DragProvider } from "./Context/DragContext";
 
 function App() {
@@ -12,9 +10,7 @@ function App() {
     <>
       <MousePositionProvider>
         <DragProvider>
-          <MouseController>
-            <Gallery></Gallery>
-          </MouseController>
+          <Gallery></Gallery>
         </DragProvider>
       </MousePositionProvider>
     </>

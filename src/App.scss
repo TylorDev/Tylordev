@@ -1,13 +1,56 @@
-body {
-  overflow: hidden;
-  background: #1d1d1d;
-
-}
-
-
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Helvetica-Neue';
+  src: url('/fonts/HelveticaNeue/HelveticaNeueLight.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Abjad';
+  src: url('/fonts/abjad-font/Abjad.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Helvetica-Neue';
+  font-weight: bold;
+  src: url('/fonts/HelveticaNeue/HelveticaNeueBold.otf') format('opentype');
+}
+
+body {
+  font-family: Helvetica-Neue;
+  color: white;
+}
+
+
+
+
+
+.placeholder {
+  background-color: black;
+  height: 150vh;
+  color: white;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+
+.Not {
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+
+  text-decoration: underline;
+
 }

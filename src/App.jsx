@@ -4,13 +4,16 @@ import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Main from "./Layouts/Main/Main";
 import Home from "./Pages/Home/Home";
+import HeaderMobile from "./Components/Header/Header-mobile";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/header" element={<HeaderMobile />} />
         <Route path="/" element={<Main />}>
           <Route path="/" element={<Home />} />
+
           <Route
             path="/research"
             element={<div className="placeholder">research</div>}

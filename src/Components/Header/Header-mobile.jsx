@@ -1,36 +1,40 @@
 import { NavLink } from "react-router-dom";
+import "./headerMobile.scss";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Header.scss";
-import { useState } from "react";
-function Header() {
-  const [close, setClose] = useState(false);
+function HeaderMobile() {
+  const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
+  const [close, setClose] = useState(true);
   const handleClick = () => {
+    setIsActive(!isActive);
     setClose(!close);
 
     if (!close) {
       console.log("Checkbox marcado");
-      navigate("/header");
+    } else {
+      console.log("Checkbox desmarcado");
+      navigate(-1);
     }
   };
   return (
     <header>
       <nav className="navbar">
-        <div className="mobile-nav">
-          <NavLink to={"/"} className={"logo"}>
-            <img src="./logo.svg" alt="XD" />
-          </NavLink>
-
-          <input className="menu-btn" type="checkbox" onChange={handleClick} />
+        <div className="mobile-nav-2">
+          <input
+            className="menu-btn"
+            type="checkbox"
+            checked={close}
+            onChange={handleClick}
+          />
           <div className="bars" id="lineas">
-            <div>Menu</div>
             <div className="barras">
               <span className="barra barra-1" id="barra1"></span>
               <span className="barra barra-2" id="barra2"></span>
             </div>
           </div>
         </div>
-        <ul className={`Header`}>
+        <ul className={`Header mob`}>
           <li>
             <NavLink to={"/about"}>About</NavLink>
           </li>
@@ -59,4 +63,4 @@ function Header() {
     </header>
   );
 }
-export default Header;
+export default HeaderMobile;

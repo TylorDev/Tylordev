@@ -1,0 +1,276 @@
+@media (max-width: 768px) {
+
+
+    html,
+    body {
+        overflow-x: hidden;
+        background-color: rgb(61, 61, 61);
+    }
+
+    .animate {
+        animation: abrir 1s ease-out forwards;
+    }
+
+    .reverse {
+        animation: cerrar 1s;
+    }
+
+    .Header {
+        display: none;
+    }
+
+    .mob {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+
+        z-index: 50;
+        background-color: rgb(0, 0, 0);
+
+
+        a {
+            transition: all 0.3s;
+        }
+
+        a:hover {
+            font-size: 1.2rem;
+            color: #2b2b2b;
+
+        }
+
+
+
+
+    }
+
+    .invisible {
+        opacity: 0;
+    }
+
+
+    .btn {
+        display: inline;
+        background-color: transparent;
+        border: none;
+        color: white;
+
+
+
+
+
+        &-close {
+            display: inline;
+        }
+    }
+
+    @keyframes open1 {
+        0% {
+            transform: rotate(0deg) translateX(0px);
+
+        }
+
+        100% {
+            transform: rotate(45deg) translateX(8px);
+            transform-origin: 50% 50%;
+        }
+
+    }
+
+    @keyframes open2 {
+        0% {
+            transform: rotate(0deg) translateX(0px);
+
+        }
+
+        100% {
+            transform: rotate(-45deg) translateX(8px);
+            transform-origin: 50% 100%;
+        }
+
+    }
+
+    .mobile-nav {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        outline: 2px solid #a601ff;
+
+        p {
+            color: white;
+            position: relative;
+
+        }
+
+        .logo {
+            padding-left: 1rem;
+        }
+
+
+
+
+
+        .menu-btn {
+            position: absolute;
+            right: 0;
+            width: 100px;
+            height: 50px;
+            outline: 2px solid rgb(0, 255, 0);
+            opacity: 0;
+            z-index: 99;
+
+
+
+            &:checked+.bars {
+
+
+                #barra1 {
+                    transform: rotate(45deg) translateX(8px);
+                    transform-origin: 50% 50%;
+                }
+
+                #barra2 {
+                    transform: rotate(-45deg) translateX(8px);
+                    transform-origin: 50% 100%;
+                }
+            }
+        }
+
+
+        .bars {
+            display: flex;
+            color: white;
+
+
+
+        }
+
+        .barras {
+
+            margin-left: 1rem;
+            gap: 0.3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 60;
+        }
+
+        .barra {
+            width: 40px;
+            height: 3px;
+
+            background-color: white;
+
+
+
+
+        }
+
+        .barra-1 {
+            animation: open1 0.5s ease-in forwards reverse;
+        }
+
+        .barra-2 {
+            animation: open2 0.5s ease-in forwards reverse;
+        }
+
+
+
+
+
+
+    }
+
+    .mobile-nav-2 {
+        right: 0;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        outline: 2px solid #a601ff;
+
+        p {
+            color: white;
+            position: relative;
+
+        }
+
+        .logo {
+            padding-left: 1rem;
+        }
+
+
+
+
+        .menu-btn {
+
+            right: 0;
+            width: 50px;
+            height: 38px;
+            outline: 2px solid rgb(0, 255, 0);
+            opacity: 0;
+            z-index: 99;
+
+
+
+
+        }
+
+
+        .bars {
+            position: absolute;
+            display: flex;
+            color: white;
+
+
+
+        }
+
+        .barras {
+
+            margin-left: 1rem;
+            gap: 0.3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 60;
+        }
+
+        .barra {
+            width: 40px;
+            height: 3px;
+
+            background-color: white;
+
+
+            transition: all .5s;
+
+        }
+
+        .barra-1 {
+            animation: open1 0.5s ease-out forwards;
+        }
+
+        .barra-2 {
+            animation: open2 0.5s ease-out forwards;
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+}

@@ -1,0 +1,114 @@
+@media (max-width: 768px) {
+
+    .Banner {
+        gap: 1rem;
+    }
+
+    .b-image {
+        height: 15vh;
+        border-radius: 1rem;
+
+        .i-content {
+            //Develop outline
+            gap: 2rem;
+
+            p {
+                font-size: 0.7rem;
+                //Develop outline
+
+
+                width: 100%;
+            }
+
+            button {
+                height: 3rem;
+            }
+
+
+
+            .c-logo {
+
+                height: 7rem;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+    .b-buttons {
+
+
+        span {
+            font-family: Abjad;
+            font-size: 4rem;
+        }
+
+        button {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+    }
+
+
+
+
+    .b-events {
+        flex-direction: column;
+        height: 100%;
+        gap: 0;
+
+        .e-event {
+            width: 100%;
+            gap: 2rem;
+
+
+
+            .ee-1 {
+                button {
+                    height: 3rem;
+                }
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

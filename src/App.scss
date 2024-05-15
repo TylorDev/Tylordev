@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @font-face {
   font-family: 'Helvetica-Neue';
   src: url('/fonts/HelveticaNeue/HelveticaNeueLight.otf') format('opentype');
@@ -23,7 +31,13 @@
 body {
   font-family: Helvetica-Neue;
   color: white;
+
 }
+
+
+
+
+
 
 
 

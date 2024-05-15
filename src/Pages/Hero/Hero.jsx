@@ -1,4 +1,5 @@
 import "./Hero.scss";
+import "./Hero-mobile.scss";
 import { GoArrowDownLeft } from "react-icons/go";
 
 function Hero() {
@@ -13,6 +14,7 @@ function Hero() {
 
       <div className="hero-content">
         <VideoHero />
+        {console.log("xd")}
         <HeroPost />
       </div>
     </div>
@@ -24,11 +26,16 @@ function VideoHero() {
   return (
     <div className="hero-video">
       <div className="corner">
-        <GoArrowDownLeft />
+        <div className="arrow">
+          <GoArrowDownLeft />
+        </div>
       </div>
 
       <video loop muted autoPlay>
-        <source src="/sample3.mp4" type="video/mp4" />
+        <source
+          src="https://static.moewalls.com/videos/preview/2024/grasp-of-the-abyss-preview.mp4"
+          type="video/mp4"
+        />
         Tu navegador no soporta la reproducción de videos.
       </video>
     </div>

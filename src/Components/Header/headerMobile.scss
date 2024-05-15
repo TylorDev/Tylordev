@@ -97,7 +97,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        outline: 2px solid #a601ff;
+
 
         p {
             color: white;
@@ -118,7 +118,7 @@
             right: 0;
             width: 100px;
             height: 50px;
-            outline: 2px solid rgb(0, 255, 0);
+
             opacity: 0;
             z-index: 99;
 
@@ -191,7 +191,8 @@
         display: flex;
         align-items: center;
         justify-content: end;
-        outline: 2px solid #a601ff;
+
+        padding: 1rem;
 
         p {
             color: white;
@@ -211,7 +212,7 @@
             right: 0;
             width: 50px;
             height: 38px;
-            outline: 2px solid rgb(0, 255, 0);
+
             opacity: 0;
             z-index: 99;
 

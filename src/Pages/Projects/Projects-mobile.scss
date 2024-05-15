@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+    .p-header {
+        font-size: 4rem;
+    }
+
+    .p-projects {
+        display: flex;
+        flex-direction: column;
+
+        .p-project {
+            width: 100%;
+        }
+    }
+
+}

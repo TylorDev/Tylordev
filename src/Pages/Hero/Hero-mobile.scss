@@ -1,0 +1,48 @@
+@media (max-width: 768px) {
+
+
+
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        height: 120vh;
+
+        gap: 1rem;
+
+    }
+
+    .hero-video {
+        height: 100%;
+        margin: 0;
+        aspect-ratio: 9/16;
+
+
+
+    }
+
+
+    .hero-post {
+        .corner {
+            height: 40%;
+            pointer-events: none;
+        }
+    }
+
+    .corner {
+        padding-right: 20%;
+        padding-top: 20%;
+    }
+
+    .hero-subtitle {
+
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 5rem;
+
+
+    }
+
+}

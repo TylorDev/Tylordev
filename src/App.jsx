@@ -5,6 +5,8 @@ import "./App.scss";
 import Main from "./Layouts/Main/Main";
 import Home from "./Pages/Home/Home";
 import HeaderMobile from "./Components/Header/Header-mobile";
+import About from "./Pages/About/About";
+import Projects from "./Pages/Projects/Projects";
 
 function App() {
   return (
@@ -22,14 +24,8 @@ function App() {
             path="/blog"
             element={<div className="placeholder">blog</div>}
           />
-          <Route
-            path="/about"
-            element={<div className="placeholder">about</div>}
-          />
-          <Route
-            path="/projects"
-            element={<div className="placeholder">projects</div>}
-          />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
           <Route
             path="/extra"
             element={<div className="placeholder">extra</div>}

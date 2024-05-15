@@ -5,6 +5,7 @@
     }
 
     .hero-top {
+
         margin-top: 4.5rem;
         display: grid;
         align-items: center;
@@ -22,18 +23,21 @@
 
 
     .hero-content {
+
         display: grid;
         grid-template-columns: 3fr 1fr;
 
-        height: 70vh;
 
-        padding: 1rem;
+
+
 
     }
 
     .hero-post {
         display: flex;
         flex-direction: column;
+
+
 
         position: relative;
 
@@ -103,6 +107,10 @@
     .hero-video {
         position: relative;
         border: 2px solid #101010;
+        border-bottom: none;
+        border-left: none;
+
+
         overflow: hidden;
         border-radius: 1rem;
         margin-right: 2rem;
@@ -116,16 +124,14 @@
         }
     }
 
-    $border-width: 20%;
-    $padding-right: 5%;
-    $padding-top: 5%;
+
 
 
     .corner {
         position: absolute;
-        left: -0.1%;
-        bottom: -0.1%;
-        height: 25%;
+        left: 0;
+        bottom: 0;
+        height: 20%;
         aspect-ratio: 1/1;
         border-radius: 0 0 0 1rem; // Cambia el valor según sea necesario
         clip-path: polygon(0 0, 0% 100%, 100% 100%);
@@ -140,18 +146,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-right: $padding-right;
-        padding-top: $padding-top;
 
 
         z-index: 999;
         cursor: pointer;
-        transition: all 1s;
+        transition: all 0.5s;
 
 
         &:hover {
             background-color: black;
-            height: 30%;
+            height: 22%;
             font-size: 2rem;
         }
 
@@ -166,7 +170,7 @@
         &::after {
             content: "";
             position: absolute;
-            height: $border-width;
+            height: 10%;
             width: 200%;
             left: -11%;
             border: 3px solid rgb(255, 255, 255);
@@ -179,60 +183,15 @@
             rotate: 45deg;
         }
 
+        .arrow {
 
-
-
-    }
-
-
-
-
-
-    @media (max-width: 768px) {
-
-
-
-
-        .hero-content {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 50%;
             display: flex;
-            flex-direction: column;
-            height: 120vh;
-            padding: 0.5rem;
-            gap: 1rem;
-
+            align-items: center;
+            justify-content: center;
         }
-
-        .hero-video {
-            height: 100%;
-            margin: 0;
-            aspect-ratio: 9/16;
-
-
-
-        }
-
-
-        .hero-post {
-            .corner {
-                height: 40%;
-                pointer-events: none;
-            }
-        }
-
-        .corner {
-            padding-right: 20%;
-            padding-top: 20%;
-        }
-
-        .hero-subtitle {
-
-            width: 100%;
-        }
-
-        .hero-title {
-            font-size: 5rem;
-
-
-        }
-
     }

@@ -1,0 +1,55 @@
+@media (max-width: 768px) {
+    .req-video {
+        height: 90vh;
+    }
+
+
+    .req-metadata {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        //Develop outline
+
+
+        .req-m-tittle {
+            font-size: 4rem;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            //Develop outline
+
+        }
+
+        .req-m-meta {
+
+            display: flex;
+            width: 100%;
+            height: 60%;
+
+            padding: 0;
+            position: relative;
+
+            button {
+                position: absolute;
+                bottom: 0;
+            }
+        }
+
+        .req-m-m-tittle {
+
+            width: 100%;
+            padding: 1rem;
+        }
+
+
+        p {
+
+
+            width: 80%;
+
+        }
+    }
+
+}

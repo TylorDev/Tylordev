@@ -3,10 +3,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Main from "./Layouts/Main/Main";
-import Home from "./Pages/Home/Home";
+import Home from "./Layouts/Home/Home";
 import HeaderMobile from "./Components/Header/Header-mobile";
 import About from "./Pages/About/About";
 import Projects from "./Pages/Projects/Projects";
+import Research from "./Pages/Research/Research";
+import Contact from "./Layouts/Contact/Contact";
+import Article from "./Pages/Article/Article";
 
 function App() {
   return (
@@ -16,14 +19,8 @@ function App() {
         <Route path="/" element={<Main />}>
           <Route path="/" element={<Home />} />
 
-          <Route
-            path="/research"
-            element={<div className="placeholder">research</div>}
-          />
-          <Route
-            path="/blog"
-            element={<div className="placeholder">blog</div>}
-          />
+          <Route path="/research" element={<Research />} />
+          <Route path="/blog" element={<Article />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route
@@ -34,10 +31,7 @@ function App() {
             path="/profile"
             element={<div className="placeholder">profile</div>}
           />
-          <Route
-            path="/contact"
-            element={<div className="placeholder">profile</div>}
-          />
+          <Route path="/contact" element={<Contact />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>

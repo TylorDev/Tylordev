@@ -1,0 +1,52 @@
+.Steps {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    padding: 5rem 0;
+}
+
+
+.Step {
+    padding: 2rem 0;
+    height: 100%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+
+
+    justify-items: center;
+    border-top: 2px solid white;
+
+    .s-tittle {
+        font-family: abjad;
+        font-size: 3.5rem;
+        justify-self: start;
+    }
+
+    p {
+        color: #d9d9d9;
+
+    }
+
+    &:last-child {
+        border-bottom: 2px solid white;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+    .Steps {
+
+        padding: 1rem 0;
+    }
+
+    .Step {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        width: 100%;
+    }
+}

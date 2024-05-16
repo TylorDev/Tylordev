@@ -1,0 +1,43 @@
+@media (max-width: 768px) {
+
+
+    .r-articles {
+        display: flex;
+        flex-direction: column;
+
+        .r-article {
+            max-width: 100%;
+
+            display: flex;
+            flex-direction: row;
+        }
+
+        .rr-cover {
+            width: 100%;
+        }
+
+
+        .rr-tittle {
+
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column-reverse;
+
+            span {
+
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+
+
+        .rr-sub {
+            color: #909090;
+        }
+    }
+
+
+
+}

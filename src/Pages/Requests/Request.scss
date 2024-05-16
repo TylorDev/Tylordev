@@ -1,0 +1,76 @@
+.Request {
+    position: relative;
+
+}
+
+.req-video {
+
+
+
+    top: 0;
+
+    height: 100vh;
+
+
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.req-metadata {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+
+
+    .req-m-tittle {
+
+        padding-top: 3rem;
+        padding-left: 3rem;
+        align-self: start;
+        font-family: abjad;
+        font-size: 9rem;
+        width: 80%;
+        height: 50%;
+
+
+    }
+
+    .req-m-meta {
+        font-size: 1.1rem;
+
+        height: 100%;
+        width: 60%;
+
+
+        display: grid;
+        grid-template-rows: 1fr;
+        padding: 5rem 1rem;
+        gap: 1rem;
+
+        button {
+            justify-self: start;
+            width: 50%;
+            color: white;
+            background-color: transparent;
+            border: 1px solid white;
+            border-radius: 3rem;
+            padding: 0.5rem 0rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: white;
+                color: black;
+            }
+        }
+    }
+}

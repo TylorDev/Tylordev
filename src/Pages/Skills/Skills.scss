@@ -1,0 +1,115 @@
+.Skills {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 1rem;
+
+
+}
+
+.sk-1,
+.sk-2 {
+    display: flex;
+    gap: 1rem;
+    width: 80%;
+
+    .skill {
+        display: flex;
+        justify-content: space-evenly;
+        position: relative;
+        border-radius: 1rem;
+        background-color: #101010;
+        overflow: hidden;
+
+
+
+        .ss-tittle {
+            padding: 2rem;
+            flex: 3;
+            font-size: 3rem;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: space-evenly;
+
+            span {
+                align-self: start;
+                width: 50%;
+                margin: 1rem;
+            }
+
+            button {
+                align-self: start;
+                background-color: transparent;
+                border-radius: 2rem;
+                border: 1px solid white;
+                padding: 0.5rem 2rem;
+                cursor: pointer;
+
+                &:active {
+                    background-color: white;
+                    color: #000;
+                }
+            }
+        }
+
+        .ss-logo {
+            overflow: hidden;
+            border-radius: 2rem;
+            margin: 1rem;
+            flex: 2;
+            position: relative;
+            bottom: -20%;
+
+            aspect-ratio: 9/14;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+
+
+}
+
+@media (max-width: 768px) {
+
+    .sk-1,
+    .sk-2 {
+        width: 100%;
+        flex-direction: column;
+
+        .skill {
+
+            .ss-tittle {
+                font-size: 2rem;
+
+                button {
+
+                    padding: 1rem 2rem;
+                }
+            }
+
+
+            .ss-logo {
+
+                border-radius: 1rem;
+
+
+                bottom: 0%;
+
+                aspect-ratio: 1/1;
+
+
+            }
+        }
+
+
+    }
+
+}

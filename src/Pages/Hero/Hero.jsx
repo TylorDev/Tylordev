@@ -1,60 +1,92 @@
+/* eslint-disable react/prop-types */
 import "./Hero.scss";
 import "./Hero-mobile.scss";
 import { GoArrowDownLeft } from "react-icons/go";
+import data from "./Hero.json";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/TylorDev/Tylordev/objectfix/package.json"
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => console.log(data))
+      .catch((error) =>
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        )
+      );
+  }, []);
   return (
     <div className="Hero">
       <div className="hero-top">
-        <p className="hero-subtitle">
-          Hello /here is all of my personal and profesional works projects.
-        </p>
-        <div className="hero-title">WELCOME TO MY PERSONAL PORTAFOLIO </div>
+        <p className="hero-subtitle">{data.hero.subtitle}</p>
+        <div className="hero-title">{data.hero.title} </div>
       </div>
 
       <div className="hero-content">
-        <VideoHero />
+        <VideoHero videoSrc={data.hero.videoSrc} />
         {console.log("xd")}
-        <HeroPost />
+        <HeroPost post={data.hero.post} />
       </div>
     </div>
   );
 }
 export default Hero;
 
-function VideoHero() {
+function VideoHero({ videoSrc }) {
+  const navigate = useNavigate();
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClick = () => {
+    navigate("/Projects");
+  };
   return (
     <div className="hero-video">
-      <div className="corner">
+      <div className="corner" onClick={handleClick}>
         <div className="arrow">
           <GoArrowDownLeft />
         </div>
       </div>
 
-      <video loop muted autoPlay>
-        <source
-          src="https://static.moewalls.com/videos/preview/2024/grasp-of-the-abyss-preview.mp4"
-          type="video/mp4"
-        />
+      <video
+        onClick={handleClick}
+        loop
+        muted
+        autoPlay
+        disablePictureInPicture
+        onContextMenu={handleContextMenu}
+      >
+        <source src={videoSrc} type="video/mp4" />
         Tu navegador no soporta la reproducción de videos.
       </video>
     </div>
   );
 }
-function HeroPost() {
+function HeroPost({ post }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/contact");
+  };
   return (
     <div className="hero-post">
       <div>
-        <span>00/</span> About me
+        <span>{post.title.split("/")[0]}/</span> {post.title.split("/")[1]}
       </div>
       <div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commo
-        </p>
-        <button>Learn more</button>
+        <p>{post.content}</p>
+        <button onClick={handleClick}>{post.buttonText}</button>
       </div>
 
       <div className="corner"></div>

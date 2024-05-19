@@ -31,29 +31,34 @@ function Header() {
           </div>
         </div>
         <ul className={`Header`}>
-          <li>
-            <NavLink to={"/about"}>About</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/projects"}>Projects</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/extra"}>Extra</NavLink>
-          </li>
+          <div>
+            <li>
+              <NavLink to={"/about"}>About</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/projects"}>Projects</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/extra"}>Extra</NavLink>
+            </li>
+          </div>
+
           <li>
             <NavLink to={"/"} className={"logo"}>
               <img src="./logo.svg" alt="XD" />
             </NavLink>
           </li>
-          <li>
-            <NavLink to={"/research"}>Research</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/blog"}>Blog</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/contact"}>Contact</NavLink>
-          </li>
+          <div>
+            <li>
+              <NavLink to={"/research"}>Research</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/blog"}>Blog</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/contact"}>Contact</NavLink>
+            </li>
+          </div>
         </ul>
       </nav>
     </header>

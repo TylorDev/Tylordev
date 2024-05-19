@@ -1,26 +1,22 @@
 import "./Request.scss";
 import "./Request-mobile.scss";
+import content from "./requestContent.json";
 function Request() {
+  const data = content.Request;
+
   return (
     <div className="Request">
       <div className="req-video">
         <video loop muted autoPlay>
-          <source
-            src="https://cdn.pixabay.com/video/2021/04/15/71122-537102350_large.mp4"
-            type="video/mp4"
-          />
+          <source src={data.videoSrc} type="video/mp4" />
           Tu navegador no soporta la reproducción de videos.
         </video>
         <div className="req-metadata">
-          <div className="req-m-tittle">Lorem ipsum dolor sit amet.</div>
+          <div className="req-m-tittle">{data.title}</div>
           <div className="req-m-meta">
-            <div className="req-m-m-tittle">/ipsum dolor</div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatum, unde vitae! Sunt enim saepe molestias deleniti,
-              quaerat dignissimos ea perspiciatis
-            </p>
-            <button>Leave a Request</button>
+            <div className="req-m-m-tittle">{data.metadata.subtitle}</div>
+            <p>{data.metadata.content}</p>
+            <button>{data.buttonText}</button>
           </div>
         </div>
       </div>

@@ -1,0 +1,28 @@
+{
+  "Research": {
+    "title": "RESEARCH",
+    "articles": [
+      {
+        "coverImageSrc": "https://cdn.dribbble.com/users/6493128/screenshots/16183040/media/fb87371c21ba4afb762d910906cfcd01.jpg",
+        "category": "News",
+        "date": "Sep 17, 2024",
+        "title": "BitBasel NFT Art Community",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      },
+      {
+        "coverImageSrc": "https://i.pinimg.com/736x/8a/45/54/8a45546744da6b3e559512f5cb24c57f.jpg",
+        "category": "News",
+        "date": "Sep 17, 2024",
+        "title": "BitBasel NFT Art Community",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      },
+      {
+        "coverImageSrc": "https://i.pinimg.com/564x/c8/ab/5b/c8ab5b2b7ee3b1d69a5192fb9163a111.jpg",
+        "category": "News",
+        "date": "Sep 17, 2024",
+        "title": "BitBasel NFT Art Community",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      }
+    ]
+  }
+}

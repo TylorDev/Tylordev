@@ -1,12 +1,15 @@
 import "./Research.scss";
 import "./Research-mobile.scss";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import content from "./researchContent.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
 
-function Research({ tittle = true }) {
+function Research({ title = true }) {
+  const data = content.Research;
+
   return (
     <div className="Research">
       <div className="b-buttons">
-        <span>{tittle ? "RESEARCH" : ""}</span>
+        <span>{title ? data.title : ""}</span>
         <div>
           <button>
             <GoArrowLeft />
@@ -18,66 +21,24 @@ function Research({ tittle = true }) {
       </div>
 
       <div className="r-articles">
-        <div className="r-article">
-          <div className="rr-cover">
-            <img
-              src="
-              https://cdn.dribbble.com/users/6493128/screenshots/16183040/media/fb87371c21ba4afb762d910906cfcd01.jpg"
-              alt=""
-            />
+        {data.articles.map((article, index) => (
+          <div key={index} className="r-article">
+            <div className="rr-cover">
+              <img
+                src={article.coverImageSrc}
+                alt={`Cover for ${article.title}`}
+              />
+            </div>
+            <div className="rr-tittle">
+              <span className="rr-sub">
+                {article.category}/ <span>{article.date}</span>
+              </span>
+              <span>
+                {article.title}. {article.content}
+              </span>
+            </div>
           </div>
-          <div className="rr-tittle">
-            {" "}
-            <span className="rr-sub">
-              News/ <span>Sep 17, 2024</span>
-            </span>
-            <span>
-              {" "}
-              BitBasel NFT Art Community. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit.
-            </span>
-          </div>
-        </div>
-        <div className="r-article">
-          <div className="rr-cover">
-            <img
-              src="
-              https://i.pinimg.com/736x/8a/45/54/8a45546744da6b3e559512f5cb24c57f.jpg"
-              alt=""
-            />
-          </div>
-          <div className="rr-tittle">
-            {" "}
-            <span className="rr-sub">
-              News/ <span>Sep 17, 2024</span>
-            </span>
-            <span>
-              {" "}
-              BitBasel NFT Art Community. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit.
-            </span>
-          </div>
-        </div>
-        <div className="r-article">
-          <div className="rr-cover">
-            <img
-              src="
-              https://i.pinimg.com/564x/c8/ab/5b/c8ab5b2b7ee3b1d69a5192fb9163a111.jpg"
-              alt=""
-            />
-          </div>
-          <div className="rr-tittle">
-            {" "}
-            <span className="rr-sub">
-              News/ <span>Sep 17, 2024</span>
-            </span>
-            <span>
-              {" "}
-              BitBasel NFT Art Community. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit.
-            </span>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

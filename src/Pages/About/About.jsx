@@ -1,107 +1,129 @@
+import { Link } from "react-router-dom";
 import "./About.scss";
 import { GoArrowDownLeft, GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { useEffect, useState } from "react";
+import profile from "./Profile.json";
+import blog from "./BlogEntries.json";
+import content from "./historyContent.json";
 function About() {
   return (
     <div className="About">
-      <div className="blog-cont">
-        <div className="header-cont">
-          <span>01/ </span>Latest Post
-        </div>
-        <div className="blog">
-          <div className="tittle-blog">BLOG</div>
-          <div className="entries">
-            <div className="entry">
-              <div>10.09.24</div>
-              <div>
-                led do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris led do eiusmod tempor incididunt{" "}
-              </div>
-            </div>
-            <div className="entry">
-              <div>10.05.24</div>
-              <div>
-                led do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris led do eiusmod tempor incididunt
-              </div>
-            </div>
-          </div>
+      <BlogCont />
+      <ProfileCont />
+      <History />
+    </div>
+  );
+}
+export default About;
 
-          <div className="corner-blog">
-            <div className="arrow">
-              <GoArrowDownLeft />
-            </div>
-          </div>
-        </div>
+function History() {
+  const data = content.History;
+
+  return (
+    <div className="history">
+      <div className="imagen">
+        <img src={data.imageSrc} alt="history-image" />
       </div>
-      <div className="profile-cont">
-        <div className="header-cont">
-          <span>02/</span> CV
-        </div>
-        <div className="profile">
-          <div className="sec-1">
-            <div className="profile-pic">
-              <img
-                src="https://i.pinimg.com/564x/a8/95/56/a895566ee13c417bc519b967acf42535.jpg"
-                alt="profilepic"
-              />
-            </div>
 
-            <div>
-              <div>Anon Unknow Name.</div>
-              <div>[Front/Back]</div>
-              <div>@TylorDev</div>
-
-              <button>
-                <GoArrowLeft />
-              </button>
-              <button>
-                <GoArrowRight />
-              </button>
-            </div>
+      <div className="latest">
+        <div className="item">
+          <div className="header-cont">
+            <span>{data.latest[0].header.section}</span>{" "}
+            {data.latest[0].header.title}
           </div>
+          <div className="header-tit">{data.latest[0].headerTitle}</div>
+        </div>
+        {data.latest.slice(1).map((item, index) => (
+          <Link key={index} className="item" to={"/projects"}>
+            <div>{item.type}</div>
+            <div className="item-tittle">{item.title}</div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
 
+function ProfileCont() {
+  const [index, setIndex] = useState(0);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Simulating fetching data from JSON file
+    setData(profile);
+  }, []);
+
+  const handlePrev = () => {
+    setIndex((prevIndex) =>
+      prevIndex === 0 ? data.paragraphs.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setIndex((prevIndex) =>
+      prevIndex === data.paragraphs.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="profile-cont">
+      <div className="header-cont">
+        <span>{data.header.section}</span> {data.header.title}
+      </div>
+      <div className="profile">
+        <div className="sec-1">
+          <div className="profile-pic">
+            <img src={data.profile.imageSrc} alt="profilepic" />
+          </div>
           <div>
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-              eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-              est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-              velit, sed quia non numquam eius modi tempora.
-            </p>
+            <div>{data.profile.name}</div>
+            <div>{data.profile.role}</div>
+            <div>{data.profile.username}</div>
+            <button onClick={handlePrev}>
+              <GoArrowLeft />
+            </button>
+            <button onClick={handleNext}>
+              <GoArrowRight />
+            </button>
           </div>
         </div>
-      </div>
-      <div className="history">
-        <div className="imagen">
-          <img
-            src="https://i.pinimg.com/736x/2a/8a/0c/2a8a0c07fb67c557f9206c11904e71eb.jpg"
-            alt="XD"
-          />
-        </div>
-
-        <div className="latest">
-          <div className="item">
-            <div className="header-cont">
-              <span>03/</span> Latest Projects
-            </div>
-            <div className="header-tit">Vault</div>
-          </div>
-          <div className="item">
-            <div>Protocol/</div>
-            <div className="item-tittle">Metta</div>
-          </div>
-          <div className="item">
-            <div>Network/</div>
-            <div className="item-tittle">Hexagon</div>
-          </div>
+        <div className="profile-content">
+          <p>{data.paragraphs[index]}</p>
         </div>
       </div>
     </div>
   );
 }
-export default About;
+
+function BlogCont() {
+  const data = blog;
+
+  return (
+    <div className="blog-cont">
+      <div className="header-cont">
+        <span>{data.header.section} </span>
+        {data.header.title}
+      </div>
+      <div className="blog">
+        <div className="tittle-blog">{data.blog.title}</div>
+        <div className="entries">
+          {data.blog.entries.map((entry, index) => (
+            <Link key={index} className="entry" to={"/blog"}>
+              <div>{entry.date}</div>
+              <div>{entry.content}</div>
+            </Link>
+          ))}
+        </div>
+        <Link className="corner-blog" to={data.blog.cornerLink.url}>
+          <div className="arrow">
+            <GoArrowDownLeft />
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
+}

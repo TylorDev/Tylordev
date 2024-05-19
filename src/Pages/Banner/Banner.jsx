@@ -1,25 +1,28 @@
-import "./Banner.scss";
-import "./Banner-mobile.scss";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import content from "./bannerContent.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
+import "./Banner.scss";
+import { useNavigate } from "react-router-dom";
+
 function Banner() {
+  const data = content.Banner;
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("contact");
+  };
   return (
     <div className="Banner">
       <div className="b-image">
         <div className="i-content">
           <div className="c-logo">
-            <img src="/logo.svg" alt="" />
+            <img src={data.logoSrc} alt="Logo" />
           </div>
-          <p>
-            WE SPONSOR PROFILE CONFERENCES AND HOLD OUR OWN EVENTS. COME TO OUR
-            MEETUPS -- WE PROMISE IT WILL BE COOL
-          </p>
-
-          <button>Learn More</button>
+          <p>{data.description}</p>
+          <button onClick={handleClick}>{data.buttonText}</button>
         </div>
       </div>
 
       <div className="b-buttons">
-        <span>EVENTS</span>
+        <span>{data.eventsTitle}</span>
         <div>
           <button>
             <GoArrowLeft />
@@ -31,32 +34,23 @@ function Banner() {
       </div>
 
       <div className="b-events">
-        <div className="e-event">
-          <div className="ee-1">
-            <div>31.09.22/ </div>
-            <button>Learn More</button>
-          </div>
-          <div className="ee-2">
-            <p>PRODUCT MANAGEMENT MEETUP</p>
-            <div className="eee-h">
-              <span>19:00</span> /Online
+        {data.services.map((service, index) => (
+          <div key={index} className="e-event">
+            <div className="ee-1">
+              <div>{service.date}/</div>
+              <button onClick={handleClick}>{service.buttonText}</button>
+            </div>
+            <div className="ee-2">
+              <p>{service.title}</p>
+              <div className="eee-h">
+                <span>{service.time}</span> /{service.location}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="e-event">
-          <div className="ee-1">
-            <div>31.09.22/ </div>
-            <button>Learn More</button>
-          </div>
-          <div className="ee-2">
-            <p>PRODUCT MANAGEMENT MEETUP</p>
-            <div className="eee-h">
-              <span>19:00</span> /Online
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 }
+
 export default Banner;

@@ -10,6 +10,7 @@ import Projects from "./Pages/Projects/Projects";
 import Research from "./Pages/Research/Research";
 import Contact from "./Layouts/Contact/Contact";
 import Article from "./Pages/Article/Article";
+import Banner from "./Pages/Banner/Banner";
 
 function App() {
   return (
@@ -23,10 +24,7 @@ function App() {
           <Route path="/blog" element={<Article />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
-          <Route
-            path="/extra"
-            element={<div className="placeholder">extra</div>}
-          />
+          <Route path="/extra" element={<Banner />} />
           <Route
             path="/profile"
             element={<div className="placeholder">profile</div>}

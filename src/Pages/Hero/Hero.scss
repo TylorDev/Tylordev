@@ -129,7 +129,7 @@
 
     .corner {
         position: absolute;
-        left: 0;
+        left: -0.1%;
         bottom: 0;
         height: 20%;
         aspect-ratio: 1/1;
@@ -155,7 +155,7 @@
 
         &:hover {
             background-color: black;
-            height: 22%;
+
             font-size: 2rem;
         }
 

@@ -1,32 +1,18 @@
 import "./Steps.scss";
 
+import content from "./stepsContent.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
+
 function Steps() {
+  const steps = content.Steps;
+
   return (
     <div className="Steps">
-      <div className="Step">
-        <div className="s-tittle">DEFINE PROBLEM</div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore
-          est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde
-          molestiae rem, temporibus aperiam vero illum recusandae natus.
-        </p>
-      </div>
-      <div className="Step">
-        <div className="s-tittle">DEFINE PROBLEM</div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore
-          est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde
-          molestiae rem, temporibus aperiam vero illum recusandae natus.
-        </p>
-      </div>
-      <div className="Step">
-        <div className="s-tittle">DEFINE PROBLEM</div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore
-          est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde
-          molestiae rem, temporibus aperiam vero illum recusandae natus.
-        </p>
-      </div>
+      {steps.map((step, index) => (
+        <div key={index} className="Step">
+          <div className="s-tittle">{step.title}</div>
+          <p>{step.content}</p>
+        </div>
+      ))}
     </div>
   );
 }

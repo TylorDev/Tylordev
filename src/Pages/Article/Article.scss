@@ -28,6 +28,7 @@
     border: 2px solid white;
     border-top: none;
     z-index: 99;
+    border-bottom: none;
 
     .ar-tittle {
 
@@ -52,5 +53,20 @@
             height: 100%;
             object-fit: cover;
         }
+    }
+}
+
+
+
+@media (max-width: 768px) {
+
+
+    .ar-banner {
+        border-radius: 0;
+    }
+
+    .ar-content {
+
+        width: 100%;
     }
 }

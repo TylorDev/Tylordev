@@ -1,0 +1,24 @@
+{
+  "Projects": {
+    "header": {
+      "mainText": "Grants & Funds/",
+      "title": "PROJECTS"
+    },
+    "projects": [
+      {
+        "coverImageSrc": "https://cdn.dribbble.com/users/6493128/screenshots/16183040/media/fb87371c21ba4afb762d910906cfcd01.jpg",
+        "status": "Funded/",
+        "title": "BitBasel NFT Art Community",
+        "metadata": "25, 000, 000 +",
+        "metadataUnit": "Users"
+      },
+      {
+        "coverImageSrc": "https://cdn.dribbble.com/users/6493128/screenshots/16183040/media/fb87371c21ba4afb762d910906cfcd01.jpg",
+        "status": "Funded/",
+        "title": "BitBasel NFT Art Community",
+        "metadata": "25, 000, 000 +",
+        "metadataUnit": "Users"
+      }
+    ]
+  }
+}

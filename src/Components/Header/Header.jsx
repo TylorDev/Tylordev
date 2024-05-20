@@ -39,7 +39,7 @@ function Header() {
               <NavLink to={"/projects"}>Projects</NavLink>
             </li>
             <li>
-              <NavLink to={"/extra"}>Extra</NavLink>
+              <NavLink to={"/services"}>Services</NavLink>
             </li>
           </div>
 
@@ -53,7 +53,7 @@ function Header() {
               <NavLink to={"/research"}>Research</NavLink>
             </li>
             <li>
-              <NavLink to={"/blog"}>Blog</NavLink>
+              <NavLink to={"/resources"}>Resources</NavLink>
             </li>
             <li>
               <NavLink to={"/contact"}>Contact</NavLink>

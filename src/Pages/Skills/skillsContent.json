@@ -1,0 +1,48 @@
+{
+  "Skills": {
+    "sk-1": [
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Lorem XD dolor",
+            "button": "examples"
+          },
+          "ss-logo": {
+            "src": "https://i.pinimg.com/564x/25/e0/8b/25e08b69fa8a91b5387061c04f947f4b.jpg",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Lorem XD",
+            "button": "&"
+          }
+        }
+      }
+    ],
+    "sk-2": [
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Lorem dolor",
+            "button": "&"
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Lorem ipsum ",
+            "button": "examples"
+          },
+          "ss-logo": {
+            "src": "https://i.pinimg.com/564x/14/cf/f6/14cff6a5080b73db6f78eeaa6a4c7d9c.jpg",
+            "alt": ""
+          }
+        }
+      }
+    ]
+  }
+}

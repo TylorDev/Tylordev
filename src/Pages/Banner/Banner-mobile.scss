@@ -55,7 +55,6 @@
 
 
 
-
     }
 
 
@@ -81,16 +80,33 @@
         height: 100%;
         gap: 0;
 
+
+
         .e-event {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
             width: 100%;
-            gap: 2rem;
+            align-items: start;
+            justify-items: center;
+            min-height: 30vh;
 
 
 
             .ee-1 {
+                width: 100%;
+                height: 100%;
+
+
                 button {
                     height: 3rem;
                 }
+            }
+
+            .ee-2 {
+                width: 100%;
+                height: 100%;
+
+                padding-bottom: 1rem;
             }
         }
 

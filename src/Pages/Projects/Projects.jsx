@@ -1,9 +1,14 @@
 import "./Projects.scss";
 import "./Projects-mobile.scss";
 import content from "./projectsContent.json";
+import { useNavigate } from "react-router-dom";
+
 function Projects() {
   const data = content.Projects;
-
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/project");
+  };
   return (
     <div className="Projects">
       <div className="p-header">
@@ -17,6 +22,7 @@ function Projects() {
               <img
                 src={project.coverImageSrc}
                 alt={`Cover for ${project.title}`}
+                onClick={handleClick}
               />
             </div>
             <div className="pp-tittle">

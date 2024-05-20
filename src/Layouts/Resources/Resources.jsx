@@ -1,9 +1,9 @@
 import Request from "../../Pages/Requests/Request";
 import Skills from "../../Pages/Skills/Skills";
 import Steps from "../../Pages/Steps/Steps";
-import "./Contact.scss";
+import "./Resources.scss";
 
-function Contact() {
+function Resources() {
   return (
     <div className="Contact">
       <Request />
@@ -12,4 +12,4 @@ function Contact() {
     </div>
   );
 }
-export default Contact;
+export default Resources;

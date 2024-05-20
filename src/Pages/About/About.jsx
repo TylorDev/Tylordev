@@ -34,7 +34,7 @@ function History() {
           <div className="header-tit">{data.latest[0].headerTitle}</div>
         </div>
         {data.latest.slice(1).map((item, index) => (
-          <Link key={index} className="item" to={"/projects"}>
+          <Link key={index} className="item" to={"/project"}>
             <div>{item.type}</div>
             <div className="item-tittle">{item.title}</div>
           </Link>

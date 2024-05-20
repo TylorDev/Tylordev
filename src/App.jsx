@@ -8,9 +8,11 @@ import HeaderMobile from "./Components/Header/Header-mobile";
 import About from "./Pages/About/About";
 import Projects from "./Pages/Projects/Projects";
 import Research from "./Pages/Research/Research";
-import Contact from "./Layouts/Contact/Contact";
 import Article from "./Pages/Article/Article";
 import Banner from "./Pages/Banner/Banner";
+import Project from "./Pages/Project/Project";
+import ContactForm from "./Pages/Contact/ContactForm";
+import Resources from "./Layouts/Resources/Resources.jsx";
 
 function App() {
   return (
@@ -24,12 +26,14 @@ function App() {
           <Route path="/blog" element={<Article />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/extra" element={<Banner />} />
+          <Route path="/project" element={<Project />} />
+          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/services" element={<Banner />} />
           <Route
             path="/profile"
             element={<div className="placeholder">profile</div>}
           />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/resources" element={<Resources />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>

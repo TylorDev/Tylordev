@@ -118,6 +118,7 @@
 
 
 
+
     .e-event {
 
         border-top: 2px solid white;
@@ -173,9 +174,12 @@
             align-items: center;
             flex-direction: column;
 
+            min-width: 60%;
+
             p {
                 font-size: 2rem;
 
+                width: 100%;
 
             }
 
@@ -184,7 +188,7 @@
 
                 width: 50%;
                 display: flex;
-                justify-content: space-evenly;
+                justify-content: space-between;
                 align-items: start;
                 align-self: flex-start;
             }

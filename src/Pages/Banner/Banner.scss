@@ -10,9 +10,8 @@
 
 .b-image {
     border-radius: 2rem;
-    background-image: url(https://gd-hbimg.huaban.com/6b7d90aebd6d910fb03ebd8e5e8be8673449760c837f1-hzQffJ_fw1200);
-    background-size: cover;
 
+    background-size: cover;
     height: 50vh;
     aspect-ratio: 5/4;
 
@@ -24,12 +23,11 @@
         height: 100%;
         padding: 3rem 2rem;
 
-        background-color: rgba(0, 0, 0, 0.357);
         z-index: 999;
 
         .c-logo {
 
-            height: 150px;
+            height: 150;
 
             img {
                 width: 100%;
@@ -44,16 +42,16 @@
             height: 2rem;
             background-color: transparent;
             border-radius: 1rem;
-            border: 2px solid white;
-            color: white;
+            border: 0.125rem solid $text-principal;
+            color: $text-principal;
             padding: 1rem;
             display: flex;
             align-items: center;
             cursor: pointer;
 
-            &:active {
-                background-color: white;
-                color: black;
+            &:hover {
+                background-color: $text-principal;
+                color: $principal;
 
             }
 
@@ -90,17 +88,17 @@
         margin-top: 50%;
         padding: 1rem;
         background-color: transparent;
-        border: 2px solid white;
+        border: 0.125rem solid $text-principal;
         border-radius: 50%;
         font-size: 1rem;
-        color: white;
+        color: $text-principal;
         cursor: pointer;
         margin-left: 0.5rem;
 
 
         &:active {
-            background-color: white;
-            color: black;
+            background-color: $text-principal;
+            color: $principal;
 
         }
 
@@ -121,7 +119,7 @@
 
     .e-event {
 
-        border-top: 2px solid white;
+        border-top: 0.125rem solid $text-principal;
         display: flex;
         width: 50%;
         padding: 1rem;
@@ -130,7 +128,8 @@
 
 
         &:hover {
-            background-color: #101010;
+            background-color: $secondary;
+            ;
         }
 
         .ee-1 {
@@ -146,16 +145,16 @@
                 height: 2rem;
                 background-color: transparent;
                 border-radius: 1rem;
-                border: 2px solid white;
-                color: white;
+                border: 0.125rem solid $text-principal;
+                color: $text-principal;
                 padding: 1rem;
                 display: flex;
                 align-items: center;
                 cursor: pointer;
 
-                &:active {
-                    background-color: white;
-                    color: black;
+                &:hover {
+                    background-color: $text-principal;
+                    color: $principal;
 
                 }
 

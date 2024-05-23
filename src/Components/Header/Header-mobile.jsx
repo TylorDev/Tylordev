@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./headerMobile.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function HeaderMobile() {
   const [isActive, setIsActive] = useState(false);

@@ -18,7 +18,8 @@
         justify-content: space-evenly;
         position: relative;
         border-radius: 1rem;
-        background-color: #101010;
+        background-color: $secondary;
+        ;
         overflow: hidden;
 
 
@@ -44,13 +45,13 @@
                 align-self: start;
                 background-color: transparent;
                 border-radius: 2rem;
-                border: 1px solid white;
+                border: 0.0625rem solid $text-principal;
                 padding: 0.5rem 2rem;
                 cursor: pointer;
-                color: white;
+                color: $text-principal;
 
                 &:active {
-                    background-color: white;
+                    background-color: $text-principal;
                     color: #000;
                 }
             }

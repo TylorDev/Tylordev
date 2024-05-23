@@ -26,6 +26,7 @@
 
         display: grid;
         grid-template-columns: 3fr 1fr;
+        //Develop outline
 
 
 
@@ -42,18 +43,19 @@
         position: relative;
 
         justify-content: space-between;
-        background-color: #101010;
+        background-color: $secondary;
+        ;
         padding: 2rem;
         border-radius: 1rem;
 
 
         .corner {
-            background-color: black;
+            background-color: $principal;
             border: none;
             pointer-events: none;
 
             &::after {
-                background-color: black;
+                background-color: $principal;
                 border: none;
             }
         }
@@ -85,15 +87,16 @@
         button {
 
             background-color: transparent;
-            border: 2px solid white;
+            border: 0.125rem solid $text-principal;
             border-radius: 1rem;
             height: 2rem;
             width: 6rem;
             cursor: pointer;
-            color: white;
+            color: $text-principal;
 
             &:hover {
-                background-color: rgba(255, 255, 255, 0.286);
+                color: $principal;
+                background-color: $text-secondary;
             }
         }
 
@@ -106,11 +109,13 @@
 
     .hero-video {
         position: relative;
-        border: 2px solid #101010;
+        border: 0.125rem solid $secondary;
+        ;
         border-bottom: none;
         border-left: none;
 
-
+        height: 100%;
+        aspect-ratio: 16/8;
         overflow: hidden;
         border-radius: 1rem;
         margin-right: 2rem;
@@ -120,7 +125,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top;
+            object-position: center;
         }
     }
 
@@ -135,11 +140,11 @@
         aspect-ratio: 1/1;
         border-radius: 0 0 0 1rem; // Cambia el valor según sea necesario
         clip-path: polygon(0 0, 0% 100%, 100% 100%);
-        background-color: rgb(0, 0, 0);
-        border: 2px solid rgb(255, 255, 255);
+        background-color: $principal;
+        border: 0.125rem solid $secondary;
         border-right: none;
         border-top: none;
-        color: white;
+        color: $text-principal;
         display: flex;
         align-items: center;
         font-size: 1.5rem;
@@ -154,14 +159,14 @@
 
 
         &:hover {
-            background-color: black;
+            background-color: $text-principal;
+            color: $principal;
 
-            font-size: 2rem;
         }
 
         &:active {
-            background-color: rgb(255, 255, 255);
-            color: black;
+            background-color: $secondary;
+            color: $principal;
         }
 
 
@@ -173,13 +178,13 @@
             height: 10%;
             width: 200%;
             left: -11%;
-            border: 3px solid rgb(255, 255, 255);
+            border: 0.1875rem solid $secondary;
             border-top: none;
             border-right: none;
 
             top: -10%;
             transform-origin: left;
-            background-color: rgb(0, 0, 0);
+            background-color: $principal;
             rotate: 45deg;
         }
 

@@ -1,85 +1,124 @@
 import { useForm } from "react-hook-form";
-import styles from "./ContactForm.module.scss";
+import "./ContactForm.scss";
+import { useState } from "react";
 
 const ContactForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
+
+  const [blur, setBlur] = useState("");
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (value === null || value === "") {
+      console.log(`${name} is empty or null`);
+    } else {
+      console.log(`${name}: ${value}`);
+    }
+  };
+
+  const handleLabel = (name) => {};
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+
+    if (value === null || value === "") {
+      console.log(`${name} is empty or null on blur`);
+      setBlur(name + blur);
+    } else {
+      console.log(`${name}: ${value} on blur`);
+      setBlur(name + blur);
+    }
+  };
 
   const onSubmit = (data) => {
     console.log(data);
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.field}>
-        <label htmlFor="name" className={styles.label}>
-          Tu Nombre
-        </label>
-        <input
-          id="name"
-          type="text"
-          className={styles.input}
-          {...register("name", { required: "El nombre es requerido" })}
-        />
-        {errors.name && (
-          <span className={styles.error}>{errors.name.message}</span>
-        )}
+    <div className="Form">
+      <div className="contact-meta f-bg">
+        <div className="cm-tittle">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        </div>
+        <div className="cm-elements">
+          <ul>
+            <li>email@email-desing.com</li>
+          </ul>
+        </div>
       </div>
+      <form className="contact-form f-bg" onSubmit={handleSubmit(onSubmit)}>
+        <div className="field">
+          <input
+            id="name"
+            type="text"
+            className={`input`}
+            placeholder="Tu Nombre"
+            {...register("name", {
+              required: "El nombre es requerido",
+              onChange: handleChange,
+              onBlur: handleBlur, // Añadir el manejador de cambio aquí
+            })}
+          />
+          <label htmlFor="name" className="label">
+            Tu Nombre
+          </label>
 
-      <div className={styles.field}>
-        <label htmlFor="email" className={styles.label}>
-          Tu Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          className={styles.input}
-          {...register("email", {
-            required: "El email es requerido",
-            pattern: { value: /^\S+@\S+$/i, message: "El email no es válido" },
-          })}
-        />
-        {errors.email && (
-          <span className={styles.error}>{errors.email.message}</span>
-        )}
-      </div>
+          {errors.name && <span className="error">{errors.name.message}</span>}
+        </div>
 
-      <div className={styles.field}>
-        <label htmlFor="message" className={styles.label}>
-          Tu Mensaje
-        </label>
-        <textarea
-          id="message"
-          className={styles.textarea}
-          {...register("message", { required: "El mensaje es requerido" })}
-        ></textarea>
-        {errors.message && (
-          <span className={styles.error}>{errors.message.message}</span>
-        )}
-      </div>
+        <div className="field">
+          <input
+            id="email"
+            type="email"
+            className="input"
+            placeholder="Tu email"
+            {...register("email", {
+              required: "El email es requerido",
+              onChange: handleChange,
+              onBlur: handleBlur, // Añadir el manejador de cambio aquí
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: "El email no es válido",
+              },
+            })}
+          />
 
-      <div className={styles.field}>
-        <label htmlFor="file" className={styles.label}>
-          Adjuntar PDF o Imagen
-        </label>
-        <input
-          id="file"
-          type="file"
-          className={styles.input}
-          {...register("file", { required: "El archivo es requerido" })}
-        />
-        {errors.file && (
-          <span className={styles.error}>{errors.file.message}</span>
-        )}
-      </div>
+          <label htmlFor="email" className="label">
+            Tu Email
+          </label>
+          {errors.email && (
+            <span className="error">{errors.email.message}</span>
+          )}
+        </div>
 
-      <button type="submit" className={styles.button}>
-        Enviar
-      </button>
-    </form>
+        <div className="field">
+          <textarea
+            id="message"
+            className="textarea"
+            placeholder="Tu mensaje"
+            {...register("message", {
+              required: "El mensaje es requerido",
+              onChange: handleChange,
+              onBlur: handleBlur,
+            })}
+          ></textarea>
+          <label htmlFor="message" className="label">
+            Tu Mensaje
+          </label>
+          {errors.message && (
+            <span className="error">{errors.message.message}</span>
+          )}
+        </div>
+
+        <button type="submit" className="button">
+          Enviar
+        </button>
+      </form>
+    </div>
   );
 };
 

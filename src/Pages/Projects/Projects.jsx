@@ -3,12 +3,17 @@ import "./Projects-mobile.scss";
 import content from "./projectsContent.json";
 import { useNavigate } from "react-router-dom";
 
-function Projects() {
+function Projects({ limit }) {
   const data = content.Projects;
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/project");
   };
+
+  const limitProjects = data.projects
+    ? data.projects.slice(0, limit)
+    : data.projects;
+
   return (
     <div className="Projects">
       <div className="p-header">
@@ -16,7 +21,7 @@ function Projects() {
         {data.header.title}
       </div>
       <div className="p-projects">
-        {data.projects.map((project, index) => (
+        {limitProjects.map((project, index) => (
           <div key={index} className="p-project">
             <div className="pp-cover">
               <img

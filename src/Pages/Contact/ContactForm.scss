@@ -1,0 +1,178 @@
+.Form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+@keyframes op {
+
+    0% {
+        color: blue;
+    }
+
+    100% {
+        color: green;
+    }
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+
+
+    width: 50%;
+}
+
+.contact-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.f-bg {
+    background-color: $secondary;
+    border-radius: 1rem;
+    overflow: hidden;
+    padding: 1rem;
+
+    height: 100%;
+}
+
+.field {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    //Develop outline
+
+    position: relative;
+
+    .label {
+        font-size: 1rem; // Tamaño de fuente cuando el input está enfocado
+
+
+        opacity: 1;
+        position: relative;
+        color: rgb(255, 255, 255);
+        top: 0;
+
+        &::after {
+            content: "*";
+            color: red;
+        }
+
+    }
+
+
+    .input:focus~.label,
+    .textarea:focus~.label {
+        opacity: 1;
+
+
+    }
+
+
+
+    .input {
+
+        width: 100%;
+        //Develop outline
+
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid $text-principal;
+        color: $text-secondary;
+        font-size: 1rem;
+        height: fit-content;
+
+
+        &:focus {
+            outline: none; // Sin contorno al hacer focus
+            background-color: transparent;
+            position: relative;
+
+        }
+
+
+        &:focus::placeholder {
+            opacity: 0;
+
+
+        }
+
+
+
+        &::placeholder {
+            color: rgb(139, 139, 139);
+            font-size: 1rem;
+            font-family: Helvetica-neue;
+            opacity: 1;
+
+        }
+
+
+
+    }
+
+
+
+    .textarea {
+        background-color: transparent; // Fondo transparente
+        border: none; // Sin bordes
+        border-bottom: 2px solid white; // Borde inferior de 2px sólido blanco
+        outline: none; // Sin contorno al hacer focus
+        color: white;
+        font-family: Helvetica-Neue;
+        font-size: 1rem;
+
+        &:focus {
+            outline: none; // Sin contorno al hacer focus
+        }
+
+
+        &::placeholder {
+            color: rgb(139, 139, 139);
+            font-size: 1rem;
+            font-family: Helvetica-neue;
+            opacity: 1;
+
+        }
+
+    }
+
+
+
+
+    .textarea {
+        max-width: 100%;
+    }
+
+    .error {
+        color: red;
+    }
+
+
+
+}
+
+
+.button {
+    background-color: transparent;
+    border: 2px solid $text-principal;
+    color: $text-principal;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+
+    cursor: pointer;
+
+    &:active {
+        background-color: $text-principal;
+        color: $principal;
+    }
+}

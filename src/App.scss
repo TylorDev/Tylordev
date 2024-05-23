@@ -30,9 +30,12 @@ a {
 
 body {
   font-family: Helvetica-Neue;
-  color: white;
+  color: $text-principal;
+
 
 }
+
+
 
 
 
@@ -44,9 +47,9 @@ body {
 
 
 .placeholder {
-  background-color: black;
+  background-color: $principal;
   height: 150vh;
-  color: white;
+  color: $text-principal;
   display: grid;
   align-items: center;
   justify-content: center;
@@ -55,8 +58,8 @@ body {
 
 
 .Not {
-  background-color: black;
-  color: white;
+  background-color: $principal;
+  color: $text-principal;
   width: 100%;
   height: 100%;
   display: flex;
@@ -67,4 +70,15 @@ body {
 
   text-decoration: underline;
 
+}
+
+$font-size-base: 16px; // Tamaño de fuente base
+$font-size-large: 22px; // Tamaño de fuente para pantallas anchas
+
+
+
+@media (min-width: 1800px) {
+  :root {
+    font-size: $font-size-large; // Establecer el tamaño de fuente grande para pantallas anchas
+  }
 }

@@ -96,7 +96,11 @@ function Article() {
           />
         </div>
       </div>
-      <Research tittle={false} />
+      <Research
+        tittle={false}
+        limit={true}
+        style={{ borderTop: "2px solid white", borderBottom: "none" }}
+      />
     </div>
   );
 }

@@ -11,8 +11,8 @@ function Home() {
       <Hero />
       <About />
       <Banner />
-      <Projects />
-      <Research />
+      <Projects limit={4} />
+      <Research limit={true} />
     </div>
   );
 }

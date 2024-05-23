@@ -9,7 +9,8 @@
 
 
 .blog {
-    background-color: #101010;
+    background-color: $secondary;
+    ;
     height: 100%;
     border-radius: 2rem;
     display: flex;
@@ -17,8 +18,6 @@
     justify-content: end;
     padding: 1rem;
     position: relative;
-
-
 
     .corner-blog {
         position: absolute;
@@ -28,11 +27,11 @@
         aspect-ratio: 1/1;
         border-radius: 0 0 0 1rem; // Cambia el valor según sea necesario
         clip-path: polygon(0 0, 0% 100%, 100% 100%);
-        background-color: rgb(0, 0, 0);
-        border: 2px solid rgb(255, 255, 255);
+        background-color: $principal;
+        border: 0.125rem solid $secondary;
         border-right: none;
         border-top: none;
-        color: white;
+        color: $text-principal;
         display: flex;
         align-items: center;
         font-size: 1.5rem;
@@ -60,13 +59,13 @@
             height: 10%;
             width: 200%;
             left: -11%;
-            border: 3px solid rgb(255, 255, 255);
+            border: 3px solid $secondary;
             border-top: none;
             border-right: none;
 
             top: -10%;
             transform-origin: left;
-            background-color: rgb(0, 0, 0);
+            background-color: $principal;
             rotate: 45deg;
         }
 
@@ -80,6 +79,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+
+
+        &:hover {
+            background-color: $text-principal;
+            color: $principal;
         }
     }
 
@@ -102,12 +108,12 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            color: white;
+            color: $text-principal;
             text-decoration: none;
 
             &:hover {
 
-                outline: 2px solid white;
+                outline: 0.125rem solid $text-principal;
                 cursor: pointer;
 
 
@@ -164,17 +170,17 @@
             margin-top: 50%;
             padding: 1rem;
             background-color: transparent;
-            border: 2px solid white;
+            border: 0.125rem solid $text-principal;
             border-radius: 50%;
             font-size: 1rem;
-            color: white;
+            color: $text-principal;
             cursor: pointer;
             margin-left: 1rem;
 
 
             &:active {
-                background-color: white;
-                color: black;
+                background-color: $text-principal;
+                color: $principal;
 
             }
 
@@ -225,7 +231,7 @@
         .item {
 
 
-            color: white;
+            color: $text-principal;
             text-decoration: none;
             cursor: pointer;
 
@@ -233,7 +239,7 @@
                 font-size: 6rem;
                 font-family: Abjad;
 
-                border-bottom: 2px solid white;
+                border-bottom: 0.125rem solid $text-principal;
 
             }
 
@@ -241,7 +247,7 @@
             .item-tittle {
                 font-size: 3rem;
                 font-family: Abjad;
-                border-bottom: 2px solid white;
+                border-bottom: 0.125rem solid $text-principal;
             }
 
 
@@ -254,7 +260,7 @@
 
 
                 .item-tittle {
-                    color: #a350b6;
+                    color: $text-secondary;
 
 
                 }
@@ -299,6 +305,10 @@
     }
 
 
+    .entry {
+        border-top: 5px solid $text-principal;
+
+    }
 
     .profile {
         padding-bottom: 5rem;

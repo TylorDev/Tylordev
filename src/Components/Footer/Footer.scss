@@ -1,17 +1,17 @@
 .Footer {
-    background-color: black;
-    color: white;
+    background-color: $principal;
+    color: $text-principal;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
     justify-content: center;
-    border-top: 2px solid white;
+    border-top: 0.125rem solid $text-principal;
     padding: 2rem;
 
     a {
         text-decoration: none;
-        color: white;
+        color: $text-principal;
 
         &:hover {
             text-decoration: underline;

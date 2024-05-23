@@ -38,7 +38,10 @@ function Banner() {
     <div className="Banner">
       <div
         className="b-image"
-        style={{ backgroundImage: `url(${data.banner})` }}
+        style={{
+          background: `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7287289915966386) 0%), url(${data.banner})`,
+          backgroundSize: "cover",
+        }}
       >
         <div className="i-content">
           <div className="c-logo">

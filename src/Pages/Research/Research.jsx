@@ -4,7 +4,7 @@ import content from "./researchContent.json"; // Asegúrate de tener el archivo 
 import "./Research.scss";
 import "./Research-mobile.scss";
 import { useNavigate } from "react-router-dom";
-function Research({ title = true }) {
+function Research({ title = true, limit = false, style }) {
   const data = content.Research;
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
@@ -12,28 +12,28 @@ function Research({ title = true }) {
     navigate("/blog");
   };
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 3) % data.articles.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.articles.length);
   };
 
   const handlePrev = () => {
     setCurrentIndex(
       (prevIndex) =>
-        (prevIndex - 3 + data.articles.length) % data.articles.length
+        (prevIndex - 4 + data.articles.length) % data.articles.length
     );
   };
 
   const displayedArticles = data.articles
-    .slice(currentIndex, currentIndex + 3)
+    .slice(currentIndex, currentIndex + 4)
     .concat(
       data.articles.slice(
         0,
-        Math.max(0, currentIndex + 3 - data.articles.length)
+        Math.max(0, currentIndex + 4 - data.articles.length)
       )
     );
 
   return (
     <div className="Research">
-      <div className="b-buttons">
+      <div className="b-buttons" style={style}>
         <span>{title ? data.title : ""}</span>
         <div>
           <button className="bb-previus" onClick={handlePrev}>
@@ -46,7 +46,7 @@ function Research({ title = true }) {
       </div>
 
       <div className="r-articles">
-        {displayedArticles.map((article, index) => (
+        {(limit ? displayedArticles : data.articles).map((article, index) => (
           <div key={index} className="r-article">
             <div className="rr-cover">
               <img

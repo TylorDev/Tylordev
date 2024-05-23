@@ -1,7 +1,7 @@
 nav {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    background-color: black;
+    border-top: 0.0625rem solid $text-principal;
+    border-bottom: 0.0625rem solid $text-principal;
+    background-color: $principal;
     position: relative;
 }
 
@@ -35,11 +35,11 @@ nav {
     a {
 
 
-        color: white;
+        color: $text-principal;
         text-decoration: none;
         transition: all 500ms;
-        border-bottom: 0px solid white;
-        padding: 15px 20px;
+        border-bottom: none;
+        padding: 0.9375rem 1.25rem;
         position: relative;
 
 
@@ -94,7 +94,7 @@ nav {
         position: absolute;
         bottom: 0;
         left: 50%;
-        background: #fff;
+        background: $text-principal;
         width: 0;
         animation: expandFromCenter 0.5s forwards;
     }
@@ -127,4 +127,17 @@ nav {
 
 .mobile-nav {
     display: none;
+}
+
+@media (max-width: 768px) {
+    .active {
+
+        position: relative; // Asegúrate de que el contenedor tenga position relative
+
+        &:after {
+            content: "";
+            display: none;
+
+        }
+    }
 }

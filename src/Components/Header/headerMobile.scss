@@ -4,7 +4,8 @@
     html,
     body {
         overflow-x: hidden;
-        background-color: rgb(61, 61, 61);
+        background-color: $secondary;
+        ;
     }
 
     .animate {
@@ -28,7 +29,7 @@
         top: 0;
 
         z-index: 50;
-        background-color: rgb(0, 0, 0);
+        background-color: $principal;
 
 
         a {
@@ -37,7 +38,8 @@
 
         a:hover {
             font-size: 1.2rem;
-            color: #2b2b2b;
+            color: $secondary;
+            ;
 
         }
 
@@ -55,7 +57,9 @@
         display: inline;
         background-color: transparent;
         border: none;
-        color: white;
+        color: $text-principal;
+        //Develop outline
+
 
 
 
@@ -68,7 +72,7 @@
 
     @keyframes open1 {
         0% {
-            transform: rotate(0deg) translateX(0px);
+            transform: rotate(0deg) translateX(0);
 
         }
 
@@ -81,7 +85,7 @@
 
     @keyframes open2 {
         0% {
-            transform: rotate(0deg) translateX(0px);
+            transform: rotate(0deg) translateX(0);
 
         }
 
@@ -100,7 +104,7 @@
 
 
         p {
-            color: white;
+            color: $text-principal;
             position: relative;
 
         }
@@ -114,10 +118,12 @@
 
 
         .menu-btn {
+            //Develop outline
+            outline: 2px solid rgb(0, 255, 0);
             position: absolute;
             right: 0;
-            width: 100px;
-            height: 50px;
+            width: 6.25rem;
+            height: 3.125rem;
 
             opacity: 0;
             z-index: 99;
@@ -142,7 +148,7 @@
 
         .bars {
             display: flex;
-            color: white;
+            color: $text-principal;
 
 
 
@@ -163,7 +169,7 @@
             width: 40px;
             height: 3px;
 
-            background-color: white;
+            background-color: $text-principal;
 
 
 
@@ -195,7 +201,7 @@
         padding: 1rem;
 
         p {
-            color: white;
+            color: $text-principal;
             position: relative;
 
         }
@@ -210,7 +216,7 @@
         .menu-btn {
 
             right: 0;
-            width: 50px;
+            width: 50;
             height: 38px;
 
             opacity: 0;
@@ -225,7 +231,7 @@
         .bars {
             position: absolute;
             display: flex;
-            color: white;
+            color: $text-principal;
 
 
 
@@ -243,10 +249,10 @@
         }
 
         .barra {
-            width: 40px;
+            width: 40;
             height: 3px;
 
-            background-color: white;
+            background-color: $text-principal;
 
 
             transition: all .5s;

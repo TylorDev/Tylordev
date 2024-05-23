@@ -60,16 +60,16 @@
         button {
             justify-self: start;
             width: 50%;
-            color: white;
+            color: $text-principal;
             background-color: transparent;
-            border: 1px solid white;
+            border: 0.0625rem solid $text-principal;
             border-radius: 3rem;
             padding: 0.5rem 0rem;
             cursor: pointer;
 
             &:hover {
-                background-color: white;
-                color: black;
+                background-color: $text-principal;
+                color: $principal;
             }
         }
     }

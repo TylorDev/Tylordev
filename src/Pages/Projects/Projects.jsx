@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 function Projects({ limit }) {
   const data = content.Projects;
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/project");
+  const handleClick = (projectName) => {
+    const formattedProjectName = projectName.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/projects/${formattedProjectName}`);
   };
 
   const limitProjects = data.projects
@@ -26,16 +27,16 @@ function Projects({ limit }) {
             <div className="pp-cover">
               <img
                 src={project.coverImageSrc}
-                alt={`Cover for ${project.title}`}
-                onClick={handleClick}
+                alt={`Cover for ${project.type}`}
+                onClick={() => handleClick(project.tittle)}
               />
             </div>
             <div className="pp-tittle">
               <span>{project.status}</span>
-              <span>{project.title}</span>
+              <span>{project.type}</span>
             </div>
             <div className="pp-metadata">
-              {project.metadata} <span>{project.metadataUnit}</span>
+              {project.tittle} <span>{project.tags}</span>
             </div>
           </div>
         ))}

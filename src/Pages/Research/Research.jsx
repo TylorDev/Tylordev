@@ -8,8 +8,8 @@ function Research({ title = true, limit = false, style }) {
   const data = content.Research;
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/blog");
+  const handleClick = (blogId) => {
+    navigate(`/research/${blogId}`);
   };
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % data.articles.length);
@@ -52,7 +52,7 @@ function Research({ title = true, limit = false, style }) {
               <img
                 src={article.coverImageSrc}
                 alt={`Cover for ${article.title}`}
-                onClick={handleClick}
+                onClick={() => handleClick(article.id)}
               />
             </div>
             <div className="rr-tittle">

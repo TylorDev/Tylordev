@@ -2,9 +2,29 @@
 import "./Project.scss";
 import { GoArrowRight } from "react-icons/go";
 import data from "./Project.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function Project() {
+  const [data, setData] = useState(null);
+  const { projectName } = useParams();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/src/API/Projects/${projectName}.json`);
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching the JSON data:", error);
+      }
+    };
+
+    fetchData();
+  }, [projectName]);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="Project">
       <div

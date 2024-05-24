@@ -1,0 +1,22 @@
+{
+  "bannerImage": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/fe60fd98025897.5ffa0f822b039.png",
+  "contentTitle": "Welcome to our Blog!",
+  "sections": [
+    {
+      "paragraph": "In this blog, we explore various topics related to technology, design, and innovation. Our goal is to provide insightful content that inspires and informs our readers.",
+      "image": "https://i.pinimg.com/736x/65/94/e1/6594e16c472d6c2db1093c389cc6c2a9.jpg"
+    },
+    {
+      "paragraph": "From cutting-edge developments in artificial intelligence to practical tips for web development, we cover a wide range of subjects. Stay tuned for our latest articles and updates!",
+      "image": "https://i.pinimg.com/originals/60/41/92/60419252951acb0ac01b4278bbac42e4.jpg"
+    }
+  ],
+  "researchProps": {
+    "tittle": false,
+    "limit": true,
+    "style": {
+      "borderTop": "2px solid white",
+      "borderBottom": "none"
+    }
+  }
+}

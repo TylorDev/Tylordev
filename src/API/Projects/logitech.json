@@ -1,0 +1,40 @@
+{
+  "header": {
+    "backgroundImage": "https://i.pinimg.com/originals/14/8f/91/148f91fa5144f8fb8fba19cbdf280f24.jpg",
+    "message": "Bienvenido a nuestra página de proyectos.",
+    "title": "Logitech",
+    "subtitle": "Descubre las innovaciones y desarrollos más recientes en nuestra plataforma.",
+    "buttons": [
+      {
+        "text": "Ver vista previa",
+        "icon": true
+      },
+      {
+        "text": "Ver código fuente",
+        "icon": true
+      }
+    ]
+  },
+  "sections": [
+    {
+      "flexDirection": "row-reverse",
+      "coverImage": "https://i.pinimg.com/originals/70/1f/30/701f30a176780ec9db925ba985380cf4.jpg",
+      "tmContent": {
+        "summary": "Este proyecto utiliza tecnologías de punta para ofrecer una experiencia de usuario intuitiva y eficiente. Descubre cómo implementamos soluciones innovadoras.",
+        "readMore": "Leer más",
+        "modalContent": "Este proyecto es un ejemplo de cómo se puede usar React y SCSS para crear interfaces de usuario modernas y responsivas. Nuestro equipo trabajó arduamente para asegurar que el producto final sea tanto estéticamente agradable como funcionalmente robusto. En este proyecto, utilizamos React para la arquitectura de componentes y SCSS para los estilos, asegurando que cada elemento sea fácilmente mantenible y escalable. Además, incorporamos diversas técnicas de optimización para mejorar el rendimiento y la accesibilidad del sitio.",
+        "close": "X"
+      }
+    },
+    {
+      "flexDirection": "row",
+      "coverImage": "https://i.pinimg.com/originals/86/a4/09/86a4096e1a31e67bd2e353df46e89b27.jpg",
+      "tmContent": {
+        "summary": "Nuestro equipo ha desarrollado una plataforma que integra múltiples servicios en una sola aplicación. Aprende más sobre las características y beneficios.",
+        "readMore": "Leer más",
+        "modalContent": "Este proyecto se centra en la integración de servicios para mejorar la eficiencia y la colaboración entre equipos. Utilizamos API RESTful para conectar diversos servicios y garantizar una comunicación fluida entre ellos. La interfaz de usuario está diseñada con principios de usabilidad y accesibilidad, asegurando que todos los usuarios puedan aprovechar al máximo las funcionalidades ofrecidas. Este proyecto también incluye pruebas automatizadas y un flujo de despliegue continuo para mantener la calidad del código y la rapidez en la entrega de nuevas características.",
+        "close": "X"
+      }
+    }
+  ]
+}

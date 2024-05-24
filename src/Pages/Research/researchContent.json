@@ -3,88 +3,52 @@
     "title": "RESEARCH",
     "articles": [
       {
-        "coverImageSrc": "https://i.pinimg.com/564x/4e/48/f2/4e48f2323a2c73f3226ac6fdb06416da.jpg",
+        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/fe60fd98025897.5ffa0f822b039.png",
         "category": "News",
         "date": "Sep 17, 2024",
         "title": "sit amet consectetur",
-        "content": "Todavía no hay comentarios."
+        "content": "Todavía no hay comentarios.",
+        "id": 1
       },
       {
-        "coverImageSrc": "https://i.pinimg.com/564x/84/12/47/8412473b801b1d178a1253b177fa8dd6.jpg",
+        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/89f92098025897.61d4c7e8a2e7b.png",
         "category": "News",
         "date": "Sep 17, 2024",
         "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "id": 2
       },
       {
-        "coverImageSrc": "https://i.pinimg.com/564x/3f/7a/6f/3f7a6faad5896d4135855e7baccf8748.jpg",
+        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/4472ef98025897.60bbb6dc733e6.png",
         "category": "News",
         "date": "Sep 17, 2024",
         "title": "Discord Community",
-        "content": " adipisicing elit."
+        "content": " adipisicing elit.",
+        "id": 3
       },
       {
-        "coverImageSrc": "https://i.pinimg.com/564x/84/e5/61/84e56121e5238d04c8c172f088c47f8c.jpg",
+        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/df08c198025897.6063763d9699d.png",
         "category": "News",
         "date": "Sep 17, 2024",
         "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "id": 4
       },
       {
-        "coverImageSrc": "https://i.pinimg.com/originals/a2/0e/89/a20e89bbb83cabd11e6afaadc3614500.jpg",
+        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/24ecde98025897.6026b6fdbec53.png",
         "category": "News",
         "date": "Sep 17, 2024",
         "title": " Develop Community",
-        "content": "adipisicing elit. lorem"
+        "content": "adipisicing elit. lorem",
+        "id": 5
       },
       {
-        "coverImageSrc": "https://i.pinimg.com/originals/ef/f5/f7/eff5f7d8c41309d8ec56fcaf8b1bf382.jpg",
+        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/7620cc98025897.60621eee5df2e.png",
         "category": "News",
         "date": "Sep 17, 2024",
         "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-      },
-      {
-        "coverImageSrc": "https://i.pinimg.com/564x/4e/48/f2/4e48f2323a2c73f3226ac6fdb06416da.jpg",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "sit amet consectetur",
-        "content": "Todavía no hay comentarios."
-      },
-      {
-        "coverImageSrc": "https://i.pinimg.com/564x/84/12/47/8412473b801b1d178a1253b177fa8dd6.jpg",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-      },
-      {
-        "coverImageSrc": "https://i.pinimg.com/564x/3f/7a/6f/3f7a6faad5896d4135855e7baccf8748.jpg",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "Discord Community",
-        "content": " adipisicing elit."
-      },
-      {
-        "coverImageSrc": "https://i.pinimg.com/564x/84/e5/61/84e56121e5238d04c8c172f088c47f8c.jpg",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-      },
-      {
-        "coverImageSrc": "https://i.pinimg.com/originals/a2/0e/89/a20e89bbb83cabd11e6afaadc3614500.jpg",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": " Develop Community",
-        "content": "adipisicing elit. lorem"
-      },
-      {
-        "coverImageSrc": "https://i.pinimg.com/originals/ef/f5/f7/eff5f7d8c41309d8ec56fcaf8b1bf382.jpg",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "id": 6
       }
     ]
   }

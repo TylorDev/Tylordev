@@ -1,107 +1,91 @@
+/* eslint-disable react/prop-types */
 import "./Article.scss";
 import Research from "./../Research/Research";
 
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 function Article() {
+  const [data, setData] = useState(null);
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/src/API/Articles/${id}.json`);
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching the JSON data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="Article">
       <div className="ar-banner">
-        <img
-          src="https://i.pinimg.com/originals/b0/ad/d9/b0add980ccef7ad58b45689d7d4c8125.jpg"
-          alt=""
-        />
+        <img src={data.bannerImage} alt="" />
       </div>
       <div className="ar-content">
-        <div className="ar-tittle">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.Saepe,
-          assumenda
-        </div>
-        <p className="ar-paragraf">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe,
-          assumenda incidunt similique aperiam natus, dolor sapiente odio,
-          labore culpa excepturi hic! Ipsum dignissimos provident quos ex eum et
-          mollitia impedit! Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Facilis eum aut libero repudiandae distinctio, consectetur
-          explicabo impedit aperiam incidunt nobis sequi, adipisci voluptas
-          blanditiis fuga! Consequatur atque qui dolore eaque. Lorem, ipsum
-          dolor sit amet consectetur adipisicing elit. Inventore, dolorem.
-          Repudiandae, perferendis? Ab voluptates facilis expedita asperiores
-          ipsa, recusandae unde veritatis, vitae odio ea magni modi, quisquam
-          dignissimos quos ex. Lorem, ipsum dolor sit amet consectetur
-          adipisicing elit. Saepe, assumenda incidunt similique aperiam natus,
-          dolor sapiente odio, labore culpa excepturi hic! Ipsum dignissimos
-          provident quos ex eum et mollitia impedit! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Facilis eum aut libero repudiandae
-          distinctio, consectetur explicabo impedit aperiam incidunt nobis
-          sequi, adipisci voluptas blanditiis fuga! Consequatur atque qui dolore
-          eaque. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Inventore, dolorem. Repudiandae, perferendis? Ab voluptates facilis
-          expedita asperiores ipsa, recusandae unde veritatis, vitae odio ea
-          magni modi, quisquam dignissimos quos ex. Lorem, ipsum dolor sit amet
-          consectetur adipisicing elit. Saepe, assumenda incidunt similique
-          aperiam natus, dolor sapiente odio, labore culpa excepturi hic! Ipsum
-          dignissimos provident quos ex eum et mollitia impedit! Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Facilis eum aut libero
-          repudiandae distinctio, consectetur explicabo impedit aperiam incidunt
-          nobis sequi, adipisci voluptas blanditiis fuga! Consequatur atque qui
-          dolore eaque. Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Inventore, dolorem. Repudiandae, perferendis? Ab voluptates
-          facilis expedita asperiores ipsa, recusandae unde veritatis, vitae
-          odio ea magni modi, quisquam dignissimos quos ex.
-        </p>
+        <div className="ar-tittle">{data.contentTitle}</div>
+        {data.sections.map((section, index) => (
+          <div className="ar-section" key={index}>
+            <p className="ar-paragraf">{section.paragraph}</p>
 
-        <div className="ar-img">
-          <img
-            src="https://i.pinimg.com/564x/a4/90/88/a4908806e02d3be2c4a526e4c0a09213.jpg"
-            alt=""
-          />
-        </div>
-
-        <p className="ar-paragraf">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe,
-          assumenda incidunt similique aperiam natus, dolor sapiente odio,
-          labore culpa excepturi hic! Ipsum dignissimos provident quos ex eum et
-          mollitia impedit! Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Facilis eum aut libero repudiandae distinctio, consectetur
-          explicabo impedit aperiam incidunt nobis sequi, adipisci voluptas
-          blanditiis fuga! Consequatur atque qui dolore eaque. Lorem, ipsum
-          dolor sit amet consectetur adipisicing elit. Inventore, dolorem.
-          Repudiandae, perferendis? Ab voluptates facilis expedita asperiores
-          ipsa, recusandae unde veritatis, vitae odio ea magni modi, quisquam
-          dignissimos quos ex. Lorem, ipsum dolor sit amet consectetur
-          adipisicing elit. Saepe, assumenda incidunt similique aperiam natus,
-          dolor sapiente odio, labore culpa excepturi hic! Ipsum dignissimos
-          provident quos ex eum et mollitia impedit! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Facilis eum aut libero repudiandae
-          distinctio, consectetur explicabo impedit aperiam incidunt nobis
-          sequi, adipisci voluptas blanditiis fuga! Consequatur atque qui dolore
-          eaque. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Inventore, dolorem. Repudiandae, perferendis? Ab voluptates facilis
-          expedita asperiores ipsa, recusandae unde veritatis, vitae odio ea
-          magni modi, quisquam dignissimos quos ex. Lorem, ipsum dolor sit amet
-          consectetur adipisicing elit. Saepe, assumenda incidunt similique
-          aperiam natus, dolor sapiente odio, labore culpa excepturi hic! Ipsum
-          dignissimos provident quos ex eum et mollitia impedit! Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Facilis eum aut libero
-          repudiandae distinctio, consectetur explicabo impedit aperiam incidunt
-          nobis sequi, adipisci voluptas blanditiis fuga! Consequatur atque qui
-          dolore eaque. Lorem, ipsum dolor sit amet consectetur adipisicing
-          elit. Inventore, dolorem. Repudiandae, perferendis? Ab voluptates
-          facilis expedita asperiores ipsa, recusandae unde veritatis, vitae
-          odio ea magni modi, quisquam dignissimos quos ex.
-        </p>
-        <div className="ar-img">
-          <img
-            src="https://i.pinimg.com/736x/0d/5d/71/0d5d716fa63c699c712d390aeeaa528b.jpg"
-            alt=""
-          />
-        </div>
+            <ImageModal src={section.image} alt="Descripción de la imagen" />
+          </div>
+        ))}
       </div>
       <Research
-        tittle={false}
-        limit={true}
-        style={{ borderTop: "2px solid white", borderBottom: "none" }}
+        tittle={data.researchProps.tittle}
+        limit={data.researchProps.limit}
+        style={data.researchProps.style}
       />
     </div>
   );
 }
+
+const ImageModal = ({ src, alt }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleImageClick = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="image-modal">
+      <img src={src} alt={alt} className="image" onClick={handleImageClick} />
+      {isOpen && <Modal src={src} alt={alt} onClose={handleCloseModal} />}
+    </div>
+  );
+};
+
+const Modal = ({ src, alt, onClose }) => {
+  const handleOverlayClick = (e) => {
+    if (e.target.className === "modal-overlay") {
+      onClose();
+    }
+  };
+
+  return (
+    <div className="modal-overlay" onClick={handleOverlayClick}>
+      <div className="modal-content">
+        <button className="close-button" onClick={onClose}>
+          &times;
+        </button>
+        <img src={src} alt={alt} className="modal-image" />
+      </div>
+    </div>
+  );
+};
+
 export default Article;

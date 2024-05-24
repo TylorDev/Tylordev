@@ -23,10 +23,11 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route path="/research" element={<Research />} />
-          <Route path="/blog" element={<Article />} />
+          <Route path="/research/:id" element={<Article />} />
+
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/project" element={<Project />} />
+          <Route path="/projects/:projectName" element={<Project />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/services" element={<Banner />} />
           <Route

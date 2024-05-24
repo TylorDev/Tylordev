@@ -101,25 +101,6 @@
 
 }
 
-@media (max-width: 768px) {
-    .pp-header {
-        padding: 1rem;
-
-        .ph-tittle {
-
-            text-align: center;
-            width: 100%;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-    }
-
-    .pp-section {
-        display: grid;
-    }
-
-}
 
 .tm-content {
     background-color: $secondary;
@@ -200,7 +181,38 @@
         .modal-content {
             p {
                 margin-bottom: 20px;
+
             }
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    .pp-header {
+        padding: 1rem;
+
+        .ph-tittle {
+
+            text-align: center;
+            width: 100%;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+    }
+
+    .pp-section {
+        display: grid;
+    }
+
+
+    .tm-content {
+
+
+
+        .modal {
+            max-width: 90vw;
         }
     }
 }

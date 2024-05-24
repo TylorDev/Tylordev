@@ -6,9 +6,9 @@
 }
 
 .ar-banner {
-    width: 100%;
-    height: 50vh;
 
+    height: 31vh;
+    aspect-ratio: 24/4;
 
 
     border-radius: 1.5rem;
@@ -43,18 +43,104 @@
 
     }
 
-    .ar-img {
-        width: 100%;
-        aspect-ratio: 16/9;
-        margin: 1rem 0;
+    .ar-section {
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        display: flex;
+
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .ar-paragraf {
+            padding: 1rem 0;
+            flex: 2;
+        }
+
+
+
+    }
+
+
+
+
+}
+
+.image-modal {
+    flex: 1;
+    width: 60%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 0.5rem;
+
+    .image {
+        cursor: pointer;
+        transition: transform 0.3s;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        &:hover {
+            transform: scale(1.05);
         }
     }
 }
+
+
+.modal-overlay {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+
+    .modal-content {
+
+
+        position: relative;
+        background-color: $secondary;
+
+        width: auto;
+        height: 80%;
+
+
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+
+            &:hover {
+                color: red;
+            }
+        }
+
+        .modal-image {
+
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+
+
+
+
+
+
 
 
 
@@ -67,6 +153,51 @@
 
     .ar-content {
 
+        width: 100%;
+    }
+
+
+    .modal-overlay {
+
+
+
+        .modal-content {
+
+
+            position: relative;
+            background-color: $secondary;
+
+            width: 100%;
+            height: auto;
+
+
+
+            .close-button {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: none;
+                border: none;
+                font-size: 2rem;
+                cursor: pointer;
+                color: white;
+
+                &:hover {
+                    color: red;
+                }
+            }
+
+            .modal-image {
+
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+
+    .image-modal {
         width: 100%;
     }
 }

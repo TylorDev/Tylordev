@@ -2,92 +2,92 @@
   "Projects": {
     "header": {
       "mainText": "Grants & Funds/",
-      "title": "PROJECTS"
+      "tittle": "PROJECTS"
     },
     "projects": [
       {
         "coverImageSrc": "https://i.pinimg.com/564x/77/1a/dd/771add9b4ed32ec5d3cbe7613167cc69.jpg",
         "status": "Work/",
-        "title": "Frontend",
-        "metadata": "Fapers",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Frontend",
+        "tittle": "Fapers",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/564x/fd/64/0b/fd640b08268e55081ff5b955804d95c4.jpg",
         "status": "Work/",
-        "title": "Frontend / Backend",
-        "metadata": "Art Station",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Frontend / Backend",
+        "tittle": "Art-Station",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/originals/74/9b/d1/749bd196f0b736ffcd37b27f49077d6c.jpg",
         "status": "Personal/",
-        "title": "Backend",
-        "metadata": "Searcher",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Backend",
+        "tittle": "Searcher",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/736x/93/67/65/9367655075b92e11596c90bdd5882aea.jpg",
         "status": "Personal/",
-        "title": "Desing",
-        "metadata": "Logitech",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Desing",
+        "tittle": "Logitech",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/564x/77/1a/dd/771add9b4ed32ec5d3cbe7613167cc69.jpg",
         "status": "Work/",
-        "title": "Frontend",
-        "metadata": "Fapers",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Frontend",
+        "tittle": "Fapers",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/564x/fd/64/0b/fd640b08268e55081ff5b955804d95c4.jpg",
         "status": "Work/",
-        "title": "Frontend / Backend",
-        "metadata": "Art Station",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Frontend / Backend",
+        "tittle": "Art Station",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/originals/74/9b/d1/749bd196f0b736ffcd37b27f49077d6c.jpg",
         "status": "Personal/",
-        "title": "Backend",
-        "metadata": "Searcher",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Backend",
+        "tittle": "Searcher",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/736x/93/67/65/9367655075b92e11596c90bdd5882aea.jpg",
         "status": "Personal/",
-        "title": "Desing",
-        "metadata": "Logitech",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Desing",
+        "tittle": "Logitech",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/564x/77/1a/dd/771add9b4ed32ec5d3cbe7613167cc69.jpg",
         "status": "Work/",
-        "title": "Frontend",
-        "metadata": "Fapers",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Frontend",
+        "tittle": "Fapers",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/564x/fd/64/0b/fd640b08268e55081ff5b955804d95c4.jpg",
         "status": "Work/",
-        "title": "Frontend / Backend",
-        "metadata": "Art Station",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Frontend / Backend",
+        "tittle": "Art Station",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/originals/74/9b/d1/749bd196f0b736ffcd37b27f49077d6c.jpg",
         "status": "Personal/",
-        "title": "Backend",
-        "metadata": "Searcher",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Backend",
+        "tittle": "Searcher",
+        "tags": "#React #Scss #Js #Vite"
       },
       {
         "coverImageSrc": "https://i.pinimg.com/736x/93/67/65/9367655075b92e11596c90bdd5882aea.jpg",
         "status": "Personal/",
-        "title": "Desing",
-        "metadata": "Logitech",
-        "metadataUnit": "#React #Scss #Js #Vite"
+        "type": "Desing",
+        "tittle": "Logitech",
+        "tags": "#React #Scss #Js #Vite"
       }
     ]
   }

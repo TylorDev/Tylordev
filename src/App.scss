@@ -72,6 +72,7 @@ body {
 
 }
 
+$font-size-min: 12px; // Tamaño de fuente base
 $font-size-base: 16px; // Tamaño de fuente base
 $font-size-large: 22px; // Tamaño de fuente para pantallas anchas
 
@@ -80,5 +81,16 @@ $font-size-large: 22px; // Tamaño de fuente para pantallas anchas
 @media (min-width: 1800px) {
   :root {
     font-size: $font-size-large; // Establecer el tamaño de fuente grande para pantallas anchas
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .hero-video {
+
+
+
+    width: 100%;
+
   }
 }

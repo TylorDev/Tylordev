@@ -36,5 +36,13 @@
         "close": "X"
       }
     }
-  ]
+  ],
+  "data": {
+    "coverImageSrc": "https://i.pinimg.com/564x/77/1a/dd/771add9b4ed32ec5d3cbe7613167cc69.jpg",
+    "status": "Work/",
+    "type": "Frontend",
+    "tittle": "Fapers",
+    "tags": "#React #Scss #Js #Vite",
+    "date": "15/10/2024"
+  }
 }

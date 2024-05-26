@@ -28,19 +28,46 @@
         height: 100vh;
         top: 0;
 
-        z-index: 50;
+        padding: 5rem;
+        z-index: 50px;
         background-color: $principal;
 
 
         a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s;
+            //Develop outline
+            outline: 2px solid white;
+            width: 100%;
+            border-radius: 0.5rem;
+            background-color: $secondary;
+
         }
 
-        a:hover {
+        a:active {
             font-size: 1.2rem;
             color: $secondary;
             ;
+            background-color: $text-principal;
 
+            img {
+                filter: invert(1);
+            }
+        }
+
+
+        .logo {
+
+            display: flex; // Usamos flexbox para centrar el contenido
+            justify-content: center; // Centra horizontalmente
+            align-items: center; // Centra verticalmente
+
+            img {
+                width: auto; // Se asegura de que la imagen no exceda el contenedor
+                height: auto; // Mantiene la proporción de la imagen
+            }
         }
 
 
@@ -111,6 +138,8 @@
 
         .logo {
             padding-left: 1rem;
+
+
         }
 
 
@@ -249,7 +278,7 @@
         }
 
         .barra {
-            width: 40;
+            width: 40px;
             height: 3px;
 
             background-color: $text-principal;

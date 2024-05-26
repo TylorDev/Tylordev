@@ -1,55 +1,5 @@
 {
   "Research": {
-    "title": "RESEARCH",
-    "articles": [
-      {
-        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/fe60fd98025897.5ffa0f822b039.png",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "sit amet consectetur",
-        "content": "Todavía no hay comentarios.",
-        "id": 1
-      },
-      {
-        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/89f92098025897.61d4c7e8a2e7b.png",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        "id": 2
-      },
-      {
-        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/4472ef98025897.60bbb6dc733e6.png",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "Discord Community",
-        "content": " adipisicing elit.",
-        "id": 3
-      },
-      {
-        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/df08c198025897.6063763d9699d.png",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        "id": 4
-      },
-      {
-        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/24ecde98025897.6026b6fdbec53.png",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": " Develop Community",
-        "content": "adipisicing elit. lorem",
-        "id": 5
-      },
-      {
-        "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/7620cc98025897.60621eee5df2e.png",
-        "category": "News",
-        "date": "Sep 17, 2024",
-        "title": "BitBasel NFT Art Community",
-        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        "id": 6
-      }
-    ]
+    "title": "RESEARCH"
   }
 }

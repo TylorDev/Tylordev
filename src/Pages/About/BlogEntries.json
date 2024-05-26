@@ -5,16 +5,6 @@
   },
   "blog": {
     "title": "BLOG",
-    "entries": [
-      {
-        "date": "10.09.24",
-        "content": "led do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris led do eiusmod tempor incididunt"
-      },
-      {
-        "date": "10.05.24",
-        "content": "led do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris led do eiusmod tempor incididunt"
-      }
-    ],
     "cornerLink": {
       "url": "/research",
       "icon": "GoArrowDownLeft"

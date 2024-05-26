@@ -11,7 +11,7 @@ function Banner() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleClick = () => {
-    navigate("contact");
+    navigate("/contact");
   };
 
   const handleNext = () => {

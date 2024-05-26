@@ -99,8 +99,10 @@
 
 
     .entries {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 2rem;
+        //Develop outline
 
         width: 85%;
 

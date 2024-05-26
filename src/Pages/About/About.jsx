@@ -18,7 +18,45 @@ export default About;
 
 function History() {
   const data = content.History;
+  const [Latest, setLatest] = useState([]);
 
+  useEffect(() => {
+    async function fetchData() {
+      // Importar todos los archivos JSON en la carpeta `src/API/Projects`
+      const jsonFiles = import.meta.glob("/src/API/Projects/*.json");
+
+      // Array para almacenar los datos de los proyectos
+      const projectData = [];
+
+      // Iterar sobre los archivos y obtener sus nombres y contenido
+      for (const path in jsonFiles) {
+        const module = await jsonFiles[path]();
+        projectData.push({
+          path,
+          data: module.default,
+        });
+      }
+
+      // Actualizar el estado con los datos de los proyectos
+      setLatest(projectData);
+    }
+
+    fetchData();
+  }, []);
+
+  const latest = Latest.map((article) => article.data);
+
+  const parseDate = (dateString) => {
+    const [day, month, year] = dateString.split("/").map(Number);
+    return new Date(year + 2000, month - 1, day); // Asume fechas en el formato DD/MM/YY
+  };
+
+  // Ordenar los datos por fecha de más reciente a más antiguo
+  const sortedLatest = latest.sort(
+    (a, b) => parseDate(b.data.date) - parseDate(a.data.date)
+  );
+
+  const topLatest = sortedLatest.slice(0, 2);
   return (
     <div className="history">
       <div className="imagen">
@@ -33,10 +71,16 @@ function History() {
           </div>
           <div className="header-tit">{data.latest[0].headerTitle}</div>
         </div>
-        {data.latest.slice(1).map((item, index) => (
-          <Link key={index} className="item" to={"/project"}>
-            <div>{item.type}</div>
-            <div className="item-tittle">{item.title}</div>
+        {topLatest.map((item, index) => (
+          <Link
+            key={index}
+            className="item"
+            to={`/projects/${item.header.title}`}
+          >
+            <div>
+              {item.data.status} {item.data.date}
+            </div>
+            <div className="item-tittle">{item.header.title}</div>
           </Link>
         ))}
       </div>
@@ -101,6 +145,46 @@ function ProfileCont() {
 
 function BlogCont() {
   const data = blog;
+  const [blogLatest, setBloglatest] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      // Importar todos los archivos JSON en la carpeta `src/API/Projects`
+      const jsonFiles = import.meta.glob("/src/API/Articles/*.json");
+
+      // Array para almacenar los datos de los proyectos
+      const projectData = [];
+
+      // Iterar sobre los archivos y obtener sus nombres y contenido
+      for (const path in jsonFiles) {
+        const module = await jsonFiles[path]();
+        projectData.push({
+          path,
+          data: module.default,
+        });
+      }
+
+      // Actualizar el estado con los datos de los proyectos
+      setBloglatest(projectData);
+    }
+
+    fetchData();
+  }, []);
+
+  const latest = blogLatest.map((article) => article.data);
+
+  const parseDate = (dateString) => {
+    const [day, month, year] = dateString.split("/").map(Number);
+    return new Date(year + 2000, month - 1, day); // Asume fechas en el formato DD/MM/YY
+  };
+
+  // Ordenar los datos por fecha de más reciente a más antiguo
+  const sortedLatest = latest.sort(
+    (a, b) => parseDate(b.data.date) - parseDate(a.data.date)
+  );
+
+  const topLatest = sortedLatest.slice(0, 4);
+  console.log(sortedLatest);
 
   return (
     <div className="blog-cont">
@@ -111,10 +195,14 @@ function BlogCont() {
       <div className="blog">
         <div className="tittle-blog">{data.blog.title}</div>
         <div className="entries">
-          {data.blog.entries.map((entry, index) => (
-            <Link key={index} className="entry" to={"/blog"}>
-              <div>{entry.date}</div>
-              <div>{entry.content}</div>
+          {topLatest.map((entry, index) => (
+            <Link
+              key={index}
+              className="entry"
+              to={`/research/${entry.data.id}`}
+            >
+              <div>{entry.data.date}</div>
+              <div>{entry.contentTitle}</div>
             </Link>
           ))}
         </div>

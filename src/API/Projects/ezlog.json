@@ -2,7 +2,7 @@
   "header": {
     "backgroundImage": "https://i.pinimg.com/originals/1b/cf/f4/1bcff4580d0d587f5c2dc02dc86cf8ca.jpg",
     "message": "Bienvenido a nuestra página de proyectos.",
-    "title": "Searcher",
+    "title": "Ezlog",
     "subtitle": "Descubre las innovaciones y desarrollos más recientes en nuestra plataforma.",
     "buttons": [
       {
@@ -41,8 +41,8 @@
     "coverImageSrc": "https://i.pinimg.com/originals/74/9b/d1/749bd196f0b736ffcd37b27f49077d6c.jpg",
     "status": "Personal/",
     "type": "Backend",
-    "tittle": "Searcher",
+    "tittle": "Ezlog",
     "tags": "#React #Scss #Js #Vite",
-    "date": "15/12/2024"
+    "date": "15/11/2024"
   }
 }

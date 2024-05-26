@@ -36,5 +36,13 @@
         "close": "X"
       }
     }
-  ]
+  ],
+  "data": {
+    "coverImageSrc": "https://i.pinimg.com/736x/93/67/65/9367655075b92e11596c90bdd5882aea.jpg",
+    "status": "Personal/",
+    "type": "Desing",
+    "tittle": "Logitech",
+    "tags": "#React #Scss #Js #Vite",
+    "date": "15/08/2024"
+  }
 }

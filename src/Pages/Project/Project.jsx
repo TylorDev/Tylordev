@@ -11,7 +11,12 @@ function Project() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/src/API/Projects/${projectName}.json`);
+        const response = await fetch(
+          `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Projects/${projectName}.json`
+        );
+        if (!response.ok) {
+          throw new Error(`Error fetching ${projectName}.json`);
+        }
         const result = await response.json();
         setData(result);
       } catch (error) {

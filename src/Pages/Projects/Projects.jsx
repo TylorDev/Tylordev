@@ -86,7 +86,7 @@ function Projects({ limit }) {
     fetchData();
   }, [filenames]);
 
-  console.log(data);
+  // console.log(data);
 
   const projects = jsonData.map((project) => project.data);
 

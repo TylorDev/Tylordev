@@ -5,7 +5,7 @@ import "./Research.scss";
 import "./Research-mobile.scss";
 import { useNavigate } from "react-router-dom";
 function Research({ title = true, limit = false, style }) {
-  const data = content.Research;
+  const datos = content.Research;
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
   const handleClick = (blogId) => {
@@ -38,25 +38,73 @@ function Research({ title = true, limit = false, style }) {
     fetchData();
   }, []);
 
-  const articles = jsonData.map((article) => article.data);
-  const displayedArticles = articles
+  const [filenames, setFilenames] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      // Importar todos los archivos JSON en la carpeta `src/API/Projects`
+      const jsonFiles = import.meta.glob("/src/API/Articles/*.json");
+
+      // Array para almacenar los nombres de los archivos
+      const fileNamesArray = [];
+
+      // Iterar sobre los archivos y obtener sus nombres
+      for (const path in jsonFiles) {
+        // Extraer el nombre del archivo del path
+        const fileName = path.split("/").pop();
+        fileNamesArray.push(fileName);
+      }
+
+      // Actualizar el estado con los nombres de los archivos
+      setFilenames(fileNamesArray);
+    }
+
+    fetchData();
+  }, []);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responses = await Promise.all(
+          filenames.map((filename) =>
+            fetch(
+              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Articles/${filename}`
+            )
+          )
+        );
+
+        const data = await Promise.all(
+          responses.map((response) => response.json())
+        );
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [filenames]);
+
+  console.log(data);
+
+  // const data = jsonData.map((article) => article.data);
+  const displayedArticles = data
     .slice(currentIndex, currentIndex + 4)
-    .concat(articles.slice(0, Math.max(0, currentIndex + 4 - articles.length)));
+    .concat(data.slice(0, Math.max(0, currentIndex + 4 - data.length)));
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % articles.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 4 + articles.length) % articles.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 4 + data.length) % data.length);
   };
 
   return (
     <div className="Research">
       <div className="b-buttons" style={style}>
-        <span>{title ? data.title : ""}</span>
+        <span>{title ? datos.title : ""}</span>
         <div>
           <button className="bb-previus" onClick={handlePrev}>
             <GoArrowLeft />
@@ -68,7 +116,7 @@ function Research({ title = true, limit = false, style }) {
       </div>
 
       <div className="r-articles">
-        {(limit ? displayedArticles : articles).map((article, index) => (
+        {(limit ? displayedArticles : data).map((article, index) => (
           <div key={index} className="r-article">
             <div className="rr-cover">
               <img

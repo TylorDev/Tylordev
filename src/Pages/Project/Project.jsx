@@ -81,7 +81,6 @@ const TextModal = ({ tmContent }) => {
 
   return (
     <div className="tm-content">
-      {console.log(tmContent)}
       <p className="summary">{tmContent.summary}</p>
       <button className="button" onClick={handleReadMore}>
         {tmContent.readMore}

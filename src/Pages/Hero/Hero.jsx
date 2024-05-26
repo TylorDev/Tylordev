@@ -34,7 +34,7 @@ function Hero() {
 
       <div className="hero-content">
         <VideoHero videoSrc={data.hero.videoSrc} />
-        {console.log("xd")}
+
         <HeroPost post={data.hero.post} />
       </div>
     </div>

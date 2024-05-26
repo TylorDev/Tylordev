@@ -9,7 +9,7 @@ function Header() {
     setClose(!close);
 
     if (!close) {
-      console.log("Checkbox marcado");
+      //console.log("Checkbox marcado");
       navigate("/header");
     }
   };

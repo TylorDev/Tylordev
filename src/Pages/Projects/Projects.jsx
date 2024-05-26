@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Projects({ limit }) {
-  const data = content.Projects;
+  const datos = content.Projects;
   const navigate = useNavigate();
   const handleClick = (projectName) => {
     const formattedProjectName = projectName.toLowerCase().replace(/\s+/g, "-");
@@ -62,15 +62,41 @@ function Projects({ limit }) {
     fetchData();
   }, []);
 
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responses = await Promise.all(
+          filenames.map((filename) =>
+            fetch(
+              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Projects/${filename}`
+            )
+          )
+        );
+
+        const data = await Promise.all(
+          responses.map((response) => response.json())
+        );
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [filenames]);
+
+  console.log(data);
+
   const projects = jsonData.map((project) => project.data);
 
-  const limitProjects = projects ? projects.slice(0, limit) : projects;
+  const limitProjects = data ? data.slice(0, limit) : projects;
 
   return (
     <div className="Projects">
       <div className="p-header">
-        <span>{data.header.mainText}</span>
-        {data.header.title}
+        <span>{datos.header.mainText}</span>
+        {datos.header.title}
       </div>
       <div className="p-projects">
         {limitProjects.map((project, index) => (

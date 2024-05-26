@@ -184,7 +184,6 @@ function BlogCont() {
   );
 
   const topLatest = sortedLatest.slice(0, 4);
-  console.log(sortedLatest);
 
   return (
     <div className="blog-cont">

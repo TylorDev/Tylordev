@@ -13,7 +13,6 @@ function HeaderMobile() {
     if (!close) {
       console.log("Checkbox marcado");
     } else {
-      console.log("Checkbox desmarcado");
       navigate(-1);
     }
   };

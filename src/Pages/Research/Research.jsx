@@ -12,32 +12,6 @@ function Research({ title = true, limit = false, style }) {
     navigate(`/research/${blogId}`);
   };
 
-  const [jsonData, setJsonData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      // Importar todos los archivos JSON en la carpeta `src/API/Projects`
-      const jsonFiles = import.meta.glob("/src/API/Articles/*.json");
-
-      // Array para almacenar los datos de los proyectos
-      const projectData = [];
-
-      // Iterar sobre los archivos y obtener sus nombres y contenido
-      for (const path in jsonFiles) {
-        const module = await jsonFiles[path]();
-        projectData.push({
-          path,
-          data: module.default,
-        });
-      }
-
-      // Actualizar el estado con los datos de los proyectos
-      setJsonData(projectData);
-    }
-
-    fetchData();
-  }, []);
-
   const [filenames, setFilenames] = useState([]);
 
   useEffect(() => {
@@ -88,7 +62,6 @@ function Research({ title = true, limit = false, style }) {
 
   console.log(data);
 
-  // const data = jsonData.map((article) => article.data);
   const displayedArticles = data
     .slice(currentIndex, currentIndex + 4)
     .concat(data.slice(0, Math.max(0, currentIndex + 4 - data.length)));

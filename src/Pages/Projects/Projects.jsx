@@ -12,34 +12,7 @@ function Projects({ limit }) {
     navigate(`/projects/${formattedProjectName}`);
   };
 
-  const [jsonData, setJsonData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      // Importar todos los archivos JSON en la carpeta `src/API/Projects`
-      const jsonFiles = import.meta.glob("/src/API/Projects/*.json");
-
-      // Array para almacenar los datos de los proyectos
-      const projectData = [];
-
-      // Iterar sobre los archivos y obtener sus nombres y contenido
-      for (const path in jsonFiles) {
-        const module = await jsonFiles[path]();
-        projectData.push({
-          path,
-          data: module.default,
-        });
-      }
-
-      // Actualizar el estado con los datos de los proyectos
-      setJsonData(projectData);
-    }
-
-    fetchData();
-  }, []);
-
   const [filenames, setFilenames] = useState([]);
-
   useEffect(() => {
     async function fetchData() {
       // Importar todos los archivos JSON en la carpeta `src/API/Projects`
@@ -86,11 +59,7 @@ function Projects({ limit }) {
     fetchData();
   }, [filenames]);
 
-  // console.log(data);
-
-  const projects = jsonData.map((project) => project.data);
-
-  const limitProjects = data ? data.slice(0, limit) : projects;
+  const limitProjects = data ? data.slice(0, limit) : data;
 
   return (
     <div className="Projects">

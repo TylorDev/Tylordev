@@ -1,0 +1,19 @@
+#Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0.125rem solid $text-principal;
+    border-radius: 1rem;
+
+    width: 6rem;
+    cursor: pointer;
+    color: $text-principal;
+    padding: 0.3rem 0;
+
+
+    &:hover {
+        color: $principal;
+        background-color: $text-secondary;
+    }
+}

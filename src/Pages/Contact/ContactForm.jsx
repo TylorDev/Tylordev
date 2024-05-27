@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import "./ContactForm.scss";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "./../../Components/Button/Button";
 const ContactForm = () => {
   const {
     register,
@@ -109,9 +110,7 @@ const ContactForm = () => {
               )}
             </div>
 
-            <button type="submit" className="button">
-              Enviar
-            </button>
+            <Button type="submit" text={"Enviar"} />
           </form>
         </div>
       )}
@@ -120,42 +119,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
-const Formulario = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const iframeRef = useRef(null);
-
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    setSubmitted(true);
-  };
-
-  const handleIframeLoad = () => {
-    if (submitted) {
-      navigate(`/projects`);
-    }
-  };
-
-  return (
-    <div>
-      <iframe
-        name="hiddenConfirm"
-        id="hiddenConfirm"
-        style={{ display: "none" }}
-        onLoad={handleIframeLoad}
-        ref={iframeRef}
-      ></iframe>
-      <form
-        action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe90nNoZ9Ro9VquD51WqJwE_yUUJvYTQ3N7WQ_wU0Hbs8lEPw/formResponse"
-        method="post"
-        target="hiddenConfirm"
-        onSubmit={handleSubmit}
-      >
-        <input name="entry.1873119902" defaultValue="Ryan Ray" />
-        <input name="entry.1965438775" defaultValue="Ryan@gmail.com" />
-        <input name="entry.1909091615" defaultValue="hello there!" />
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-  );
-};

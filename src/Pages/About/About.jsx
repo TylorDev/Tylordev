@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import "./About.scss";
-import { GoArrowDownLeft, GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { GoArrowDownLeft } from "react-icons/go";
 import { useEffect, useState } from "react";
 import profile from "./Profile.json";
 import blog from "./BlogEntries.json";
 import content from "./historyContent.json";
+import { CButton } from "../../Components/Button/CButton";
 function About() {
   return (
     <div className="About">
@@ -149,12 +150,10 @@ function ProfileCont() {
             <div>{data.profile.name}</div>
             <div>{data.profile.role}</div>
             <div>{data.profile.username}</div>
-            <button onClick={handlePrev}>
-              <GoArrowLeft />
-            </button>
-            <button onClick={handleNext}>
-              <GoArrowRight />
-            </button>
+
+            <CButton onClick={handlePrev} left={true} />
+
+            <CButton onClick={handleNext} />
           </div>
         </div>
         <div className="profile-content">

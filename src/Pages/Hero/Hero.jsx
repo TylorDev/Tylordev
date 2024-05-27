@@ -3,28 +3,12 @@ import "./Hero.scss";
 import "./Hero-mobile.scss";
 import { GoArrowDownLeft } from "react-icons/go";
 import data from "./Hero.json";
-import { useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "./../../Components/Button/Button";
+
 function Hero() {
-  // useEffect(() => {
-  //   fetch(
-  //     "https://raw.githubusercontent.com/TylorDev/Tylordev/objectfix/package.json"
-  //   )
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => console.log(data))
-  //     .catch((error) =>
-  //       console.error(
-  //         "There has been a problem with your fetch operation:",
-  //         error
-  //       )
-  //     );
-  // }, []);
   return (
     <div className="Hero">
       <div className="hero-top">
@@ -86,7 +70,8 @@ function HeroPost({ post }) {
       </div>
       <div>
         <p>{post.content}</p>
-        <button onClick={handleClick}>{post.buttonText}</button>
+
+        <Button handleClick={handleClick} text={post.buttonText} />
       </div>
 
       <div className="corner"></div>

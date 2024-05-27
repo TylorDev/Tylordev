@@ -4,6 +4,8 @@ import content from "./bannerContent.json"; // Asegúrate de tener el archivo JS
 import "./Banner.scss";
 import "./Banner-mobile.scss";
 import { useNavigate } from "react-router-dom";
+import { Button } from "./../../Components/Button/Button";
+import { CButton } from "./../../Components/Button/CButton";
 
 function Banner() {
   const data = content.Banner;
@@ -48,19 +50,17 @@ function Banner() {
             <img src={data.logoSrc} alt="Logo" />
           </div>
           <p>{data.description}</p>
-          <button onClick={handleClick}>{data.buttonText}</button>
+
+          <Button handleClick={handleClick} text={data.buttonText} />
         </div>
       </div>
 
       <div className="b-buttons">
         <span>{data.eventsTitle}</span>
         <div>
-          <button className="bb-prev" onClick={handlePrev}>
-            <GoArrowLeft />
-          </button>
-          <button className="bb-next" onClick={handleNext}>
-            <GoArrowRight />
-          </button>
+          <CButton onClick={handlePrev} left={true} />
+
+          <CButton onClick={handleNext} />
         </div>
       </div>
 
@@ -69,7 +69,7 @@ function Banner() {
           <div key={index} className="e-event">
             <div className="ee-1">
               <div>{service.date}/</div>
-              <button onClick={handleClick}>{service.buttonText}</button>
+              <Button handleClick={handleClick} text={service.buttonText} />
             </div>
             <div className="ee-2">
               <p>{service.title}</p>

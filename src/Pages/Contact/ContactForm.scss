@@ -176,3 +176,11 @@
         color: $principal;
     }
 }
+
+
+
+@media (max-width: 768px) {
+    .Form {
+        flex-direction: column;
+    }
+}

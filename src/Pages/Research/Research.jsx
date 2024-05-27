@@ -4,6 +4,7 @@ import content from "./researchContent.json"; // Asegúrate de tener el archivo 
 import "./Research.scss";
 import "./Research-mobile.scss";
 import { useNavigate } from "react-router-dom";
+import { CButton } from "./../../Components/Button/CButton";
 function Research({ title = true, limit = false, style }) {
   const datos = content.Research;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -79,12 +80,9 @@ function Research({ title = true, limit = false, style }) {
       <div className="b-buttons" style={style}>
         <span>{title ? datos.title : ""}</span>
         <div>
-          <button className="bb-previus" onClick={handlePrev}>
-            <GoArrowLeft />
-          </button>
-          <button className="bb-next" onClick={handleNext}>
-            <GoArrowRight />
-          </button>
+          <CButton onClick={handlePrev} left={true} />
+
+          <CButton onClick={handleNext} />
         </div>
       </div>
 

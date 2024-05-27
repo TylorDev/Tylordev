@@ -1,0 +1,23 @@
+#CButton {
+
+    text-align: center;
+    margin-top: 50%;
+    padding: 1rem;
+    background-color: transparent;
+    border: 0.125rem solid $text-principal;
+    border-radius: 50%;
+    font-size: 1rem;
+    color: $text-principal;
+    cursor: pointer;
+    margin-left: 1rem;
+
+
+    &:active {
+        background-color: $text-principal;
+        color: $principal;
+
+    }
+
+
+
+}

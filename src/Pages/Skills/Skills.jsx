@@ -1,6 +1,7 @@
 import "./Skills.scss";
 
 import content from "./skillsContent.json";
+import { TextModal } from "./../../Components/TextModal/TextModal";
 
 function Skills() {
   return (
@@ -11,7 +12,7 @@ function Skills() {
             <div key={index} className="skill">
               <div className="ss-tittle">
                 <span>{item.skill["ss-tittle"].text}</span>
-                <button>{item.skill["ss-tittle"].button}</button>
+                <TextModal tmContent={item.skill["ss-tittle"].tmContent} />
               </div>
               {item.skill["ss-logo"] && (
                 <div className="ss-logo">

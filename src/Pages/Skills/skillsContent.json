@@ -4,11 +4,16 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "Lorem XD dolor",
-            "button": "examples"
+            "text": "REACT JS",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
           },
           "ss-logo": {
-            "src": "https://i.pinimg.com/564x/25/e0/8b/25e08b69fa8a91b5387061c04f947f4b.jpg",
+            "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
             "alt": ""
           }
         }
@@ -16,8 +21,51 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "Lorem XD",
-            "button": "&"
+            "text": "Vite",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://vitejs.dev/logo-with-shadow.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "JavaScript",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Node JS",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
+            "alt": ""
           }
         }
       }
@@ -26,19 +74,67 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "Lorem dolor",
-            "button": "&"
+            "text": "Sass & Scss ",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://sass-lang.com/assets/img/styleguide/seal-color.png",
+            "alt": ""
           }
         }
       },
       {
         "skill": {
           "ss-tittle": {
-            "text": "Lorem ipsum ",
-            "button": "examples"
+            "text": "GIT ",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
           },
           "ss-logo": {
-            "src": "https://i.pinimg.com/564x/14/cf/f6/14cff6a5080b73db6f78eeaa6a4c7d9c.jpg",
+            "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2048px-Git_icon.svg.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "MySQL ",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://pngimg.com/d/mysql_PNG23.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "React Router V6 ",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://www.svgrepo.com/show/354262/react-router.svg",
             "alt": ""
           }
         }

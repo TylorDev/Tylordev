@@ -1,9 +1,14 @@
 import "./Request.scss";
 import "./Request-mobile.scss";
 import content from "./requestContent.json";
+import { Button } from "./../../Components/Button/Button";
+import { useNavigate } from "react-router-dom";
 function Request() {
   const data = content.Request;
-
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/contact");
+  };
   return (
     <div className="Request">
       <div className="req-video">
@@ -16,7 +21,8 @@ function Request() {
           <div className="req-m-meta">
             <div className="req-m-m-tittle">{data.metadata.subtitle}</div>
             <p>{data.metadata.content}</p>
-            <button>{data.buttonText}</button>
+
+            <Button text={data.buttonText} handleClick={handleClick}></Button>
           </div>
         </div>
       </div>

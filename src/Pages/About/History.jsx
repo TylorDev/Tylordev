@@ -7,9 +7,15 @@ import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataC
 export function History() {
   const { language } = useLanguage();
 
-  FetchDataComponent;
+  const [Page, setPage] = useState(null);
 
-  const datos = content.History;
+  const PageName = "About";
+  const datos = FetchDataComponent({ PageName });
+
+  useEffect(() => {
+    // Simulating fetching data from JSON file
+    setPage(datos);
+  }, [datos]);
 
   const [filenames, setFilenames] = useState([]);
   useEffect(() => {
@@ -59,7 +65,7 @@ export function History() {
   }, [filenames]);
 
   const latest = data;
-
+  console.log(latest);
   const parseDate = (dateString) => {
     const [day, month, year] = dateString.split("/").map(Number);
     return new Date(year + 2000, month - 1, day); // Asume fechas en el formato DD/MM/YY
@@ -79,16 +85,18 @@ export function History() {
   return (
     <div className="history">
       <div className="imagen">
-        <img src={datos.imageSrc} alt="history-image" />
+        <img src={datos.History.imageSrc} alt="history-image" />
       </div>
 
       <div className="latest">
         <div className="item">
           <div className="header-cont">
-            <span>{datos.latest[0].header.section}</span>{" "}
-            {datos.latest[0].header.title}
+            <span>{datos.History.latest[0].header.section}</span>{" "}
+            {datos.History.latest[0].header.title}
           </div>
-          <div className="header-tit">{datos.latest[0].headerTitle}</div>
+          <div className="header-tit">
+            {datos.History.latest[0].headerTitle}
+          </div>
         </div>
         {topLatest.map((item, index) => (
           <Link

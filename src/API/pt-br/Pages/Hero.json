@@ -1,0 +1,12 @@
+{
+  "hero": {
+    "subtitle": "Desenvolvedor Web Frontend especializado em React e tecnologias modernas",
+    "title": "Bem-vindo ao meu portfólio!",
+    "videoSrc": "https://cdn.dribbble.com/userupload/3786901/file/original-3d93cb58addddb54a249f9b815cacf4f.mp4",
+    "post": {
+      "title": "00/ Sobre mim",
+      "content": "Olá, sou @TylorDev, um desenvolvedor web frontend apaixonado por criar aplicações web modernas e funcionais. Com experiência em React, JavaScript e CSS, dedico-me a construir soluções eficientes e escaláveis. Meu objetivo é sempre oferecer uma experiência de usuário ótima e trabalhar em projetos inovadores que façam a diferença.",
+      "buttonText": "Contato"
+    }
+  }
+}

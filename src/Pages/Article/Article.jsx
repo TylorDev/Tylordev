@@ -4,14 +4,24 @@ import Research from "./../Research/Research";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useLanguage } from "../../Context/LanguageContext";
 
 function Article() {
   const [data, setData] = useState(null);
   const { id } = useParams();
+
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/src/API/Articles/${id}.json`);
+        const response = await fetch(
+          `/src/API/${language}/Articles/${id}.json`
+        );
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -20,7 +30,7 @@ function Article() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, language]);
 
   if (!data) {
     return <div>Loading...</div>;

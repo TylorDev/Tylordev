@@ -23,10 +23,24 @@ function Projects({ limit }) {
   };
 
   const [filenames, setFilenames] = useState([]);
+
+  const enUsFiles = import.meta.glob("/src/API/en-us/Projects/*.json");
+  const esMxFiles = import.meta.glob("/src/API/es-mx/Projects/*.json");
+  const ptBrFiles = import.meta.glob("/src/API/pt-br/Projects/*.json");
+  const defaultFiles = import.meta.glob("/src/API/Projects/*.json");
+
   useEffect(() => {
     async function fetchData() {
-      // Importar todos los archivos JSON en la carpeta `src/API/Projects`
-      const jsonFiles = import.meta.glob("/src/API/Projects/*.json");
+      let jsonFiles;
+      if (language === "en-us") {
+        jsonFiles = enUsFiles;
+      } else if (language === "es-mx") {
+        jsonFiles = esMxFiles;
+      } else if (language === "pt-br") {
+        jsonFiles = ptBrFiles;
+      } else {
+        jsonFiles = defaultFiles;
+      }
 
       // Array para almacenar los nombres de los archivos
       const fileNamesArray = [];
@@ -43,7 +57,7 @@ function Projects({ limit }) {
     }
 
     fetchData();
-  }, []);
+  }, [language]);
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -52,7 +66,7 @@ function Projects({ limit }) {
         const responses = await Promise.all(
           filenames.map((filename) =>
             fetch(
-              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Projects/${filename}`
+              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/Projects/${filename}`
             )
           )
         );
@@ -67,7 +81,7 @@ function Projects({ limit }) {
     };
 
     fetchData();
-  }, [filenames]);
+  }, [filenames, language]);
 
   const limitProjects = data ? data.slice(0, limit) : data;
 

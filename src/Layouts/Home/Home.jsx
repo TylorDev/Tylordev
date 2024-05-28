@@ -4,12 +4,10 @@ import About from "../../Pages/About/About";
 import Banner from "../../Pages/Banner/Banner";
 import Projects from "../../Pages/Projects/Projects";
 import Research from "../../Pages/Research/Research";
-import LanguageSelector from "./../../Components/LanguageSelector/LanguageSelector";
 
 function Home() {
   return (
     <div className="Home">
-      <LanguageSelector />
       <Hero />
       <About />
       <Banner />

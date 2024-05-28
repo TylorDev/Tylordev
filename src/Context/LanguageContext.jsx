@@ -4,7 +4,7 @@ import { createContext, useState, useContext } from "react";
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState("en"); // Idioma predeterminado
+  const [language, setLanguage] = useState("en-us"); // Idioma predeterminado
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

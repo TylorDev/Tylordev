@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import About from "./About.json";
-import { useParams } from "react-router-dom";
-import { useLanguage } from "./../../Context/LanguageContext";
 
+import { useLanguage } from "./../../Context/LanguageContext";
+import content from "./About.json";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 export function History() {
-  const { language, setLanguage } = useLanguage();
-  const { lang } = useParams();
+  const { language } = useLanguage();
 
   FetchDataComponent;
-  const PageName = "About";
-  const json = FetchDataComponent({ PageName });
-  const datos = json.History;
+
+  const datos = content.History;
 
   const [filenames, setFilenames] = useState([]);
   useEffect(() => {

@@ -1,17 +1,17 @@
 {
   "header": {
     "section": "02/",
-    "title": "CV"
+    "title": "cv"
   },
   "profile": {
-    "name": "Anon Unknow Name.",
-    "role": "[Frontend/Backend]",
+    "name": "Nome desconhecido desconhecido.",
+    "role": "[Front-end/Back-end]",
     "username": "@TylorDev",
     "imageSrc": "https://i.pinimg.com/564x/28/54/09/285409694ec9ccbf1a98fd135613d656.jpg"
   },
   "paragraphs": [
-    "Asegúrate de que useLanguage es un custom hook que maneja el estado de language y proporciona los métodos necesarios (setLanguage).",
-    "El primer useEffect se asegura de que language se actualice si lang cambia. El segundo useEffect se encarga de la obtención de datos basada en el language actual y PageName."
+    "Certifique-se de que useLanguage seja um gancho personalizado que lida com o estado do idioma e fornece os métodos necessários (setLanguage).",
+    "O primeiro useEffect garante que o idioma seja atualizado se o idioma for alterado. "
   ],
   "History": {
     "imageSrc": "https://i.pinimg.com/originals/c1/fc/73/c1fc730005984aa2f4664e6d89e12f1f.jpg",
@@ -19,18 +19,18 @@
       {
         "header": {
           "section": "03/",
-          "title": "Proyectos mas recientes!"
+          "title": "Projetos mais recentes!"
         },
-        "headerTitle": "Vaulted"
+        "headerTitle": "Cofre"
       }
     ]
   },
   "blogHeader": {
     "section": "01/",
-    "title": "Blogs mas recientes!"
+    "title": "Blogs mais recentes!"
   },
   "blog": {
-    "title": "BLOG",
+    "title": "BLOGUE",
     "cornerLink": {
       "icon": "GoArrowDownLeft"
     }

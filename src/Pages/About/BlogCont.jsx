@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { GoArrowDownLeft } from "react-icons/go";
 import { useEffect, useState } from "react";
-import About from "./About.json";
+import datos from "./About.json";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import { useLanguage } from "./../../Context/LanguageContext";
 FetchDataComponent;
 export function BlogCont() {
   const PageName = "About";
-  const datos = FetchDataComponent({ PageName });
+  const fetch2 = FetchDataComponent({ PageName });
 
   const { language } = useLanguage();
 

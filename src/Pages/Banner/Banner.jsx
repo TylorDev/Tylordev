@@ -8,12 +8,8 @@ import { Button } from "./../../Components/Button/Button";
 import { CButton } from "./../../Components/Button/CButton";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
-import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 function Banner() {
-  const PageName = "Banner";
-  const json = FetchDataComponent({ PageName });
-
-  const data = json.Banner;
+  const data = content.Banner;
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
 

@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
-import About from "./About.json";
 import { CButton } from "../../Components/Button/CButton";
-import { useParams } from "react-router-dom";
-import { useLanguage } from "./../../Context/LanguageContext";
-
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 
 export function ProfileCont() {
   const [index, setIndex] = useState(0);
   const [data, setData] = useState(null);
-  const { language, setLanguage } = useLanguage();
-  const { lang } = useParams();
 
   const PageName = "About";
   const datos = FetchDataComponent({ PageName });

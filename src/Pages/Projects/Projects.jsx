@@ -3,13 +3,23 @@ import "./Projects-mobile.scss";
 import content from "./projectsContent.json";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { useParams } from "react-router-dom";
+import { useLanguage } from "./../../Context/LanguageContext";
 function Projects({ limit }) {
   const datos = content.Projects;
   const navigate = useNavigate();
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
+
   const handleClick = (projectName) => {
     const formattedProjectName = projectName.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/projects/${formattedProjectName}`);
+    navigate(`/${language}/projects/${formattedProjectName}`);
   };
 
   const [filenames, setFilenames] = useState([]);

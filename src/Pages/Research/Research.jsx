@@ -5,12 +5,26 @@ import "./Research.scss";
 import "./Research-mobile.scss";
 import { useNavigate } from "react-router-dom";
 import { CButton } from "./../../Components/Button/CButton";
+
+import { useParams } from "react-router-dom";
+import { useLanguage } from "./../../Context/LanguageContext";
+
 function Research({ title = true, limit = false, style }) {
   const datos = content.Research;
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
+
   const handleClick = (blogId) => {
-    navigate(`/research/${blogId}`);
+    navigate(`/${language}/research/${blogId}`);
   };
 
   const [filenames, setFilenames] = useState([]);
@@ -60,8 +74,6 @@ function Research({ title = true, limit = false, style }) {
 
     fetchData();
   }, [filenames]);
-
-  console.log(data);
 
   const displayedArticles = data
     .slice(currentIndex, currentIndex + 4)

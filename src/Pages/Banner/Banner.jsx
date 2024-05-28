@@ -6,14 +6,24 @@ import "./Banner-mobile.scss";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./../../Components/Button/Button";
 import { CButton } from "./../../Components/Button/CButton";
-
+import { useParams } from "react-router-dom";
+import { useLanguage } from "./../../Context/LanguageContext";
 function Banner() {
   const data = content.Banner;
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
+
   const handleClick = () => {
-    navigate("/contact");
+    navigate(`/${language}/contact`);
   };
 
   const handleNext = () => {

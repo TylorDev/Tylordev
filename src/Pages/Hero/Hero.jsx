@@ -7,6 +7,8 @@ import data from "./Hero.json";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "./../../Components/Button/Button";
+import { useParams } from "react-router-dom";
+import { useLanguage } from "../../Context/LanguageContext";
 
 function Hero() {
   return (
@@ -32,8 +34,17 @@ function VideoHero({ videoSrc }) {
     event.preventDefault();
   };
 
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
+
   const handleClick = () => {
-    navigate("/Projects");
+    navigate(`/${language}/Projects`);
   };
   return (
     <div className="hero-video">
@@ -59,10 +70,19 @@ function VideoHero({ videoSrc }) {
 }
 function HeroPost({ post }) {
   const navigate = useNavigate();
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
 
   const handleClick = () => {
-    navigate("/contact");
+    navigate(`/${language}/contact`);
   };
+
   return (
     <div className="hero-post">
       <div>

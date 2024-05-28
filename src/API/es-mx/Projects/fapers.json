@@ -1,0 +1,48 @@
+{
+  "header": {
+    "backgroundImage": "https://i.pinimg.com/originals/47/a0/e9/47a0e998904f3d084b1d0bee60c7e7d9.jpg",
+    "message": "Bienvenido a nuestra página de proyectos.",
+    "title": "Fapers",
+    "subtitle": "Descubre las innovaciones y desarrollos más recientes en nuestra plataforma.",
+    "buttons": [
+      {
+        "text": "Ver vista previa",
+        "icon": true
+      },
+      {
+        "text": "Ver código fuente",
+        "icon": true
+      }
+    ]
+  },
+  "sections": [
+    {
+      "flexDirection": "row-reverse",
+      "coverImage": "https://i.pinimg.com/originals/3a/c5/99/3ac5996fbea0af7eff505c7f54db4676.png",
+      "tmContent": {
+        "summary": "Este proyecto utiliza tecnologías de punta para ofrecer una experiencia de usuario intuitiva y eficiente. Descubre cómo implementamos soluciones innovadoras.",
+        "readMore": "Leer más",
+        "modalContent": "Este proyecto es un ejemplo de cómo se puede usar React y SCSS para crear interfaces de usuario modernas y responsivas. Nuestro equipo trabajó arduamente para asegurar que el producto final sea tanto estéticamente agradable como funcionalmente robusto. En este proyecto, utilizamos React para la arquitectura de componentes y SCSS para los estilos, asegurando que cada elemento sea fácilmente mantenible y escalable. Además, incorporamos diversas técnicas de optimización para mejorar el rendimiento y la accesibilidad del sitio.",
+        "close": "X"
+      }
+    },
+    {
+      "flexDirection": "row",
+      "coverImage": "https://i.pinimg.com/originals/7d/1c/29/7d1c2946c66d02b6e04f8aae0a6082e2.jpg",
+      "tmContent": {
+        "summary": "Nuestro equipo ha desarrollado una plataforma que integra múltiples servicios en una sola aplicación. Aprende más sobre las características y beneficios.",
+        "readMore": "Leer más",
+        "modalContent": "Este proyecto se centra en la integración de servicios para mejorar la eficiencia y la colaboración entre equipos. Utilizamos API RESTful para conectar diversos servicios y garantizar una comunicación fluida entre ellos. La interfaz de usuario está diseñada con principios de usabilidad y accesibilidad, asegurando que todos los usuarios puedan aprovechar al máximo las funcionalidades ofrecidas. Este proyecto también incluye pruebas automatizadas y un flujo de despliegue continuo para mantener la calidad del código y la rapidez en la entrega de nuevas características.",
+        "close": "X"
+      }
+    }
+  ],
+  "data": {
+    "coverImageSrc": "https://i.pinimg.com/564x/77/1a/dd/771add9b4ed32ec5d3cbe7613167cc69.jpg",
+    "status": "Work/",
+    "type": "Frontend",
+    "tittle": "Fapers",
+    "tags": "#React #Scss #Js #Vite",
+    "date": "15/10/2024"
+  }
+}

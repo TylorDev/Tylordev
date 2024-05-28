@@ -1,0 +1,48 @@
+{
+  "header": {
+    "backgroundImage": "https://i.pinimg.com/originals/e3/b2/b8/e3b2b8992f488b17d779cd5a0982b5ae.jpg",
+    "message": "Siguiente.",
+    "title": "Art-station",
+    "subtitle": "The writer said he was an identity thief",
+    "buttons": [
+      {
+        "text": "Ver vista previa",
+        "icon": true
+      },
+      {
+        "text": "Ver código fuente",
+        "icon": true
+      }
+    ]
+  },
+  "sections": [
+    {
+      "flexDirection": "row-reverse",
+      "coverImage": "https://i.pinimg.com/originals/74/5b/7f/745b7f0642f806d9dc422b583e450be2.jpg",
+      "tmContent": {
+        "summary": "“We figure out how to steal,” he said. “That’s what we do.”",
+        "readMore": "Leer más",
+        "modalContent": "The Vatican said on Tuesday that Pope Francis “extends his apologies” after reports that he used an offensive slang word referring to gay men at what was intended to be a private meeting with 250 Italian bishops last week.",
+        "close": "X"
+      }
+    },
+    {
+      "flexDirection": "row",
+      "coverImage": "https://i.pinimg.com/originals/e4/6f/d2/e46fd224f67591eac9b7e44f10214f1b.jpg",
+      "tmContent": {
+        "summary": "Nuestro equipo ha desarrollado una plataforma que integra múltiples servicios en una sola aplicación. Aprende más sobre las características y beneficios.",
+        "readMore": "Leer más",
+        "modalContent": "In an email to The New York Times, he said his ring preyed on the dead, the unsuspecting and the elderly, especially those from Florida and California, using birth certificates and other documents to discover personal information that aided in their schemes.",
+        "close": "X"
+      }
+    }
+  ],
+  "data": {
+    "coverImageSrc": "https://i.pinimg.com/564x/fd/64/0b/fd640b08268e55081ff5b955804d95c4.jpg",
+    "status": "Workes/",
+    "type": "Frontend / Backend",
+    "tittle": "Art-Station",
+    "tags": "#React #Scss #Js #Vite",
+    "date": "14/12/2099"
+  }
+}

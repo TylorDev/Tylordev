@@ -3,11 +3,22 @@ import "./Request-mobile.scss";
 import content from "./requestContent.json";
 import { Button } from "./../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useLanguage } from "./../../Context/LanguageContext";
 function Request() {
   const data = content.Request;
   const navigate = useNavigate();
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
+
   const handleClick = () => {
-    navigate("/contact");
+    navigate(`/${language}/contact`);
   };
   return (
     <div className="Request">

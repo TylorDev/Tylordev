@@ -2,22 +2,35 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Header.scss";
 import { useState } from "react";
+
+import { useParams } from "react-router-dom";
+import { useLanguage } from "./../../Context/LanguageContext";
+
 function Header() {
   const [close, setClose] = useState(false);
   const navigate = useNavigate();
+
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
   const handleClick = () => {
     setClose(!close);
 
     if (!close) {
       console.log("Checkbox marcado");
-      navigate("/header");
+      navigate(`/${language}/header`);
     }
   };
   return (
     <header>
       <nav className="navbar">
         <div className="mobile-nav">
-          <NavLink to={"/"} className={"logo"}>
+          <NavLink to={`/${language}`} className={"logo"}>
             <img src="./logo.svg" alt="XD" />
           </NavLink>
 
@@ -33,30 +46,30 @@ function Header() {
         <ul className={`Header`}>
           <div>
             <li>
-              <NavLink to={"/about"}>About</NavLink>
+              <NavLink to={`/${language}/about`}>About</NavLink>
             </li>
             <li>
-              <NavLink to={"/projects"}>Projects</NavLink>
+              <NavLink to={`/${language}/projects`}>Projects</NavLink>
             </li>
             <li>
-              <NavLink to={"/services"}>Services</NavLink>
+              <NavLink to={`/${language}/services`}>Services</NavLink>
             </li>
           </div>
 
           <li>
-            <NavLink to={"/"} className={"logo"}>
+            <NavLink to={`/${language}`} className={`logo`}>
               <img src="./logo.svg" alt="XD" />
             </NavLink>
           </li>
           <div>
             <li>
-              <NavLink to={"/research"}>Research</NavLink>
+              <NavLink to={`/${language}/research`}>Research</NavLink>
             </li>
             <li>
-              <NavLink to={"/resources"}>Resources</NavLink>
+              <NavLink to={`/${language}/resources`}>Resources</NavLink>
             </li>
             <li>
-              <NavLink to={"/contact"}>Contact</NavLink>
+              <NavLink to={`/${language}/contact`}>Contact</NavLink>
             </li>
           </div>
         </ul>

@@ -6,6 +6,9 @@ import profile from "./Profile.json";
 import blog from "./BlogEntries.json";
 import content from "./historyContent.json";
 import { CButton } from "../../Components/Button/CButton";
+
+import { useParams } from "react-router-dom";
+import { useLanguage } from "./../../Context/LanguageContext";
 function About() {
   return (
     <div className="About">
@@ -18,6 +21,15 @@ function About() {
 export default About;
 
 function History() {
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
+
   const datos = content.History;
 
   const [filenames, setFilenames] = useState([]);
@@ -98,7 +110,7 @@ function History() {
           <Link
             key={index}
             className="item"
-            to={`/projects/${item.header.title.toLowerCase()}`}
+            to={`/${language}/projects/${item.header.title.toLowerCase()}`}
           >
             <div>
               {item.data.status} {item.data.date}
@@ -114,6 +126,14 @@ function History() {
 function ProfileCont() {
   const [index, setIndex] = useState(0);
   const [data, setData] = useState(null);
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
 
   useEffect(() => {
     // Simulating fetching data from JSON file
@@ -166,6 +186,14 @@ function ProfileCont() {
 
 function BlogCont() {
   const datos = blog;
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
 
   const [filenames, setFilenames] = useState([]);
 
@@ -215,8 +243,6 @@ function BlogCont() {
     fetchData();
   }, [filenames]);
 
-  console.log(data);
-
   const latest = data;
 
   const parseDate = (dateString) => {
@@ -244,14 +270,14 @@ function BlogCont() {
             <Link
               key={index}
               className="entry"
-              to={`/research/${entry.data.id}`}
+              to={`/${language}/research/${entry.data.id}`}
             >
               <div>{entry.data.date}</div>
               <div>{entry.contentTitle}</div>
             </Link>
           ))}
         </div>
-        <Link className="corner-blog" to={datos.blog.cornerLink.url}>
+        <Link className="corner-blog" to={`/${language}/research`}>
           <div className="arrow">
             <GoArrowDownLeft />
           </div>

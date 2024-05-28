@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import "./headerMobile.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useLanguage } from "./../../Context/LanguageContext";
+
 function HeaderMobile() {
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
@@ -16,6 +19,15 @@ function HeaderMobile() {
       navigate(-1);
     }
   };
+  const { language, setLanguage } = useLanguage();
+  const { lang } = useParams();
+  console.log(lang);
+  if (lang !== language) {
+    setLanguage(lang);
+  }
+
+  console.log(language);
+
   return (
     <header>
       <nav className="navbar">
@@ -35,27 +47,27 @@ function HeaderMobile() {
         </div>
         <ul className={`Header mob`}>
           <li>
-            <NavLink to={"/about"}>About</NavLink>
+            <NavLink to={`/${language}/about`}>About</NavLink>
           </li>
           <li>
-            <NavLink to={"/projects"}>Projects</NavLink>
+            <NavLink to={`/${language}/projects`}>Projects</NavLink>
           </li>
           <li>
-            <NavLink to={"/services"}>Services</NavLink>
+            <NavLink to={`/${language}/services`}>Services</NavLink>
           </li>
           <li>
-            <NavLink to={"/"} className={"logo"}>
+            <NavLink to={`${language}/`} className={`logo`}>
               <img src="./logo.svg" alt="XD" />
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/research"}>Research</NavLink>
+            <NavLink to={`/${language}/research`}>Research</NavLink>
           </li>
           <li>
-            <NavLink to={"/resources"}>Resources</NavLink>
+            <NavLink to={`/${language}/resources`}>Resources</NavLink>
           </li>
           <li>
-            <NavLink to={"/contact"}>Contact</NavLink>
+            <NavLink to={`/${language}/contact`}>Contact</NavLink>
           </li>
         </ul>
       </nav>

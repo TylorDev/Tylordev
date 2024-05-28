@@ -6,7 +6,6 @@
   "blog": {
     "title": "BLOG",
     "cornerLink": {
-      "url": "/research",
       "icon": "GoArrowDownLeft"
     }
   }

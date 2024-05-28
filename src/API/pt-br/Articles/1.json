@@ -1,0 +1,31 @@
+{
+  "bannerImage": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/fe60fd98025897.5ffa0f822b039.png",
+  "contentTitle": " TITULARES DE CADEIRAS CATIVAS:",
+  "sections": [
+    {
+      "paragraph": "O pagamento do ingresso poderá ser feito em dinheiro ou cartão de débito. O ingresso de meia-entrada será vendido somente mediante confirmação de documentação comprobatória, no guichê, no dia do jogo.",
+      "image": "https://i.pinimg.com/736x/65/94/e1/6594e16c472d6c2db1093c389cc6c2a9.jpg"
+    },
+    {
+      "paragraph": "Obrigatória a apresentação do cartão da Cadeira Cativa com as semestralidades pagas. Venda online a partir das 10h de 04/02 em spfcticket.net > R$ 40 Venda na bilheteria 1 e na bilheteria do portão 7 a partir das 10h de 04/02.",
+      "image": "https://i.pinimg.com/originals/60/41/92/60419252951acb0ac01b4278bbac42e4.jpg"
+    }
+  ],
+
+  "researchProps": {
+    "tittle": false,
+    "limit": true,
+    "style": {
+      "borderTop": "2px solid white",
+      "borderBottom": "none"
+    }
+  },
+  "data": {
+    "coverImageSrc": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/fe60fd98025897.5ffa0f822b039.png",
+    "category": "News",
+    "date": "12/99/23",
+    "title": "sit amet consectetur",
+    "content": "Todavía no hay comentarios.",
+    "id": 1
+  }
+}

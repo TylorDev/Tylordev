@@ -7,15 +7,11 @@ import "./Resources.scss";
 function Resources() {
   return (
     <div className="Resources">
-      <div id="request">
-        <Request />
-      </div>
-      <div id="skills">
-        <Skills />
-      </div>
-      <div id="steps">
-        <Steps />
-      </div>
+      <Request />
+
+      <Skills />
+
+      <Steps />
     </div>
   );
 }

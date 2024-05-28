@@ -2,7 +2,6 @@
 import "./Hero.scss";
 import "./Hero-mobile.scss";
 import { GoArrowDownLeft } from "react-icons/go";
-import data from "./Hero.json";
 
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +9,16 @@ import { Button } from "./../../Components/Button/Button";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "../../Context/LanguageContext";
 
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+
 function Hero() {
+  const PageName = "Hero";
+  const data = FetchDataComponent({ PageName });
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="Hero">
       <div className="hero-top">
@@ -36,12 +44,6 @@ function VideoHero({ videoSrc }) {
 
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
-  console.log(lang);
-  if (lang !== language) {
-    setLanguage(lang);
-  }
-
-  console.log(language);
 
   const handleClick = () => {
     navigate(`/${language}/Projects`);
@@ -72,12 +74,6 @@ function HeroPost({ post }) {
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
-  console.log(lang);
-  if (lang !== language) {
-    setLanguage(lang);
-  }
-
-  console.log(language);
 
   const handleClick = () => {
     navigate(`/${language}/contact`);

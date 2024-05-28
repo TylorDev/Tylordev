@@ -21,12 +21,6 @@ function HeaderMobile() {
   };
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
-  console.log(lang);
-  if (lang !== language) {
-    setLanguage(lang);
-  }
-
-  console.log(language);
 
   return (
     <header>

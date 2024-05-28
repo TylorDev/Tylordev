@@ -1,0 +1,39 @@
+{
+  "Banner": {
+    "logoSrc": "/logo.svg",
+    "banner": "https://images.unsplash.com/photo-1618327907215-4e514efabd41?q=80&w=1527&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "description": "PATROCINAMOS CONFERENCIAS DE PERFILES Y REALIZAMOS NUESTROS PROPIOS EVENTOS. ",
+    "buttonText": "Contacto",
+    "eventsTitle": "PRODUCTOS",
+    "services": [
+      {
+        "date": "31.09.22",
+        "time": "30$",
+        "location": "En línea",
+        "title": "DISEÑO DE PRODUCTO WEB",
+        "buttonText": "Aprende más"
+      },
+      {
+        "date": "31.09.22",
+        "time": "30$",
+        "location": "En línea",
+        "title": "DESARROLLO WEB REACCIONAR",
+        "buttonText": "Aprende más"
+      },
+      {
+        "date": "31.09.22",
+        "time": "30$",
+        "location": "En línea",
+        "title": "ENTREGA DEL PRODUCTO ",
+        "buttonText": "Aprende más"
+      },
+      {
+        "date": "31.09.22",
+        "time": "30$",
+        "location": "En línea",
+        "title": "CONSEJOS DE REACCIÓN WEB",
+        "buttonText": "Aprende más"
+      }
+    ]
+  }
+}

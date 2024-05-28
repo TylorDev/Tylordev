@@ -12,10 +12,7 @@ function Project() {
   const { projectName } = useParams();
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
-  console.log(lang);
-  if (lang !== language) {
-    setLanguage(lang);
-  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {

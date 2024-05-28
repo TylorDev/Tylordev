@@ -1,0 +1,38 @@
+{
+  "header": {
+    "section": "02/",
+    "title": "CV"
+  },
+  "profile": {
+    "name": "Anon Unknown Name.",
+    "role": "[Frontend/Backend]",
+    "username": "@TylorDev",
+    "imageSrc": "https://i.pinimg.com/564x/28/54/09/285409694ec9ccbf1a98fd135613d656.jpg"
+  },
+  "paragraphs": [
+    "Make sure useLanguage is a custom hook that handles the language state and provides the necessary methods (setLanguage).",
+    "The first useEffect makes sure that language is updated if lang changes. "
+  ],
+  "History": {
+    "imageSrc": "https://i.pinimg.com/originals/c1/fc/73/c1fc730005984aa2f4664e6d89e12f1f.jpg",
+    "latest": [
+      {
+        "header": {
+          "section": "03/",
+          "title": "Most recent projects!"
+        },
+        "headerTitle": "Vault"
+      }
+    ]
+  },
+  "blogHeader": {
+    "section": "01/",
+    "title": "Most recent blogs!"
+  },
+  "blog": {
+    "title": "BLOG",
+    "cornerLink": {
+      "icon": "GoArrowDownLeft"
+    }
+  }
+}

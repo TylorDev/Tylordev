@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
-import content from "./bannerContent.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
+import content from "./Banner.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
 import "./Banner.scss";
 import "./Banner-mobile.scss";
 import { useNavigate } from "react-router-dom";
@@ -8,19 +8,17 @@ import { Button } from "./../../Components/Button/Button";
 import { CButton } from "./../../Components/Button/CButton";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 function Banner() {
-  const data = content.Banner;
+  const PageName = "Banner";
+  const json = FetchDataComponent({ PageName });
+
+  const data = json.Banner;
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
-  console.log(lang);
-  if (lang !== language) {
-    setLanguage(lang);
-  }
-
-  console.log(language);
 
   const handleClick = () => {
     navigate(`/${language}/contact`);

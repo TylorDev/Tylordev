@@ -1,9 +1,10 @@
 import "./Home.scss";
 import Hero from "../../Pages/Hero/Hero";
-import About from "../../Pages/About/About";
+
 import Banner from "../../Pages/Banner/Banner";
 import Projects from "../../Pages/Projects/Projects";
 import Research from "../../Pages/Research/Research";
+import About from "./../About/About";
 
 function Home() {
   return (

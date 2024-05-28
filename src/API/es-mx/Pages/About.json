@@ -1,0 +1,38 @@
+{
+  "header": {
+    "section": "02/",
+    "title": "CV"
+  },
+  "profile": {
+    "name": "Anónimo Nombre desconocido.",
+    "role": "[Frontal/Backend]",
+    "username": "@TylorDev",
+    "imageSrc": "https://i.pinimg.com/564x/28/54/09/285409694ec9ccbf1a98fd135613d656.jpg"
+  },
+  "paragraphs": [
+    "Asegúrese de que useLanguage sea un enlace personalizado que maneja el estado del idioma y proporciona los métodos necesarios (setLanguage).",
+    "El primer useEffect garantiza que el idioma se actualice si cambia. "
+  ],
+  "History": {
+    "imageSrc": "https://i.pinimg.com/originals/c1/fc/73/c1fc730005984aa2f4664e6d89e12f1f.jpg",
+    "latest": [
+      {
+        "header": {
+          "section": "03/",
+          "title": "¡Proyectos más recientes!"
+        },
+        "headerTitle": "Bóveda"
+      }
+    ]
+  },
+  "blogHeader": {
+    "section": "01/",
+    "title": "Blogs más recientes!"
+  },
+  "blog": {
+    "title": "BLOG",
+    "cornerLink": {
+      "icon": "GoArrowDownLeft"
+    }
+  }
+}

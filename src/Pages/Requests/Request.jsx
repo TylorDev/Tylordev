@@ -10,12 +10,6 @@ function Request() {
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
-  console.log(lang);
-  if (lang !== language) {
-    setLanguage(lang);
-  }
-
-  console.log(language);
 
   const handleClick = () => {
     navigate(`/${language}/contact`);

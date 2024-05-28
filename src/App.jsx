@@ -5,7 +5,7 @@ import "./App.scss";
 import Main from "./Layouts/Main/Main";
 import Home from "./Layouts/Home/Home";
 import HeaderMobile from "./Components/Header/Header-mobile";
-import About from "./Pages/About/About";
+
 import Projects from "./Pages/Projects/Projects";
 import Research from "./Pages/Research/Research";
 import Article from "./Pages/Article/Article";
@@ -14,6 +14,7 @@ import Project from "./Pages/Project/Project";
 import ContactForm from "./Pages/Contact/ContactForm";
 import Resources from "./Layouts/Resources/Resources.jsx";
 import { LanguageProvider } from "./Context/LanguageContext.jsx";
+import About from "./Layouts/About/About";
 
 const validLanguages = ["en-us", "es-mx", "pt-br"];
 

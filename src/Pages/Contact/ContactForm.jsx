@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import "./ContactForm.scss";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./../../Components/Button/Button";
 

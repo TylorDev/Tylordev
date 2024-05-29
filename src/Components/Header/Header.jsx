@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Header.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
@@ -17,6 +17,10 @@ function Header() {
 
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
+
+  const handleName = (name) => {
+    document.title = name;
+  };
 
   const handleClick = () => {
     setClose(!close);
@@ -51,17 +55,32 @@ function Header() {
         <ul className="Header">
           <div>
             <li>
-              <NavLink to={`/${language}/about`}>
+              <NavLink
+                to={`/${language}/about`}
+                onClick={() => {
+                  handleName(content.navItems.about);
+                }}
+              >
                 {content.navItems.about}
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/${language}/projects`}>
+              <NavLink
+                to={`/${language}/projects`}
+                onClick={() => {
+                  handleName(content.navItems.projects);
+                }}
+              >
                 {content.navItems.projects}
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/${language}/services`}>
+              <NavLink
+                to={`/${language}/services`}
+                onClick={() => {
+                  handleName(content.navItems.services);
+                }}
+              >
                 {content.navItems.services}
               </NavLink>
             </li>
@@ -70,23 +89,44 @@ function Header() {
             </li>
           </div>
           <li>
-            <NavLink to={`/${language}`} className="logo">
+            <NavLink
+              to={`/${language}`}
+              className="logo"
+              onClick={() => {
+                handleName("TylorDev/");
+              }}
+            >
               <img src={content.logoSrc} alt={content.logoAlt} />
             </NavLink>
           </li>
           <div>
             <li>
-              <NavLink to={`/${language}/research`}>
+              <NavLink
+                to={`/${language}/research`}
+                onClick={() => {
+                  handleName(content.navItems.research);
+                }}
+              >
                 {content.navItems.research}
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/${language}/resources`}>
+              <NavLink
+                to={`/${language}/resources`}
+                onClick={() => {
+                  handleName(content.navItems.resources);
+                }}
+              >
                 {content.navItems.resources}
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/${language}/contact`}>
+              <NavLink
+                to={`/${language}/contact`}
+                onClick={() => {
+                  handleName(content.navItems.contact);
+                }}
+              >
                 {content.navItems.contact}
               </NavLink>
             </li>

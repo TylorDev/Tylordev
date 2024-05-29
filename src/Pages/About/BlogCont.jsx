@@ -13,10 +13,23 @@ export function BlogCont() {
 
   const [filenames, setFilenames] = useState([]);
 
+  const enUsFiles = import.meta.glob("/src/API/en-us/Articles/*.json");
+  const esMxFiles = import.meta.glob("/src/API/es-mx/Articles/*.json");
+  const ptBrFiles = import.meta.glob("/src/API/pt-br/Articles/*.json");
+  const defaultFiles = import.meta.glob("/src/API/Articles1/*.json");
+
   useEffect(() => {
     async function fetchData() {
-      // Importar todos los archivos JSON en la carpeta `src/API/Projects`
-      const jsonFiles = import.meta.glob("/src/API/Articles/*.json");
+      let jsonFiles;
+      if (language === "en-us") {
+        jsonFiles = enUsFiles;
+      } else if (language === "es-mx") {
+        jsonFiles = esMxFiles;
+      } else if (language === "pt-br") {
+        jsonFiles = ptBrFiles;
+      } else {
+        jsonFiles = defaultFiles;
+      }
 
       // Array para almacenar los nombres de los archivos
       const fileNamesArray = [];
@@ -33,7 +46,7 @@ export function BlogCont() {
     }
 
     fetchData();
-  }, []);
+  }, [language]);
 
   const [data, setData] = useState([]);
   useEffect(() => {

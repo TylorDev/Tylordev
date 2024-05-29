@@ -14,6 +14,15 @@ function Project() {
   const { lang } = useParams();
 
   useEffect(() => {
+    function capitalizeFirstLetter(string) {
+      if (!string) return string; // Maneja casos donde la cadena sea vacía o null
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    document.title = capitalizeFirstLetter(projectName);
+  }, [projectName]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(

@@ -47,7 +47,7 @@ export function History() {
         const responses = await Promise.all(
           filenames.map((filename) =>
             fetch(
-              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Projects/${filename}`
+              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/Projects/${filename}`
             )
           )
         );
@@ -62,7 +62,7 @@ export function History() {
     };
 
     fetchData();
-  }, [filenames]);
+  }, [filenames, language]);
 
   const latest = data;
 

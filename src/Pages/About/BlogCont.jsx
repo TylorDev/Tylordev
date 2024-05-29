@@ -42,7 +42,7 @@ export function BlogCont() {
         const responses = await Promise.all(
           filenames.map((filename) =>
             fetch(
-              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Articles/${filename}`
+              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/Articles/${filename}`
             )
           )
         );
@@ -57,7 +57,7 @@ export function BlogCont() {
     };
 
     fetchData();
-  }, [filenames]);
+  }, [filenames, language]);
 
   const latest = data;
 

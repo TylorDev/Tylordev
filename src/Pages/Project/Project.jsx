@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./Project.scss";
 import { GoArrowRight } from "react-icons/go";
-import data from "./Project.json";
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TextModal } from "../../Components/TextModal/TextModal";

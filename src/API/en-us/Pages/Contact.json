@@ -1,0 +1,28 @@
+{
+  "thankYouMessage": "Gracias por enviar tu mensaje!",
+  "contactMeta": {
+    "title": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ",
+    "email": "email@email-desing.com"
+  },
+  "formFields": {
+    "name": {
+      "placeholder": "Tu Nombre",
+      "label": "Tu Nombre",
+      "errorMessage": "El nombre es requerido"
+    },
+    "email": {
+      "placeholder": "Tu email",
+      "label": "Tu Email",
+      "errorMessage": {
+        "required": "El email es requerido",
+        "invalid": "El email no es válido"
+      }
+    },
+    "message": {
+      "placeholder": "Tu mensaje",
+      "label": "Tu Mensaje",
+      "errorMessage": "El mensaje es requerido"
+    },
+    "submitButton": "Enviar"
+  }
+}

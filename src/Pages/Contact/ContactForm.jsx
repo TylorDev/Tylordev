@@ -3,6 +3,7 @@ import "./ContactForm.scss";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./../../Components/Button/Button";
+import editableContent from "./Contact.json";
 const ContactForm = () => {
   const {
     register,
@@ -36,16 +37,16 @@ const ContactForm = () => {
   return (
     <div className="Form">
       {submitted ? (
-        <div className="thank-you-message">Gracias por enviar tu mensaje!</div>
+        <div className="thank-you-message">
+          {editableContent.thankYouMessage}
+        </div>
       ) : (
         <div className="Form">
           <div className="contact-meta f-bg">
-            <div className="cm-tittle">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            </div>
+            <div className="cm-tittle">{editableContent.contactMeta.title}</div>
             <div className="cm-elements">
               <ul>
-                <li>email@email-desing.com</li>
+                <li>{editableContent.contactMeta.email}</li>
               </ul>
             </div>
           </div>
@@ -60,11 +61,13 @@ const ContactForm = () => {
                 id="name"
                 type="text"
                 className="input"
-                placeholder="Tu Nombre"
-                {...register("name", { required: "El nombre es requerido" })}
+                placeholder={editableContent.formFields.name.placeholder}
+                {...register("name", {
+                  required: editableContent.formFields.name.errorMessage,
+                })}
               />
               <label htmlFor="name" className="label">
-                Tu Nombre
+                {editableContent.formFields.name.label}
               </label>
               {errors.name && (
                 <span className="error">{errors.name.message}</span>
@@ -76,17 +79,19 @@ const ContactForm = () => {
                 id="email"
                 type="email"
                 className="input"
-                placeholder="Tu email"
+                placeholder={editableContent.formFields.email.placeholder}
                 {...register("email", {
-                  required: "El email es requerido",
+                  required:
+                    editableContent.formFields.email.errorMessage.required,
                   pattern: {
                     value: /^\S+@\S+$/i,
-                    message: "El email no es válido",
+                    message:
+                      editableContent.formFields.email.errorMessage.invalid,
                   },
                 })}
               />
               <label htmlFor="email" className="label">
-                Tu Email
+                {editableContent.formFields.email.label}
               </label>
               {errors.email && (
                 <span className="error">{errors.email.message}</span>
@@ -97,20 +102,23 @@ const ContactForm = () => {
               <textarea
                 id="message"
                 className="textarea"
-                placeholder="Tu mensaje"
+                placeholder={editableContent.formFields.message.placeholder}
                 {...register("message", {
-                  required: "El mensaje es requerido",
+                  required: editableContent.formFields.message.errorMessage,
                 })}
               ></textarea>
               <label htmlFor="message" className="label">
-                Tu Mensaje
+                {editableContent.formFields.message.label}
               </label>
               {errors.message && (
                 <span className="error">{errors.message.message}</span>
               )}
             </div>
 
-            <Button type="submit" text={"Enviar"} />
+            <Button
+              type="submit"
+              text={editableContent.formFields.submitButton}
+            />
           </form>
         </div>
       )}

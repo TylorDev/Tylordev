@@ -1,5 +1,5 @@
 {
-  "logoSrc": "./logo.svg",
+  "logoSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/main/public/logo.svg",
   "logoAlt": "XD",
   "menuLabel": "Menu",
   "navItems": {

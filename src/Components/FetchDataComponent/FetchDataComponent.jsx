@@ -7,7 +7,6 @@ const FetchDataComponent = (name) => {
   const { language } = useLanguage();
   const { lang } = useParams();
 
-  console.log(name);
   useEffect(() => {
     const fetchData = async () => {
       try {

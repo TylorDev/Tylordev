@@ -65,7 +65,7 @@ export function History() {
   }, [filenames]);
 
   const latest = data;
-  console.log(latest);
+
   const parseDate = (dateString) => {
     const [day, month, year] = dateString.split("/").map(Number);
     return new Date(year + 2000, month - 1, day); // Asume fechas en el formato DD/MM/YY

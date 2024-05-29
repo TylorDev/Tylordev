@@ -2,16 +2,17 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "../../Context/LanguageContext";
 
-const FetchDataComponent = ({ PageName }) => {
+const FetchDataComponent = (name) => {
   const [data, setData] = useState(null);
   const { language } = useLanguage();
   const { lang } = useParams();
 
+  console.log(name);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${lang}/Pages/${PageName}.json`
+          `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${lang}/Pages/${name}.json`
         );
         const result = await response.json();
         setData(result);
@@ -21,7 +22,7 @@ const FetchDataComponent = ({ PageName }) => {
     };
 
     fetchData();
-  }, [language, PageName, lang]);
+  }, [language, name, lang]);
 
   return data;
 };

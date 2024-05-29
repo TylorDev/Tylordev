@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
-
+import content from "./Header.json";
 function HeaderMobile() {
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
@@ -39,29 +39,41 @@ function HeaderMobile() {
             </div>
           </div>
         </div>
-        <ul className={`Header mob`}>
+        <ul className="Header mob">
           <li>
-            <NavLink to={`/${language}/about`}>About</NavLink>
-          </li>
-          <li>
-            <NavLink to={`/${language}/projects`}>Projects</NavLink>
-          </li>
-          <li>
-            <NavLink to={`/${language}/services`}>Services</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${language}/`} className={`logo`}>
-              <img src="./logo.svg" alt="XD" />
+            <NavLink to={`/${language}/about`}>
+              {content.navItems.about}
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/${language}/research`}>Research</NavLink>
+            <NavLink to={`/${language}/projects`}>
+              {content.navItems.projects}
+            </NavLink>
           </li>
           <li>
-            <NavLink to={`/${language}/resources`}>Resources</NavLink>
+            <NavLink to={`/${language}/services`}>
+              {content.navItems.services}
+            </NavLink>
           </li>
           <li>
-            <NavLink to={`/${language}/contact`}>Contact</NavLink>
+            <NavLink to={`/${language}/`} className="logo">
+              <img src={content.logoSrc} alt={content.logoAlt} />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/${language}/research`}>
+              {content.navItems.research}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/${language}/resources`}>
+              {content.navItems.resources}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/${language}/contact`}>
+              {content.navItems.contact}
+            </NavLink>
           </li>
         </ul>
       </nav>

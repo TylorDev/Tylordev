@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
-import content from "./researchContent.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
+
 import "./Research.scss";
 import "./Research-mobile.scss";
 import { useNavigate } from "react-router-dom";
@@ -8,9 +8,11 @@ import { CButton } from "./../../Components/Button/CButton";
 
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
-
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 function Research({ title = true, limit = false, style }) {
-  const datos = content.Research;
+  const content = FetchDataComponent("researchContent");
+  const datos = content?.Research ?? [];
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 

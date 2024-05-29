@@ -13,7 +13,7 @@ import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataC
 
 function Hero() {
   const PageName = "Hero";
-  const data = FetchDataComponent({ PageName });
+  const data = FetchDataComponent(PageName);
 
   if (!data) {
     return <div>Loading...</div>;

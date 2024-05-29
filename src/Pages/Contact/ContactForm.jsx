@@ -3,8 +3,13 @@ import "./ContactForm.scss";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./../../Components/Button/Button";
-import editableContent from "./Contact.json";
+
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 const ContactForm = () => {
+  const pageName = "Contact";
+
+  const editableContent = FetchDataComponent(pageName);
+
   const {
     register,
     handleSubmit,
@@ -33,6 +38,10 @@ const ContactForm = () => {
       console.error("Error submitting the form:", error);
     }
   };
+
+  if (!editableContent) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="Form">

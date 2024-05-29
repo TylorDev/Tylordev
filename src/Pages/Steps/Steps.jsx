@@ -1,9 +1,9 @@
 import "./Steps.scss";
 
-import content from "./stepsContent.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
-
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 function Steps() {
-  const steps = content.Steps;
+  const content = FetchDataComponent("stepsContent");
+  const steps = content?.Steps ?? [];
 
   return (
     <div className="Steps">

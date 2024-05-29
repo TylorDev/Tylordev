@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import content from "./Banner.json"; // Asegúrate de tener el archivo JSON en la misma carpeta o actualizar la ruta según corresponda
 import "./Banner.scss";
 import "./Banner-mobile.scss";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +7,7 @@ import { Button } from "./../../Components/Button/Button";
 import { CButton } from "./../../Components/Button/CButton";
 
 import { useLanguage } from "./../../Context/LanguageContext";
-import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+
 function Banner() {
   // const data = content;
   // const content = FetchDataComponent("Banner");

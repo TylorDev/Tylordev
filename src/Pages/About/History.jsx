@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useLanguage } from "./../../Context/LanguageContext";
-import content from "./About.json";
+
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 export function History() {
   const { language } = useLanguage();
@@ -10,7 +10,7 @@ export function History() {
   const [Page, setPage] = useState(null);
 
   const PageName = "About";
-  const datos = FetchDataComponent({ PageName });
+  const datos = FetchDataComponent(PageName);
 
   useEffect(() => {
     // Simulating fetching data from JSON file

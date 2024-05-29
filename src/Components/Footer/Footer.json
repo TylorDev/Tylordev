@@ -1,0 +1,17 @@
+{
+  "logoSrc": "./logo.svg",
+  "logoAlt": "Logo",
+  "links": {
+    "about": "Acerca",
+    "projects": "Projects",
+    "extras": "Extras",
+    "research": "Research",
+    "blog": "Publications",
+    "github": "Github",
+    "linkedIn": "LinkedIn",
+    "instagram": "Instagram"
+  },
+  "footerText": "TylorDev/ All rights reserved",
+  "privacyPolicy": "Privacy Policy",
+  "footerDynamicText": "Dynamic Text"
+}

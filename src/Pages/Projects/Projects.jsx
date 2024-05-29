@@ -1,12 +1,15 @@
 import "./Projects.scss";
 import "./Projects-mobile.scss";
-import content from "./projectsContent.json";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 function Projects({ limit }) {
-  const datos = content.Projects;
+  const content = FetchDataComponent("projectsContent");
+  const datos = content?.Projects ?? [];
+
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
@@ -78,6 +81,10 @@ function Projects({ limit }) {
   }, [filenames, language]);
 
   const limitProjects = data ? data.slice(0, limit) : data;
+
+  if (!content) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="Projects">

@@ -7,7 +7,7 @@ export function ProfileCont() {
   const [data, setData] = useState(null);
 
   const PageName = "About";
-  const datos = FetchDataComponent({ PageName });
+  const datos = FetchDataComponent(PageName);
 
   useEffect(() => {
     // Simulating fetching data from JSON file

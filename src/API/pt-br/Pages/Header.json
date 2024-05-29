@@ -1,0 +1,13 @@
+{
+  "logoSrc": "./logo.svg",
+  "logoAlt": "XD",
+  "menuLabel": "Menu",
+  "navItems": {
+    "about": "About",
+    "projects": "Proyectos",
+    "services": "Services",
+    "research": "Investigacion",
+    "resources": "Recursos",
+    "contact": "Contact"
+  }
+}

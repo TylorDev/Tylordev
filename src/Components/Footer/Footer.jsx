@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import "./Footer.scss";
 import { useState, useEffect } from "react";
+import content from "./Footer.json";
+import FetchDataComponent from "./../FetchDataComponent/FetchDataComponent";
 
 function Footer() {
   const [w, setW] = useState(window.innerWidth);
+
+  const content = FetchDataComponent("Footer");
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,27 +24,26 @@ function Footer() {
     <footer className="Footer">
       <div className="footer-content">
         <div className="footer__logo">
-          <img src="./logo.svg" alt="Logo" />
+          <img src={content.logoSrc} alt={content.logoAlt} />
         </div>
         <div className="footer__links">
-          <Link to="/about">About</Link>
-          <Link to="/projects">Projects</Link>
-          <Link to="/extras">Extras</Link>
-
-          <Link to="/research">Research</Link>
-
-          <Link to="/blog">Publications</Link>
-
-          <Link to="/github">Github</Link>
-          <Link to="/linkedIn">LinkedIn</Link>
-          <Link to="/instagram">Instagram</Link>
+          <Link to="/about">{content.links.about}</Link>
+          <Link to="/projects">{content.links.projects}</Link>
+          <Link to="/extras">{content.links.extras}</Link>
+          <Link to="/research">{content.links.research}</Link>
+          <Link to="/blog">{content.links.blog}</Link>
+          <Link to="/github">{content.links.github}</Link>
+          <Link to="/linkedIn">{content.links.linkedIn}</Link>
+          <Link to="/instagram">{content.links.instagram}</Link>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <div>TylorDev/ All rights reserved</div>
-        <Link to="/">Privacy Policy</Link>
-        <div>{w}/</div>
+        <div>{content.footerText}</div>
+        <Link to="/">{content.privacyPolicy}</Link>
+        <div>
+          {w}/{content.footerDynamicText}
+        </div>
       </div>
     </footer>
   );

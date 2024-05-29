@@ -8,7 +8,7 @@ FetchDataComponent;
 export function BlogCont() {
   const PageName = "About";
 
-  const datos = FetchDataComponent({ PageName });
+  const datos = FetchDataComponent(PageName);
   const { language } = useLanguage();
 
   const [filenames, setFilenames] = useState([]);

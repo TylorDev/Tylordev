@@ -1,9 +1,14 @@
 import "./Skills.scss";
 
-import content from "./skillsContent.json";
 import { TextModal } from "./../../Components/TextModal/TextModal";
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 
 function Skills() {
+  const content = FetchDataComponent("skillsContent");
+
+  if (!content) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="Skills">
       {Object.keys(content.Skills).map((key) => (

@@ -1,12 +1,15 @@
 import "./Request.scss";
 import "./Request-mobile.scss";
-import content from "./requestContent.json";
+
 import { Button } from "./../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 function Request() {
-  const data = content.Request;
+  const content = FetchDataComponent("requestContent");
+  const data = content?.Request ?? [];
+
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
@@ -14,6 +17,11 @@ function Request() {
   const handleClick = () => {
     navigate(`/${language}/contact`);
   };
+
+  if (!content) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="Request">
       <div className="req-video">

@@ -25,6 +25,11 @@ function Header() {
       navigate(`/${language}/header`);
     }
   };
+
+  if (!content) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <header>
       <nav className="navbar">

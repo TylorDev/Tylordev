@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Footer.scss";
 import { useState, useEffect } from "react";
-import content from "./Footer.json";
+
 import FetchDataComponent from "./../FetchDataComponent/FetchDataComponent";
 
 function Footer() {
@@ -20,6 +20,11 @@ function Footer() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  if (!content) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <footer className="Footer">
       <div className="footer-content">

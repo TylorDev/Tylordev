@@ -4,8 +4,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
-import content from "./Header.json";
+
+import FetchDataComponent from "./../FetchDataComponent/FetchDataComponent";
+
 function HeaderMobile() {
+  const content = FetchDataComponent("Header");
+
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const [close, setClose] = useState(true);
@@ -21,6 +25,10 @@ function HeaderMobile() {
   };
   const { language, setLanguage } = useLanguage();
   const { lang } = useParams();
+
+  if (!content) {
+    return <header>Loading...</header>;
+  }
 
   return (
     <header>

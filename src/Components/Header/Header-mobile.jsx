@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
 
 import FetchDataComponent from "./../FetchDataComponent/FetchDataComponent";
+import LanguageSelector from "./../LanguageSelector/LanguageSelector";
 
 function HeaderMobile() {
   const content = FetchDataComponent("Header");
@@ -23,8 +24,7 @@ function HeaderMobile() {
       navigate(-1);
     }
   };
-  const { language, setLanguage } = useLanguage();
-  const { lang } = useParams();
+  const { language } = useLanguage();
 
   if (!content) {
     return <header>Loading...</header>;
@@ -48,6 +48,9 @@ function HeaderMobile() {
           </div>
         </div>
         <ul className="Header mob">
+          <li id="lenguage">
+            <LanguageSelector />
+          </li>
           <li>
             <NavLink to={`/${language}/about`}>
               {content.navItems.about}
@@ -63,6 +66,7 @@ function HeaderMobile() {
               {content.navItems.services}
             </NavLink>
           </li>
+
           <li>
             <NavLink to={`/${language}/`} className="logo">
               <img src={content.logoSrc} alt={content.logoAlt} />

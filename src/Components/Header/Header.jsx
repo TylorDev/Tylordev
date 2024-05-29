@@ -5,8 +5,9 @@ import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
-import content from "./Header.json";
+
 import FetchDataComponent from "./../FetchDataComponent/FetchDataComponent";
+import LanguageSelector from "./../LanguageSelector/LanguageSelector";
 
 function Header() {
   const content = FetchDataComponent("Header");
@@ -63,6 +64,9 @@ function Header() {
               <NavLink to={`/${language}/services`}>
                 {content.navItems.services}
               </NavLink>
+            </li>
+            <li>
+              <LanguageSelector />
             </li>
           </div>
           <li>

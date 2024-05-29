@@ -31,6 +31,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Navigate to="/en-us" />} />
+          <Route path="/:lang/header" element={<HeaderMobile />} />
           <Route
             path="/:lang"
             element={
@@ -40,7 +41,7 @@ function App() {
             }
           >
             <Route path="/:lang" element={<Home />} />
-            <Route path="/:lang/header" element={<HeaderMobile />} />
+
             <Route path="/:lang/research" element={<Research />} />
             <Route path="/:lang/research/:id" element={<Article />} />
             <Route path="/:lang/about" element={<About />} />

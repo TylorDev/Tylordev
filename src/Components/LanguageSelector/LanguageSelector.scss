@@ -1,0 +1,204 @@
+/* The container must be positioned relative: */
+.custom-select {
+    position: absolute;
+    right: 40%;
+
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .example-2 {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .inner {
+            font-family: Helvetica-Neue;
+            height: 2rem;
+            background-color: $secondary;
+            color: $text-principal;
+            outline: none;
+            border: none;
+
+            font-size: 0.8rem;
+            border-radius: 0.3rem;
+            z-index: 999;
+            width: 100%;
+            margin: 2px;
+
+            &:focus {
+                outline: 2px solid white;
+            }
+        }
+
+
+        &::before {
+            content: "";
+            display: block;
+            background: linear-gradient(90deg,
+                    rgba(255, 0, 0, 0) 0%,
+                    rgba(102, 102, 102, 0.75) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            height: 300px;
+            width: 100px;
+            transform: translate(0);
+            position: absolute;
+            animation: rotate 5s linear forwards infinite;
+            z-index: 0;
+            top: 50%;
+            transform-origin: top center;
+        }
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    .custom-select {
+        position: relative;
+
+
+        right: auto;
+
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .example-2 {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 200vw;
+            z-index: 99;
+            top: 0;
+            left: 0;
+
+            .inner {
+                font-family: Helvetica-Neue;
+                height: 3rem;
+                background-color: $secondary;
+                color: $text-principal;
+                outline: none;
+                border: none;
+
+                font-size: 0.8rem;
+                border-radius: 0.3rem;
+                z-index: 999;
+
+                margin: 2px;
+
+                &:focus {
+                    outline: 2px solid white;
+                }
+            }
+
+
+            &::before {
+                content: "";
+                display: block;
+                background: linear-gradient(90deg,
+                        rgba(255, 0, 0, 0) 0%,
+                        rgba(102, 102, 102, 0.75) 50%,
+                        rgba(255, 255, 255, 0) 100%);
+                height: 300px;
+                width: 100px;
+                transform: translate(0);
+                position: absolute;
+                animation: rotate 5s linear forwards infinite;
+                z-index: 0;
+                top: 50%;
+                transform-origin: top center;
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+}

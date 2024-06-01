@@ -2,16 +2,15 @@
 import "./Project.scss";
 import { GoArrowRight } from "react-icons/go";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { TextModal } from "../../Components/TextModal/TextModal";
-import { useLanguage } from "../../Context/LanguageContext";
+
+import { Void } from "./../../Components/Void/Void";
+import GetObjectData from "./../../Components/GetObjectData/GetObjectData";
 
 function Project() {
-  const [data, setData] = useState(null);
   const { projectName } = useParams();
-  const { language, setLanguage } = useLanguage();
-  const { lang } = useParams();
 
   useEffect(() => {
     function capitalizeFirstLetter(string) {
@@ -22,27 +21,36 @@ function Project() {
     document.title = capitalizeFirstLetter(projectName);
   }, [projectName]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/Projects/${projectName}.json`
-        );
-        if (!response.ok) {
-          throw new Error(`Error fetching ${projectName}.json`);
-        }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching the JSON data:", error);
-      }
-    };
-
-    fetchData();
-  }, [projectName, language]);
+  const data = GetObjectData({ type: "Projects" });
 
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+      <div className="Project">
+        <div className="pp-header">
+          <Void type="m" cla={"ph-message"} char={10} />
+
+          <Void type="m" cla={"ph-tittle"} char={10} />
+
+          <p className="ph-subtittle">
+            <Void type="div" />
+          </p>
+          <div className="ph-action-buttons">
+            <Void type="button" char={20} />
+            <Void type="button" char={20} />
+          </div>
+        </div>
+
+        <div className="pp-section" style={{ flexDirection: "row-reverse" }}>
+          <Void type="mirror" cla={"ppc-cover"} />
+          <Void type="m" cla={"tm-content"} char={76} />
+        </div>
+
+        <div className="pp-section" style={{ flexDirection: "row" }}>
+          <Void type="mirror" cla={"ppc-cover"} />
+          <Void type="m" cla={"tm-content"} char={76} />
+        </div>
+      </div>
+    );
   }
   return (
     <div className="Project">

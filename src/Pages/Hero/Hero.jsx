@@ -10,13 +10,58 @@ import { useParams } from "react-router-dom";
 import { useLanguage } from "../../Context/LanguageContext";
 
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+import { Void } from "./../../Components/Void/Void";
 
 function Hero() {
   const PageName = "Hero";
   const data = FetchDataComponent(PageName);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+      <div className="Hero">
+        <div className="hero-top">
+          <p className="hero-subtitle">
+            <Void type="parraf" margin={0.2} lines={3} range="20-30" />
+          </p>
+          <div className="hero-title">
+            <Void type="div" char={21} />
+          </div>
+        </div>
+
+        <div className="hero-content">
+          <div className="hero-video">
+            <div className="corner">
+              <div className="arrow">
+                <GoArrowDownLeft />
+              </div>
+            </div>
+
+            <div className="video">
+              <Void />
+            </div>
+          </div>
+
+          <div className="hero-post">
+            <div>
+              <span>
+                {" "}
+                <Void type="span" />
+              </span>{" "}
+              <Void type="div" />
+            </div>
+            <div>
+              <p>
+                <Void type="parraf" margin={0.2} lines={10} range="20-20" />
+              </p>
+
+              <Void type="div" char={10} radius={1} />
+            </div>
+
+            <div className="corner"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -57,6 +102,7 @@ function VideoHero({ videoSrc }) {
       </div>
 
       <video
+        className="video"
         onClick={handleClick}
         loop
         muted

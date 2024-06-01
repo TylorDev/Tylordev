@@ -7,27 +7,11 @@ import { Button } from "./../../Components/Button/Button";
 import { CButton } from "./../../Components/Button/CButton";
 
 import { useLanguage } from "./../../Context/LanguageContext";
+import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+import { Void } from "./../../Components/Void/Void";
 
 function Banner() {
-  // const data = content;
-  // const content = FetchDataComponent("Banner");
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/pt-br/Pages/Banner.json"
-        );
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const data = FetchDataComponent("Banner");
 
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -118,7 +102,88 @@ function Banner() {
           </div>
         </div>
       ) : (
-        <p>Cargando datos...</p>
+        <div className="Banner">
+          <div
+            className="b-image"
+            style={{
+              marginBottom: "1rem",
+            }}
+          >
+            <Void radius={2} />
+          </div>
+
+          <div className="b-buttons">
+            <Void type={"span"} />
+            <div>
+              <Void
+                id="CButton"
+                type={"button"}
+                char={2}
+                marginX={1}
+                radius={5}
+              />
+
+              <Void
+                id="CButton"
+                type={"button"}
+                char={2}
+                marginX={1}
+                radius={5}
+              />
+            </div>
+          </div>
+
+          <div className="b-events">
+            <div className="e-event">
+              <div className="ee-1">
+                <div>
+                  <Void type={"span"} char={3} margin={0.1} />{" "}
+                  <Void type={"span"} char={3} margin={0.1} />{" "}
+                  <Void type={"span"} char={4} margin={0.1} />/
+                </div>
+                <Void
+                  id="Button"
+                  type={"button"}
+                  char={2}
+                  marginX={1}
+                  radius={5}
+                />
+              </div>
+              <div className="ee-2">
+                <p>
+                  <Void type={"parraf"} lines={2} range="10-15" margin={0.2} />
+                </p>
+                <div className="eee-h">
+                  <Void type={"div"} char={20} />
+                </div>
+              </div>
+            </div>
+            <div className="e-event">
+              <div className="ee-1">
+                <div>
+                  <Void type={"span"} char={3} margin={0.1} />{" "}
+                  <Void type={"span"} char={3} margin={0.1} />{" "}
+                  <Void type={"span"} char={4} margin={0.1} />/
+                </div>
+                <Void
+                  id="Button"
+                  type={"button"}
+                  char={2}
+                  marginX={1}
+                  radius={5}
+                />
+              </div>
+              <div className="ee-2">
+                <p>
+                  <Void type={"parraf"} lines={2} range="10-15" margin={0.2} />
+                </p>
+                <div className="eee-h">
+                  <Void type={"div"} char={20} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

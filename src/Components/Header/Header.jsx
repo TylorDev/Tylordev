@@ -8,6 +8,7 @@ import { useLanguage } from "./../../Context/LanguageContext";
 
 import FetchDataComponent from "./../FetchDataComponent/FetchDataComponent";
 import LanguageSelector from "./../LanguageSelector/LanguageSelector";
+import { Void } from "./../Void/Void";
 
 function Header() {
   const content = FetchDataComponent("Header");
@@ -32,7 +33,59 @@ function Header() {
   };
 
   if (!content) {
-    return <div>Loading...</div>;
+    return (
+      <header>
+        <nav className="navbar">
+          <div className="mobile-nav">
+            <Void type="parraf" range="10-1" margin={0} lines={2} />
+
+            <div className="bars" id="lineas">
+              <div>
+                <Void type="div" char={8} />
+              </div>
+              <div className="barras">
+                <span className="barra barra-1" id="barra1"></span>
+                <span className="barra barra-2" id="barra2"></span>
+              </div>
+            </div>
+          </div>
+          <ul className="Header">
+            <div>
+              <li>
+                <Void type="div" marginX={0.2} />
+              </li>
+              <li>
+                <Void type="div" marginX={0.2} />
+              </li>
+              <li>
+                <Void type="div" marginX={0.2} />
+              </li>
+            </div>
+            <li>
+              <a className="logo">
+                <Void
+                  type="img"
+                  src={
+                    "https://gclabels.net/image/cache/data/new/inv/new/Blank-White-Square-Labels-s1w-600x600.png"
+                  }
+                />
+              </a>
+            </li>
+            <div>
+              <li>
+                <Void type="div" />
+              </li>
+              <li>
+                <Void type="div" />
+              </li>
+              <li>
+                <Void type="div" />
+              </li>
+            </div>
+          </ul>
+        </nav>
+      </header>
+    );
   }
 
   return (
@@ -88,7 +141,7 @@ function Header() {
               <LanguageSelector />
             </li>
           </div>
-          <li>
+          <li id="liLogo">
             <NavLink
               to={`/${language}`}
               className="logo"

@@ -1,0 +1,19 @@
+@keyframes fadeInOut {
+    0% {
+        opacity: 50%;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 50%;
+    }
+}
+
+.voidparraf {
+    display: flex;
+    flex-direction: column;
+
+}

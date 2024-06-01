@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+import { Void } from "./../../Components/Void/Void";
 function Request() {
   const content = FetchDataComponent("requestContent");
   const data = content?.Request ?? [];
@@ -19,7 +20,33 @@ function Request() {
   };
 
   if (!content) {
-    return <div>Loading...</div>;
+    return (
+      <div className="Request">
+        <div className="req-video">
+          <div className="req-metadata">
+            <div className="req-m-tittle">
+              <Void type={"parraf"} range="8-10" lines={3} margin={0.2} />
+            </div>
+            <div className="req-m-meta">
+              <div className="req-m-m-tittle">
+                <Void type={"div"} />
+              </div>
+              <p>
+                <Void type={"parraf"} margin={0.1} />
+              </p>
+
+              <Void
+                id="Button"
+                type={"button"}
+                char={2}
+                marginX={1}
+                radius={5}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

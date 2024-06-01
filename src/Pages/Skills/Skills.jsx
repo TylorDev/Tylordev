@@ -2,12 +2,20 @@ import "./Skills.scss";
 
 import { TextModal } from "./../../Components/TextModal/TextModal";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
-
+import { Void } from "./../../Components/Void/Void";
 function Skills() {
   const content = FetchDataComponent("skillsContent");
 
   if (!content) {
-    return <div>Loading...</div>;
+    return (
+      <div className="Skills">
+        {Array(20)
+          .fill("")
+          .map((_, index) => (
+            <Void key={index} />
+          ))}
+      </div>
+    );
   }
   return (
     <div className="Skills">

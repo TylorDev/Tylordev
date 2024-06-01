@@ -1,6 +1,7 @@
 // LanguageSelector.js
 
 import { useNavigate, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useLanguage } from "../../Context/LanguageContext";
 import "./LanguageSelector.scss";
 
@@ -9,10 +10,15 @@ const LanguageSelector = () => {
   const navigate = useNavigate();
   const { lang } = useParams();
 
+  const location = useLocation();
+
   const handleChange = (event) => {
     const selectedLang = event.target.value;
     setLanguage(selectedLang);
-    navigate(`/${selectedLang}`);
+    // Extrae la ruta actual sin el idioma
+    const currentPath = location.pathname.split("/").slice(2).join("/");
+    // Navega a la nueva ruta con el nuevo idioma
+    navigate(`/${selectedLang}/${currentPath}`);
   };
 
   return (

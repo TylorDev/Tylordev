@@ -1,9 +1,12 @@
 .Form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
     padding: 1rem;
+}
+
+
+.Form-conteiner {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
@@ -18,15 +21,21 @@
     }
 }
 
+.f-bg {
+    background-color: $secondary;
+    border-radius: 1rem;
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: space-evenly;
+    gap: 1rem;
+    padding: 3rem;
 
-
-    width: 50%;
 }
+
 
 .contact-meta {
     display: flex;
@@ -34,27 +43,33 @@
     align-items: center;
     justify-content: space-around;
 
+    a {
+        color: $text-principal;
+    }
+
+
+
+    .cm-tittle {
+        font-size: 2rem;
+        text-align: center;
+        font-weight: bold;
+    }
+
 }
 
-.f-bg {
-    background-color: $secondary;
-    border-radius: 1rem;
-    overflow: hidden;
-    padding: 1rem;
 
-    height: 100%;
-}
 
 .field {
     display: flex;
     flex-direction: column-reverse;
     width: 100%;
+    gap: 1rem;
     //Develop outline
 
     position: relative;
 
     .label {
-        font-size: 1rem; // Tamaño de fuente cuando el input está enfocado
+        font-size: 1.5rem; // Tamaño de fuente cuando el input está enfocado
 
 
         opacity: 1;
@@ -67,22 +82,22 @@
             color: red;
         }
 
-    }
+        &[op="true"]::after {
+            content: "";
+            color: rgb(89, 0, 255);
 
-
-    .input:focus~.label,
-    .textarea:focus~.label {
-        opacity: 1;
-
+        }
 
     }
 
 
 
-    .input {
 
-        width: 100%;
-        //Develop outline
+
+    .input,
+    .textarea {
+
+
 
         background-color: transparent;
         border: none;
@@ -90,51 +105,7 @@
         color: $text-secondary;
         font-size: 1rem;
         height: fit-content;
-
-
-        &:focus {
-            outline: none; // Sin contorno al hacer focus
-            background-color: transparent;
-            position: relative;
-
-        }
-
-
-        &:focus::placeholder {
-            opacity: 0;
-
-
-        }
-
-
-
-        &::placeholder {
-            color: rgb(139, 139, 139);
-            font-size: 1rem;
-            font-family: Helvetica-neue;
-            opacity: 1;
-
-        }
-
-
-
-    }
-
-
-
-    .textarea {
-        background-color: transparent; // Fondo transparente
-        border: none; // Sin bordes
-        border-bottom: 2px solid white; // Borde inferior de 2px sólido blanco
-        outline: none; // Sin contorno al hacer focus
-        color: white;
         font-family: Helvetica-Neue;
-        font-size: 1rem;
-
-        &:focus {
-            outline: none; // Sin contorno al hacer focus
-        }
-
 
         &::placeholder {
             color: rgb(139, 139, 139);
@@ -143,15 +114,20 @@
             opacity: 1;
 
         }
-
     }
-
 
 
 
     .textarea {
-        max-width: 100%;
+
+        resize: vertical; // Permite la redimension vertica
+
     }
+
+
+
+
+
 
     .error {
         color: red;
@@ -162,25 +138,58 @@
 }
 
 
-.button {
-    background-color: transparent;
-    border: 2px solid $text-principal;
-    color: $text-principal;
-    padding: 1rem 2rem;
-    border-radius: 2rem;
-
-    cursor: pointer;
-
-    &:active {
-        background-color: $text-principal;
-        color: $principal;
-    }
-}
-
-
 
 @media (max-width: 768px) {
-    .Form {
-        flex-direction: column;
+    .Form-conteiner {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: 100vh;
+        gap: 0;
+        background-color: $secondary;
+        border-radius: 1rem;
+        padding: 2rem 1rem;
+
     }
+
+    .f-bg {
+        background-color: transparent;
+        border-radius: 0;
+    }
+
+    .contact-form {
+        order: 1;
+        height: 100%;
+        padding: 0rem;
+
+
+        .textarea {
+            width: inherit;
+
+        }
+
+    }
+
+    .contact-meta {
+        gap: 2rem;
+        //Develop outline
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+
+
+        .cm-elements {
+            border-bottom: 2px solid white;
+            padding-bottom: 1rem;
+        }
+
+        .cm-tittle {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+
+    }
+
+
+
+
 }

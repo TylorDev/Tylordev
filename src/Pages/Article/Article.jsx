@@ -1,36 +1,33 @@
 /* eslint-disable react/prop-types */
 import "./Article.scss";
 import Research from "./../Research/Research";
-
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useLanguage } from "../../Context/LanguageContext";
+import { useState } from "react";
+import { Void } from "./../../Components/Void/Void";
+import GetObjectData from "./../../Components/GetObjectData/GetObjectData";
 
 function Article() {
-  const [data, setData] = useState(null);
-  const { id } = useParams();
-
-  const { language, setLanguage } = useLanguage();
-  const { lang } = useParams();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `/src/API/${language}/Articles/${id}.json`
-        );
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching the JSON data:", error);
-      }
-    };
-
-    fetchData();
-  }, [id, language]);
-
+  const data = GetObjectData({ type: "Articles" });
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+      <div className="Article">
+        <Void type="mirror" cla={"ar-banner"} />
+
+        <div className="ar-content">
+          <Void type="m" cla={"ar-tittle"} char={6} />
+          <div className="ar-section">
+            <Void type="parraf" margin={0.1} lines={15} range="70-75" />
+
+            <Void type="mirror" cla={"image-modal"} />
+          </div>
+          <div className="ar-section">
+            <Void type="parraf" margin={0.1} lines={15} range="70-75" />
+
+            <Void type="mirror" cla={"image-modal"} />
+          </div>
+        </div>
+        <Research title={false} limit={4} />
+      </div>
+    );
   }
 
   return (

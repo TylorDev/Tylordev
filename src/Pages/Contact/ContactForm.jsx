@@ -1,10 +1,13 @@
+/* eslint-disable react/no-unknown-property */
 import { useForm } from "react-hook-form";
 import "./ContactForm.scss";
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import { Button } from "./../../Components/Button/Button";
 
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+import { Link } from "react-router-dom";
+import { Void } from "./../../Components/Void/Void";
 const ContactForm = () => {
   const pageName = "Contact";
 
@@ -40,7 +43,43 @@ const ContactForm = () => {
   };
 
   if (!editableContent) {
-    return <div>Loading...</div>;
+    return (
+      <div className="Form">
+        <div className="Form-conteiner">
+          <div className="contact-meta f-bg">
+            <Void radius={1} />
+          </div>
+
+          <form className="contact-form f-bg">
+            <div className="field">
+              <Void />
+              <label className="label" op="true">
+                <Void type={"div"} />
+              </label>
+            </div>
+
+            <div className="field">
+              <Void />
+              <label className="label" op="true">
+                <Void type={"div"} />
+              </label>
+            </div>
+
+            <div className="field">
+              <Void />
+              <label className="label" op="true">
+                <Void type={"div"} />
+              </label>
+            </div>
+            <div className="field">
+              <label className="label" op="true">
+                <Void type={"div"} radius={2} char={9} />
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -50,13 +89,13 @@ const ContactForm = () => {
           {editableContent.thankYouMessage}
         </div>
       ) : (
-        <div className="Form">
+        <div className="Form-conteiner">
           <div className="contact-meta f-bg">
             <div className="cm-tittle">{editableContent.contactMeta.title}</div>
             <div className="cm-elements">
-              <ul>
-                <li>{editableContent.contactMeta.email}</li>
-              </ul>
+              <Link to={`mailto:${editableContent.contactMeta.email}`}>
+                {editableContent.contactMeta.email}
+              </Link>
             </div>
           </div>
 
@@ -75,7 +114,7 @@ const ContactForm = () => {
                   required: editableContent.formFields.name.errorMessage,
                 })}
               />
-              <label htmlFor="name" className="label">
+              <label htmlFor="name" className="label" op="true">
                 {editableContent.formFields.name.label}
               </label>
               {errors.name && (
@@ -99,7 +138,7 @@ const ContactForm = () => {
                   },
                 })}
               />
-              <label htmlFor="email" className="label">
+              <label htmlFor="email" className="label" op="true">
                 {editableContent.formFields.email.label}
               </label>
               {errors.email && (
@@ -116,7 +155,7 @@ const ContactForm = () => {
                   required: editableContent.formFields.message.errorMessage,
                 })}
               ></textarea>
-              <label htmlFor="message" className="label">
+              <label htmlFor="message" className="label" op="true">
                 {editableContent.formFields.message.label}
               </label>
               {errors.message && (

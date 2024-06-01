@@ -1,82 +1,18 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import { useLanguage } from "./../../Context/LanguageContext";
 
+import { Void } from "./../../Components/Void/Void";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+import GetData from "./../../Components/GetData/GetData";
 export function History() {
   const { language } = useLanguage();
-
-  const [Page, setPage] = useState(null);
 
   const PageName = "About";
   const datos = FetchDataComponent(PageName);
 
-  useEffect(() => {
-    // Simulating fetching data from JSON file
-    setPage(datos);
-  }, [datos]);
-
-  const [filenames, setFilenames] = useState([]);
-
-  const enUsFiles = import.meta.glob("/src/API/en-us/Projects/*.json");
-  const esMxFiles = import.meta.glob("/src/API/es-mx/Projects/*.json");
-  const ptBrFiles = import.meta.glob("/src/API/pt-br/Projects/*.json");
-  const defaultFiles = import.meta.glob("/src/API/Projects/*.json");
-
-  useEffect(() => {
-    async function fetchData() {
-      let jsonFiles;
-      if (language === "en-us") {
-        jsonFiles = enUsFiles;
-      } else if (language === "es-mx") {
-        jsonFiles = esMxFiles;
-      } else if (language === "pt-br") {
-        jsonFiles = ptBrFiles;
-      } else {
-        jsonFiles = defaultFiles;
-      }
-
-      // Array para almacenar los nombres de los archivos
-      const fileNamesArray = [];
-
-      // Iterar sobre los archivos y obtener sus nombres
-      for (const path in jsonFiles) {
-        // Extraer el nombre del archivo del path
-        const fileName = path.split("/").pop();
-        fileNamesArray.push(fileName);
-      }
-
-      // Actualizar el estado con los nombres de los archivos
-      setFilenames(fileNamesArray);
-    }
-
-    fetchData();
-  }, [language]);
-
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responses = await Promise.all(
-          filenames.map((filename) =>
-            fetch(
-              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/Projects/${filename}`
-            )
-          )
-        );
-
-        const data = await Promise.all(
-          responses.map((response) => response.json())
-        );
-        setData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [filenames, language]);
+  const fileType = "Projects";
+  const data = GetData({ fileType });
 
   const latest = data;
 
@@ -93,7 +29,49 @@ export function History() {
   const topLatest = sortedLatest.slice(0, 2);
 
   if (!datos) {
-    return <div>Loading...</div>;
+    return (
+      <div className="history">
+        <div className="imagen">
+          <Void
+            type={"img"}
+            src={
+              "https://gclabels.net/image/cache/data/new/inv/new/Blank-White-Square-Labels-s1w-600x600.png"
+            }
+          />
+        </div>
+
+        <div className="latest">
+          <div className="item">
+            <div className="header-cont">
+              <Void type={"span"} />
+              <Void type={"div"} />
+            </div>
+            <div className="header-tit">
+              <Void type={"div"} />
+            </div>
+          </div>
+
+          <Link className="item">
+            <div>
+              <Void type={"div"} /> <Void type={"div"} />
+            </div>
+            <div className="item-tittle">
+              {" "}
+              <Void type={"div"} />
+            </div>
+          </Link>
+          <Link className="item">
+            <div>
+              <Void type={"div"} /> <Void type={"div"} />
+            </div>
+            <div className="item-tittle">
+              {" "}
+              <Void type={"div"} />
+            </div>
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (

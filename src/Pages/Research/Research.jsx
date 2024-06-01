@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { useState } from "react";
 
 import "./Research.scss";
 import "./Research-mobile.scss";
 import { useNavigate } from "react-router-dom";
 import { CButton } from "./../../Components/Button/CButton";
 
-import { useParams } from "react-router-dom";
 import { useLanguage } from "./../../Context/LanguageContext";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
+import { Void } from "../../Components/Void/Void";
+import GetData from "./../../Components/GetData/GetData";
 function Research({ title = true, limit = false, style }) {
   const content = FetchDataComponent("researchContent");
   const datos = content?.Research ?? [];
@@ -16,73 +16,16 @@ function Research({ title = true, limit = false, style }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 
-  const { language, setLanguage } = useLanguage();
-  const { lang } = useParams();
+  const { language } = useLanguage();
 
   const handleClick = (blogId) => {
     navigate(`/${language}/research/${blogId}`);
+    console.log(blogId);
   };
 
-  const [filenames, setFilenames] = useState([]);
+  const fileType = "Articles";
 
-  const enUsFiles = import.meta.glob("/src/API/en-us/Articles/*.json");
-  const esMxFiles = import.meta.glob("/src/API/es-mx/Articles/*.json");
-  const ptBrFiles = import.meta.glob("/src/API/pt-br/Articles/*.json");
-  const defaultFiles = import.meta.glob("/src/API/Articles/*.json");
-
-  useEffect(() => {
-    async function fetchData() {
-      let jsonFiles;
-      if (language === "en-us") {
-        jsonFiles = enUsFiles;
-      } else if (language === "es-mx") {
-        jsonFiles = esMxFiles;
-      } else if (language === "pt-br") {
-        jsonFiles = ptBrFiles;
-      } else {
-        jsonFiles = defaultFiles;
-      }
-
-      // Array para almacenar los nombres de los archivos
-      const fileNamesArray = [];
-
-      // Iterar sobre los archivos y obtener sus nombres
-      for (const path in jsonFiles) {
-        // Extraer el nombre del archivo del path
-        const fileName = path.split("/").pop();
-        fileNamesArray.push(fileName);
-      }
-
-      // Actualizar el estado con los nombres de los archivos
-      setFilenames(fileNamesArray);
-    }
-
-    fetchData();
-  }, [language]);
-
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responses = await Promise.all(
-          filenames.map((filename) =>
-            fetch(
-              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/Articles/${filename}`
-            )
-          )
-        );
-
-        const data = await Promise.all(
-          responses.map((response) => response.json())
-        );
-        setData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [filenames, language]);
+  const data = GetData({ fileType });
 
   const displayedArticles = data
     .slice(currentIndex, currentIndex + 4)
@@ -96,6 +39,44 @@ function Research({ title = true, limit = false, style }) {
     setCurrentIndex((prevIndex) => (prevIndex - 4 + data.length) % data.length);
   };
 
+  if (!content) {
+    return (
+      <div className="Research">
+        <div className="b-buttons" style={style}>
+          <Void type="span" />
+          <div>
+            <Void
+              id="CButton"
+              type={"button"}
+              char={2}
+              marginX={1}
+              radius={5}
+            />
+            <Void
+              id="CButton"
+              type={"button"}
+              char={2}
+              marginX={1}
+              radius={5}
+            />
+          </div>
+        </div>
+
+        <div className="r-articles">
+          {Array(8)
+            .fill("")
+            .map((_, index) => (
+              <div className="r-article" key={index}>
+                <div className="rr-cover">
+                  <Void type={"img"} />
+                </div>
+                <div className="rr-tittle"></div>
+              </div>
+            ))}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="Research">
       <div className="b-buttons" style={style}>

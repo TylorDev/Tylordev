@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CButton } from "../../Components/Button/CButton";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
-
+import { Void } from "./../../Components/Void/Void";
 export function ProfileCont() {
   const [index, setIndex] = useState(0);
-  const [data, setData] = useState(null);
 
   const PageName = "About";
-  const datos = FetchDataComponent(PageName);
-
-  useEffect(() => {
-    // Simulating fetching data from JSON file
-    setData(datos);
-  }, [datos]);
+  const data = FetchDataComponent(PageName);
 
   const handlePrev = () => {
     setIndex((prevIndex) =>
@@ -27,7 +21,43 @@ export function ProfileCont() {
   };
 
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+      <div className="profile-cont">
+        <div className="header-cont">
+          <Void type={"span"} char={5} /> <Void type={"div"} char={5} />
+        </div>
+        <div className="profile">
+          <div className="sec-1">
+            <div className="profile-pic">
+              <Void type={"img"} />
+            </div>
+            <div>
+              <Void type={"parraf"} lines={3} margin={0.5} range="15-15" />
+
+              <div>
+                <Void
+                  id="CButton"
+                  type={"button"}
+                  char={2}
+                  marginX={1}
+                  radius={5}
+                />
+                <Void
+                  id="CButton"
+                  type={"button"}
+                  char={2}
+                  marginX={1}
+                  radius={5}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="profile-content">
+            <Void type={"parraf"} lines={5} margin={0.5} />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

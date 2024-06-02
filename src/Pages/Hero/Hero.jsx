@@ -11,6 +11,7 @@ import { useLanguage } from "../../Context/LanguageContext";
 
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import { Void } from "./../../Components/Void/Void";
+import { TittleBar } from "./../../Components/TittleBar/TittleBar";
 
 function Hero() {
   const PageName = "Hero";
@@ -20,9 +21,8 @@ function Hero() {
     return (
       <div className="Hero">
         <div className="hero-top">
-          <p className="hero-subtitle">
-            <Void type="parraf" margin={0.2} lines={3} range="20-30" />
-          </p>
+          <Void type="parraf" margin={0.2} lines={3} range="20-30" />
+
           <div className="hero-title">
             <Void type="div" char={21} />
           </div>
@@ -50,9 +50,7 @@ function Hero() {
               <Void type="div" />
             </div>
             <div>
-              <p>
-                <Void type="parraf" margin={0.2} lines={10} range="20-20" />
-              </p>
+              <Void type="parraf" margin={0.2} lines={10} range="20-20" />
 
               <Void type="div" char={10} radius={1} />
             </div>
@@ -68,7 +66,12 @@ function Hero() {
     <div className="Hero">
       <div className="hero-top">
         <p className="hero-subtitle">{data.hero.subtitle}</p>
-        <div className="hero-title">{data.hero.title} </div>
+
+        <TittleBar
+          tittle={data.hero.title}
+          hideButtons={true}
+          hiddeLine={true}
+        />
       </div>
 
       <div className="hero-content">

@@ -32,7 +32,6 @@ const LanguageSelector = () => {
           <option value="en-us">English 🇺🇸</option>
           <option value="es-mx">Español 🇲🇽 </option>
           <option value="pt-br">Português 🇧🇷</option>
-          {/* Añadir más opciones de idioma según sea necesario */}
         </select>
       </div>
     </div>

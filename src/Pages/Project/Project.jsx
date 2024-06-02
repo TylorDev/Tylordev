@@ -2,24 +2,45 @@
 import "./Project.scss";
 import { GoArrowRight } from "react-icons/go";
 
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { TextModal } from "../../Components/TextModal/TextModal";
 
 import { Void } from "./../../Components/Void/Void";
 import GetObjectData from "./../../Components/GetObjectData/GetObjectData";
+import { useLanguage } from "../../Context/LanguageContext";
+import GetData from "./../../Components/GetData/GetData";
 
 function Project() {
+  const fileType = "Projects";
+  const list = GetData({ fileType });
   const { projectName } = useParams();
+  const [index, setIndex] = useState(0);
+
+  const navigate = useNavigate();
+  const { language } = useLanguage();
+
+  const handleClick = () => {
+    const newIndex = index + 1 < list.length ? index + 1 : 0;
+    navigate(
+      `/${language}/projects/${list[newIndex].header.title.toLowerCase()}`
+    );
+  };
 
   useEffect(() => {
     function capitalizeFirstLetter(string) {
       if (!string) return string; // Maneja casos donde la cadena sea vacía o null
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
+    const findIndexByName = (name) => {
+      return list.findIndex((item) => item.header.title === name);
+    };
+
+    const id = findIndexByName(capitalizeFirstLetter(projectName));
+    setIndex(id);
 
     document.title = capitalizeFirstLetter(projectName);
-  }, [projectName]);
+  }, [projectName, list]);
 
   const data = GetObjectData({ type: "Projects" });
 
@@ -31,9 +52,8 @@ function Project() {
 
           <Void type="m" cla={"ph-tittle"} char={10} />
 
-          <p className="ph-subtittle">
-            <Void type="div" />
-          </p>
+          <Void type="parraf" />
+
           <div className="ph-action-buttons">
             <Void type="button" char={20} />
             <Void type="button" char={20} />
@@ -57,12 +77,12 @@ function Project() {
       <div
         className="pp-header"
         style={{
-          background: `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 0%), url(${data.header.backgroundImage})`,
+          backgroundImage: `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 0%), url(${data.header.backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="ph-message">
+        <div className="ph-message" onClick={handleClick}>
           <span>{data.header.message}</span>
           <GoArrowRight />
         </div>

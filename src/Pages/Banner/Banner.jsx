@@ -4,11 +4,11 @@ import "./Banner.scss";
 import "./Banner-mobile.scss";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./../../Components/Button/Button";
-import { CButton } from "./../../Components/Button/CButton";
 
 import { useLanguage } from "./../../Context/LanguageContext";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import { Void } from "./../../Components/Void/Void";
+import { TittleBar } from "../../Components/TittleBar/TittleBar";
 
 function Banner() {
   const data = FetchDataComponent("Banner");
@@ -75,14 +75,11 @@ function Banner() {
             </div>
           </div>
 
-          <div className="b-buttons">
-            <span>{data.eventsTitle}</span>
-            <div>
-              <CButton onClick={handlePrev} left={true} />
-
-              <CButton onClick={handleNext} />
-            </div>
-          </div>
+          <TittleBar
+            tittle={data.eventsTitle}
+            handlePrev={handlePrev}
+            handleNext={handleNext}
+          />
 
           <div className="b-events">
             {displayedServices.map((service, index) => (
@@ -150,9 +147,8 @@ function Banner() {
                 />
               </div>
               <div className="ee-2">
-                <p>
-                  <Void type={"parraf"} lines={2} range="10-15" margin={0.2} />
-                </p>
+                <Void type={"parraf"} lines={2} range="10-15" margin={0.2} />
+
                 <div className="eee-h">
                   <Void type={"div"} char={20} />
                 </div>
@@ -174,9 +170,8 @@ function Banner() {
                 />
               </div>
               <div className="ee-2">
-                <p>
-                  <Void type={"parraf"} lines={2} range="10-15" margin={0.2} />
-                </p>
+                <Void type={"parraf"} lines={2} range="10-15" margin={0.2} />
+
                 <div className="eee-h">
                   <Void type={"div"} char={20} />
                 </div>

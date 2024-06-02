@@ -5,6 +5,7 @@ import { useLanguage } from "./../../Context/LanguageContext";
 import { Void } from "./../../Components/Void/Void";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import GetData from "./../../Components/GetData/GetData";
+import { TittleBar } from "./../../Components/TittleBar/TittleBar";
 export function History() {
   const { language } = useLanguage();
 
@@ -86,9 +87,10 @@ export function History() {
             <span>{datos.History.latest[0].header.section}</span>{" "}
             {datos.History.latest[0].header.title}
           </div>
-          <div className="header-tit">
-            {datos.History.latest[0].headerTitle}
-          </div>
+          <TittleBar
+            tittle={datos.History.latest[0].headerTitle}
+            hideButtons={true}
+          />
         </div>
         {topLatest.map((item, index) => (
           <Link

@@ -5,37 +5,7 @@
         display: flex;
         flex-direction: column;
 
-        .r-article {
-            height: 20vh;
 
-            display: flex;
-            flex-direction: row;
-        }
-
-        .rr-cover {
-            width: 100%;
-        }
-
-
-        .rr-tittle {
-
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column-reverse;
-
-            span {
-
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-            }
-        }
-
-
-        .rr-sub {
-            color: $text-secondary;
-        }
     }
 
 

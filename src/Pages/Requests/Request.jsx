@@ -31,9 +31,8 @@ function Request() {
               <div className="req-m-m-tittle">
                 <Void type={"div"} />
               </div>
-              <p>
-                <Void type={"parraf"} margin={0.1} />
-              </p>
+
+              <Void type={"parraf"} margin={0.1} />
 
               <Void
                 id="Button"

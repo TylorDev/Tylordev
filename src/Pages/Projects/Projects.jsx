@@ -6,6 +6,8 @@ import { useLanguage } from "./../../Context/LanguageContext";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import { Void } from "../../Components/Void/Void";
 import GetData from "./../../Components/GetData/GetData";
+import { TittleBar } from "./../../Components/TittleBar/TittleBar";
+import { ProjectCard } from "../../Components/ProjectCard/ProjectCard";
 
 function Projects({ limit }) {
   const content = FetchDataComponent("projectsContent");
@@ -40,28 +42,14 @@ function Projects({ limit }) {
 
   return (
     <div className="Projects">
-      <div className="p-header">
-        <span>{datos.header.mainText}</span>
-        {datos.header.tittle}
-      </div>
+      <TittleBar tittle={datos.header.tittle} />
       <div className="p-projects">
         {limitProjects.map((project, index) => (
-          <div key={index} className="p-project">
-            <div className="pp-cover">
-              <img
-                src={project.data.coverImageSrc}
-                alt={`Cover for ${project.data.type}`}
-                onClick={() => handleClick(project.data.tittle)}
-              />
-            </div>
-            <div className="pp-tittle">
-              <span>{project.data.status}</span>
-              <span>{project.data.type}</span>
-            </div>
-            <div className="pp-metadata">
-              {project.data.tittle} <span>{project.data.tags}</span>
-            </div>
-          </div>
+          <ProjectCard
+            key={index}
+            project={project}
+            handleClick={handleClick}
+          />
         ))}
       </div>
     </div>

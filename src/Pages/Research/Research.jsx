@@ -9,6 +9,9 @@ import { useLanguage } from "./../../Context/LanguageContext";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import { Void } from "../../Components/Void/Void";
 import GetData from "./../../Components/GetData/GetData";
+import { TittleBar } from "./../../Components/TittleBar/TittleBar";
+import { ArticleCard } from "../../Components/ArticleCard/ArticleCard";
+
 function Research({ title = true, limit = false, style }) {
   const content = FetchDataComponent("researchContent");
   const datos = content?.Research ?? [];
@@ -79,34 +82,19 @@ function Research({ title = true, limit = false, style }) {
   }
   return (
     <div className="Research">
-      <div className="b-buttons" style={style}>
-        <span>{title ? datos.title : ""}</span>
-        <div>
-          <CButton onClick={handlePrev} left={true} />
-
-          <CButton onClick={handleNext} />
-        </div>
-      </div>
+      <TittleBar
+        tittle={title ? datos.title : ""}
+        handlePrev={handlePrev}
+        handleNext={handleNext}
+      />
 
       <div className="r-articles">
         {(limit ? displayedArticles : data).map((article, index) => (
-          <div key={index} className="r-article">
-            <div className="rr-cover">
-              <img
-                src={article.data.coverImageSrc}
-                alt={`Cover for ${article.data.title}`}
-                onClick={() => handleClick(article.data.id)}
-              />
-            </div>
-            <div className="rr-tittle">
-              <span className="rr-sub">
-                {article.data.category}/ <span>{article.data.date}</span>
-              </span>
-              <span>
-                {article.data.title}. {article.data.content}
-              </span>
-            </div>
-          </div>
+          <ArticleCard
+            key={index}
+            article={article}
+            handleClick={handleClick}
+          />
         ))}
       </div>
     </div>

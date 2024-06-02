@@ -3,7 +3,7 @@ import "./Steps.scss";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import { Void } from "./../../Components/Void/Void";
 function Steps() {
-  const content = FetchDataComponent("stepsContents");
+  const content = FetchDataComponent("stepsContent");
   const steps = content?.Steps ?? [];
   if (!content) {
     return (

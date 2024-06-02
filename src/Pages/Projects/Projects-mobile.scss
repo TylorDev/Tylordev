@@ -6,23 +6,6 @@
     .p-projects {
         display: grid;
         grid-template-columns: 1fr 1fr;
-
-        .p-project {
-            width: 100%;
-
-
-
-
-            .pp-tittle {
-
-                justify-content: space-evenly;
-
-            }
-
-            .pp-metadata {
-                align-items: center;
-            }
-        }
     }
 
 }

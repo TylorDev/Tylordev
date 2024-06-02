@@ -5,6 +5,7 @@ import { useLanguage } from "./../../Context/LanguageContext";
 import { Void } from "./../../Components/Void/Void";
 
 import GetData from "./../../Components/GetData/GetData";
+import { TittleBar } from "./../../Components/TittleBar/TittleBar";
 FetchDataComponent;
 export function BlogCont() {
   const PageName = "About";
@@ -86,7 +87,11 @@ export function BlogCont() {
         {datos.blogHeader.title}
       </div>
       <div className="blog">
-        <div className="tittle-blog">{datos.blog.title}</div>
+        <TittleBar
+          tittle={datos.blog.title}
+          hideButtons={true}
+          hiddeLine={true}
+        />
         <div className="entries">
           {topLatest.map((entry, index) => (
             <Link

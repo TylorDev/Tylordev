@@ -1,48 +1,83 @@
 {
+  "data": {
+    "coverImageSrc": "https://pixeldrain.com/api/file/wyjo1Z8r",
+    "coverImageAlt": "capa do projeto",
+    "status": " Pessoal/",
+    "type": "Front-end/",
+    "tittle": "Searcher",
+    "tags": "#React  #Scss #Js #Vite",
+    "date": "03/04/2024",
+    "title": "Searcher"
+  },
   "header": {
-    "backgroundImage": "https://i.pinimg.com/originals/1b/cf/f4/1bcff4580d0d587f5c2dc02dc86cf8ca.jpg",
-    "message": "Bienvenido a nuestra página de proyectos.",
+    "backgroundImage": "https://pixeldrain.com/api/file/HqKCnrN6",
+    "backgroundAlt": "Banner do projeto",
+    "message": "Próximo",
     "title": "Searcher",
-    "subtitle": "Descubre las innovaciones y desarrollos más recientes en nuestra plataforma.",
+    "subtitle": "Descubra, colecione e venda Art.",
     "buttons": [
       {
-        "text": "Ver vista previa",
-        "icon": true
+        "text": "Ver pré-visualização",
+        "icon": true,
+        "url": "https://tylordev.github.io/Searcher/"
       },
       {
-        "text": "Ver código fuente",
-        "icon": true
+        "text": "Ver código-fonte",
+        "icon": true,
+        "url": "https://tylordev.github.io/Searcher/"
       }
     ]
   },
   "sections": [
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://i.pinimg.com/originals/4e/01/0d/4e010d255955bb029ecaf5a1ab3ba218.jpg",
+      "coverImage": "https://pixeldrain.com/api/file/Fg8DXPQZ",
       "tmContent": {
-        "summary": "Este proyecto utiliza tecnologías de punta para ofrecer una experiencia de usuario intuitiva y eficiente. Descubre cómo implementamos soluciones innovadoras.",
-        "readMore": "Leer más",
-        "modalContent": "Este proyecto es un ejemplo de cómo se puede usar React y SCSS para crear interfaces de usuario modernas y responsivas. Nuestro equipo trabajó arduamente para asegurar que el producto final sea tanto estéticamente agradable como funcionalmente robusto. En este proyecto, utilizamos React para la arquitectura de componentes y SCSS para los estilos, asegurando que cada elemento sea fácilmente mantenible y escalable. Además, incorporamos diversas técnicas de optimización para mejorar el rendimiento y la accesibilidad del sitio.",
-        "close": "X"
+        "summary": "Atualmente a página não responde, mas estou trabalhando para mudar isso.",
+        "readMore": "ler mais",
+        "modalContent": "Encontrei alguns designs que não possuem versão mobile. ",
+        "close": "x"
       }
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://i.pinimg.com/originals/14/b8/49/14b84981d807a087b04fc854e9880a91.jpg",
+      "coverImage": "https://pixeldrain.com/api/file/KWHZhkq4",
       "tmContent": {
-        "summary": "Nuestro equipo ha desarrollado una plataforma que integra múltiples servicios en una sola aplicación. Aprende más sobre las características y beneficios.",
-        "readMore": "Leer más",
-        "modalContent": "Este proyecto se centra en la integración de servicios para mejorar la eficiencia y la colaboración entre equipos. Utilizamos API RESTful para conectar diversos servicios y garantizar una comunicación fluida entre ellos. La interfaz de usuario está diseñada con principios de usabilidad y accesibilidad, asegurando que todos los usuarios puedan aprovechar al máximo las funcionalidades ofrecidas. Este proyecto también incluye pruebas automatizadas y un flujo de despliegue continuo para mantener la calidad del código y la rapidez en la entrega de nuevas características.",
-        "close": "X"
+        "summary": "O design original está na minha página do GitHub.",
+        "readMore": "ler mais",
+        "modalContent": "Adorei o design da página, por isso a criei. ",
+        "close": "x"
+      }
+    },
+    {
+      "flexDirection": "row-reverse",
+      "coverImage": "https://pixeldrain.com/api/file/y4ay2ByL",
+      "tmContent": {
+        "summary": "Todas as imagens são do Pinterest.",
+        "readMore": "ler mais",
+        "modalContent": "Para este controle deslizante, eu estava planejando fazer uma animação mais complexa, mas demoraria muito. ",
+        "close": "x"
+      }
+    },
+    {
+      "flexDirection": "row",
+      "coverImage": "https://pixeldrain.com/api/file/FypSVPiv",
+      "tmContent": {
+        "summary": "Este projeto, como todos os meus projetos pessoais, não possui back-end.",
+        "readMore": "ler mais",
+        "modalContent": "A filtragem por tipo de arte é feita através de JSON, que contém todos os dados de cada publicação. ",
+        "close": "x"
+      }
+    },
+    {
+      "flexDirection": "row-reverse",
+      "coverImage": "https://pixeldrain.com/api/file/y7NGeZMV",
+      "tmContent": {
+        "summary": "Este projeto é simples mas eficaz, com uma página principal e vários subcaminhos que facilitam a navegação.",
+        "readMore": "ler mais",
+        "modalContent": "Usei o React Router para gerenciar rotas de forma eficiente, permitindo uma navegação fluida entre as diferentes seções da página. ",
+        "close": "x"
       }
     }
-  ],
-  "data": {
-    "coverImageSrc": "https://i.pinimg.com/originals/74/9b/d1/749bd196f0b736ffcd37b27f49077d6c.jpg",
-    "status": "Personal/",
-    "type": "Backend",
-    "tittle": "Searcher",
-    "tags": "#React #Scss #Js #Vite",
-    "date": "15/12/2024"
-  }
+  ]
 }

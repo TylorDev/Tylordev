@@ -1,48 +1,82 @@
 {
+  "data": {
+    "coverImageSrc": "https://pixeldrain.com/api/file/wyjo1Z8r",
+    "coverImageAlt": "project-cover",
+    "status": "Personal/",
+    "type": "Frontend/",
+    "tittle": "Searcher",
+    "tags": "#React #Scss #Js #Vite",
+    "date": "2024-04-03"
+  },
   "header": {
-    "backgroundImage": "https://i.pinimg.com/originals/1b/cf/f4/1bcff4580d0d587f5c2dc02dc86cf8ca.jpg",
-    "message": "Bienvenido a nuestra página de proyectos.",
+    "backgroundImage": "https://pixeldrain.com/api/file/HqKCnrN6",
+    "backgroundAlt": "Project-banner",
+    "message": "Siguiente",
     "title": "Searcher",
-    "subtitle": "Descubre las innovaciones y desarrollos más recientes en nuestra plataforma.",
+    "subtitle": "Descubre, colecciona y vende Arte.",
     "buttons": [
       {
         "text": "Ver vista previa",
-        "icon": true
+        "icon": true,
+        "url": "https://tylordev.github.io/Searcher/"
       },
       {
         "text": "Ver código fuente",
-        "icon": true
+        "icon": true,
+        "url": "https://tylordev.github.io/Searcher/"
       }
     ]
   },
   "sections": [
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://i.pinimg.com/originals/4e/01/0d/4e010d255955bb029ecaf5a1ab3ba218.jpg",
+      "coverImage": "https://pixeldrain.com/api/file/Fg8DXPQZ",
       "tmContent": {
-        "summary": "Este proyecto utiliza tecnologías de punta para ofrecer una experiencia de usuario intuitiva y eficiente. Descubre cómo implementamos soluciones innovadoras.",
+        "summary": "Actualmente, la página no es responsive, pero estoy trabajando para cambiar eso.",
         "readMore": "Leer más",
-        "modalContent": "Este proyecto es un ejemplo de cómo se puede usar React y SCSS para crear interfaces de usuario modernas y responsivas. Nuestro equipo trabajó arduamente para asegurar que el producto final sea tanto estéticamente agradable como funcionalmente robusto. En este proyecto, utilizamos React para la arquitectura de componentes y SCSS para los estilos, asegurando que cada elemento sea fácilmente mantenible y escalable. Además, incorporamos diversas técnicas de optimización para mejorar el rendimiento y la accesibilidad del sitio.",
+        "modalContent": "He encontrado algunos diseños que no tienen una versión móvil. Aunque este no es un proyecto serio, y la creación de una versión responsive no es estrictamente necesaria, estoy considerando seriamente desarrollarla en el futuro. Una versión móvil mejoraría significativamente la accesibilidad y la experiencia del usuario, permitiendo que más personas puedan disfrutar del contenido de manera cómoda desde sus dispositivos móviles.",
         "close": "X"
       }
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://i.pinimg.com/originals/14/b8/49/14b84981d807a087b04fc854e9880a91.jpg",
+      "coverImage": "https://pixeldrain.com/api/file/KWHZhkq4",
       "tmContent": {
-        "summary": "Nuestro equipo ha desarrollado una plataforma que integra múltiples servicios en una sola aplicación. Aprende más sobre las características y beneficios.",
+        "summary": "El diseño original está en mi página de GitHub.",
         "readMore": "Leer más",
-        "modalContent": "Este proyecto se centra en la integración de servicios para mejorar la eficiencia y la colaboración entre equipos. Utilizamos API RESTful para conectar diversos servicios y garantizar una comunicación fluida entre ellos. La interfaz de usuario está diseñada con principios de usabilidad y accesibilidad, asegurando que todos los usuarios puedan aprovechar al máximo las funcionalidades ofrecidas. Este proyecto también incluye pruebas automatizadas y un flujo de despliegue continuo para mantener la calidad del código y la rapidez en la entrega de nuevas características.",
+        "modalContent": "Me encantó el diseño de la página, por eso la creé. Además, me sirve para aprender a hacer cosas nuevas.",
+        "close": "X"
+      }
+    },
+    {
+      "flexDirection": "row-reverse",
+      "coverImage": "https://pixeldrain.com/api/file/y4ay2ByL",
+      "tmContent": {
+        "summary": "Todas las imágenes son de Pinterest.",
+        "readMore": "Leer más",
+        "modalContent": "Para este slider, tenía pensado hacer una animación más compleja, pero me tomaría demasiado tiempo. Opté por simplificarlo: las imágenes se hacen más pequeñas y crecen al estar en el centro.",
+        "close": "X"
+      }
+    },
+    {
+      "flexDirection": "row",
+      "coverImage": "https://pixeldrain.com/api/file/FypSVPiv",
+      "tmContent": {
+        "summary": "Este proyecto, al igual que todos mis proyectos personales, no tiene backend.",
+        "readMore": "Leer más",
+        "modalContent": "El filtro por tipo de arte se realiza utilizando JSON, que contiene todos los datos de cada publicación. Si tuviera un backend, solo necesitaría hacer llamadas a la API para obtener los datos. En este caso, tuve que implementar toda la lógica de los filtros manualmente. No tuve tiempo para ordenar por fecha, pero estoy considerando agregar esa funcionalidad en el futuro. A pesar de estas limitaciones, la estructura actual me ha permitido enfocarme en aprender y practicar el manejo de datos en el frontend, lo cual es una habilidad valiosa.",
+        "close": "X"
+      }
+    },
+    {
+      "flexDirection": "row-reverse",
+      "coverImage": "https://pixeldrain.com/api/file/y7NGeZMV",
+      "tmContent": {
+        "summary": "Este proyecto es sencillo pero efectivo, con una página principal y varias subrutas que facilitan la navegación.",
+        "readMore": "Leer más",
+        "modalContent": "He utilizado React Router para gestionar las rutas de manera eficiente, permitiendo una navegación fluida entre las diferentes secciones de la página. Para los estilos, opté por SCSS, lo que me ha permitido mantener un código CSS modular y fácil de mantener. Todo el código está escrito en React, aprovechando su capacidad para crear interfaces de usuario dinámicas y responsivas. Además de los filtros de arte, esta página no incluye otras funcionalidades adicionales, ya que mi objetivo era mantener la simplicidad y evitar complejidades innecesarias.",
         "close": "X"
       }
     }
-  ],
-  "data": {
-    "coverImageSrc": "https://i.pinimg.com/originals/74/9b/d1/749bd196f0b736ffcd37b27f49077d6c.jpg",
-    "status": "Personal/",
-    "type": "Backend",
-    "tittle": "Searcher",
-    "tags": "#React #Scss #Js #Vite",
-    "date": "15/12/2024"
-  }
+  ]
 }

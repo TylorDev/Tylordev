@@ -3,15 +3,15 @@
   "logoAlt": "Logo",
   "links": {
     "about": "Acerca",
-    "projects": "Projects",
+    "projects": "Proyectos",
     "extras": "Extras",
-    "research": "Research",
-    "blog": "Publications",
+    "research": "Investigación",
+    "blog": "Publicaciones",
     "github": "Github",
     "linkedIn": "LinkedIn",
     "instagram": "Instagram"
   },
-  "footerText": "TylorDev/ All rights reserved",
-  "privacyPolicy": "Privacy Policy",
-  "footerDynamicText": "Dynamic Text"
+  "footerText": "TylorDev/ Todos los derechos reservados",
+  "privacyPolicy": "contacto@contacto.com",
+  "footerDynamicText": "Texto Dinámico"
 }

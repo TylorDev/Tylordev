@@ -3,11 +3,11 @@
   "logoAlt": "logo",
   "menuLabel": "Menu",
   "navItems": {
-    "about": "About",
+    "about": "Acerca de",
     "projects": "Proyectos",
-    "services": "Services",
-    "research": "Investigacion",
+    "services": "Servicios",
+    "research": "Publicaciones",
     "resources": "Recursos",
-    "contact": "Contact"
+    "contact": "Contacto"
   }
 }

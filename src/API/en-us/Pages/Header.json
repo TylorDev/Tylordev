@@ -4,10 +4,10 @@
   "menuLabel": "Menu",
   "navItems": {
     "about": "About",
-    "projects": "Proyectos",
+    "projects": "Projects",
     "services": "Services",
-    "research": "Investigacion",
-    "resources": "Recursos",
+    "research": "Publications",
+    "resources": "Resources",
     "contact": "Contact"
   }
 }

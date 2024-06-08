@@ -2,7 +2,7 @@
   "logoSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/main/public/logo.svg",
   "logoAlt": "Logo",
   "links": {
-    "about": "Acerca",
+    "about": "About",
     "projects": "Projects",
     "extras": "Extras",
     "research": "Research",
@@ -12,6 +12,6 @@
     "instagram": "Instagram"
   },
   "footerText": "TylorDev/ All rights reserved",
-  "privacyPolicy": "Privacy Policy",
+  "privacyPolicy": "contact@contact.com",
   "footerDynamicText": "Dynamic Text"
 }

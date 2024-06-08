@@ -4,24 +4,26 @@
     "title": "CV"
   },
   "profile": {
-    "name": "Anon Unknown Name.",
+    "name": "Tylor.",
     "role": "[Frontend/Backend]",
     "username": "@TylorDev",
-    "imageSrc": "https://i.pinimg.com/564x/28/54/09/285409694ec9ccbf1a98fd135613d656.jpg"
+    "imageSrc": "https://pixeldrain.com/api/file/cZawoPwX"
   },
   "paragraphs": [
-    "Make sure useLanguage is a custom hook that handles the language state and provides the necessary methods (setLanguage).",
-    "The first useEffect makes sure that language is updated if lang changes. "
+    "Currently, I specialize in developing modern web applications using React and Node.js, two of the most in-demand and versatile technologies in the market. Additionally, I integrate Vite into my projects to optimize performance and developer experience. To ensure code quality and consistency, I manage versions with Git and GitHub, essential tools in the workflow of any professional developer.",
+    "Over the past year, I have dedicated my time to creating and refining personal projects with React, exploring and applying industry best practices. This journey has not only improved my technical skills but also strengthened my ability to problem-solve and think critically and creatively.",
+    "My passion for technology is not limited to web development alone. I have delved into a wide range of areas, including software programs, databases, systems, and game development. This diversity of knowledge allows me to tackle challenges from multiple perspectives and find innovative solutions.",
+    "I am always on the lookout for new opportunities to learn, collaborate, and grow as a professional. If you share my passion for technology and development, I would love to work with you!"
   ],
   "History": {
-    "imageSrc": "https://i.pinimg.com/originals/c1/fc/73/c1fc730005984aa2f4664e6d89e12f1f.jpg",
+    "imageSrc": "https://pixeldrain.com/api/file/Ethe5rZY",
     "latest": [
       {
         "header": {
           "section": "03/",
           "title": "Most recent projects!"
         },
-        "headerTitle": "Vault"
+        "headerTitle": "History"
       }
     ]
   },

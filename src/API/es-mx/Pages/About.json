@@ -4,24 +4,26 @@
     "title": "CV"
   },
   "profile": {
-    "name": "Anónimo Nombre desconocido.",
+    "name": "Tylor.",
     "role": "[Frontal/Backend]",
     "username": "@TylorDev",
-    "imageSrc": "https://i.pinimg.com/564x/28/54/09/285409694ec9ccbf1a98fd135613d656.jpg"
+    "imageSrc": "https://pixeldrain.com/api/file/cZawoPwX"
   },
   "paragraphs": [
-    "Asegúrese de que useLanguage sea un enlace personalizado que maneja el estado del idioma y proporciona los métodos necesarios (setLanguage).",
-    "El primer useEffect garantiza que el idioma se actualice si cambia. "
+    "Actualmente, me especializo en el desarrollo de aplicaciones web modernas utilizando React y Node.js, dos de las tecnologías más demandadas y versátiles del mercado. Además, integro Vite en mis proyectos para optimizar el rendimiento y la experiencia del desarrollador. Para asegurar la calidad y la coherencia del código, gestiono versiones con Git y GitHub, herramientas esenciales en el flujo de trabajo de cualquier desarrollador profesional.",
+    "A lo largo del último año, he dedicado mi tiempo a crear y perfeccionar proyectos personales con React, explorando y aplicando las mejores prácticas de la industria. Este viaje no solo ha mejorado mis habilidades técnicas, sino que también ha fortalecido mi capacidad para resolver problemas y pensar de manera crítica y creativa. ",
+    "Mi pasión por la tecnología no se limita solo al desarrollo web. He profundizado en una amplia gama de áreas, incluyendo programas de software, bases de datos, sistemas y desarrollo de juegos. Esta diversidad de conocimientos me permite abordar los desafíos desde múltiples perspectivas y encontrar soluciones innovadoras.",
+    "Estoy siempre en busca de nuevas oportunidades para aprender, colaborar y crecer como profesional. Si compartes mi pasión por la tecnología y el desarrollo, ¡me encantaría trabajar contigo!"
   ],
   "History": {
-    "imageSrc": "https://i.pinimg.com/originals/c1/fc/73/c1fc730005984aa2f4664e6d89e12f1f.jpg",
+    "imageSrc": "https://pixeldrain.com/api/file/Ethe5rZY",
     "latest": [
       {
         "header": {
           "section": "03/",
           "title": "¡Proyectos más recientes!"
         },
-        "headerTitle": "Bóveda"
+        "headerTitle": "Historial"
       }
     ]
   },

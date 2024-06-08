@@ -4,24 +4,26 @@
     "title": "cv"
   },
   "profile": {
-    "name": "Nome desconhecido desconhecido.",
+    "name": "Tylor.",
     "role": "[Front-end/Back-end]",
     "username": "@TylorDev",
-    "imageSrc": "https://i.pinimg.com/564x/28/54/09/285409694ec9ccbf1a98fd135613d656.jpg"
+    "imageSrc": "https://pixeldrain.com/api/file/cZawoPwX"
   },
   "paragraphs": [
-    "Certifique-se de que useLanguage seja um gancho personalizado que lida com o estado do idioma e fornece os métodos necessários (setLanguage).",
-    "O primeiro useEffect garante que o idioma seja atualizado se o idioma for alterado. "
+    "Atualmente, me especializo no desenvolvimento de aplicações web modernas utilizando React e Node.js, duas das tecnologias mais demandadas e versáteis do mercado. Além disso, integro o Vite em meus projetos para otimizar o desempenho e a experiência do desenvolvedor. Para garantir a qualidade e a consistência do código, gerencio versões com Git e GitHub, ferramentas essenciais no fluxo de trabalho de qualquer desenvolvedor profissional.",
+    "Ao longo do último ano, dediquei meu tempo à criação e aprimoramento de projetos pessoais com React, explorando e aplicando as melhores práticas da indústria. Esta jornada não apenas aprimorou minhas habilidades técnicas, mas também fortaleceu minha capacidade de resolver problemas e pensar de forma crítica e criativa.",
+    "Minha paixão pela tecnologia não se limita apenas ao desenvolvimento web. Eu me aprofundei em uma ampla gama de áreas, incluindo programas de software, bancos de dados, sistemas e desenvolvimento de jogos. Essa diversidade de conhecimentos me permite enfrentar desafios de múltiplas perspectivas e encontrar soluções inovadoras.",
+    "Estou sempre em busca de novas oportunidades para aprender, colaborar e crescer como profissional. Se você compartilha minha paixão pela tecnologia e desenvolvimento, adoraria trabalhar com você!"
   ],
   "History": {
-    "imageSrc": "https://i.pinimg.com/originals/c1/fc/73/c1fc730005984aa2f4664e6d89e12f1f.jpg",
+    "imageSrc": "https://pixeldrain.com/api/file/Ethe5rZY",
     "latest": [
       {
         "header": {
           "section": "03/",
           "title": "Projetos mais recentes!"
         },
-        "headerTitle": "Cofre"
+        "headerTitle": "Histórico"
       }
     ]
   },

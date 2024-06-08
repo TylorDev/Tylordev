@@ -1,37 +1,37 @@
 {
   "logoSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/main/public/logo.svg",
-  "banner": "https://images.unsplash.com/photo-1618327907215-4e514efabd41?q=80&w=1527&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "description": "WE SPONSOR PROFILE CONFERENCES AND HOLD OUR OWN EVENTS. COME TO OUR MEETUPS -- WE PROMISE IT WILL BE COOL",
+  "banner": "https://pixeldrain.com/api/file/Roa7NS1Z",
+  "description": "Let's work together to take your project to the next level. Ready to start making your dreams come true?",
   "buttonText": "Contact",
-  "eventsTitle": "PRODUCTS",
+  "eventsTitle": "SERVICES",
   "services": [
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Frontend",
+      "time": "1-2 weeks",
       "location": "Online",
-      "title": "PRODUCT DESING WEB",
-      "buttonText": "Learn More"
+      "title": "DEVELOPMENT OF YOUR WEBSITE WITH REACT.JS",
+      "buttonText": "Learn more"
     },
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Backend",
+      "time": "1-3 weeks",
       "location": "Online",
-      "title": "WEB DEVELOPING REACT",
-      "buttonText": "Learn More"
+      "title": "API DEVELOPMENT",
+      "buttonText": "Learn more"
     },
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Design",
+      "time": "Undetermined",
       "location": "Online",
-      "title": "PRODUCT DELIVERY ",
-      "buttonText": "Learn More"
+      "title": "DESIGN FROM SCRATCH OF YOUR PAGE/IDEA",
+      "buttonText": "Learn more"
     },
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Deploy",
+      "time": "Undetermined",
       "location": "Online",
-      "title": "WEB  REACT ADVICE",
-      "buttonText": "Learn More"
+      "title": "ADVICE WHEN PUBLISHING YOUR PAGE",
+      "buttonText": "Learn more"
     }
   ]
 }

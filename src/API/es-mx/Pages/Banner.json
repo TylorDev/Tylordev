@@ -1,37 +1,37 @@
 {
   "logoSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/main/public/logo.svg",
-  "banner": "https://images.unsplash.com/photo-1618327907215-4e514efabd41?q=80&w=1527&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "description": "PATROCINAMOS CONFERENCIAS DE PERFILES Y REALIZAMOS NUESTROS PROPIOS EVENTOS. ",
+  "banner": "https://pixeldrain.com/api/file/Roa7NS1Z",
+  "description": "Trabajemos juntos para llevar tu proyecto al siguiente nivel. ¿Listo para comenzar a hacer tus sueños realidad?",
   "buttonText": "Contacto",
-  "eventsTitle": "PRODUCTOS",
+  "eventsTitle": "SERVICIOS",
   "services": [
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Frontend",
+      "time": "1-2 semanas",
       "location": "En línea",
-      "title": "DISEÑO DE PRODUCTO WEB",
-      "buttonText": "Aprende más"
+      "title": "DESARROLLO DE TU PÁGINA CON REACT.JS",
+      "buttonText": "Saber más"
     },
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Backend",
+      "time": "1-3 semanas",
       "location": "En línea",
-      "title": "DESARROLLO WEB REACCIONAR",
-      "buttonText": "Aprende más"
+      "title": "DESARROLLO DE UN API",
+      "buttonText": "Saber más"
     },
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Diseño",
+      "time": "Indeterminado",
       "location": "En línea",
-      "title": "ENTREGA DEL PRODUCTO ",
-      "buttonText": "Aprende más"
+      "title": "DISEÑO DESDE CERO DE TU PAGINA/IDEA",
+      "buttonText": "Saber más"
     },
     {
-      "date": "31.09.22",
-      "time": "30$",
+      "date": "Deploy",
+      "time": "Indeterminado",
       "location": "En línea",
-      "title": "CONSEJOS DE REACCIÓN WEB",
-      "buttonText": "Aprende más"
+      "title": "ASESORAMIENTO AL MOMENTO DE PUBLICAR TU PAGINA",
+      "buttonText": "Saber más"
     }
   ]
 }

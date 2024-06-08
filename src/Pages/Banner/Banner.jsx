@@ -58,6 +58,20 @@ function Banner() {
       {/* Verifica si data es null o undefined */}
       {data != null ? (
         <div className="Banner">
+          <div className="b-video">
+            <video autoPlay muted loop className="video-bg">
+              <source src={data.Banner} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="i-content">
+              <div className="c-logo">
+                <img src={data.logoSrc} alt="Logo" />
+              </div>
+              <p>{data.description}</p>
+              <Button handleClick={handleClick} text={data.buttonText} />
+            </div>
+          </div>
+
           <div
             className="b-image"
             style={{

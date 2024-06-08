@@ -60,7 +60,7 @@ function Banner() {
         <div className="Banner">
           <div className="b-video">
             <video autoPlay muted loop className="video-bg">
-              <source src={data.Banner} type="video/mp4" />
+              <source src={data.banner} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div className="i-content">

@@ -5,11 +5,11 @@
     "about": "Acerca",
     "projects": "Proyectos",
     "extras": "Extras",
-    "research": "Investigación",
+
     "blog": "Publicaciones",
-    "github": "Github",
-    "linkedIn": "LinkedIn",
-    "instagram": "Instagram"
+    "github": "https://github.com/TylorDev",
+    "linkedIn": "https://www.linkedin.com",
+    "instagram": "https://www.instagram.com/"
   },
   "footerText": "TylorDev/ Todos los derechos reservados",
   "privacyPolicy": "contacto@contacto.com",

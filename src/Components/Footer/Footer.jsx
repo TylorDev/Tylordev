@@ -3,7 +3,9 @@ import "./Footer.scss";
 import { useState, useEffect } from "react";
 import { useLanguage } from "./../../Context/LanguageContext";
 import FetchDataComponent from "./../FetchDataComponent/FetchDataComponent";
-
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
 function Footer() {
   const [w, setW] = useState(window.innerWidth);
   const { language } = useLanguage();
@@ -35,11 +37,16 @@ function Footer() {
           <Link to={`/${language}/about`}>{content.links.about}</Link>
           <Link to={`/${language}/projects`}>{content.links.projects}</Link>
           <Link to={`/${language}/services`}>{content.links.extras}</Link>
-          <Link to={`/${language}/research`}>{content.links.research}</Link>
-
-          <Link to={`/${language}/github`}>{content.links.github}</Link>
-          <Link to={`/${language}/linkedIn`}>{content.links.linkedIn}</Link>
-          <Link to={`/${language}/instagram`}>{content.links.instagram}</Link>
+          <Link to={`/${language}/research`}>{content.links.blog}</Link>
+          <Link to={content.links.github}>
+            Github <FaGithub />{" "}
+          </Link>
+          <Link to={content.links.linkedIn}>
+            LinkedIn <FaLinkedin />{" "}
+          </Link>
+          <Link to={content.links.instagram}>
+            Instagram <FaInstagramSquare />{" "}
+          </Link>
         </div>
       </div>
 

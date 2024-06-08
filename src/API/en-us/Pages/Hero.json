@@ -1,11 +1,11 @@
 {
   "hero": {
-    "subtitle": "Frontend Web Developer specializing in React and modern technologies",
-    "title": "Welcome to my portfolio!",
-    "videoSrc": "https://cdn.dribbble.com/userupload/3786901/file/original-3d93cb58addddb54a249f9b815cacf4f.mp4",
+    "subtitle": "I'm a web developer and designer with 1 year of experience in React, Node, and Vite.",
+    "title": "I'll make your website come true! Fast, easy, cheap.",
+    "videoSrc": "https://pixeldrain.com/api/file/XjGoD1XR",
     "post": {
       "title": "00/ About me",
-      "content": "Hello, I'm @TylorDev, a passionate frontend web developer who loves creating modern and functional web applications. With experience in React, JavaScript, and CSS, I focus on building efficient and scalable solutions. My goal is always to provide an optimal user experience and work on innovative projects that make a difference.",
+      "content": "Hi! I'm @TylorDev on all platforms. I develop with React, Node, Vite, and use Git/GitHub. I have one year of experience creating projects in React and over 8 years learning programming, databases, and system and game development. Let's work together!",
       "buttonText": "Contact"
     }
   }

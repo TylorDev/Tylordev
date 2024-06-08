@@ -1,12 +1,12 @@
 {
   "hero": {
-    "subtitle": "Desenvolvedor Web Frontend especializado em React e tecnologias modernas",
-    "title": "Bem-vindo ao meu portfólio!",
-    "videoSrc": "https://cdn.dribbble.com/userupload/3786901/file/original-3d93cb58addddb54a249f9b815cacf4f.mp4",
+    "subtitle": "Sou desenvolvedor e designer web com 1 ano de experiência em React, Node e Vite.",
+    "title": "Vou tornar o seu site realidade! Rápido, fácil, barato.",
+    "videoSrc": "https://pixeldrain.com/api/file/XjGoD1XR",
     "post": {
       "title": "00/ Sobre mim",
-      "content": "Olá, sou @TylorDev, um desenvolvedor web frontend apaixonado por criar aplicações web modernas e funcionais. Com experiência em React, JavaScript e CSS, dedico-me a construir soluções eficientes e escaláveis. Meu objetivo é sempre oferecer uma experiência de usuário ótima e trabalhar em projetos inovadores que façam a diferença.",
-      "buttonText": "Contato"
+      "content": "Olá! Sou @TylorDev em todas as plataformas. Desenvolvo com React, Node, Vite e uso Git/GitHub. Tenho um ano de experiência criando projetos em React e mais de 8 anos aprendendo programação, bancos de dados e desenvolvimento de sistemas e jogos. Vamos trabalhar juntos!",
+      "buttonText": "Contatar"
     }
   }
 }

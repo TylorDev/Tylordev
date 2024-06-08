@@ -52,7 +52,10 @@ function Footer() {
 
       <div className="footer-bottom">
         <div>{content.footerText}</div>
-        <Link to={`/${language}/`}>{content.privacyPolicy}</Link>
+        <Link to={`mailto:${content.privacyPolicy}`}>
+          {content.privacyPolicy}{" "}
+        </Link>
+
         <div>
           {w}/{content.footerDynamicText}
         </div>

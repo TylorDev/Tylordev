@@ -1,6 +1,6 @@
 {
   "Request": {
-    "videoSrc": "https://cdn.pixabay.com/video/2021/04/15/71122-537102350_large.mp4",
+    "videoSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Cloud/sample-2.mp4",
     "title": "Lorem ipsum dolor sit amet.",
     "metadata": {
       "subtitle": "/ipsum dolor",

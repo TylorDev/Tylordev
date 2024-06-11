@@ -68,6 +68,142 @@
             "alt": ""
           }
         }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "REACT JS",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Vite",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://vitejs.dev/logo-with-shadow.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "JavaScript",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Node JS",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "REACT JS",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Vite",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://vitejs.dev/logo-with-shadow.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "JavaScript",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Node JS",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Read More",
+              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
+            "alt": ""
+          }
+        }
       }
     ]
   }

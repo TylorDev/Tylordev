@@ -3,6 +3,7 @@ import "./Skills.scss";
 import { TextModal } from "./../../Components/TextModal/TextModal";
 import FetchDataComponent from "./../../Components/FetchDataComponent/FetchDataComponent";
 import { Void } from "./../../Components/Void/Void";
+
 function Skills() {
   const content = FetchDataComponent("skillsContent");
 
@@ -19,9 +20,9 @@ function Skills() {
   }
   return (
     <div className="Skills">
-      {Object.keys(content.Skills).map((key) => (
-        <div key={key} className={key}>
-          {content.Skills[key].map((item, index) => (
+      {content.Skills["sk-1"] && (
+        <div key="sk-1" className="sk-1">
+          {content.Skills["sk-1"].map((item, index) => (
             <div key={index} className="skill">
               <div className="ss-tittle">
                 <span>{item.skill["ss-tittle"].text}</span>
@@ -38,7 +39,7 @@ function Skills() {
             </div>
           ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }

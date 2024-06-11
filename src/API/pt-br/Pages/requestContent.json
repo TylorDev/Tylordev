@@ -1,11 +1,11 @@
 {
   "Request": {
     "videoSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/Cloud/sample-2.mp4",
-    "title": "Lorem ipsum dolor sit amet.",
+    "title": "Ferramentas Essenciais de Desenvolvimento",
     "metadata": {
-      "subtitle": "/ipsum dolor",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, unde vitae! Sunt enim saepe molestias deleniti, quaerat dignissimos ea perspiciatis"
+      "subtitle": "/Webkit",
+      "content": "Ofereço assistência especializada em seus projetos, utilizando as tecnologias de desenvolvimento mais demandadas."
     },
-    "buttonText": "Leave a Request"
+    "buttonText": "Trabalhar juntos"
   }
 }

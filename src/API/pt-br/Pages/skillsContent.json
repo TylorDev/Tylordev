@@ -8,7 +8,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É uma biblioteca JavaScript para construção de interfaces de usuário. ",
+              "modalContent": "É uma biblioteca de JavaScript para construir interfaces de usuário. Utiliza componentes reutilizáveis para criar aplicações web interativas e dinâmicas.",
               "close": "x"
             }
           },
@@ -25,7 +25,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É uma ferramenta de construção de projetos web para aplicações modernas. ",
+              "modalContent": "É uma ferramenta de construção de projetos web para aplicações modernas. Oferece um ambiente de desenvolvimento rápido e eficiente utilizando módulos ES",
               "close": "x"
             }
           },
@@ -42,7 +42,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É um ambiente de execução JavaScript que permite executar código JavaScript no lado do servidor. ",
+              "modalContent": "É um ambiente de execução de JavaScript que permite executar código JavaScript no lado do servidor. É escalável e utilizado para desenvolver aplicações de rede e backend.",
               "close": "x"
             }
           },
@@ -59,7 +59,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É o gerenciador de pacotes Node.js, usado para instalar, compartilhar e gerenciar dependências de projetos JavaScript.",
+              "modalContent": "É o gerenciador de pacotes do Node.js, utilizado para instalar, compartilhar e gerenciar dependências de projetos JavaScript.",
               "close": "x"
             }
           },
@@ -76,7 +76,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É um sistema de controle de versão que permite rastrear alterações em arquivos e colaborar em projetos de desenvolvimento de software. ",
+              "modalContent": "É um sistema de controle de versões que permite rastrear mudanças em arquivos e colaborar em projetos de desenvolvimento de software. Permite trabalhar em ramificações, mesclar mudanças e manter um histórico de versões.",
               "close": "x"
             }
           },
@@ -93,7 +93,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É uma plataforma de hospedagem de código que usa Git para controle de versão. ",
+              "modalContent": "É uma plataforma de hospedagem de código que utiliza o Git para controle de versões. Permite que os desenvolvedores colaborem em projetos, revisem código, gerenciem problemas e realizem o acompanhamento de mudanças no código-fonte.",
               "close": "x"
             }
           },
@@ -110,7 +110,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É uma biblioteca de roteamento para React que permite navegar entre diferentes componentes de uma aplicação web. ",
+              "modalContent": "É uma biblioteca de roteamento para React que permite a navegação entre diferentes componentes de uma aplicação web. A versão 6 introduz uma API simplificada e melhorias na gestão do estado das rotas.",
               "close": "x"
             }
           },
@@ -127,7 +127,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É um recurso do React que permite que os dados sejam compartilhados entre os componentes sem a necessidade de passar manualmente os acessórios por cada nível da hierarquia. ",
+              "modalContent": "É uma característica do React que permite compartilhar dados entre componentes sem precisar passar props manualmente por cada nível da hierarquia. É útil para o gerenciamento do estado global e a gestão de temas em uma aplicação.",
               "close": "x"
             }
           },
@@ -140,11 +140,11 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "figma",
+            "text": "Figma",
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É uma ferramenta de design de interface de usuário baseada na web que permite aos designers criar protótipos, colaborar em tempo real e projetar interfaces de usuário para aplicativos web e móveis.",
+              "modalContent": "É uma ferramenta de design de interface de usuário baseada na web que permite aos designers criar protótipos, colaborar em tempo real e projetar interfaces de usuário para aplicações web e móveis.",
               "close": "x"
             }
           },
@@ -161,7 +161,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "São pré-processadores CSS que ampliam a funcionalidade do CSS tradicional, permitindo a utilização de variáveis, nesting, mixins, entre outros recursos, para escrever estilos de forma mais eficiente e modular. ",
+              "modalContent": "São preprocessadores CSS que estendem a funcionalidade do CSS tradicional, permitindo o uso de variáveis, aninhamento, mixins, entre outras características, para escrever estilos de maneira mais eficiente e modular.",
               "close": "x"
             }
           },
@@ -178,7 +178,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "É uma estrutura CSS que fornece um conjunto de classes predefinidas para estilizar componentes e criar layouts de forma rápida e consistente. ",
+              "modalContent": "É um framework de CSS que fornece um conjunto de classes predefinidas para estilizar componentes e criar layouts de maneira rápida e consistente. Baseia-se na filosofia 'utility-first', o que significa que se concentra em fornecer classes utilitárias para estilos específicos em vez de componentes predefinidos.",
               "close": "x"
             }
           },
@@ -195,7 +195,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Detalhes",
-              "modalContent": "SQL, ou Structured Query Language, é uma linguagem de programação usada para interagir com bancos de dados relacionais. ",
+              "modalContent": "SQL, ou Structured Query Language, é uma linguagem de programação utilizada para interagir com bancos de dados relacionais. Permite realizar consultas, inserções, atualizações e exclusões de dados, bem como definir e modificar a estrutura dos bancos de dados. É amplamente utilizado no desenvolvimento de aplicações web e de software para gerenciar e manipular dados de maneira eficiente e segura.",
               "close": "x"
             }
           },

@@ -44,7 +44,7 @@
 
             display: flex;
             align-items: center;
-            width: 100%;
+            width: 30%;
 
             aspect-ratio: 4/4;
 
@@ -85,8 +85,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 1;
-            padding: 0;
+            gap: 1rem;
+            padding: 1rem 0;
             margin: 0;
 
 
@@ -97,7 +97,7 @@
                 font-size: 0.7rem;
                 order: 1;
 
-
+                text-align: center;
 
 
 
@@ -111,7 +111,8 @@
 
                 display: flex;
                 align-items: center;
-                width: 30%;
+                width: 3rem;
+                height: 3rem;
 
                 aspect-ratio: 1/1;
 

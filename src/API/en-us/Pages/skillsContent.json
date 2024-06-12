@@ -8,7 +8,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a JavaScript library for building user interfaces. ",
+              "modalContent": "It is a JavaScript library for building user interfaces. It uses reusable components to create interactive and dynamic web applications.",
               "close": "x"
             }
           },
@@ -25,7 +25,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a web project building tool for modern applications. ",
+              "modalContent": "It is a web project building tool for modern applications. It offers a fast and efficient development environment using ES modules.",
               "close": "x"
             }
           },
@@ -42,7 +42,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a JavaScript runtime environment that allows you to execute JavaScript code on the server side. ",
+              "modalContent": "It is a JavaScript runtime environment that allows JavaScript code to be executed on the server side. It is scalable and used for developing network and backend applications.",
               "close": "x"
             }
           },
@@ -59,7 +59,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is the Node.js package manager, used to install, share, and manage dependencies of JavaScript projects.",
+              "modalContent": "It is the package manager for Node.js, used to install, share, and manage JavaScript project dependencies.",
               "close": "x"
             }
           },
@@ -76,7 +76,8 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a version control system that allows you to track changes to files and collaborate on software development projects. ",
+              "modalContent": "It is a version control system that allows tracking changes in files and collaborating on software development projects. It enables working on branches, merging changes, and maintaining a version history.",
+
               "close": "x"
             }
           },
@@ -93,7 +94,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a code hosting platform that uses Git for version control. ",
+              "modalContent": "It is a code hosting platform that uses Git for version control. It allows developers to collaborate on projects, review code, manage issues, and track changes in the source code.",
               "close": "x"
             }
           },
@@ -110,7 +111,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a routing library for React that allows you to navigate between different components of a web application. ",
+              "modalContent": "It is a routing library for React that enables navigation between different components of a web application. Version 6 introduces a simplified API and improvements in route state management.",
               "close": "x"
             }
           },
@@ -127,7 +128,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a React feature that allows data to be shared between components without having to manually pass props through each level of the hierarchy. ",
+              "modalContent": "It is a React feature that allows sharing data between components without having to pass props manually through each level of the hierarchy. It is useful for managing global state and handling themes in an application.",
               "close": "x"
             }
           },
@@ -144,7 +145,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a web-based user interface design tool that allows designers to create prototypes, collaborate in real time, and design user interfaces for web and mobile applications.",
+              "modalContent": "It is a web-based user interface design tool that allows designers to create prototypes, collaborate in real-time, and design user interfaces for web and mobile applications.",
               "close": "x"
             }
           },
@@ -161,7 +162,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "They are CSS preprocessors that extend the functionality of traditional CSS, allowing the use of variables, nesting, mixins, among other features, to write styles in a more efficient and modular way. ",
+              "modalContent": "They are CSS preprocessors that extend the functionality of traditional CSS, allowing the use of variables, nesting, mixins, and other features to write styles more efficiently and modularly.",
               "close": "x"
             }
           },
@@ -178,7 +179,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "It is a CSS framework that provides a set of predefined classes to style components and create layouts quickly and consistently. ",
+              "modalContent": "It is a CSS framework that provides a set of predefined classes to style components and create layouts quickly and consistently. It is based on the 'utility-first' philosophy, which means it focuses on providing utility classes for specific styles rather than predefined components.",
               "close": "x"
             }
           },
@@ -195,7 +196,7 @@
             "tmContent": {
               "summary": "",
               "readMore": "Details",
-              "modalContent": "SQL, or Structured Query Language, is a programming language used to interact with relational databases. ",
+              "modalContent": "SQL, or Structured Query Language, is a programming language used to interact with relational databases. It allows for querying, inserting, updating, and deleting data, as well as defining and modifying the structure of databases. It is widely used in web and software development to efficiently and securely manage and manipulate data",
               "close": "x"
             }
           },

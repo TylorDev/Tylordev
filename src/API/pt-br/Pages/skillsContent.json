@@ -4,12 +4,12 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "REACT JS",
+            "text": "React js",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Detalhes",
+              "modalContent": "É uma biblioteca JavaScript para construção de interfaces de usuário. ",
+              "close": "x"
             }
           },
           "ss-logo": {
@@ -24,9 +24,9 @@
             "text": "Vite",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Detalhes",
+              "modalContent": "É uma ferramenta de construção de projetos web para aplicações modernas. ",
+              "close": "x"
             }
           },
           "ss-logo": {
@@ -38,16 +38,16 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "JavaScript",
+            "text": "NodeJS",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Detalhes",
+              "modalContent": "É um ambiente de execução JavaScript que permite executar código JavaScript no lado do servidor. ",
+              "close": "x"
             }
           },
           "ss-logo": {
-            "src": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
             "alt": ""
           }
         }
@@ -55,16 +55,152 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "Node JS",
+            "text": "npm",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Detalhes",
+              "modalContent": "É o gerenciador de pacotes Node.js, usado para instalar, compartilhar e gerenciar dependências de projetos JavaScript.",
+              "close": "x"
             }
           },
           "ss-logo": {
-            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
+            "src": "https://iconduck.com/vectors/vctr6s6hp3zp/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Git",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "É um sistema de controle de versão que permite rastrear alterações em arquivos e colaborar em projetos de desenvolvimento de software. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctr6ap2mvtz/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "GitHub",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "É uma plataforma de hospedagem de código que usa Git para controle de versão. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/github-icon-512x497-oppthre2.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "React Roteador v6",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "É uma biblioteca de roteamento para React que permite navegar entre diferentes componentes de uma aplicação web. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctrsmq4rc5x/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "ReactContext",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "É um recurso do React que permite que os dados sejam compartilhados entre os componentes sem a necessidade de passar manualmente os acessórios por cada nível da hierarquia. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctrxw3mopo4/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "figma",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "É uma ferramenta de design de interface de usuário baseada na web que permite aos designers criar protótipos, colaborar em tempo real e projetar interfaces de usuário para aplicativos web e móveis.",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/figma-icon-342x512-hiy4fg6k.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Sass/Scss",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "São pré-processadores CSS que ampliam a funcionalidade do CSS tradicional, permitindo a utilização de variáveis, nesting, mixins, entre outros recursos, para escrever estilos de forma mais eficiente e modular. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/sass-icon-512x512-wrsgqu3t.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "CSS do vento favorável",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "É uma estrutura CSS que fornece um conjunto de classes predefinidas para estilizar componentes e criar layouts de forma rápida e consistente. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/tailwind-css-icon-512x307-1v56l8ed.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "SQL",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalhes",
+              "modalContent": "SQL, ou Structured Query Language, é uma linguagem de programação usada para interagir com bancos de dados relacionais. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/mysql-icon-512x512-26zvphww.png",
             "alt": ""
           }
         }

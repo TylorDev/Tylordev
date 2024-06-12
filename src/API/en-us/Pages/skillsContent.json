@@ -4,12 +4,12 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "REACT JS",
+            "text": "React js",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Details",
+              "modalContent": "It is a JavaScript library for building user interfaces. ",
+              "close": "x"
             }
           },
           "ss-logo": {
@@ -24,9 +24,9 @@
             "text": "Vite",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Details",
+              "modalContent": "It is a web project building tool for modern applications. ",
+              "close": "x"
             }
           },
           "ss-logo": {
@@ -38,16 +38,16 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "JavaScript",
+            "text": "NodeJS",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Details",
+              "modalContent": "It is a JavaScript runtime environment that allows you to execute JavaScript code on the server side. ",
+              "close": "x"
             }
           },
           "ss-logo": {
-            "src": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
             "alt": ""
           }
         }
@@ -55,16 +55,152 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "Node JS",
+            "text": "npm",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
+              "readMore": "Details",
+              "modalContent": "It is the Node.js package manager, used to install, share, and manage dependencies of JavaScript projects.",
+              "close": "x"
             }
           },
           "ss-logo": {
-            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
+            "src": "https://iconduck.com/vectors/vctr6s6hp3zp/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Git",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "It is a version control system that allows you to track changes to files and collaborate on software development projects. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctr6ap2mvtz/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "GitHub",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "It is a code hosting platform that uses Git for version control. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/github-icon-512x497-oppthre2.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "React Router v6",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "It is a routing library for React that allows you to navigate between different components of a web application. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctrsmq4rc5x/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "ReactContext",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "It is a React feature that allows data to be shared between components without having to manually pass props through each level of the hierarchy. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctrxw3mopo4/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "figma",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "It is a web-based user interface design tool that allows designers to create prototypes, collaborate in real time, and design user interfaces for web and mobile applications.",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/figma-icon-342x512-hiy4fg6k.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Sass/Scss",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "They are CSS preprocessors that extend the functionality of traditional CSS, allowing the use of variables, nesting, mixins, among other features, to write styles in a more efficient and modular way. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/sass-icon-512x512-wrsgqu3t.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Tailwind CSS",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "It is a CSS framework that provides a set of predefined classes to style components and create layouts quickly and consistently. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/tailwind-css-icon-512x307-1v56l8ed.png",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "SQL",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Details",
+              "modalContent": "SQL, or Structured Query Language, is a programming language used to interact with relational databases. ",
+              "close": "x"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/mysql-icon-512x512-26zvphww.png",
             "alt": ""
           }
         }

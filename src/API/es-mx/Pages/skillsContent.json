@@ -189,6 +189,23 @@
             "alt": ""
           }
         }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "SQL",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalles",
+              "modalContent": "SQL, o Structured Query Language, es un lenguaje de programación utilizado para interactuar con bases de datos relacionales. Permite realizar consultas, inserciones, actualizaciones y eliminaciones de datos, así como también definir y modificar la estructura de las bases de datos. Es ampliamente utilizado en el desarrollo de aplicaciones web y de software para gestionar y manipular datos de manera eficiente y segura.",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://static-00.iconduck.com/assets.00/mysql-icon-512x512-26zvphww.png",
+            "alt": ""
+          }
+        }
       }
     ]
   }

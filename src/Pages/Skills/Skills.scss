@@ -10,7 +10,7 @@
 .sk-1,
 .sk-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1rem;
     width: 100%;
 
@@ -95,7 +95,8 @@
 
     .sk-1,
     .sk-2 {
-
+        display: grid;
+        grid-template-columns: 1fr 1fr;
 
         .skill {
             flex-direction: column;

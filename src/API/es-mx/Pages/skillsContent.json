@@ -7,8 +7,9 @@
             "text": "REACT JS",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "readMore": "Detalles",
+              "modalContent": "Es una biblioteca de JavaScript para construir interfaces de usuario. Utiliza componentes reutilizables para crear aplicaciones web interactivas y dinámicas.",
+
               "close": "X"
             }
           },
@@ -24,8 +25,8 @@
             "text": "Vite",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "readMore": "Detalles",
+              "modalContent": "Es una herramienta de construcción de proyectos web para aplicaciones modernas. Ofrece un entorno de desarrollo rápido y eficiente mediante el uso de ES modules.",
               "close": "X"
             }
           },
@@ -35,31 +36,15 @@
           }
         }
       },
-      {
-        "skill": {
-          "ss-tittle": {
-            "text": "JavaScript",
-            "tmContent": {
-              "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
-            }
-          },
-          "ss-logo": {
-            "src": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
-            "alt": ""
-          }
-        }
-      },
+
       {
         "skill": {
           "ss-tittle": {
             "text": "Node JS",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "readMore": "Detalles",
+              "modalContent": "Es un entorno de ejecución de JavaScript que permite ejecutar código JavaScript en el lado del servidor. Es escalable y utilizado para desarrollar aplicaciones de red y backend.",
               "close": "X"
             }
           },
@@ -72,16 +57,16 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "REACT JS",
+            "text": "npm",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "readMore": "Detalles",
+              "modalContent": "Es el administrador de paquetes de Node.js, utilizado para instalar, compartir y administrar dependencias de proyectos JavaScript.",
               "close": "X"
             }
           },
           "ss-logo": {
-            "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
+            "src": "https://iconduck.com/vectors/vctr6s6hp3zp/media/svg/download",
             "alt": ""
           }
         }
@@ -89,11 +74,79 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "Vite",
+            "text": "Git",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "readMore": "Detalles",
+              "modalContent": "Es un sistema de control de versiones que permite rastrear cambios en archivos y colaborar en proyectos de desarrollo de software. Permite trabajar en ramas, fusionar cambios y mantener un historial de versiones.",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctr6ap2mvtz/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "GitHub",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalles",
+              "modalContent": "Es una plataforma de alojamiento de código que utiliza Git para control de versiones. Permite a los desarrolladores colaborar en proyectos, revisar código, administrar problemas y realizar seguimiento de cambios en el código fuente.",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctr92stqpig/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "React Router v6",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalles",
+              "modalContent": "Es una biblioteca de enrutamiento para React que permite navegar entre diferentes componentes de una aplicación web. La versión 6 introduce una API simplificada y mejoras en la gestión del estado de la ruta.",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctrsmq4rc5x/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "React Context",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalles",
+              "modalContent": "Es una característica de React que permite compartir datos entre componentes sin tener que pasar props manualmente a través de cada nivel de la jerarquía. Es útil para el manejo del estado global y la gestión de temas en una aplicación.",
+              "close": "X"
+            }
+          },
+          "ss-logo": {
+            "src": "https://iconduck.com/vectors/vctrxw3mopo4/media/svg/download",
+            "alt": ""
+          }
+        }
+      },
+      {
+        "skill": {
+          "ss-tittle": {
+            "text": "Figma",
+            "tmContent": {
+              "summary": "",
+              "readMore": "Detalles",
+              "modalContent": "Es una herramienta de diseño de interfaz de usuario basada en la web que permite a los diseñadores crear prototipos, colaborar en tiempo real y diseñar interfaces de usuario para aplicaciones web y móviles.",
               "close": "X"
             }
           },
@@ -106,11 +159,11 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "JavaScript",
+            "text": "Sass/Scss",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "readMore": "Detalles",
+              "modalContent": "Son preprocesadores CSS que extienden la funcionalidad del CSS tradicional, permitiendo el uso de variables, anidamiento, mixins, entre otras características, para escribir estilos de manera más eficiente y modular. ",
               "close": "X"
             }
           },
@@ -123,79 +176,11 @@
       {
         "skill": {
           "ss-tittle": {
-            "text": "Node JS",
+            "text": "Tailwind CSS",
             "tmContent": {
               "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
-            }
-          },
-          "ss-logo": {
-            "src": "https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png",
-            "alt": ""
-          }
-        }
-      },
-      {
-        "skill": {
-          "ss-tittle": {
-            "text": "REACT JS",
-            "tmContent": {
-              "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
-            }
-          },
-          "ss-logo": {
-            "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
-            "alt": ""
-          }
-        }
-      },
-      {
-        "skill": {
-          "ss-tittle": {
-            "text": "Vite",
-            "tmContent": {
-              "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
-            }
-          },
-          "ss-logo": {
-            "src": "https://vitejs.dev/logo-with-shadow.png",
-            "alt": ""
-          }
-        }
-      },
-      {
-        "skill": {
-          "ss-tittle": {
-            "text": "JavaScript",
-            "tmContent": {
-              "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
-              "close": "X"
-            }
-          },
-          "ss-logo": {
-            "src": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
-            "alt": ""
-          }
-        }
-      },
-      {
-        "skill": {
-          "ss-tittle": {
-            "text": "Node JS",
-            "tmContent": {
-              "summary": "",
-              "readMore": "Read More",
-              "modalContent": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. ",
+              "readMore": "Detalles",
+              "modalContent": "Es un framework de CSS que proporciona un conjunto de clases predefinidas para estilizar componentes y crear diseños de manera rápida y consistente. Se basa en la filosofía de 'utility-first', lo que significa que se centra en proporcionar clases utilitarias para estilos específicos en lugar de componentes predefinidos.",
               "close": "X"
             }
           },

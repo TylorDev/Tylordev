@@ -1,16 +1,16 @@
 {
   "Steps": [
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "PLANEAMENTO",
+      "content": "Começamos com uma colaboração próxima com você para entender suas necessidades e expectativas. Isso inclui reuniões detalhadas onde discutimos os objetivos do projeto e os requisitos específicos do seu site. Além disso, realizamos uma análise profunda da concorrência e do mercado-alvo para garantir que nosso design e conteúdo sejam não apenas competitivos, mas também relevantes. Aqui também estruturamos o conteúdo e criamos um mapa do site claro e organizado, que será nosso guia para o desenvolvimento e a navegação do usuário."
     },
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "DESENHO E DESENVOLVIMENTO",
+      "content": "Com um plano sólido em mãos, mergulhamos no design e desenvolvimento do frontend. Começamos criando wireframes e mockups que mostram a disposição visual e a funcionalidade geral da sua página. Esses mockups servem como guia para construir a interface do usuário (UI), integrando elementos gráficos e estilos de branding para uma experiência visual atraente e coerente. Utilizamos tecnologias como React para criar componentes interativos e estilizamos com SCSS e Tailwind CSS para alcançar um design moderno e responsivo."
     },
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "TESTES E LANÇAMENTO",
+      "content": "Com o design e desenvolvimento completos, passamos para a fase crucial de testes e lançamento. Realizamos testes exaustivos para garantir que todos os recursos funcionem perfeitamente e atendam aos requisitos. Além disso, testamos a compatibilidade em diferentes navegadores e dispositivos para assegurar uma experiência consistente. Otimizamos o desempenho, melhorando a velocidade de carregamento e a eficiência do site. Finalmente, após corrigir quaisquer erros, lançamos oficialmente o seu site, tornando-o acessível ao público e prontos para oferecer suporte e manutenção contínuos."
     }
   ]
 }

@@ -1,16 +1,16 @@
 {
   "Steps": [
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "PLANNING",
+      "content": "We begin with close collaboration with you to understand your needs and expectations. This includes detailed meetings where we discuss the project's goals and your website's specific requirements. Additionally, we conduct an in-depth analysis of the competition and target market to ensure our design and content are not only competitive but also relevant. Here, we also structure the content and create a clear and organized site map, which will guide us in the development and user navigation."
     },
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "DESIGN AND DEVELOPMENT",
+      "content": "With a solid plan in hand, we dive into the design and development of the frontend. We start by creating wireframes and mockups that showcase the visual layout and overall functionality of your page. These mockups serve as a guide to building the user interface (UI), integrating graphic elements and branding styles for an attractive and coherent visual experience. We use technologies like React to create interactive components, and style with SCSS and Tailwind CSS to achieve a modern and responsive design."
     },
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "TESTING AND DEPLOYMENT",
+      "content": "With the design and development complete, we move on to the crucial phase of testing and deployment. We conduct thorough testing to ensure all features work perfectly and meet the requirements. Additionally, we test compatibility on different browsers and devices to ensure a consistent experience. We optimize performance, improving loading speed and site efficiency. Finally, after fixing any errors, we officially launch your website, making it accessible to the public and ready to provide ongoing support and maintenance."
     }
   ]
 }

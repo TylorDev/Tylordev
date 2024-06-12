@@ -1,16 +1,16 @@
 {
   "Steps": [
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "PLANIFICACION",
+      "content": "Comenzamos con una colaboración cercana contigo para entender tus necesidades y expectativas. Esto incluye reuniones detalladas donde discutimos los objetivos del proyecto y los requisitos específicos de tu web. Además, realizamos un análisis profundo de la competencia y del mercado objetivo para asegurarnos de que nuestro diseño y contenido sean no solo competitivos, sino también relevantes. Aquí también estructuramos el contenido y creamos un mapa del sitio claro y organizado, que será nuestra guía para el desarrollo y la navegación del usuario."
     },
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "DISEÑO Y DESAROLLO",
+      "content": "Con un plan sólido en mano, nos adentramos en el diseño y desarrollo del frontend. Empezamos creando wireframes y maquetas que muestran la disposición visual y la funcionalidad general de tu página. Estos mockups sirven como guía para construir la interfaz de usuario (UI), integrando elementos gráficos y estilos de branding para una experiencia visual atractiva y coherente. Utilizamos tecnologías como React para crear componentes interactivos, y estilizamos con SCSS y Tailwind CSS para lograr un diseño moderno y responsive."
     },
     {
-      "title": "DEFINE PROBLEM",
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At inventore est quos provident. Iste quos cumque quasi vitae in at, sapiente, unde molestiae rem, temporibus aperiam vero illum recusandae natus."
+      "title": "PRUEBAS Y LANZAMIENTO",
+      "content": "Con el diseño y desarrollo completos, pasamos a la fase crucial de pruebas y lanzamiento. Realizamos pruebas exhaustivas para garantizar que todas las características funcionen perfectamente y cumplan con los requisitos. Además, probamos la compatibilidad en diferentes navegadores y dispositivos para asegurar una experiencia consistente. Optimizamos el rendimiento, mejorando la velocidad de carga y la eficiencia del sitio. Finalmente, después de corregir cualquier error, lanzamos tu web oficialmente, haciéndola accesible al público y listos para ofrecer soporte y mantenimiento continuo."
     }
   ]
 }

@@ -6,12 +6,12 @@
   },
   "formFields": {
     "name": {
-      "placeholder": "Tu Nombre",
+      "placeholder": "¡No te olvides de tu nombre! (o usa tu apodo, si prefieres ser casual)",
       "label": "Tu Nombre",
       "errorMessage": "¡Ups! Parece que alguien prefiere mantener su identidad en secreto."
     },
     "email": {
-      "placeholder": "Tu email",
+      "placeholder": "Escribe tu correo electrónico (preferiblemente uno que revises)",
       "label": "Tu Email",
       "errorMessage": {
         "required": "¿Email? Requerido. Sin él, nos sentimos incompletos.",
@@ -21,7 +21,7 @@
     "message": {
       "placeholder": "Tu mensaje",
       "label": "Tu Mensaje",
-      "errorMessage": "El mensaje está tan vacío como nuestra bandeja de entrada. Por favor, escríbenos algo."
+      "errorMessage": "Mensaje (cuéntanos algo interesante... o lo que quieras)"
     },
     "submitButton": "Enviar"
   }

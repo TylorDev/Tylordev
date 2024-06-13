@@ -147,6 +147,7 @@ const ContactForm = () => {
             </div>
 
             <div className="field">
+              {console.log(editableContent.formFields.message)}
               <textarea
                 id="message"
                 className="textarea"
@@ -159,7 +160,7 @@ const ContactForm = () => {
                 {editableContent.formFields.message.label}
               </label>
               {errors.message && (
-                <span className="error">{errors.message.message}</span>
+                <span className="error">{errors.message.errorMessage}</span>
               )}
             </div>
 

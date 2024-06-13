@@ -19,9 +19,9 @@
       }
     },
     "message": {
-      "placeholder": "Tu mensaje",
-      "label": "Tu Mensaje",
-      "errorMessage": "Mensaje (cuéntanos algo interesante... o lo que quieras)"
+      "placeholder": "Mensaje (cuéntanos algo interesante... o lo que quieras)",
+      "label": "Tu mensaje",
+      "errorMessage": "El mensaje está tan vacío como nuestra bandeja de entrada. Por favor, escríbenos algo."
     },
     "submitButton": "Enviar"
   }

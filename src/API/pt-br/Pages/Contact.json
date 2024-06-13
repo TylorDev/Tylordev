@@ -1,27 +1,27 @@
 {
-  "thankYouMessage": "Gracias por enviar tu mensaje!",
+  "thankYouMessage": "Obrigado por enviar sua mensagem!",
   "contactMeta": {
-    "title": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ",
-    "email": "email@email-desing.com"
+    "title": "“Não há nada mais satisfatório do que alcançar algo que lhe disseram que você nunca conseguiria.” Se você quer que algo seja feito direito, você pode fazer você mesmo... ou me ligar.",
+    "email": "email@email-design.com"
   },
   "formFields": {
     "name": {
-      "placeholder": "Tu Nombre",
-      "label": "Tu Nombre",
-      "errorMessage": "El nombre es requerido"
+      "placeholder": "Não esqueça seu nome! (ou use seu apelido, se preferir ser casual)",
+      "label": "Seu Nome",
+      "errorMessage": "Oops! Parece que alguém prefere manter sua identidade em segredo."
     },
     "email": {
-      "placeholder": "Tu email",
-      "label": "Tu Email",
+      "placeholder": "Digite seu e-mail (de preferência um que você verifique regularmente)",
+      "label": "Seu Email",
       "errorMessage": {
-        "required": "El email es requerido",
-        "invalid": "El email no es válido"
+        "required": "E-mail? Obrigatório. Sem ele, nos sentimos incompletos.",
+        "invalid": "Oops! Parece que o e-mail não é tão válido quanto pensamos. Por favor, revise e corrija."
       }
     },
     "message": {
-      "placeholder": "Tu mensaje",
-      "label": "Tu Mensaje",
-      "errorMessage": "El mensaje es requerido"
+      "placeholder": "Mensagem (conte-nos algo interessante... ou o que você quiser)",
+      "label": "Sua Mensagem",
+      "errorMessage": "A mensagem está tão vazia quanto nossa caixa de entrada. Por favor, escreva algo para nós."
     },
     "submitButton": "Enviar"
   }

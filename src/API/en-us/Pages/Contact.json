@@ -1,28 +1,28 @@
 {
-  "thankYouMessage": "Gracias por enviar tu mensaje!",
+  "thankYouMessage": "Thank you for submitting your message!",
   "contactMeta": {
-    "title": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ",
-    "email": "email@email-desing.com"
+    "title": "“There is nothing more satisfying than achieving something you were told you never could.” If you want something done right, you can do it yourself... or give me a call.",
+    "email": "email@email-design.com"
   },
   "formFields": {
     "name": {
-      "placeholder": "Tu Nombre",
-      "label": "Tu Nombre",
-      "errorMessage": "El nombre es requerido"
+      "placeholder": "Don't forget your name! (or use your nickname, if you prefer to be casual)",
+      "label": "Your Name",
+      "errorMessage": "Oops! Looks like someone prefers to keep their identity a secret."
     },
     "email": {
-      "placeholder": "Tu email",
-      "label": "Tu Email",
+      "placeholder": "Enter your email (preferably one you check regularly)",
+      "label": "Your Email",
       "errorMessage": {
-        "required": "El email es requerido",
-        "invalid": "El email no es válido"
+        "required": "Email? Required. Without it, we feel incomplete.",
+        "invalid": "Oops! Looks like the email isn't as valid as we thought. Please review and correct."
       }
     },
     "message": {
-      "placeholder": "Tu mensaje",
-      "label": "Tu Mensaje",
-      "errorMessage": "El mensaje es requerido"
+      "placeholder": "Message (tell us something interesting... or whatever you want)",
+      "label": "Your Message",
+      "errorMessage": "The message is as empty as our inbox. Please write us something."
     },
-    "submitButton": "Enviar"
+    "submitButton": "Submit"
   }
 }

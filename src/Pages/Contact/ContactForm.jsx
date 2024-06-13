@@ -160,7 +160,7 @@ const ContactForm = () => {
                 {editableContent.formFields.message.label}
               </label>
               {errors.message && (
-                <span className="error">{errors.message.errorMessage}</span>
+                <span className="error">{errors.message.message}</span>
               )}
             </div>
 

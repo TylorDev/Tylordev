@@ -50,8 +50,12 @@ const SendButton = () => {
         // Aquí puedes manejar la respuesta del servidor si es necesario
       })
       .catch((error) => {
-        console.error("Error al enviar solicitud al servidor:", error);
-        // Aquí puedes manejar los errores de la solicitud si es necesario
+        if (error.response && error.response.status === 500) {
+          console.error("No hay nada que actualizar.");
+        } else {
+          console.error("Error al enviar solicitud al servidor:", error);
+          // Aquí puedes manejar otros errores de la solicitud si es necesario
+        }
       });
   };
 

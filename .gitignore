@@ -24,6 +24,5 @@ dist-ssr
 *.sw?
 
 *.otf
-*.jpg
-*.png
+
 *.woff

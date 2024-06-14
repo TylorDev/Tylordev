@@ -38,7 +38,7 @@ function App() {
 export default App;
 
 function NotFound() {
-  return <div className="Not">ERROR 404</div>;
+  return <div className="Not">ERROR 4044</div>;
 }
 
 const SendButton = () => {

@@ -4,9 +4,9 @@ import Research from "./../Research/Research";
 import { useState } from "react";
 import { Void } from "./../../Components/Void/Void";
 import GetObjectData from "./../../Components/GetObjectData/GetObjectData";
-
+import data from "./1.json";
 function Article() {
-  const data = GetObjectData({ type: "Articles" });
+  // const data = GetObjectData({ type: "Articles" });
   if (!data) {
     return (
       <div className="Article">
@@ -39,9 +39,14 @@ function Article() {
         <div className="ar-tittle">{data.contentTitle}</div>
         {data.sections.map((section, index) => (
           <div className="ar-section" key={index}>
+            {section.tittle && (
+              <div className="sec-tittle">{section.tittle}</div>
+            )}
             <p className="ar-paragraf">{section.paragraph}</p>
 
-            <ImageModal src={section.image} alt="Descripción de la imagen" />
+            {section.image && (
+              <ImageModal src={section.image} alt="Descripción de la imagen" />
+            )}
           </div>
         ))}
       </div>
@@ -86,7 +91,7 @@ const Modal = ({ src, alt, onClose }) => {
         <button className="close-button" onClick={onClose}>
           &times;
         </button>
-        <img src={src} alt={alt} className="modal-image" />
+        {src && <img src={src} alt={alt} className="modal-image" />}
       </div>
     </div>
   );

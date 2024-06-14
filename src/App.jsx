@@ -46,14 +46,14 @@ const SendButton = () => {
     axios
       .get("http://localhost:3000/send")
       .then((response) => {
-        console.log(response.data);
-        alert("Solicitud enviada correctamente");
+        console.log("Solicitud enviada al servidor:", response.data);
+        // Aquí puedes manejar la respuesta del servidor si es necesario
       })
       .catch((error) => {
-        console.error("Error al enviar la solicitud:", error);
-        alert("Error al enviar la solicitud");
+        console.error("Error al enviar solicitud al servidor:", error);
+        // Aquí puedes manejar los errores de la solicitud si es necesario
       });
   };
 
-  return <button onClick={handleClick}>Enviar solicitud</button>;
+  return <button onClick={handleClick}>Enviar Solicitud al Servidor</button>;
 };

@@ -5,7 +5,7 @@ import "./App.scss";
 import Main from "./Layouts/Main/Main";
 import Home from "./Layouts/Home/Home";
 import HeaderMobile from "./Components/Header/Header-mobile";
-
+import axios from "axios";
 import Projects from "./Pages/Projects/Projects";
 import Research from "./Pages/Research/Research";
 import Article from "./Pages/Article/Article";
@@ -29,35 +29,7 @@ function App() {
   return (
     <LanguageProvider>
       <div className="App">
-        <Routes>
-          <Route path="/" element={<Navigate to="/en-us" />} />
-          <Route path="/:lang/header" element={<HeaderMobile />} />
-          <Route
-            path="/:lang"
-            element={
-              <LanguageWrapper>
-                <Main />
-              </LanguageWrapper>
-            }
-          >
-            <Route path="/:lang" element={<Home />} />
-
-            <Route path="/:lang/research" element={<Research />} />
-            <Route path="/:lang/research/:id" element={<Article />} />
-            <Route path="/:lang/about" element={<About />} />
-            <Route path="/:lang/projects" element={<Projects />} />
-            <Route path="/:lang/projects/:projectName" element={<Project />} />
-            <Route path="/:lang/contact" element={<ContactForm />} />
-            <Route path="/:lang/services" element={<Banner />} />
-            <Route
-              path="/:lang/profile"
-              element={<div className="placeholder">profile</div>}
-            />
-            <Route path="/:lang/resources" element={<Resources />} />
-          </Route>
-          <Route path="*" element={<NotFound />} /> LanguageSelector.js
-          <Route path="/404" element={<NotFound />} />
-        </Routes>
+        <SendButton />
       </div>
     </LanguageProvider>
   );
@@ -68,3 +40,20 @@ export default App;
 function NotFound() {
   return <div className="Not">ERROR 404</div>;
 }
+
+const SendButton = () => {
+  const handleClick = () => {
+    axios
+      .get("http://localhost:3000/send")
+      .then((response) => {
+        console.log(response.data);
+        alert("Solicitud enviada correctamente");
+      })
+      .catch((error) => {
+        console.error("Error al enviar la solicitud:", error);
+        alert("Error al enviar la solicitud");
+      });
+  };
+
+  return <button onClick={handleClick}>Enviar solicitud</button>;
+};

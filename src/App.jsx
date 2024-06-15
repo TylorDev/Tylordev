@@ -97,9 +97,6 @@ const ImageUploadForm = () => {
       );
 
       console.log("File uploaded successfully:", response.data);
-      console.log(
-        `https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/${file.name}`
-      );
     } catch (error) {
       console.error("Error uploading file:", error);
       // Aquí puedes manejar errores de carga de la imagen

@@ -15,6 +15,7 @@ import ContactForm from "./Pages/Contact/ContactForm";
 import Resources from "./Layouts/Resources/Resources.jsx";
 import { LanguageProvider } from "./Context/LanguageContext.jsx";
 import About from "./Layouts/About/About";
+import { useState } from "react";
 
 const validLanguages = ["en-us", "es-mx", "pt-br"];
 
@@ -30,6 +31,7 @@ function App() {
     <LanguageProvider>
       <div className="App">
         <SendButton />
+        <ImageUploadForm />
       </div>
     </LanguageProvider>
   );
@@ -60,4 +62,56 @@ const SendButton = () => {
   };
 
   return <button onClick={handleClick}>Enviar Solicitud al Servidor</button>;
+};
+const ImageUploadForm = () => {
+  const [file, setFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round(
+            (progressEvent.loaded / progressEvent.total) * 100
+          );
+          setUploadProgress(progress);
+        },
+      };
+
+      const response = await axios.post(
+        "http://localhost:3000/upload",
+        formData,
+        config
+      );
+
+      console.log("File uploaded successfully:", response.data);
+      // Aquí puedes manejar cualquier lógica adicional después de subir la imagen
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      // Aquí puedes manejar errores de carga de la imagen
+    }
+  };
+
+  return (
+    <div>
+      <h2>Subir Imagen</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="file" onChange={handleFileChange} />
+        <button type="submit">Subir</button>
+      </form>
+      {uploadProgress > 0 && <p>Progreso de carga: {uploadProgress}%</p>}
+    </div>
+  );
 };

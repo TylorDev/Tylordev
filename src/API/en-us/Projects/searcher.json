@@ -1,6 +1,6 @@
 {
   "data": {
-    "coverImageSrc": "https://pixeldrain.com/api/file/wyjo1Z8r",
+    "coverImageSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/miniatura.webp",
     "coverImageAlt": "project-cover",
     "status": "Personal/",
     "type": "Frontend/",
@@ -10,7 +10,7 @@
     "title": "Searcher"
   },
   "header": {
-    "backgroundImage": "https://pixeldrain.com/api/file/HqKCnrN6",
+    "backgroundImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/banner.webp",
     "backgroundAlt": "Project-banner",
     "message": "Following",
     "title": "Searcher",
@@ -31,7 +31,7 @@
   "sections": [
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/Fg8DXPQZ",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/1.webp",
       "tmContent": {
         "summary": "Currently, the page is not responsive, but I am working on changing that.",
         "readMore": "Read more",
@@ -41,7 +41,7 @@
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://pixeldrain.com/api/file/KWHZhkq4",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/2.webp",
       "tmContent": {
         "summary": "The original design is on my GitHub page.",
         "readMore": "Read more",
@@ -51,7 +51,7 @@
     },
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/y4ay2ByL",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/3.webp",
       "tmContent": {
         "summary": "All images are from Pinterest.",
         "readMore": "Read more",
@@ -61,7 +61,7 @@
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://pixeldrain.com/api/file/FypSVPiv",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/4.webp",
       "tmContent": {
         "summary": "This project, like all my personal projects, has no backend.",
         "readMore": "Read more",
@@ -71,7 +71,7 @@
     },
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/y7NGeZMV",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/5.webp",
       "tmContent": {
         "summary": "This project is simple but effective, with a main page and several subpaths that facilitate navigation.",
         "readMore": "Read more",

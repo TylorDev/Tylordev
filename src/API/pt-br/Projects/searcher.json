@@ -1,6 +1,6 @@
 {
   "data": {
-    "coverImageSrc": "https://pixeldrain.com/api/file/wyjo1Z8r",
+    "coverImageSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/miniatura.webp",
     "coverImageAlt": "capa do projeto",
     "status": " Pessoal/",
     "type": "Front-end/",
@@ -10,7 +10,7 @@
     "title": "Searcher"
   },
   "header": {
-    "backgroundImage": "https://pixeldrain.com/api/file/HqKCnrN6",
+    "backgroundImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/banner.webp",
     "backgroundAlt": "Banner do projeto",
     "message": "Próximo",
     "title": "Searcher",
@@ -31,7 +31,7 @@
   "sections": [
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/Fg8DXPQZ",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/1.webp",
       "tmContent": {
         "summary": "Atualmente a página não responde, mas estou trabalhando para mudar isso.",
         "readMore": "ler mais",
@@ -41,7 +41,7 @@
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://pixeldrain.com/api/file/KWHZhkq4",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/2.webp",
       "tmContent": {
         "summary": "O design original está na minha página do GitHub.",
         "readMore": "ler mais",
@@ -51,7 +51,7 @@
     },
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/y4ay2ByL",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/3.webp",
       "tmContent": {
         "summary": "Todas as imagens são do Pinterest.",
         "readMore": "ler mais",
@@ -61,7 +61,7 @@
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://pixeldrain.com/api/file/FypSVPiv",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/4.webp",
       "tmContent": {
         "summary": "Este projeto, como todos os meus projetos pessoais, não possui back-end.",
         "readMore": "ler mais",
@@ -71,7 +71,7 @@
     },
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/y7NGeZMV",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/5.webp",
       "tmContent": {
         "summary": "Este projeto é simples mas eficaz, com uma página principal e vários subcaminhos que facilitam a navegação.",
         "readMore": "ler mais",

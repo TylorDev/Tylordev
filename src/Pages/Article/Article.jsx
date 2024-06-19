@@ -4,9 +4,9 @@ import Research from "./../Research/Research";
 import { useState } from "react";
 import { Void } from "./../../Components/Void/Void";
 import GetObjectData from "./../../Components/GetObjectData/GetObjectData";
-import data from "./1.json";
+// import data from "./1.json";
 function Article() {
-  // const data = GetObjectData({ type: "Articles" });
+  const data = GetObjectData({ type: "Articles" });
   if (!data) {
     return (
       <div className="Article">

@@ -1,6 +1,6 @@
 {
   "data": {
-    "coverImageSrc": "https://pixeldrain.com/api/file/wyjo1Z8r",
+    "coverImageSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/miniatura.webp",
     "coverImageAlt": "project-cover",
     "status": "Personal/",
     "type": "Frontend/",
@@ -9,7 +9,7 @@
     "date": "2024-04-03"
   },
   "header": {
-    "backgroundImage": "https://pixeldrain.com/api/file/HqKCnrN6",
+    "backgroundImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/banner.webp",
     "backgroundAlt": "Project-banner",
     "message": "Siguiente",
     "title": "Searcher",
@@ -30,7 +30,7 @@
   "sections": [
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/Fg8DXPQZ",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/1.webp",
       "tmContent": {
         "summary": "Actualmente, la página no es responsive, pero estoy trabajando para cambiar eso.",
         "readMore": "Leer más",
@@ -40,7 +40,7 @@
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://pixeldrain.com/api/file/KWHZhkq4",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/2.webp",
       "tmContent": {
         "summary": "El diseño original está en mi página de GitHub.",
         "readMore": "Leer más",
@@ -50,7 +50,7 @@
     },
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/y4ay2ByL",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/3.webp",
       "tmContent": {
         "summary": "Todas las imágenes son de Pinterest.",
         "readMore": "Leer más",
@@ -60,7 +60,7 @@
     },
     {
       "flexDirection": "row",
-      "coverImage": "https://pixeldrain.com/api/file/FypSVPiv",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/4.webp",
       "tmContent": {
         "summary": "Este proyecto, al igual que todos mis proyectos personales, no tiene backend.",
         "readMore": "Leer más",
@@ -70,7 +70,7 @@
     },
     {
       "flexDirection": "row-reverse",
-      "coverImage": "https://pixeldrain.com/api/file/y7NGeZMV",
+      "coverImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/5.webp",
       "tmContent": {
         "summary": "Este proyecto es sencillo pero efectivo, con una página principal y varias subrutas que facilitan la navegación.",
         "readMore": "Leer más",

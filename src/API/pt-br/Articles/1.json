@@ -22,12 +22,12 @@
     },
     {
       "tittle": "",
-      "paragraph": " 1. La Pizarra (Local Storage): Es un espacio donde cualquier pestaña puede escribir datos. Estos datos permanecen ahí hasta que alguien los borra o modifica .Personas Observando(Pestañas del Navegador): Todas las pestañas abiertas de la misma aplicación están constantemente observando la pizarra para detectar cualquier cambio.Evento de Cambio (storage): Cuando alguien escribe en la pizarra, todas las personas en la sala reciben una notificación inmediata de que algo ha cambiado. En términos técnicos, esto es el evento storage.",
+      "paragraph": " 1. La Pizarra (Local Storage): Es un espacio donde cualquier pestaña puede escribir datos. Estos datos permanecen ahí hasta que alguien los borra o modifica.",
       "image": ""
     },
     {
       "tittle": "",
-      "paragraph": "2. Personas Observando(Pestañas del Navegador): Todas las pestañas abiertas de la misma aplicación están constantemente observando la pizarra para detectar cualquier cambio.Evento de Cambio (storage): Cuando alguien escribe en la pizarra, todas las personas en la sala reciben una notificación inmediata de que algo ha cambiado. En términos técnicos, esto es el evento storage.",
+      "paragraph": "2. Personas Observando(Pestañas del Navegador): Todas las pestañas abiertas de la misma aplicación están constantemente observando la pizarra para detectar cualquier cambio.",
       "image": ""
     },
     {

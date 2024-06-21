@@ -1,48 +1,48 @@
 {
   "data": {
     "coverImageSrc": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/51943d9b-5acb-4d33-9e33-411e58c76901.webp",
-    "category": "Experimento",
-    "date": "20/06/2024",
-    "title": "Comunicacion entre pestañas",
+    "category": "Experiment",
+    "date": "06/20/2024",
+    "title": "Communication between tabs",
     "content": "localStorage",
     "id": 1
   },
   "bannerImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/85c76491-36ce-4fc5-bbd3-009a9b74fc9e.webp",
-  "contentTitle": "Comunicando multiples pestañas en un mismo navegador, sin backend!  ",
+  "contentTitle": "Communicating multiple tabs in the same browser, without backend!",
   "sections": [
     {
-      "tittle": "Concepto Básico",
-      "paragraph": "Local Storage es una característica de HTML5 que permite almacenar datos de manera persistente en el navegador del usuario. A diferencia de las cookies, los datos en local storage no se envían al servidor con cada solicitud, y tienen un tamaño de almacenamiento mayor (generalmente 5MB).Para permitir que varias pestañas de una misma aplicación web se comuniquen entre sí, se puede utilizar el evento storage. Este evento se dispara en todas las pestañas cuando se produce un cambio en el local storage.",
+      "title": "Basic Concept",
+      "paragraph": "Local Storage is an HTML5 feature that allows data to be stored persistently in the user's browser. Unlike cookies, data in local storage is not sent to the server with each request, and it has a larger storage size (usually 5MB). To allow multiple tabs of the same web application to communicate with each other, the storage event can be used. This event is fired in all tabs when a change in local storage occurs.",
       "image": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/616f5b05-17dc-47af-b087-61311d2e8790.webp"
     },
     {
-      "tittle": "Entender el Proceso",
-      "paragraph": "Imagina que tienes una pizarra (local storage) en una sala de reuniones (el navegador). Cada vez que alguien en la sala (una pestaña) quiere compartir información con los demás, escribe un mensaje en la pizarra. Todos los presentes en la sala (otras pestañas) están observando la pizarra. Cuando alguien escribe algo nuevo, todos los demás lo ven y pueden reaccionar a ese cambio.",
+      "title": "Understanding the Process",
+      "paragraph": "Imagine you have a whiteboard (local storage) in a meeting room (the browser). Every time someone in the room (a tab) wants to share information with others, they write a message on the whiteboard. Everyone present in the room (other tabs) is watching the whiteboard. When someone writes something new, everyone else sees it and can react to that change.",
       "image": ""
     },
     {
       "tittle": "",
-      "paragraph": " 1. La Pizarra (Local Storage): Es un espacio donde cualquier pestaña puede escribir datos. Estos datos permanecen ahí hasta que alguien los borra o modifica.",
+      "paragraph": "1. The Whiteboard (Local Storage): It is a space where any tab can write data. This data stays there until someone deletes or modifies it.",
       "image": ""
     },
     {
       "tittle": "",
-      "paragraph": "2. Personas Observando(Pestañas del Navegador): Todas las pestañas abiertas de la misma aplicación están constantemente observando la pizarra para detectar cualquier cambio.",
+      "paragraph": "2. People Watching (Browser Tabs): All open tabs of the same application are constantly watching the whiteboard for any changes.",
       "image": ""
     },
     {
       "tittle": "",
-      "paragraph": "3. Evento de Cambio (storage): Cuando alguien escribe en la pizarra, todas las personas en la sala reciben una notificación inmediata de que algo ha cambiado. En términos técnicos, esto es el evento storage.",
+      "paragraph": "3. Change Event (storage): When someone writes on the whiteboard, everyone in the room receives an immediate notification that something has changed. In technical terms, this is the storage event.",
       "image": ""
     },
     {
-      "tittle": "Limitaciones",
-      "paragraph": "Esta comunicación entre pestañas utilizando local storage solo funciona dentro del mismo dominio y navegador, ya que diferentes navegadores no comparten el mismo local storage. Además, los datos en local storage no están encriptados, por lo que no es seguro almacenar información sensible.",
+      "title": "Limitations",
+      "paragraph": "This communication between tabs using local storage only works within the same domain and browser, as different browsers do not share the same local storage. Additionally, data in local storage is not encrypted, so it is not secure to store sensitive information.",
       "image": ""
     },
     {
-      "tittle": "Pasos del Proceso",
-      "paragraph": "Una pestaña escribe un mensaje en local storage utilizando localStorage.setItem(key, value), Este acto de escribir un mensaje dispara el evento storage en todas las pestañas que están escuchando este evento. Cada pestaña tiene un event listener para el evento storage. Este listener detecta cualquier cambio en el local storage. Cuando el evento storage se dispara, las pestañas pueden leer el nuevo mensaje del local storage y reaccionar en consecuencia, por ejemplo, actualizando su interfaz de usuario.",
+      "title": "Process Steps",
+      "paragraph": "A tab writes a message in local storage using localStorage.setItem(key, value). This act of writing a message triggers the storage event in all tabs listening to this event. Each tab has an event listener for the storage event. This listener detects any change in local storage. When the storage event is triggered, tabs can read the new message from local storage and react accordingly, for example, by updating their user interface.",
       "image": ""
     }
   ],

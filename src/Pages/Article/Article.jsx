@@ -50,11 +50,7 @@ function Article() {
           </div>
         ))}
       </div>
-      <Research
-        tittle={data.researchProps.tittle}
-        limit={data.researchProps.limit}
-        style={data.researchProps.style}
-      />
+      <Research style={data.researchProps.style} />
     </div>
   );
 }

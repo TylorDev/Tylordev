@@ -13,7 +13,7 @@ function Home() {
       <About />
       <Banner />
       <Projects limit={4} />
-      <Research limit={true} />
+      <Research />
     </div>
   );
 }

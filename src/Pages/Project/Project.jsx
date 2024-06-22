@@ -90,7 +90,10 @@ function Project() {
         <p className="ph-subtittle">{data.header.subtitle}</p>
         <div className="ph-action-buttons">
           {data.header.buttons.map((button, index) => (
-            <button key={index}>
+            <button
+              key={index}
+              onClick={() => window.open(button.url, "_blank")}
+            >
               {button.text} {button.icon && <GoArrowRight />}
             </button>
           ))}

@@ -103,7 +103,7 @@ function Banner() {
                   <Button handleClick={handleClick} text={service.buttonText} />
                 </div>
                 <div className="ee-2">
-                  <p>{service.title}</p>
+                  <p className="service-name">{service.title}</p>
                   <div className="eee-h">
                     <span>{service.time}</span> /{service.location}
                   </div>

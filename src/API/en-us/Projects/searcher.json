@@ -12,7 +12,7 @@
   "header": {
     "backgroundImage": "https://raw.githubusercontent.com/TylorDev/Tylordev/public/Assets/Images/banner.webp",
     "backgroundAlt": "Project-banner",
-    "message": "Following",
+    "message": "Next",
     "title": "Searcher",
     "subtitle": "Discover, collect and sell Art.",
     "buttons": [
@@ -24,7 +24,7 @@
       {
         "text": "View source code",
         "icon": true,
-        "url": "https://tylordev.github.io/Searcher/"
+        "url": "https://github.com/TylorDev/Searcher"
       }
     ]
   },

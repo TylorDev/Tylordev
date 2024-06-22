@@ -3,7 +3,6 @@
     display: grid;
     grid-template-columns: 5fr 4fr 3fr;
 
-
 }
 
 
@@ -137,6 +136,9 @@
 
     display: flex;
     flex-direction: column;
+
+    //Develop outline
+
 }
 
 .profile {
@@ -145,6 +147,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
 
 
     .profile-pic {
@@ -177,7 +180,7 @@
 
         p {
 
-            width: 50%;
+            width: 100%;
         }
 
     }
@@ -291,7 +294,7 @@
     }
 
     .profile {
-        padding-bottom: 5rem;
+        padding-bottom: 8rem;
 
         div:nth-child(2) {
 

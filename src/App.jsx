@@ -30,7 +30,7 @@ function App() {
     <LanguageProvider>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Navigate to="/en-us" />} />
+          <Route path="/Tylordev" element={<Navigate to="/en-us" />} />
           <Route path="/:lang/header" element={<HeaderMobile />} />
           <Route
             path="/:lang"

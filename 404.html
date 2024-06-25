@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=/" />
+    <script>
+      // This script handles redirection in single-page applications (SPAs)
+      var target = window.location.pathname;
+      if (target && target !== "/") {
+        window.location.replace("/?p=" + target);
+      }
+    </script>
+  </head>
+  <body>
+    <p>Redireccionando...</p>
+  </body>
+</html>

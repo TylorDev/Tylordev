@@ -96,7 +96,7 @@ export function History() {
           <Link
             key={index}
             className="item"
-            to={`/${language}/projects/${item.header.title.toLowerCase()}`}
+            to={`/Tylordev/${language}/projects/${item.header.title.toLowerCase()}`}
           >
             <div>
               {item.data.status} {item.data.date}

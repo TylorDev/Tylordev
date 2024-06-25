@@ -16,7 +16,7 @@ function Request() {
   const { lang } = useParams();
 
   const handleClick = () => {
-    navigate(`/${language}/contact`);
+    navigate(`/Tylordev/${language}/contact`);
   };
 
   if (!content) {

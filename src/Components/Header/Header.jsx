@@ -28,7 +28,7 @@ function Header() {
 
     if (!close) {
       console.log("Checkbox marcado");
-      navigate(`/${language}/header`);
+      navigate(`/Tylordev/${language}/header`);
     }
   };
 
@@ -92,7 +92,7 @@ function Header() {
     <header>
       <nav className="navbar">
         <div className="mobile-nav">
-          <NavLink to={`/${language}`} className="logo">
+          <NavLink to={`/Tylordev/${language}`} className="logo">
             <img src={content.logoSrc} alt={content.logoAlt} />
           </NavLink>
 
@@ -109,7 +109,7 @@ function Header() {
           <div>
             <li>
               <NavLink
-                to={`/${language}/about`}
+                to={`/Tylordev/${language}/about`}
                 onClick={() => {
                   handleName(content.navItems.about);
                 }}
@@ -119,7 +119,7 @@ function Header() {
             </li>
             <li>
               <NavLink
-                to={`/${language}/projects`}
+                to={`/Tylordev/${language}/projects`}
                 onClick={() => {
                   handleName(content.navItems.projects);
                 }}
@@ -129,7 +129,7 @@ function Header() {
             </li>
             <li>
               <NavLink
-                to={`/${language}/services`}
+                to={`/Tylordev/${language}/services`}
                 onClick={() => {
                   handleName(content.navItems.services);
                 }}
@@ -143,7 +143,7 @@ function Header() {
           </div>
           <li id="liLogo">
             <NavLink
-              to={`/${language}`}
+              to={`/Tylordev/`}
               className="logo"
               onClick={() => {
                 handleName("TylorDev/");
@@ -155,7 +155,7 @@ function Header() {
           <div>
             <li>
               <NavLink
-                to={`/${language}/research`}
+                to={`/Tylordev/${language}/research`}
                 onClick={() => {
                   handleName(content.navItems.research);
                 }}
@@ -165,7 +165,7 @@ function Header() {
             </li>
             <li>
               <NavLink
-                to={`/${language}/resources`}
+                to={`/Tylordev/${language}/resources`}
                 onClick={() => {
                   handleName(content.navItems.resources);
                 }}
@@ -175,7 +175,7 @@ function Header() {
             </li>
             <li>
               <NavLink
-                to={`/${language}/contact`}
+                to={`/Tylordev/${language}/contact`}
                 onClick={() => {
                   handleName(content.navItems.contact);
                 }}

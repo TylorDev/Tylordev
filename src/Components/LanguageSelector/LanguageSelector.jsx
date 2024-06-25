@@ -14,11 +14,26 @@ const LanguageSelector = () => {
 
   const handleChange = (event) => {
     const selectedLang = event.target.value;
+    console.log("Selected Language:", selectedLang);
+
     setLanguage(selectedLang);
-    // Extrae la ruta actual sin el idioma
-    const currentPath = location.pathname.split("/").slice(2).join("/");
-    // Navega a la nueva ruta con el nuevo idioma
-    navigate(`/${selectedLang}/${currentPath}`);
+
+    const currentPath = location.pathname;
+    console.log("Current Path:", currentPath);
+
+    // Detectar y reemplazar el idioma en la URL
+    const languagePatterns = ["en-us", "es-mx", "pt-br"];
+    let newPath = currentPath;
+
+    languagePatterns.forEach((pattern) => {
+      if (currentPath.includes(pattern)) {
+        newPath = currentPath.replace(pattern, selectedLang);
+      }
+    });
+
+    console.log("Navigating to:", newPath);
+
+    navigate(newPath);
   };
 
   return (

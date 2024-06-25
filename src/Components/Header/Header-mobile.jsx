@@ -57,7 +57,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/${language}/about`}
+              to={`/Tylordev/${language}/about`}
               onClick={() => {
                 handleName(content.navItems.about);
               }}
@@ -67,7 +67,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/${language}/projects`}
+              to={`/Tylordev/${language}/projects`}
               onClick={() => {
                 handleName(content.navItems.projects);
               }}
@@ -77,7 +77,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/${language}/services`}
+              to={`/Tylordev/${language}/services`}
               onClick={() => {
                 handleName(content.navItems.services);
               }}
@@ -88,7 +88,7 @@ function HeaderMobile() {
 
           <li>
             <NavLink
-              to={`/${language}`}
+              to={`/Tylordev/${language}`}
               className="logo"
               onClick={() => {
                 handleName("TylorDev/");
@@ -99,7 +99,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/${language}/research`}
+              to={`/Tylordev/${language}/research`}
               onClick={() => {
                 handleName(content.navItems.research);
               }}
@@ -109,7 +109,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/${language}/resources`}
+              to={`/Tylordev/${language}/resources`}
               onClick={() => {
                 handleName(content.navItems.resources);
               }}
@@ -119,7 +119,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/${language}/contact`}
+              to={`/Tylordev/${language}/contact`}
               onClick={() => {
                 handleName(content.navItems.contact);
               }}

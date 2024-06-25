@@ -34,10 +34,16 @@ function Footer() {
           <img src={content.logoSrc} alt={content.logoAlt} />
         </div>
         <div className="footer__links">
-          <Link to={`/${language}/about`}>{content.links.about}</Link>
-          <Link to={`/${language}/projects`}>{content.links.projects}</Link>
-          <Link to={`/${language}/services`}>{content.links.extras}</Link>
-          <Link to={`/${language}/research`}>{content.links.blog}</Link>
+          <Link to={`/Tylordev/${language}/about`}>{content.links.about}</Link>
+          <Link to={`/Tylordev/${language}/projects`}>
+            {content.links.projects}
+          </Link>
+          <Link to={`/Tylordev/${language}/services`}>
+            {content.links.extras}
+          </Link>
+          <Link to={`/Tylordev/${language}/research`}>
+            {content.links.blog}
+          </Link>
           <Link to={content.links.github}>
             Github <FaGithub />{" "}
           </Link>

@@ -19,7 +19,7 @@ function Banner() {
   const { language } = useLanguage();
 
   const handleClick = () => {
-    navigate(`/Tylordev/${language}/contact`);
+    navigate(`/${language}/contact`);
   };
 
   const handleNext = () => {

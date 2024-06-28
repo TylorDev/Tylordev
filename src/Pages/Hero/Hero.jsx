@@ -94,7 +94,7 @@ function VideoHero({ videoSrc }) {
   const { lang } = useParams();
 
   const handleClick = () => {
-    navigate(`/Tylordev/${language}/Projects`);
+    navigate(`/${language}/Projects`);
   };
   return (
     <div className="hero-video">
@@ -125,7 +125,7 @@ function HeroPost({ post }) {
   const { lang } = useParams();
 
   const handleClick = () => {
-    navigate(`/Tylordev/${language}/contact`);
+    navigate(`/${language}/contact`);
   };
 
   return (

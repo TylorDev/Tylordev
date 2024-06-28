@@ -22,7 +22,7 @@ function Research({ title = true, limit = false, style }) {
   const { language } = useLanguage();
 
   const handleClick = (blogId) => {
-    navigate(`/Tylordev/${language}/research/${blogId}`);
+    navigate(`/${language}/research/${blogId}`);
     console.log(blogId);
   };
 

@@ -30,33 +30,29 @@ function App() {
     <LanguageProvider>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Navigate to="/Tylordev" />} />
-          <Route path="/Tylordev" element={<Navigate to="/Tylordev/en-us" />} />
-          <Route path="/Tylordev/:lang/header" element={<HeaderMobile />} />
+          <Route path="/" element={<Navigate to="/en-us" />} />
+          <Route path="/:lang/header" element={<HeaderMobile />} />
           <Route
-            path="/Tylordev/:lang"
+            path="/:lang"
             element={
               <LanguageWrapper>
                 <Main />
               </LanguageWrapper>
             }
           >
-            <Route path="/Tylordev/:lang" element={<Home />} />
-            <Route path="/Tylordev/:lang/research" element={<Research />} />
-            <Route path="/Tylordev/:lang/research/:id" element={<Article />} />
-            <Route path="/Tylordev/:lang/about" element={<About />} />
-            <Route path="/Tylordev/:lang/projects" element={<Projects />} />
+            <Route path="/:lang" element={<Home />} />
+            <Route path="/:lang/research" element={<Research />} />
+            <Route path="/:lang/research/:id" element={<Article />} />
+            <Route path="/:lang/about" element={<About />} />
+            <Route path="/:lang/projects" element={<Projects />} />
+            <Route path="/:lang/projects/:projectName" element={<Project />} />
+            <Route path="/:lang/contact" element={<ContactForm />} />
+            <Route path="/:lang/services" element={<Banner />} />
             <Route
-              path="/Tylordev/:lang/projects/:projectName"
-              element={<Project />}
-            />
-            <Route path="/Tylordev/:lang/contact" element={<ContactForm />} />
-            <Route path="/Tylordev/:lang/services" element={<Banner />} />
-            <Route
-              path="/Tylordev/:lang/profile"
+              path="/:lang/profile"
               element={<div className="placeholder">profile</div>}
             />
-            <Route path="/Tylordev/:lang/resources" element={<Resources />} />
+            <Route path="/:lang/resources" element={<Resources />} />
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route path="/404" element={<NotFound />} />

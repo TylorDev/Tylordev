@@ -57,7 +57,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/Tylordev/${language}/about`}
+              to={`/${language}/about`}
               onClick={() => {
                 handleName(content.navItems.about);
               }}
@@ -67,7 +67,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/Tylordev/${language}/projects`}
+              to={`/${language}/projects`}
               onClick={() => {
                 handleName(content.navItems.projects);
               }}
@@ -77,7 +77,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/Tylordev/${language}/services`}
+              to={`/${language}/services`}
               onClick={() => {
                 handleName(content.navItems.services);
               }}
@@ -88,10 +88,10 @@ function HeaderMobile() {
 
           <li>
             <NavLink
-              to={`/Tylordev/${language}`}
+              to={`/${language}`}
               className="logo"
               onClick={() => {
-                handleName("TylorDev/");
+                handleName("/");
               }}
             >
               <img src={content.logoSrc} alt={content.logoAlt} />
@@ -99,7 +99,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/Tylordev/${language}/research`}
+              to={`/${language}/research`}
               onClick={() => {
                 handleName(content.navItems.research);
               }}
@@ -109,7 +109,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/Tylordev/${language}/resources`}
+              to={`/${language}/resources`}
               onClick={() => {
                 handleName(content.navItems.resources);
               }}
@@ -119,7 +119,7 @@ function HeaderMobile() {
           </li>
           <li>
             <NavLink
-              to={`/Tylordev/${language}/contact`}
+              to={`/${language}/contact`}
               onClick={() => {
                 handleName(content.navItems.contact);
               }}

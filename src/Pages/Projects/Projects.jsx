@@ -19,7 +19,7 @@ function Projects({ limit }) {
 
   const handleClick = (projectName) => {
     const formattedProjectName = projectName.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/Tylordev/${language}/projects/${formattedProjectName}`);
+    navigate(`/${language}/projects/${formattedProjectName}`);
   };
 
   const fileType = "Projects";

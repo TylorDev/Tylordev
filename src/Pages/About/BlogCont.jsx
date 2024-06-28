@@ -97,14 +97,14 @@ export function BlogCont() {
             <Link
               key={index}
               className="entry"
-              to={`/Tylordev/${language}/research/${entry.data.id}`}
+              to={`/${language}/research/${entry.data.id}`}
             >
               <div>{entry.data.date}</div>
               <div>{entry.contentTitle}</div>
             </Link>
           ))}
         </div>
-        <Link className="corner-blog" to={`/Tylordev/${language}/research`}>
+        <Link className="corner-blog" to={`/${language}/research`}>
           <div className="arrow">
             <GoArrowDownLeft />
           </div>

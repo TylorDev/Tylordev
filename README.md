@@ -1,11 +1,11 @@
 ![Visitor](https://visitor-badge.laobi.icu/badge?page_id=Tylordev)
-#### Platform & Tools  W
+#### Platform & Tools  
 
 [![Windows](https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11&logoColor=white)](#)
 [![Visual Studio](https://custom-icon-badges.demolab.com/badge/Visual%20Studio-5C2D91.svg?&logo=visual-studio&logoColor=white)](#)
 [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](#)
  
-#### Languages & Frameworks  W
+#### Languages & Frameworks  
 [![](https://img.shields.io/badge/-React-61dafb?style=for-the-badge&logo=react&logoColor=ffffff)](https://reactjs.org/)
 [![](https://img.shields.io/badge/-TypeScript-007acc?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![](https://img.shields.io/badge/-SCSS-BF4080?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)

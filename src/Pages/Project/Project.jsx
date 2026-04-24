@@ -14,6 +14,7 @@ import GetData from "./../../Components/GetData/GetData";
 function Project() {
   const fileType = "Projects";
   const list = GetData({ fileType });
+  const data = GetObjectData({ type: "Projects" });
   const { projectName } = useParams();
   const [index, setIndex] = useState(0);
 
@@ -22,27 +23,18 @@ function Project() {
 
   const handleClick = () => {
     const newIndex = index + 1 < list.length ? index + 1 : 0;
-    navigate(
-      `/${language}/projects/${list[newIndex].header.title.toLowerCase()}`
-    );
+    if (!list[newIndex]?.slug) return;
+    navigate(`/${language}/projects/${list[newIndex].slug}`);
   };
 
   useEffect(() => {
-    function capitalizeFirstLetter(string) {
-      if (!string) return string; // Maneja casos donde la cadena sea vacía o null
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-    const findIndexByName = (name) => {
-      return list.findIndex((item) => item.header.title === name);
-    };
-
-    const id = findIndexByName(capitalizeFirstLetter(projectName));
+    const id = list.findIndex((item) => item.slug === projectName);
     setIndex(id);
 
-    document.title = capitalizeFirstLetter(projectName);
-  }, [projectName, list]);
-
-  const data = GetObjectData({ type: "Projects" });
+    if (data?.header?.title) {
+      document.title = data.header.title;
+    }
+  }, [projectName, list, data]);
 
   if (!data) {
     return (

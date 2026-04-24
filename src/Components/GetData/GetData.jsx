@@ -1,36 +1,34 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "../../Context/LanguageContext";
-import GetFilenames from "../GetFilenames/getFileNames";
+import {
+  getApiUrl,
+  mapArticleFromApi,
+  mapProjectFromApi,
+} from "../ApiData/apiMappers";
 
 const GetData = ({ fileType }) => {
   const { language } = useLanguage();
-
-  const filenames = GetFilenames({ fileType });
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responses = await Promise.all(
-          filenames.map((filename) =>
-            fetch(
-              `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/${fileType}/${filename}`
-            )
-          )
-        );
+        const endpoint = fileType === "Projects" ? "/projects" : "/articles";
+        const response = await fetch(getApiUrl(endpoint));
+        const result = await response.json();
+        const mapper =
+          fileType === "Projects" ? mapProjectFromApi : mapArticleFromApi;
 
-        const data = await Promise.all(
-          responses.map((response) => response.json())
-        );
-        setData(data);
+        setData(result.map((item) => mapper(item, language)));
       } catch (error) {
         console.error("Error fetching data:", error);
+        setData([]);
       }
     };
 
     fetchData();
-  }, [filenames, language, fileType]);
+  }, [language, fileType]);
 
   return data;
 };

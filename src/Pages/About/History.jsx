@@ -15,16 +15,8 @@ export function History() {
   const fileType = "Projects";
   const data = GetData({ fileType });
 
-  const latest = data;
-
-  const parseDate = (dateString) => {
-    const [day, month, year] = dateString.split("/").map(Number);
-    return new Date(year + 2000, month - 1, day); // Asume fechas en el formato DD/MM/YY
-  };
-
-  // Ordenar los datos por fecha de más reciente a más antiguo
-  const sortedLatest = latest.sort(
-    (a, b) => parseDate(b.data.date) - parseDate(a.data.date)
+  const sortedLatest = [...data].sort(
+    (a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
   );
 
   const topLatest = sortedLatest.slice(0, 2);
@@ -96,7 +88,7 @@ export function History() {
           <Link
             key={index}
             className="item"
-            to={`/${language}/projects/${item.header.title.toLowerCase()}`}
+            to={`/${language}/projects/${item.slug}`}
           >
             <div>
               {item.data.status} {item.data.date}

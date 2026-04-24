@@ -7,7 +7,7 @@ export function ProjectCard({ project, handleClick }) {
         <img
           src={project.data.coverImageSrc}
           alt={`Cover for ${project.data.type}`}
-          onClick={() => handleClick(project.data.tittle)}
+          onClick={() => handleClick(project.slug ?? project.data.tittle)}
         />
       </div>
       <div className="pp-tittle">

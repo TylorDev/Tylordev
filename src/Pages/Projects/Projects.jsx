@@ -13,13 +13,13 @@ function Projects({ limit }) {
   const content = FetchDataComponent("projectsContent");
 
   const datos = content?.Projects ?? [];
+  const emptyMessage = "En construccion";
 
   const navigate = useNavigate();
   const { language } = useLanguage();
 
-  const handleClick = (projectName) => {
-    const formattedProjectName = projectName.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/${language}/projects/${formattedProjectName}`);
+  const handleClick = (projectSlug) => {
+    navigate(`/${language}/projects/${projectSlug}`);
   };
 
   const fileType = "Projects";
@@ -27,6 +27,7 @@ function Projects({ limit }) {
   const data = GetData({ fileType });
 
   const limitProjects = data ? data.slice(0, limit) : data;
+  const projectsToDisplay = limit ? limitProjects : data;
 
   if (!content) {
     return (
@@ -44,13 +45,25 @@ function Projects({ limit }) {
     <div className="Projects">
       <TittleBar tittle={datos.header.tittle} />
       <div className="p-projects">
-        {limitProjects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            project={project}
-            handleClick={handleClick}
-          />
-        ))}
+        {projectsToDisplay.length ? (
+          projectsToDisplay.map((project, index) => (
+            <ProjectCard
+              key={index}
+              project={project}
+              handleClick={handleClick}
+            />
+          ))
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              padding: "2rem 0",
+              textAlign: "center",
+            }}
+          >
+            {emptyMessage}
+          </div>
+        )}
       </div>
     </div>
   );

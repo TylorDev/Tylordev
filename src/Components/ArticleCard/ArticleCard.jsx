@@ -7,7 +7,7 @@ export function ArticleCard({ article, handleClick }) {
         <img
           src={article.data.coverImageSrc}
           alt={`Cover for ${article.data.title}`}
-          onClick={() => handleClick(article.data.id)}
+          onClick={() => handleClick(article.slug ?? article.data.id)}
         />
       </div>
       <div className="rr-tittle">

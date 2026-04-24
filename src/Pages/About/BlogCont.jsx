@@ -11,17 +11,11 @@ export function BlogCont() {
   const PageName = "About";
   const datos = FetchDataComponent(PageName);
   const { language } = useLanguage();
+  const emptyMessage = "En construccion";
   const fileType = "Articles";
   const data = GetData({ fileType });
-  const latest = data;
-
-  const parseDate = (dateString) => {
-    const [day, month, year] = dateString.split("/").map(Number);
-    return new Date(year + 2000, month - 1, day); // Asume fechas en el formato DD/MM/YY
-  };
-  // Ordenar los datos por fecha de más reciente a más antiguo
-  const sortedLatest = latest.sort(
-    (a, b) => parseDate(b.data.date) - parseDate(a.data.date)
+  const sortedLatest = [...data].sort(
+    (a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
   );
   const topLatest = sortedLatest.slice(0, 4);
 
@@ -93,16 +87,28 @@ export function BlogCont() {
           hiddeLine={true}
         />
         <div className="entries">
-          {topLatest.map((entry, index) => (
-            <Link
-              key={index}
-              className="entry"
-              to={`/${language}/research/${entry.data.id}`}
+          {topLatest.length ? (
+            topLatest.map((entry, index) => (
+              <Link
+                key={index}
+                className="entry"
+                to={`/${language}/research/${entry.slug}`}
+              >
+                <div>{entry.data.date}</div>
+                <div>{entry.contentTitle}</div>
+              </Link>
+            ))
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                padding: "1.5rem 0",
+                textAlign: "center",
+              }}
             >
-              <div>{entry.data.date}</div>
-              <div>{entry.contentTitle}</div>
-            </Link>
-          ))}
+              {emptyMessage}
+            </div>
+          )}
         </div>
         <Link className="corner-blog" to={`/${language}/research`}>
           <div className="arrow">

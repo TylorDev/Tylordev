@@ -15,15 +15,15 @@ import { ArticleCard } from "../../Components/ArticleCard/ArticleCard";
 function Research({ title = true, limit = false, style }) {
   const content = FetchDataComponent("researchContent");
   const datos = content?.Research ?? [];
+  const emptyMessage = "En construccion";
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 
   const { language } = useLanguage();
 
-  const handleClick = (blogId) => {
-    navigate(`/${language}/research/${blogId}`);
-    console.log(blogId);
+  const handleClick = (blogSlug) => {
+    navigate(`/${language}/research/${blogSlug}`);
   };
 
   const fileType = "Articles";
@@ -35,10 +35,12 @@ function Research({ title = true, limit = false, style }) {
     .concat(data.slice(0, Math.max(0, currentIndex + 4 - data.length)));
 
   const handleNext = () => {
+    if (!data.length) return;
     setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
 
   const handlePrev = () => {
+    if (!data.length) return;
     setCurrentIndex((prevIndex) => (prevIndex - 4 + data.length) % data.length);
   };
 
@@ -89,13 +91,25 @@ function Research({ title = true, limit = false, style }) {
       />
 
       <div className="r-articles">
-        {(limit ? displayedArticles : data).map((article, index) => (
-          <ArticleCard
-            key={index}
-            article={article}
-            handleClick={handleClick}
-          />
-        ))}
+        {(limit ? displayedArticles : data).length ? (
+          (limit ? displayedArticles : data).map((article, index) => (
+            <ArticleCard
+              key={index}
+              article={article}
+              handleClick={handleClick}
+            />
+          ))
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              padding: "2rem 0",
+              textAlign: "center",
+            }}
+          >
+            {emptyMessage}
+          </div>
+        )}
       </div>
     </div>
   );

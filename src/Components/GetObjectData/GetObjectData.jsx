@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "../../Context/LanguageContext";
+import {
+  getApiUrl,
+  mapArticleFromApi,
+  mapProjectFromApi,
+} from "../ApiData/apiMappers";
 
 const GetObjectData = ({ type }) => {
   const { language } = useLanguage();
@@ -13,15 +18,22 @@ const GetObjectData = ({ type }) => {
         const paramKey = type === "Projects" ? "projectName" : "id";
         const paramValue = params[paramKey];
         const response = await fetch(
-          `https://raw.githubusercontent.com/TylorDev/Tylordev/main/src/API/${language}/${type}/${paramValue}.json`
+          type === "Projects"
+            ? getApiUrl(`/projects/${paramValue}`)
+            : getApiUrl(`/articles/${paramValue}`)
         );
         if (!response.ok) {
-          throw new Error(`Error fetching ${paramValue}.json`);
+          throw new Error(`Error fetching ${paramValue}`);
         }
         const result = await response.json();
-        setData(result);
+        setData(
+          type === "Projects"
+            ? mapProjectFromApi(result, language)
+            : mapArticleFromApi(result, language)
+        );
       } catch (error) {
         console.error("Error fetching the JSON data:", error);
+        setData(null);
       }
     };
 

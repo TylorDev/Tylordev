@@ -6,10 +6,6 @@ import { usePage } from "../../lib/hooks";
 import type { HeaderPage, Locale } from "../../lib/types";
 import "./Header.scss";
 
-const ADMIN_URL =
-  (import.meta.env.VITE_ADMIN_URL as string | undefined) ??
-  "https://tylordev.github.io/Tylordev-Admin/";
-
 const langLabel: Record<Locale, string> = {
   "en-us": "EN",
   "es-mx": "ES",
@@ -68,16 +64,14 @@ export default function Header() {
             ))}
           </div>
 
-          <a
+          <NavLink
             className="hdr-admin"
-            href={ADMIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Admin (external)"
+            to="/admin"
+            aria-label="Admin"
             onClick={() => setOpen(false)}
           >
             <FiShield /> Admin
-          </a>
+          </NavLink>
         </nav>
 
         <button

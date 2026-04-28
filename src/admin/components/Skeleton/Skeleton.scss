@@ -1,0 +1,11 @@
+.sk {
+  display: block;
+  background: linear-gradient(90deg, $bg-soft 0%, $bg-elev 50%, $bg-soft 100%);
+  background-size: 200% 100%;
+  animation: skshimmer 1.4s infinite;
+}
+
+@keyframes skshimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

@@ -14,6 +14,7 @@ const ArticleDetail = lazy(() => import("./pages/ArticleDetail/ArticleDetail"));
 const About = lazy(() => import("./pages/About/About"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+const AdminApp = lazy(() => import("./admin/AdminApp"));
 
 const SUPPORTED: Locale[] = ["en-us", "es-mx", "pt-br"];
 
@@ -51,6 +52,7 @@ export default function App() {
       <Suspense fallback={<PageFallback />}>
         <Routes>
           <Route path="/" element={<Navigate to="/en-us" replace />} />
+          <Route path="/admin/*" element={<AdminApp />} />
 
           <Route
             path="/:lang"

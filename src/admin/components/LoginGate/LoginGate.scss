@@ -1,0 +1,97 @@
+.loginx {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+    $bg;
+
+  &-card {
+    width: min(460px, 100%);
+    padding: 32px;
+    text-align: center;
+
+    .eyebrow { margin: 8px auto 12px; }
+    .section-subtitle { margin-bottom: 22px; }
+  }
+
+  &-badge {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 6px;
+    display: grid;
+    place-items: center;
+    border: 1px solid $border-strong;
+    border-radius: $radius;
+    color: $text;
+    background: $bg;
+    font-size: 18px;
+  }
+
+  &-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+
+  &-error {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    border-radius: $radius-sm;
+    border: 1px solid rgba($danger, 0.4);
+    color: $danger;
+    background: rgba($danger, 0.06);
+    font-size: 12.5px;
+    font-family: $mono;
+  }
+
+  &-test {
+    margin: 4px auto 14px;
+    padding-top: 14px;
+    border-top: 1px dashed $border-strong;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    p {
+      margin: 0;
+      color: $text-faint;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-family: $mono;
+
+      code {
+        color: $text-dim;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+    }
+  }
+
+  &-meta {
+    margin-top: 8px;
+    color: $text-faint;
+    font-family: $mono;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    code {
+      color: $text-dim;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  }
+
+  &-loading .loginx-card {
+    text-align: left;
+  }
+}

@@ -1,0 +1,164 @@
+.about {
+  &-head {
+    padding: 64px 24px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &-id {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @media (max-width: $bp-sm) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid $border-strong;
+    background: $bg-soft;
+  }
+
+  &-id-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &-name {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  &-role {
+    color: $text-dim;
+    font-family: $mono;
+    font-size: 13px;
+    letter-spacing: -0.005em;
+  }
+
+  &-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  &-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-dim;
+    font-family: $mono;
+    font-size: 12px;
+    transition: color 0.15s ease;
+  }
+
+  &-meta-link {
+    color: $text-dim;
+    border-bottom: 1px solid transparent;
+    &:hover { color: $text; border-color: $border-strong; }
+  }
+
+  &-bio {
+    max-width: 680px;
+    padding: 32px 24px 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    p {
+      color: $text-dim;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+  }
+
+  // ── Stack ──────────────────────────────────────────────────────────────
+  &-stack {
+    padding: 0 24px 96px;
+
+    &-head {
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &-link {
+      color: $text;
+      font-family: $mono;
+      font-size: 13px;
+      border-bottom: 1px solid $border-strong;
+      transition: border-color 0.15s ease;
+      &:hover { border-color: $text; }
+    }
+
+    &-group {
+      margin-bottom: 28px;
+
+      h4 {
+        font-family: $mono;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: $text-faint;
+        margin-bottom: 12px;
+      }
+    }
+
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 8px;
+    }
+  }
+}
+
+// ── Tech tile: a Vercel-style flat card with logo + label ────────────────
+.tech {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  background: $bg-soft;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: $border-strong;
+    background: $bg-elev;
+    transform: translateY(-1px);
+  }
+
+  &-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    // Color is applied inline (per-brand), so the SVG inherits it.
+    & > svg { display: block; }
+  }
+
+  &-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: $text;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

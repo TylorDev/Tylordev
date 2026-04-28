@@ -1,0 +1,30 @@
+.articles {
+  &-head {
+    padding: 64px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .section-title {
+      font-size: clamp(36px, 5.5vw, 56px);
+      letter-spacing: -0.04em;
+    }
+  }
+
+  // Vercel-style list: a single bordered container with rows separated by 1px.
+  &-list {
+    padding: 0;
+    margin-bottom: 80px;
+    border: 1px solid $border;
+    border-radius: $radius;
+    overflow: hidden;
+  }
+
+  &-empty {
+    padding: 56px 24px;
+    text-align: center;
+    color: $text-dim;
+    font-family: $mono;
+    font-size: 13px;
+  }
+}

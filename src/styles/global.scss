@@ -1,0 +1,121 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { height: 100%; }
+
+body {
+  background: $bg;
+  color: $text;
+  // Geist Sans with Inter fallback — same neutral grotesque feel as Vercel.
+  font-family: "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+::selection { background: rgba(250, 250, 250, 0.18); color: $text; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: $bg; }
+::-webkit-scrollbar-thumb { background: $bg-elev; }
+::-webkit-scrollbar-thumb:hover { background: $bg-elev-2; }
+
+.container { @include container; }
+.glass { @include glass; }
+.section { @include section; }
+
+// Vercel-style buttons: small, sharp, high-contrast. Primary = white-on-black.
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: $radius-sm;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.005em;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  border: 1px solid $border-strong;
+  background: transparent;
+  color: $text;
+  white-space: nowrap;
+
+  &:hover { border-color: $text-dim; }
+
+  &.btn-primary {
+    background: $text;
+    border-color: $text;
+    color: $bg;
+    &:hover { background: rgba(250, 250, 250, 0.92); border-color: rgba(250, 250, 250, 0.92); }
+  }
+
+  &.btn-ghost {
+    border-color: transparent;
+    color: $text-dim;
+    padding-left: 10px;
+    padding-right: 10px;
+    &:hover { color: $text; border-color: transparent; background: $accent-soft; }
+  }
+
+  &.btn-danger {
+    background: transparent;
+    border-color: rgba($danger, 0.4);
+    color: $danger;
+  }
+}
+
+// Section headings: Vercel uses tight tracking and a small subtitle in muted gray.
+.section-title {
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.section-subtitle {
+  color: $text-dim;
+  font-size: 14px;
+  margin-bottom: 32px;
+  letter-spacing: -0.005em;
+}
+
+// Eyebrow: mono, all-caps, subtle. Marks a section without competing with the title.
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  color: $text-faint;
+  font-family: $mono;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+
+  &::before {
+    content: "";
+    width: 12px;
+    height: 1px;
+    background: $border-strong;
+  }
+}
+
+// Vercel's signature: white-to-translucent-white vertical fade for hero titles.
+.gradient-text { @include gradient-text; }
+
+.skeleton { @include shimmer; }
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.fadeIn { animation: fadeIn 0.4s ease both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

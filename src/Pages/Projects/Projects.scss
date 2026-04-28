@@ -1,28 +1,56 @@
-.Projects {
+.projects {
+  &-head {
+    padding: 64px 24px 24px;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 12px;
 
-}
-
-.p-header {
-    font-family: abjad;
-    font-size: 10rem;
-    border-bottom: 0.125rem solid $text-principal;
-
-    display: flex;
-    justify-content: space-between;
-
-    span {
-        font-size: 1rem;
-        font-family: Helvetica-Neue;
+    .section-title {
+      font-size: clamp(36px, 5.5vw, 56px);
+      letter-spacing: -0.04em;
     }
-}
+  }
 
-.p-projects {
+  &-filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  &-chip {
+    padding: 6px 12px;
+    border-radius: $radius-sm;
+    border: 1px solid $border;
+    background: transparent;
+    color: $text-dim;
+    font-family: $mono;
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+
+    &:hover { color: $text; border-color: $border-strong; }
+    &.active {
+      background: $text;
+      border-color: $text;
+      color: $bg;
+    }
+  }
+
+  &-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    align-items: start;
-    justify-content: center;
-    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    padding: 16px 24px 80px;
+  }
+
+  &-empty {
+    grid-column: 1 / -1;
+    padding: 56px 24px;
+    text-align: center;
+    color: $text-dim;
+    font-family: $mono;
+    font-size: 13px;
+  }
 }

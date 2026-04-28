@@ -1,0 +1,132 @@
+.pdetail {
+  &-hero {
+    position: relative;
+    min-height: 56vh;
+    background-size: cover;
+    background-position: center;
+    background-color: $bg-soft;
+    display: flex;
+    align-items: flex-end;
+    padding: 60px 0 40px;
+    overflow: hidden;
+    border-bottom: 1px solid $border;
+
+    &-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.96) 95%);
+    }
+
+    &-inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+  }
+
+  &-back {
+    align-self: flex-start;
+    margin-bottom: 16px;
+  }
+
+  &-title {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+  }
+
+  &-sub {
+    font-size: 16px;
+    color: $text-dim;
+    max-width: 680px;
+    letter-spacing: -0.005em;
+  }
+
+  &-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  &-message {
+    padding: 40px 24px;
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.45;
+      max-width: 720px;
+      color: $text;
+    }
+  }
+
+  &-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-bottom: 80px;
+  }
+
+  &-section {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    padding: 0;
+
+    @media (max-width: $bp-md) {
+      flex-direction: column !important;
+    }
+
+    &-img {
+      flex: 1;
+      min-height: 240px;
+      background: $bg-soft;
+      img { width: 100%; height: 100%; object-fit: cover; }
+    }
+
+    &-text {
+      flex: 1;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+
+      p { color: $text-dim; font-size: 14px; line-height: 1.7; }
+
+      details {
+        summary {
+          cursor: pointer;
+          color: $text;
+          font-family: $mono;
+          font-weight: 500;
+          font-size: 12px;
+          padding: 4px 0;
+          letter-spacing: 0.02em;
+          &:hover { color: $text-dim; }
+        }
+        p {
+          margin-top: 12px;
+          padding: 14px;
+          background: $bg;
+          border: 1px solid $border;
+          border-radius: $radius-sm;
+        }
+      }
+    }
+  }
+
+  &-empty {
+    padding: 120px 24px;
+    text-align: center;
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 24px;
+    }
+  }
+}

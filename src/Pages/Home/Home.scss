@@ -1,0 +1,106 @@
+.home {
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid $border;
+
+    &-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 96px 24px 80px;
+
+      @media (max-width: $bp-md) { padding: 64px 24px 56px; }
+    }
+
+    // Vercel-style subtle dotted background — radial mask so it fades at the edges.
+    &-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: radial-gradient(ellipse at center top, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center top, black 0%, transparent 70%);
+    }
+
+    &-title {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+      max-width: 720px;
+    }
+
+    &-subtitle {
+      color: $text-dim;
+      font-size: 16px;
+      max-width: 560px;
+      letter-spacing: -0.01em;
+    }
+
+    &-cta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+  }
+
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 16px;
+
+    @media (max-width: $bp-sm) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  &-articles {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 1px solid $border;
+    border-radius: $radius;
+    overflow: hidden;
+  }
+
+  .about-teaser-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+    padding: 32px;
+    align-items: center;
+
+    @media (max-width: $bp-md) {
+      grid-template-columns: 1fr;
+      padding: 24px;
+    }
+  }
+
+  .about-teaser-img {
+    width: 180px;
+    height: 180px;
+    border-radius: $radius;
+    object-fit: cover;
+    border: 1px solid $border;
+
+    @media (max-width: $bp-md) {
+      width: 120px;
+      height: 120px;
+    }
+  }
+}

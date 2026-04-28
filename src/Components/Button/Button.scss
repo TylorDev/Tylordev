@@ -1,19 +1,7 @@
-#Button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border: 0.125rem solid $text-principal;
-    border-radius: 1rem;
-
-    width: 6rem;
-    cursor: pointer;
-    color: $text-principal;
-    padding: 0.3rem 0;
-
-
-    &:hover {
-        color: $principal;
-        background-color: $text-secondary;
-    }
+// Button styles already declared globally with .btn / .btn-primary / .btn-ghost / .btn-danger.
+// This file holds Button-specific layout tweaks only.
+.btn {
+  &.btn-default {
+    // alias for default chip — uses base .btn styles
+  }
 }

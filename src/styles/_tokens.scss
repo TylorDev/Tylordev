@@ -1,0 +1,83 @@
+// Global SCSS tokens — auto-injected into every .scss via vite config.
+// Vercel-style minimalism: pure black, thin visible borders, sharp corners,
+// monospace labels, white as the primary accent.
+
+$bg: #000000;
+$bg-soft: #0a0a0a;
+$bg-elev: #111111;
+$bg-elev-2: #1a1a1a;
+
+// Vercel uses borders as the primary visual divider — make them visible.
+$border: #1f1f22;
+$border-strong: #2e2e34;
+
+$text: #fafafa;
+$text-dim: #a1a1aa;
+$text-faint: #52525b;
+
+// White is the primary accent. Color used only for status/hover hints.
+$accent: #fafafa;
+$accent-hover: #ffffff;
+$accent-soft: rgba(255, 255, 255, 0.06);
+$accent-border: #333338;
+
+// Optional secondary used sparingly (links, focused chip)
+$accent-2: #ededed;
+$accent-warm: #fafafa;
+$danger: #ff4d6a;
+$success: #50d094;
+
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+$shadow-lg: 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+
+$radius-sm: 6px;
+$radius: 8px;
+$radius-lg: 12px;
+
+$maxw: 1080px;
+$header-h: 64px;
+
+$bp-sm: 640px;
+$bp-md: 880px;
+$bp-lg: 1100px;
+
+$mono: ui-monospace, "Geist Mono", "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+// Surface = card. Vercel cards are pure flat — bg + 1px border, no glass.
+@mixin glass {
+  background: $bg-soft;
+  border: 1px solid $border;
+  border-radius: $radius;
+  transition: border-color 0.15s ease;
+}
+
+@mixin section {
+  padding: 72px 0;
+  @media (max-width: $bp-md) { padding: 48px 0; }
+}
+
+@mixin container {
+  max-width: $maxw;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+// No more rainbow gradients. Vercel's signature subtle gradient text instead.
+@mixin gradient-text {
+  background: linear-gradient(180deg, $text 0%, rgba(250, 250, 250, 0.55) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin shimmer {
+  background: linear-gradient(90deg, $bg-soft 0%, $bg-elev 50%, $bg-soft 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: $radius-sm;
+}
+
+// Compatibility shims — old code still references $grad. Resolve to white.
+$grad: $accent;
+$grad-warm: $accent;

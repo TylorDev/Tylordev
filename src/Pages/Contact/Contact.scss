@@ -1,0 +1,120 @@
+.contact {
+  &-head {
+    padding: 64px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 14px;
+    padding: 0 24px 80px;
+
+    @media (max-width: $bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &-info {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+    p {
+      color: $text-faint;
+      font-family: $mono;
+      font-size: 12px;
+    }
+  }
+
+  &-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    background: $bg;
+    border: 1px solid $border-strong;
+    border-radius: $radius-sm;
+    color: $text;
+    font-family: $mono;
+    font-size: 13px;
+    width: fit-content;
+    transition: border-color 0.15s ease;
+    &:hover { border-color: $text-dim; }
+  }
+
+  &-form {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-family: $mono;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: $text-faint;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      background: $bg;
+      border: 1px solid $border-strong;
+      border-radius: $radius-sm;
+      color: $text;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+      transition: border-color 0.15s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $text-dim;
+      }
+
+      &::placeholder { color: $text-faint; }
+    }
+
+    textarea { min-height: 140px; }
+  }
+
+  &-error {
+    font-family: $mono;
+    font-size: 11px;
+    color: $danger;
+  }
+
+  &-success {
+    padding: 120px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: $success;
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: $text;
+      letter-spacing: -0.015em;
+    }
+  }
+}

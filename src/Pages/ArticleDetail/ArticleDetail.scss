@@ -1,0 +1,73 @@
+.adetail {
+  &-head {
+    padding: 64px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 760px;
+  }
+
+  &-back { align-self: flex-start; margin-bottom: 8px; }
+
+  &-title {
+    font-size: clamp(28px, 4.5vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  &-lede {
+    color: $text-dim;
+    font-size: 16px;
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+  }
+
+  &-banner {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: $radius;
+    border: 1px solid $border;
+    margin: 12px 0 32px;
+  }
+
+  &-body {
+    max-width: 700px;
+    padding: 0 24px 80px;
+  }
+
+  &-intro {
+    color: $text-dim;
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+
+  &-section {
+    margin: 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    img { border-radius: $radius; border: 1px solid $border; max-width: 100%; }
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: 12px;
+    }
+    p { color: $text-dim; line-height: 1.75; font-size: 14.5px; }
+  }
+
+  &-empty {
+    padding: 120px 24px;
+    text-align: center;
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 24px;
+    }
+  }
+}

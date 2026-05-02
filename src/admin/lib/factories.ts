@@ -12,21 +12,46 @@ export const slugify = (raw: string) =>
 export function emptyProject(): RawProject {
   return {
     slug: "",
-    publishedAt: new Date().toISOString().slice(0, 10),
+    publishedAt: null,
     shared: {
+      title: "",
       coverImageSrc: "",
-      coverImageAlt: "",
       backgroundImage: "",
-      backgroundAlt: "",
-      buttons: [],
+      status: "",
+      type: "",
+      technologies: "",
+      buttons: [
+        {
+          icon: "preview",
+          url: "",
+          translations: [
+            { locale: "en-us", text: "Live Preview" },
+            { locale: "es-mx", text: "Vista Previa" },
+            { locale: "pt-br", text: "Ver ao Vivo" },
+          ],
+        },
+        {
+          icon: "github",
+          url: "",
+          translations: [
+            { locale: "en-us", text: "Source Code" },
+            { locale: "es-mx", text: "Código Fuente" },
+            { locale: "pt-br", text: "Código Fonte" },
+          ],
+        },
+        {
+          icon: "docs",
+          url: "",
+          translations: [
+            { locale: "en-us", text: "Documentation" },
+            { locale: "es-mx", text: "Documentación" },
+            { locale: "pt-br", text: "Documentação" },
+          ],
+        },
+      ],
     },
     translations: LOCALES.map((locale) => ({
       locale,
-      title: "",
-      status: "Draft",
-      type: "",
-      tags: "",
-      message: "",
       subtitle: "",
     })),
     sections: [],
@@ -36,11 +61,11 @@ export function emptyProject(): RawProject {
 export function emptyArticle(): RawArticle {
   return {
     slug: "",
-    publishedAt: new Date().toISOString().slice(0, 10),
+    publishedAt: null,
     shared: {
       coverImageSrc: "",
       bannerImage: "",
-      researchStyle: { borderColor: "#2e2e34" },
+      researchStyle: { borderTop: "", borderBottom: "" },
     },
     translations: LOCALES.map((locale) => ({
       locale,

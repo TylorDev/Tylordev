@@ -1,0 +1,162 @@
+.edf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  span {
+    font-family: $mono;
+    font-size: 11px;
+    color: $text-faint;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    background: $bg;
+    color: $text;
+    border: 1px solid $border-strong;
+    border-radius: $radius-sm;
+    padding: 9px 11px;
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s ease;
+    &:focus { border-color: $text-dim; }
+  }
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+    line-height: 1.55;
+  }
+}
+
+.edf-required {
+  color: $danger;
+  margin-left: 2px;
+  font-weight: 600;
+}
+
+.edf-fieldrow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.edf-divider {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px dashed $border;
+}
+
+.edf-repeatable {
+  margin-top: 8px;
+  padding: 14px;
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: $bg;
+
+  > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    h4 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.edf-rep-item {
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  padding: 12px;
+  background: $bg-soft;
+}
+.edf-rep-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.edf-rep-index {
+  font-family: $mono;
+  font-size: 11px;
+  color: $text-faint;
+}
+.edf-rep-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edf-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  padding: 0 6px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  font-family: $mono;
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.edf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-family: $mono;
+  font-size: 11px;
+  color: $text-faint;
+  border: 1px solid $border-strong;
+  border-radius: $radius-sm;
+  background: transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  &:hover {
+    color: $text-dim;
+    border-color: $text-dim;
+  }
+}
+
+.edf-iconbtn {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: $radius-sm;
+  border: 1px solid $border-strong;
+  background: $bg;
+  color: $text-dim;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  &:hover {
+    color: $text;
+    border-color: $text-dim;
+  }
+  &.danger:hover {
+    color: $danger;
+    border-color: rgba($danger, 0.5);
+  }
+}

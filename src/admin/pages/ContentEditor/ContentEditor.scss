@@ -1,0 +1,266 @@
+@use "../../../styles/tokens" as *;
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+.ce {
+  padding-bottom: 80px;
+
+  &-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 40px;
+    padding-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  // ─── How-to banner ──────────────────────────────────────────────────────
+
+  &-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: $radius;
+    margin-bottom: 24px;
+    border-color: rgba(99, 179, 237, 0.25);
+
+    &-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: #63b3ed;
+      font-size: 18px;
+    }
+
+    strong { font-size: 13px; color: $text; }
+
+    a {
+      color: #63b3ed;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      &:hover { text-decoration: underline; }
+    }
+
+    code {
+      font-family: $mono;
+      font-size: 11.5px;
+      background: rgba(255,255,255,0.07);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+  }
+
+  &-banner-steps {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12.5px;
+    color: $text-dim;
+    line-height: 1.5;
+  }
+
+  // ─── Tabs ────────────────────────────────────────────────────────────────
+
+  &-section-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0;
+    border-bottom: 1px solid $border;
+    padding-bottom: 0;
+  }
+
+  &-tab {
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $text-dim;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -1px;
+
+    &:hover { color: $text; }
+
+    &.active {
+      color: $text;
+      border-bottom-color: $text;
+    }
+  }
+
+  &-locale-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 12px 0 8px;
+  }
+
+  &-loc {
+    padding: 4px 12px;
+    font-family: $mono;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: $text-dim;
+    background: $bg-elev;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover { color: $text; border-color: $border-strong; }
+
+    &.active {
+      color: $text;
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+    }
+  }
+
+  // ─── Editor panel ────────────────────────────────────────────────────────
+
+  &-panel {
+    padding: 28px 32px;
+    margin-top: 0;
+    border-top-left-radius: 0;
+  }
+
+  // ─── Fields ─────────────────────────────────────────────────────────────
+
+  &-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &-label {
+    font-size: 11.5px;
+    font-weight: 500;
+    font-family: $mono;
+    letter-spacing: 0.04em;
+    color: $text-dim;
+    text-transform: uppercase;
+  }
+
+  &-input {
+    background: $bg-elev;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    color: $text;
+    font-size: 13.5px;
+    padding: 9px 12px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.15s;
+
+    &:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &-textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6;
+  }
+
+  &-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: $mono;
+    letter-spacing: 0.06em;
+    color: $text-faint;
+    text-transform: uppercase;
+    padding-top: 8px;
+    border-top: 1px solid $border;
+    margin-top: 4px;
+  }
+
+  &-para-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  &-remove-btn {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: rgba(200, 40, 40, 0.15);
+    border: 1px solid rgba(200, 40, 40, 0.25);
+    color: #fc8181;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+
+    &:hover { background: rgba(200, 40, 40, 0.3); }
+  }
+
+  &-add-btn {
+    align-self: flex-start;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-family: $mono;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    color: $text-dim;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover { color: $text; border-color: $border-strong; background: rgba(255,255,255,0.08); }
+  }
+
+  // ─── Action buttons ──────────────────────────────────────────────────────
+
+  &-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    align-items: flex-start;
+  }
+
+  &-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    border-radius: $radius-sm;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &--ghost {
+      background: transparent;
+      border: 1px solid $border-strong;
+      color: $text-dim;
+      &:hover { color: $text; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
+    }
+
+    &--primary {
+      background: $text;
+      color: $bg;
+      border: 1px solid transparent;
+      &:hover { opacity: 0.85; }
+    }
+  }
+}

@@ -1,4 +1,5 @@
-import { FiLogOut, FiShield, FiExternalLink, FiTool } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
+import { FiLogOut, FiShield, FiExternalLink, FiTool, FiEdit3 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { isTestMode } from "../../lib/testMode";
 import "./AdminHeader.scss";
@@ -27,6 +28,9 @@ export default function AdminHeader() {
               <FiTool /> Test mode
             </span>
           )}
+          <NavLink className="ahdr-link" to="/admin/content">
+            <FiEdit3 /> Content
+          </NavLink>
           <a className="ahdr-link" href={PUBLIC_SITE} target="_blank" rel="noopener noreferrer">
             Public site <FiExternalLink />
           </a>

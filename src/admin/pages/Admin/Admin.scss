@@ -187,7 +187,7 @@
       }
     }
   }
-  &-row .acard { padding-right: 110px; }
+  &-row .acard { padding-right: 130px; }
 
   &-rowact {
     position: absolute;
@@ -232,71 +232,25 @@
     color: $text-dim;
   }
 
-  /* ─── Drawer ─────────────────────────────────────────────── */
-  &-scrim {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(2px);
-    z-index: 80;
-    animation: scrimIn 0.18s ease;
-  }
-  &-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: min(640px, 100vw);
-    z-index: 90;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0;
-    border-left: 1px solid $border-strong;
-    background: $bg-soft;
-    animation: drawerIn 0.22s cubic-bezier(0.2, 0.7, 0.2, 1);
-
-    &-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 20px 24px;
-      border-bottom: 1px solid $border;
-      gap: 12px;
-
-      h2 {
-        margin-top: 6px;
-        font-size: 18px;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-      }
-    }
-
-    &-locales {
-      display: inline-flex;
-      align-self: flex-start;
-      margin: 14px 24px 0;
-      border: 1px solid $border;
-      border-radius: $radius-sm;
-      overflow: hidden;
-    }
-
-    &-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 18px 24px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    &-foot {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 20px;
-      border-top: 1px solid $border;
-      background: $bg;
-    }
+  /* ─── Draft flag ─────────────────────────────────────────── */
+  &-draft-flag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: $mono;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: rgba(255, 180, 0, 0.18);
+    color: #f5a623;
+    border: 1px solid rgba(255, 180, 0, 0.35);
+    backdrop-filter: blur(6px);
   }
 
   &-loc {
@@ -312,112 +266,15 @@
     &.active { background: $text; color: $bg; }
   }
 
-  /* ─── Form fields ────────────────────────────────────────── */
-  &-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-
-    span {
-      font-family: $mono;
-      font-size: 11px;
-      color: $text-faint;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      background: $bg;
-      color: $text;
-      border: 1px solid $border-strong;
-      border-radius: $radius-sm;
-      padding: 9px 11px;
-      font: inherit;
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.15s ease;
-      &:focus { border-color: $text-dim; }
-    }
-    textarea {
-      resize: vertical;
-      min-height: 60px;
-      line-height: 1.55;
-    }
-  }
-
-  &-fieldrow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    @media (max-width: $bp-sm) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  &-divider {
-    margin-top: 8px;
-    padding-top: 16px;
-    border-top: 1px dashed $border;
-  }
-
-  /* ─── Repeatable blocks (sections, buttons) ─────────────── */
-  &-repeatable {
-    margin-top: 8px;
-    padding: 14px;
-    border: 1px solid $border;
-    border-radius: $radius;
-    background: $bg;
-
-    > header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-
-      h4 {
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-    }
-
-    &-body {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-  }
-
-  &-rep-item {
-    border: 1px solid $border;
-    border-radius: $radius-sm;
-    padding: 12px;
-    background: $bg-soft;
-  }
-  &-rep-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  &-rep-index {
-    font-family: $mono;
-    font-size: 11px;
-    color: $text-faint;
-  }
-  &-rep-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
   /* ─── Confirm dialog ─────────────────────────────────────── */
+  &-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: 80;
+    animation: scrimIn 0.18s ease;
+  }
   &-confirm {
     position: fixed;
     z-index: 95;
@@ -483,7 +340,7 @@
     }
   }
 
-  /* Reuse the same chip style as the public Projects filter bar. */
+  /* Chip style */
   .projects-chip {
     display: inline-flex;
     align-items: center;
@@ -510,16 +367,6 @@
   }
 }
 
-@keyframes drawerIn {
-  from {
-    transform: translateX(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 @keyframes scrimIn {
   from { opacity: 0; }
   to { opacity: 1; }

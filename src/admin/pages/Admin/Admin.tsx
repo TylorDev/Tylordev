@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FiPlus,
   FiSearch,
-  FiSave,
   FiTrash2,
   FiX,
   FiEdit2,
@@ -11,6 +12,8 @@ import {
   FiCheckCircle,
   FiPackage,
   FiFileText,
+  FiEye,
+  FiCopy,
 } from "react-icons/fi";
 import {
   createArticle,
@@ -22,17 +25,7 @@ import {
   listProjects,
   mapArticle,
   mapProject,
-  updateArticle,
-  updateProject,
 } from "../../lib/api";
-import {
-  emptyArticle,
-  emptyArticleSection,
-  emptyProject,
-  emptyProjectButton,
-  emptyProjectSection,
-  slugify,
-} from "../../lib/factories";
 import {
   LOCALES,
   type Article,
@@ -43,14 +36,15 @@ import {
 } from "../../lib/types";
 import Button from "../../components/Button/Button";
 import Skeleton from "../../components/Skeleton/Skeleton";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
-import ArticleCard from "../../components/ArticleCard/ArticleCard";
+import ProjectCard from "../../../components/ProjectCard/ProjectCard";
+import ArticleCard from "../../../components/ArticleCard/ArticleCard";
 import "./Admin.scss";
 
 type Tab = "projects" | "articles";
 type Toast = { kind: "ok" | "err"; text: string };
 
 export default function Admin() {
+  const navigate = useNavigate();
   const [language, setLanguage] = useState<Locale>("en-us");
   const [tab, setTab] = useState<Tab>("projects");
   const [query, setQuery] = useState("");
@@ -59,9 +53,6 @@ export default function Admin() {
   const [projects, setProjects] = useState<RawProject[]>([]);
   const [articles, setArticles] = useState<RawArticle[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editingProject, setEditingProject] = useState<RawProject | null>(null);
-  const [editingArticle, setEditingArticle] = useState<RawArticle | null>(null);
-  const [editorLocale, setEditorLocale] = useState<Locale>("en-us");
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<Toast | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
@@ -114,7 +105,7 @@ export default function Admin() {
       !q ||
       p.data.tittle.toLowerCase().includes(q) ||
       p.slug.toLowerCase().includes(q) ||
-      p.data.tags.toLowerCase().includes(q);
+      p.data.technologies.toLowerCase().includes(q);
     const matchesS = statusFilter === "All" || p.data.status === statusFilter;
     return matchesQ && matchesS;
   });
@@ -133,92 +124,8 @@ export default function Admin() {
     projects: projects.length,
     articles: articles.length,
     drafts:
-      projects.filter((p) =>
-        p.translations.some((t) => (t.status ?? "").toLowerCase() === "draft")
-      ).length +
+      projects.filter((p) => !p.publishedAt).length +
       articles.filter((a) => !a.publishedAt).length,
-  };
-
-  // ─── Editor open / close ────────────────────────────────────────────────
-  const openNewProject = () => {
-    setEditingProject(emptyProject());
-    setEditorLocale("en-us");
-  };
-  const openNewArticle = () => {
-    setEditingArticle(emptyArticle());
-    setEditorLocale("en-us");
-  };
-  const editProject = (slug: string) => {
-    const found = projects.find((p) => p.slug === slug);
-    if (found) {
-      setEditingProject(JSON.parse(JSON.stringify(found)));
-      setEditorLocale("en-us");
-    }
-  };
-  const editArticle = (slug: string) => {
-    const found = articles.find((a) => a.slug === slug);
-    if (found) {
-      setEditingArticle(JSON.parse(JSON.stringify(found)));
-      setEditorLocale("en-us");
-    }
-  };
-  const closeEditor = () => {
-    setEditingProject(null);
-    setEditingArticle(null);
-    setConfirmDelete(null);
-  };
-
-  // ─── Save (create or update) ────────────────────────────────────────────
-  const saveProject = async () => {
-    if (!editingProject) return;
-    if (!editingProject.slug) {
-      setToast({ kind: "err", text: "Slug is required." });
-      return;
-    }
-    setSaving(true);
-    try {
-      const exists = projects.some((p) => p.slug === editingProject.slug);
-      const result = exists
-        ? await updateProject(editingProject.slug, editingProject)
-        : await createProject(editingProject);
-      const saved = result ?? editingProject;
-      setProjects((prev) => {
-        const next = prev.filter((p) => p.slug !== saved.slug);
-        return [saved, ...next];
-      });
-      setEditingProject(null);
-      setToast({ kind: "ok", text: exists ? "Project updated." : "Project created." });
-    } catch (err) {
-      setToast({ kind: "err", text: extractApiError(err) });
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const saveArticle = async () => {
-    if (!editingArticle) return;
-    if (!editingArticle.slug) {
-      setToast({ kind: "err", text: "Slug is required." });
-      return;
-    }
-    setSaving(true);
-    try {
-      const exists = articles.some((a) => a.slug === editingArticle.slug);
-      const result = exists
-        ? await updateArticle(editingArticle.slug, editingArticle)
-        : await createArticle(editingArticle);
-      const saved = result ?? editingArticle;
-      setArticles((prev) => {
-        const next = prev.filter((a) => a.slug !== saved.slug);
-        return [saved, ...next];
-      });
-      setEditingArticle(null);
-      setToast({ kind: "ok", text: exists ? "Article updated." : "Article created." });
-    } catch (err) {
-      setToast({ kind: "err", text: extractApiError(err) });
-    } finally {
-      setSaving(false);
-    }
   };
 
   // ─── Delete ─────────────────────────────────────────────────────────────
@@ -227,7 +134,6 @@ export default function Admin() {
     try {
       await deleteProject(slug);
       setProjects((prev) => prev.filter((p) => p.slug !== slug));
-      setEditingProject(null);
       setConfirmDelete(null);
       setToast({ kind: "ok", text: "Project deleted." });
     } catch (err) {
@@ -242,7 +148,6 @@ export default function Admin() {
     try {
       await deleteArticle(slug);
       setArticles((prev) => prev.filter((a) => a.slug !== slug));
-      setEditingArticle(null);
       setConfirmDelete(null);
       setToast({ kind: "ok", text: "Article deleted." });
     } catch (err) {
@@ -252,50 +157,57 @@ export default function Admin() {
     }
   };
 
-  // ─── Editor: project field setters ──────────────────────────────────────
-  const patchProject = (patch: Partial<RawProject>) =>
-    setEditingProject((cur) => (cur ? { ...cur, ...patch } : cur));
-  const patchProjectShared = (patch: Partial<RawProject["shared"]>) =>
-    setEditingProject((cur) =>
-      cur ? { ...cur, shared: { ...cur.shared, ...patch } } : cur
-    );
-  const patchProjectTranslation = (locale: Locale, field: string, value: string) =>
-    setEditingProject((cur) => {
-      if (!cur) return cur;
-      const translations = cur.translations.map((t) =>
-        t.locale === locale ? { ...t, [field]: value } : t
-      );
-      const englishTitle = cur.translations.find((t) => t.locale === "en-us")?.title ?? "";
-      const nextSlug =
-        field === "title" && locale === "en-us" && (!cur.slug || cur.slug === slugify(englishTitle))
-          ? slugify(value)
-          : cur.slug;
-      return { ...cur, slug: nextSlug, translations };
-    });
+  const removeIds = (obj: any) => {
+    for (const key in obj) {
+      if (key === 'id') delete obj[key];
+      else if (typeof obj[key] === 'object' && obj[key] !== null) removeIds(obj[key]);
+    }
+  };
 
-  // ─── Editor: article field setters ──────────────────────────────────────
-  const patchArticle = (patch: Partial<RawArticle>) =>
-    setEditingArticle((cur) => (cur ? { ...cur, ...patch } : cur));
-  const patchArticleShared = (patch: Partial<RawArticle["shared"]>) =>
-    setEditingArticle((cur) =>
-      cur ? { ...cur, shared: { ...cur.shared, ...patch } } : cur
-    );
-  const patchArticleTranslation = (locale: Locale, field: string, value: string) =>
-    setEditingArticle((cur) => {
-      if (!cur) return cur;
-      const translations = cur.translations.map((t) =>
-        t.locale === locale ? { ...t, [field]: value } : t
-      );
-      const englishTitle = cur.translations.find((t) => t.locale === "en-us")?.title ?? "";
-      const nextSlug =
-        field === "title" && locale === "en-us" && (!cur.slug || cur.slug === slugify(englishTitle))
-          ? slugify(value)
-          : cur.slug;
-      return { ...cur, slug: nextSlug, translations };
-    });
+  const duplicateProject = async (slug: string) => {
+    const original = projects.find((p) => p.slug === slug);
+    if (!original) return;
+    setSaving(true);
+    try {
+      const clone = JSON.parse(JSON.stringify(original));
+      removeIds(clone);
+      clone.slug = `${original.slug}-copy-${Math.floor(Math.random() * 10000)}`;
+      clone.publishedAt = null;
+      if (clone.shared) {
+        clone.shared.title = `(Copy) ${clone.shared.title || ''}`;
+      }
+      await createProject(clone);
+      setToast({ kind: "ok", text: "Project duplicated." });
+      reload();
+    } catch (err) {
+      setToast({ kind: "err", text: extractApiError(err) });
+    } finally {
+      setSaving(false);
+    }
+  };
 
-  const projectTr = editingProject?.translations.find((t) => t.locale === editorLocale);
-  const articleTr = editingArticle?.translations.find((t) => t.locale === editorLocale);
+  const duplicateArticle = async (slug: string) => {
+    const original = articles.find((a) => a.slug === slug);
+    if (!original) return;
+    setSaving(true);
+    try {
+      const clone = JSON.parse(JSON.stringify(original));
+      removeIds(clone);
+      clone.slug = `${original.slug}-copy-${Math.floor(Math.random() * 10000)}`;
+      clone.publishedAt = null;
+      if (clone.translations && clone.translations.length > 0) {
+        const enTr = clone.translations.find((t: any) => t.locale === "en-us") || clone.translations[0];
+        enTr.title = `(Copy) ${enTr.title || ''}`;
+      }
+      await createArticle(clone);
+      setToast({ kind: "ok", text: "Article duplicated." });
+      reload();
+    } catch (err) {
+      setToast({ kind: "err", text: extractApiError(err) });
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <div className="adminx fadeIn">
@@ -386,7 +298,9 @@ export default function Admin() {
           <Button
             variant="primary"
             icon={<FiPlus />}
-            onClick={tab === "projects" ? openNewProject : openNewArticle}
+            onClick={() =>
+              navigate(tab === "projects" ? "/admin/edit/project" : "/admin/edit/article")
+            }
           >
             New {tab === "projects" ? "project" : "article"}
           </Button>
@@ -398,406 +312,64 @@ export default function Admin() {
           <SkeletonGrid kind={tab} />
         ) : tab === "projects" ? (
           filteredProjects.length === 0 ? (
-            <EmptyState onCreate={openNewProject} kind="project" />
+            <EmptyState
+              onCreate={() => navigate("/admin/edit/project")}
+              kind="project"
+            />
           ) : (
             <div className="adminx-grid">
-              {filteredProjects.map((p) => (
-                <div key={p.slug} className="adminx-cell">
-                  <ProjectCard project={p} onClick={() => editProject(p.slug)} />
-                  <RowActions
-                    onEdit={() => editProject(p.slug)}
-                    onDelete={() => setConfirmDelete(`p:${p.slug}`)}
-                  />
-                </div>
-              ))}
+              {filteredProjects.map((p) => {
+                const raw = projects.find((rp) => rp.slug === p.slug);
+                const isDraft = !raw?.publishedAt;
+                return (
+                  <div key={p.slug} className="adminx-cell">
+                    {isDraft && <span className="adminx-draft-flag">Draft</span>}
+                    <ProjectCard
+                      project={p}
+                      onClick={() => navigate(`/admin/edit/project/${p.slug}`)}
+                    />
+                    <RowActions
+                      onEdit={() => navigate(`/admin/edit/project/${p.slug}`)}
+                      onPreview={() => navigate(`/admin/preview/project/${p.slug}`)}
+                      onDuplicate={() => duplicateProject(p.slug)}
+                      onDelete={() => setConfirmDelete(`p:${p.slug}`)}
+                    />
+                  </div>
+                );
+              })}
             </div>
           )
         ) : filteredArticles.length === 0 ? (
-          <EmptyState onCreate={openNewArticle} kind="article" />
+          <EmptyState
+            onCreate={() => navigate("/admin/edit/article")}
+            kind="article"
+          />
         ) : (
           <div className="adminx-stack glass">
-            {filteredArticles.map((a) => (
-              <div key={a.slug} className="adminx-row">
-                <ArticleCard article={a} onClick={() => editArticle(a.slug)} />
-                <RowActions
-                  onEdit={() => editArticle(a.slug)}
-                  onDelete={() => setConfirmDelete(`a:${a.slug}`)}
-                />
-              </div>
-            ))}
+            {filteredArticles.map((a) => {
+              const raw = articles.find((ra) => ra.slug === a.slug);
+              const isDraft = !raw?.publishedAt;
+              return (
+                <div key={a.slug} className="adminx-row">
+                  {isDraft && <span className="adminx-draft-flag">Draft</span>}
+                  <ArticleCard
+                    article={a}
+                    onClick={() => navigate(`/admin/edit/article/${a.slug}`)}
+                  />
+                  <RowActions
+                    onEdit={() => navigate(`/admin/edit/article/${a.slug}`)}
+                    onPreview={() => navigate(`/admin/preview/article/${a.slug}`)}
+                    onDuplicate={() => duplicateArticle(a.slug)}
+                    onDelete={() => setConfirmDelete(`a:${a.slug}`)}
+                  />
+                </div>
+              );
+            })}
           </div>
         )}
       </section>
 
-      {/* ─── Drawer: project editor ───────────────────────────────────── */}
-      {editingProject && projectTr && (
-        <Drawer
-          title={projects.some((p) => p.slug === editingProject.slug) ? `Edit · ${editingProject.slug}` : "New project"}
-          onClose={closeEditor}
-          locale={editorLocale}
-          onLocale={setEditorLocale}
-          saving={saving}
-          onSave={saveProject}
-          onDelete={
-            projects.some((p) => p.slug === editingProject.slug)
-              ? () => setConfirmDelete(`p:${editingProject.slug}`)
-              : undefined
-          }
-        >
-          <Field label="Slug">
-            <input
-              value={editingProject.slug}
-              onChange={(e) => patchProject({ slug: slugify(e.target.value) })}
-              placeholder="auto-generated from English title"
-            />
-          </Field>
-          <Field label="Published at">
-            <input
-              type="date"
-              value={(editingProject.publishedAt ?? "").slice(0, 10)}
-              onChange={(e) => patchProject({ publishedAt: e.target.value })}
-            />
-          </Field>
-          <Field label="Cover image (URL)">
-            <input
-              value={editingProject.shared.coverImageSrc ?? ""}
-              onChange={(e) => patchProjectShared({ coverImageSrc: e.target.value })}
-            />
-          </Field>
-          <Field label="Cover alt">
-            <input
-              value={editingProject.shared.coverImageAlt ?? ""}
-              onChange={(e) => patchProjectShared({ coverImageAlt: e.target.value })}
-            />
-          </Field>
-          <Field label="Background image (URL)">
-            <input
-              value={editingProject.shared.backgroundImage ?? ""}
-              onChange={(e) => patchProjectShared({ backgroundImage: e.target.value })}
-            />
-          </Field>
-
-          <Divider label={`Translation · ${editorLocale}`} />
-
-          <Field label="Title">
-            <input
-              value={projectTr.title ?? ""}
-              onChange={(e) => patchProjectTranslation(editorLocale, "title", e.target.value)}
-            />
-          </Field>
-          <Row>
-            <Field label="Status">
-              <input
-                value={projectTr.status ?? ""}
-                onChange={(e) => patchProjectTranslation(editorLocale, "status", e.target.value)}
-                placeholder="Draft / Live / Beta"
-              />
-            </Field>
-            <Field label="Type">
-              <input
-                value={projectTr.type ?? ""}
-                onChange={(e) => patchProjectTranslation(editorLocale, "type", e.target.value)}
-                placeholder="Web App, Design System…"
-              />
-            </Field>
-          </Row>
-          <Field label="Tags">
-            <input
-              value={projectTr.tags ?? ""}
-              onChange={(e) => patchProjectTranslation(editorLocale, "tags", e.target.value)}
-              placeholder="#react #typescript"
-            />
-          </Field>
-          <Field label="Subtitle">
-            <input
-              value={projectTr.subtitle ?? ""}
-              onChange={(e) => patchProjectTranslation(editorLocale, "subtitle", e.target.value)}
-            />
-          </Field>
-          <Field label="Hero message">
-            <textarea
-              rows={2}
-              value={projectTr.message ?? ""}
-              onChange={(e) => patchProjectTranslation(editorLocale, "message", e.target.value)}
-            />
-          </Field>
-
-          <Repeatable
-            label="Buttons"
-            count={editingProject.shared.buttons?.length ?? 0}
-            onAdd={() =>
-              patchProjectShared({
-                buttons: [...(editingProject.shared.buttons ?? []), emptyProjectButton()],
-              })
-            }
-          >
-            {(editingProject.shared.buttons ?? []).map((btn, i) => {
-              const tr = btn.translations?.find((t) => t.locale === editorLocale);
-              return (
-                <RepeatableItem
-                  key={i}
-                  index={i}
-                  onRemove={() =>
-                    patchProjectShared({
-                      buttons: (editingProject.shared.buttons ?? []).filter((_, idx) => idx !== i),
-                    })
-                  }
-                >
-                  <Field label="URL">
-                    <input
-                      value={btn.url ?? ""}
-                      onChange={(e) => {
-                        const next = [...(editingProject.shared.buttons ?? [])];
-                        next[i] = { ...next[i], url: e.target.value };
-                        patchProjectShared({ buttons: next });
-                      }}
-                    />
-                  </Field>
-                  <Field label={`Label (${editorLocale})`}>
-                    <input
-                      value={tr?.text ?? ""}
-                      onChange={(e) => {
-                        const next = [...(editingProject.shared.buttons ?? [])];
-                        const translations = (next[i].translations ?? []).map((t) =>
-                          t.locale === editorLocale ? { ...t, text: e.target.value } : t
-                        );
-                        if (!translations.some((t) => t.locale === editorLocale)) {
-                          translations.push({ locale: editorLocale, text: e.target.value });
-                        }
-                        next[i] = { ...next[i], translations };
-                        patchProjectShared({ buttons: next });
-                      }}
-                    />
-                  </Field>
-                </RepeatableItem>
-              );
-            })}
-          </Repeatable>
-
-          <Repeatable
-            label="Sections"
-            count={editingProject.sections?.length ?? 0}
-            onAdd={() =>
-              patchProject({
-                sections: [...(editingProject.sections ?? []), emptyProjectSection()],
-              })
-            }
-          >
-            {(editingProject.sections ?? []).map((sec, i) => {
-              const tr = sec.translations?.find((t) => t.locale === editorLocale) as
-                | { summary?: string; readMore?: string; modalContent?: string; close?: string }
-                | undefined;
-              return (
-                <RepeatableItem
-                  key={i}
-                  index={i}
-                  onRemove={() =>
-                    patchProject({
-                      sections: (editingProject.sections ?? []).filter((_, idx) => idx !== i),
-                    })
-                  }
-                >
-                  <Row>
-                    <Field label="Cover image">
-                      <input
-                        value={sec.coverImage ?? ""}
-                        onChange={(e) => {
-                          const next = [...(editingProject.sections ?? [])];
-                          next[i] = { ...next[i], coverImage: e.target.value };
-                          patchProject({ sections: next });
-                        }}
-                      />
-                    </Field>
-                    <Field label="Direction">
-                      <select
-                        value={sec.flexDirection ?? "row"}
-                        onChange={(e) => {
-                          const next = [...(editingProject.sections ?? [])];
-                          next[i] = { ...next[i], flexDirection: e.target.value };
-                          patchProject({ sections: next });
-                        }}
-                      >
-                        <option value="row">row</option>
-                        <option value="row-reverse">row-reverse</option>
-                      </select>
-                    </Field>
-                  </Row>
-                  <Field label="Summary">
-                    <textarea
-                      rows={2}
-                      value={tr?.summary ?? ""}
-                      onChange={(e) => {
-                        const next = [...(editingProject.sections ?? [])];
-                        const translations = (next[i].translations ?? []).map((t) =>
-                          t.locale === editorLocale ? { ...t, summary: e.target.value } : t
-                        );
-                        next[i] = { ...next[i], translations };
-                        patchProject({ sections: next });
-                      }}
-                    />
-                  </Field>
-                  <Field label="Modal content">
-                    <textarea
-                      rows={4}
-                      value={tr?.modalContent ?? ""}
-                      onChange={(e) => {
-                        const next = [...(editingProject.sections ?? [])];
-                        const translations = (next[i].translations ?? []).map((t) =>
-                          t.locale === editorLocale ? { ...t, modalContent: e.target.value } : t
-                        );
-                        next[i] = { ...next[i], translations };
-                        patchProject({ sections: next });
-                      }}
-                    />
-                  </Field>
-                </RepeatableItem>
-              );
-            })}
-          </Repeatable>
-        </Drawer>
-      )}
-
-      {/* ─── Drawer: article editor ───────────────────────────────────── */}
-      {editingArticle && articleTr && (
-        <Drawer
-          title={articles.some((a) => a.slug === editingArticle.slug) ? `Edit · ${editingArticle.slug}` : "New article"}
-          onClose={closeEditor}
-          locale={editorLocale}
-          onLocale={setEditorLocale}
-          saving={saving}
-          onSave={saveArticle}
-          onDelete={
-            articles.some((a) => a.slug === editingArticle.slug)
-              ? () => setConfirmDelete(`a:${editingArticle.slug}`)
-              : undefined
-          }
-        >
-          <Field label="Slug">
-            <input
-              value={editingArticle.slug}
-              onChange={(e) => patchArticle({ slug: slugify(e.target.value) })}
-              placeholder="auto-generated from English title"
-            />
-          </Field>
-          <Field label="Published at">
-            <input
-              type="date"
-              value={(editingArticle.publishedAt ?? "").slice(0, 10)}
-              onChange={(e) => patchArticle({ publishedAt: e.target.value })}
-            />
-          </Field>
-          <Field label="Cover image (URL)">
-            <input
-              value={editingArticle.shared.coverImageSrc ?? ""}
-              onChange={(e) => patchArticleShared({ coverImageSrc: e.target.value })}
-            />
-          </Field>
-          <Field label="Banner image (URL)">
-            <input
-              value={editingArticle.shared.bannerImage ?? ""}
-              onChange={(e) => patchArticleShared({ bannerImage: e.target.value })}
-            />
-          </Field>
-
-          <Divider label={`Translation · ${editorLocale}`} />
-
-          <Row>
-            <Field label="Category">
-              <input
-                value={articleTr.category ?? ""}
-                onChange={(e) => patchArticleTranslation(editorLocale, "category", e.target.value)}
-              />
-            </Field>
-            <Field label="Title">
-              <input
-                value={articleTr.title ?? ""}
-                onChange={(e) => patchArticleTranslation(editorLocale, "title", e.target.value)}
-              />
-            </Field>
-          </Row>
-          <Field label="Headline">
-            <textarea
-              rows={2}
-              value={articleTr.contentTitle ?? ""}
-              onChange={(e) => patchArticleTranslation(editorLocale, "contentTitle", e.target.value)}
-            />
-          </Field>
-          <Field label="Excerpt">
-            <textarea
-              rows={3}
-              value={articleTr.content ?? ""}
-              onChange={(e) => patchArticleTranslation(editorLocale, "content", e.target.value)}
-            />
-          </Field>
-
-          <Repeatable
-            label="Sections"
-            count={editingArticle.sections?.length ?? 0}
-            onAdd={() =>
-              patchArticle({
-                sections: [...(editingArticle.sections ?? []), emptyArticleSection()],
-              })
-            }
-          >
-            {(editingArticle.sections ?? []).map((sec, i) => {
-              const tr = sec.translations?.find((t) => t.locale === editorLocale) as
-                | { title?: string; paragraph?: string }
-                | undefined;
-              return (
-                <RepeatableItem
-                  key={i}
-                  index={i}
-                  onRemove={() =>
-                    patchArticle({
-                      sections: (editingArticle.sections ?? []).filter((_, idx) => idx !== i),
-                    })
-                  }
-                >
-                  <Field label="Image (URL)">
-                    <input
-                      value={sec.image ?? ""}
-                      onChange={(e) => {
-                        const next = [...(editingArticle.sections ?? [])];
-                        next[i] = { ...next[i], image: e.target.value };
-                        patchArticle({ sections: next });
-                      }}
-                    />
-                  </Field>
-                  <Field label="Subtitle">
-                    <input
-                      value={tr?.title ?? ""}
-                      onChange={(e) => {
-                        const next = [...(editingArticle.sections ?? [])];
-                        const translations = (next[i].translations ?? []).map((t) =>
-                          t.locale === editorLocale ? { ...t, title: e.target.value } : t
-                        );
-                        next[i] = { ...next[i], translations };
-                        patchArticle({ sections: next });
-                      }}
-                    />
-                  </Field>
-                  <Field label="Paragraph">
-                    <textarea
-                      rows={4}
-                      value={tr?.paragraph ?? ""}
-                      onChange={(e) => {
-                        const next = [...(editingArticle.sections ?? [])];
-                        const translations = (next[i].translations ?? []).map((t) =>
-                          t.locale === editorLocale ? { ...t, paragraph: e.target.value } : t
-                        );
-                        next[i] = { ...next[i], translations };
-                        patchArticle({ sections: next });
-                      }}
-                    />
-                  </Field>
-                </RepeatableItem>
-              );
-            })}
-          </Repeatable>
-        </Drawer>
-      )}
-
-      {confirmDelete && (
+      {confirmDelete && createPortal(
         <ConfirmDialog
           slug={confirmDelete.slice(2)}
           onCancel={() => setConfirmDelete(null)}
@@ -807,17 +379,19 @@ export default function Admin() {
               : removeArticle(confirmDelete.slice(2))
           }
           busy={saving}
-        />
+        />,
+        document.body
       )}
 
-      {toast && (
+      {toast && createPortal(
         <div className={`adminx-toast ${toast.kind}`}>
           {toast.kind === "ok" ? <FiCheckCircle /> : <FiAlertCircle />}
           <span>{toast.text}</span>
           <button onClick={() => setToast(null)} aria-label="Dismiss">
             <FiX />
           </button>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
@@ -837,13 +411,29 @@ function Stat({ label, value, icon }: { label: string; value: number; icon: Reac
   );
 }
 
-function RowActions({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => void }) {
+function RowActions({
+  onEdit,
+  onPreview,
+  onDuplicate,
+  onDelete,
+}: {
+  onEdit: () => void;
+  onPreview: () => void;
+  onDuplicate: () => void;
+  onDelete: () => void;
+}) {
   return (
     <div className="adminx-rowact">
-      <button className="adminx-iconbtn" onClick={onEdit} aria-label="Edit">
+      <button className="adminx-iconbtn" onClick={onPreview} aria-label="Preview" title="Preview">
+        <FiEye />
+      </button>
+      <button className="adminx-iconbtn" onClick={onDuplicate} aria-label="Duplicate" title="Duplicate">
+        <FiCopy />
+      </button>
+      <button className="adminx-iconbtn" onClick={onEdit} aria-label="Edit" title="Edit">
         <FiEdit2 />
       </button>
-      <button className="adminx-iconbtn danger" onClick={onDelete} aria-label="Delete">
+      <button className="adminx-iconbtn danger" onClick={onDelete} aria-label="Delete" title="Delete">
         <FiTrash2 />
       </button>
     </div>
@@ -900,72 +490,6 @@ function EmptyState({
   );
 }
 
-function Drawer({
-  title,
-  onClose,
-  locale,
-  onLocale,
-  saving,
-  onSave,
-  onDelete,
-  children,
-}: {
-  title: string;
-  onClose: () => void;
-  locale: Locale;
-  onLocale: (l: Locale) => void;
-  saving: boolean;
-  onSave: () => void;
-  onDelete?: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <>
-      <div className="adminx-scrim" onClick={onClose} />
-      <aside className="adminx-drawer glass" role="dialog" aria-label={title}>
-        <header className="adminx-drawer-head">
-          <div>
-            <span className="eyebrow">Editor</span>
-            <h2>{title}</h2>
-          </div>
-          <button className="adminx-iconbtn" onClick={onClose} aria-label="Close editor">
-            <FiX />
-          </button>
-        </header>
-
-        <div className="adminx-drawer-locales">
-          {LOCALES.map((l) => (
-            <button
-              key={l}
-              className={`adminx-loc ${l === locale ? "active" : ""}`}
-              onClick={() => onLocale(l)}
-            >
-              {l}
-            </button>
-          ))}
-        </div>
-
-        <div className="adminx-drawer-body">{children}</div>
-
-        <footer className="adminx-drawer-foot">
-          {onDelete && (
-            <Button variant="danger" icon={<FiTrash2 />} onClick={onDelete} disabled={saving}>
-              Delete
-            </Button>
-          )}
-          <div style={{ flex: 1 }} />
-          <Button variant="ghost" onClick={onClose} disabled={saving}>
-            Cancel
-          </Button>
-          <Button variant="primary" icon={<FiSave />} onClick={onSave} disabled={saving}>
-            {saving ? "Saving…" : "Save"}
-          </Button>
-        </footer>
-      </aside>
-    </>
-  );
-}
-
 function ConfirmDialog({
   slug,
   onCancel,
@@ -982,7 +506,7 @@ function ConfirmDialog({
       <div className="adminx-scrim" onClick={onCancel} />
       <div className="adminx-confirm glass" role="alertdialog" aria-label="Confirm delete">
         <FiAlertCircle className="adminx-confirm-icon" />
-        <h3>Delete “{slug}”?</h3>
+        <h3>Delete "{slug}"?</h3>
         <p>This removes all translations and sections. The action cannot be undone.</p>
         <div className="adminx-confirm-actions">
           <Button variant="ghost" onClick={onCancel} disabled={busy}>
@@ -994,74 +518,5 @@ function ConfirmDialog({
         </div>
       </div>
     </>
-  );
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label className="adminx-field">
-      <span>{label}</span>
-      {children}
-    </label>
-  );
-}
-
-function Row({ children }: { children: React.ReactNode }) {
-  return <div className="adminx-fieldrow">{children}</div>;
-}
-
-function Divider({ label }: { label: string }) {
-  return (
-    <div className="adminx-divider">
-      <span className="eyebrow">{label}</span>
-    </div>
-  );
-}
-
-function Repeatable({
-  label,
-  count,
-  onAdd,
-  children,
-}: {
-  label: string;
-  count: number;
-  onAdd: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="adminx-repeatable">
-      <header>
-        <h4>
-          {label} <span className="adminx-count">{count}</span>
-        </h4>
-        <button type="button" className="projects-chip" onClick={onAdd}>
-          <FiPlus /> Add
-        </button>
-      </header>
-      <div className="adminx-repeatable-body">{children}</div>
-    </section>
-  );
-}
-
-function RepeatableItem({
-  index,
-  onRemove,
-  children,
-}: {
-  index: number;
-  onRemove: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="adminx-rep-item">
-      <div className="adminx-rep-head">
-        <span className="adminx-rep-index">#{index + 1}</span>
-        <button className="adminx-iconbtn danger" onClick={onRemove} aria-label="Remove">
-          <FiTrash2 />
-        </button>
-      </div>
-      <div className="adminx-rep-fields">{children}</div>
-    </div>
   );
 }

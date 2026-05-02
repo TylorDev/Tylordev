@@ -1,14 +1,25 @@
+@use "../../styles/tokens" as *;
+
 .pcard {
+  --pcard-accent: #{$border-strong}; // fallback — overridden by JS
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
   padding: 0;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
 
   &:hover {
-    border-color: $border-strong;
-    .pcard-cover img { transform: scale(1.03); }
-    .pcard-arrow { opacity: 1; }
+    border-color: var(--pcard-accent);
+    box-shadow: 0 0 20px -2px rgba(var(--pcard-accent-rgb), 0.35);
+
+    .pcard-cover img {
+      transform: scale(1.03);
+    }
+
+    .pcard-arrow {
+      opacity: 1;
+    }
   }
 
   &-cover {
@@ -45,6 +56,8 @@
     font-weight: 500;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
     background: rgba(0, 0, 0, 0.7);
     color: $text;
     border: 1px solid $border-strong;
@@ -69,10 +82,11 @@
   }
 
   &-body {
-    padding: 16px 18px 18px;
+    padding: 16px 18px 12px;
     display: flex;
     flex-direction: column;
     gap: 6px;
+    flex: 1;
   }
 
   &-meta {
@@ -95,11 +109,32 @@
       background: $bg;
       color: $text-dim;
 
-      &-published, &-finished, &-completado, &-released, &-publicado, &-live, &-activo, &-ativo {
+      &-published,
+      &-finished,
+      &-completado,
+      &-completed,
+      &-released,
+      &-publicado,
+      &-live,
+      &-activo,
+      &-ativo {
         border-color: rgba($success, 0.4);
         color: $success;
       }
-      &-draft, &-development, &-progress, &-en-progreso, &-beta {
+
+      &-development,
+      &-progress,
+      &-en-proceso,
+      &-en-progreso,
+      &-in-progress,
+      &-beta {
+        border-color: rgba(#f5a623, 0.4);
+        color: #f5a623;
+      }
+
+      &-cancelled,
+      &-cancelado,
+      &-draft {
         border-color: rgba($danger, 0.4);
         color: $danger;
       }
@@ -113,9 +148,94 @@
     color: $text;
   }
 
+  // ── Short description below title ──
+  &-desc {
+    color: $text-dim;
+    font-size: 12.5px;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: 2px;
+  }
+
   &-tags {
     color: $text-dim;
     font-family: $mono;
     font-size: 12px;
   }
+
+  // ── Footer with action buttons ──
+  &-footer {
+    display: flex;
+    gap: 8px;
+    padding: 0 18px 16px;
+    margin-top: auto;
+  }
+
+  &-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: $radius-sm;
+    font-family: $mono;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease,
+      color 0.15s ease, transform 0.15s ease;
+    white-space: nowrap;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    // Green "Live Preview" button
+    &--preview {
+      background: rgba($success, 0.12);
+      border: 1px solid rgba($success, 0.35);
+      color: $success;
+
+      &:hover {
+        background: rgba($success, 0.2);
+        border-color: rgba($success, 0.6);
+      }
+    }
+
+    // Dark "Source Code" button
+    &--source {
+      background: $bg-elev;
+      border: 1px solid $border-strong;
+      color: $text-dim;
+
+      &:hover {
+        background: $bg-elev-2;
+        border-color: $text-faint;
+        color: $text;
+      }
+    }
+  }
+}
+
+.pcard-techs {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.pcard-techs span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pcard-techs span:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }

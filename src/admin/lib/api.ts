@@ -103,30 +103,32 @@ export const buildLoginUrl = (returnTo = window.location.href) => {
 // section IDs. Flatten the GET shape into the wire shape the API expects.
 const toProjectPayload = (p: RawProject) => ({
   slug: p.slug,
-  ...(p.publishedAt ? { publishedAt: p.publishedAt } : {}),
-  coverImageSrc: p.shared?.coverImageSrc,
-  coverImageAlt: p.shared?.coverImageAlt,
-  backgroundImage: p.shared?.backgroundImage,
-  backgroundAlt: p.shared?.backgroundAlt,
+  publishedAt: p.publishedAt ?? null,
+  coverImageSrc: p.shared?.coverImageSrc ?? "",
+  backgroundImage: p.shared?.backgroundImage ?? "",
+  status: p.shared?.status ?? "",
+  type: p.shared?.type ?? "",
+  title: p.shared?.title ?? "",
+  technologies: p.shared?.technologies ?? "",
   translations: p.translations,
   buttons: p.shared?.buttons ?? [],
   sections: (p.sections ?? []).map((s) => ({
-    flexDirection: s.flexDirection,
-    coverImage: s.coverImage,
-    translations: s.translations,
+    flexDirection: s.flexDirection ?? "row",
+    coverImage: s.coverImage ?? "",
+    translations: s.translations ?? [],
   })),
 });
 
 const toArticlePayload = (a: RawArticle) => ({
   slug: a.slug,
-  ...(a.publishedAt ? { publishedAt: a.publishedAt } : {}),
-  coverImageSrc: a.shared?.coverImageSrc,
-  bannerImage: a.shared?.bannerImage,
+  publishedAt: a.publishedAt ?? null,
+  coverImageSrc: a.shared?.coverImageSrc ?? "",
+  bannerImage: a.shared?.bannerImage ?? "",
   translations: a.translations,
   researchStyle: a.shared?.researchStyle ?? { borderTop: "", borderBottom: "" },
   sections: (a.sections ?? []).map((s) => ({
-    image: s.image,
-    translations: s.translations,
+    image: s.image ?? "",
+    translations: s.translations ?? [],
   })),
 });
 
@@ -184,22 +186,25 @@ export function mapProject(project: RawProject, locale: Locale): Project {
     publishedAt: project.publishedAt,
     data: {
       coverImageSrc: project.shared?.coverImageSrc,
-      coverImageAlt: project.shared?.coverImageAlt,
-      status: t.status ?? "",
-      type: t.type ?? "",
-      tittle: t.title ?? "",
-      tags: t.tags ?? "",
+      status: project.shared?.status ?? "",
+      type: project.shared?.type ?? "",
+      tittle: project.shared?.title ?? "",
+      subtitle: t.subtitle ?? "",
+      technologies: project.shared?.technologies ?? "",
       date: formatDate(project.publishedAt),
+      buttons: (project.shared?.buttons ?? []).map((b) => ({
+        text: pickTranslation(b.translations, locale).text ?? "",
+        url: b.url,
+        icon: b.icon,
+      })),
     },
     header: {
       backgroundImage: project.shared?.backgroundImage,
-      backgroundAlt: project.shared?.backgroundAlt,
-      message: t.message ?? "",
-      title: t.title ?? "",
       subtitle: t.subtitle ?? "",
       buttons: (project.shared?.buttons ?? []).map((b) => ({
         text: pickTranslation(b.translations, locale).text ?? "",
         url: b.url,
+        icon: b.icon,
       })),
     },
     sections: (project.sections ?? []).map((s) => {

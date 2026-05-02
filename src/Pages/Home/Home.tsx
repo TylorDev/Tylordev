@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { useLanguage } from "../../context/LanguageContext";
-import { usePage, useProjects, useArticles } from "../../lib/hooks";
+import { usePage, useProjects } from "../../lib/hooks";
 import type { HeroPage, AboutPage } from "../../lib/types";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
-import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import Skeleton from "../../components/Skeleton/Skeleton";
 import "./Home.scss";
 
@@ -13,7 +12,6 @@ export default function Home() {
   const { data: hero, loading: heroLoading } = usePage<HeroPage>("Hero");
   const { data: about } = usePage<AboutPage>("About");
   const { data: projects, loading: pLoading } = useProjects();
-  const { data: articles, loading: aLoading } = useArticles();
   const navigate = useNavigate();
 
   return (
@@ -47,42 +45,6 @@ export default function Home() {
           )}
         </div>
       </section>
-
-      {/* PROJECTS PREVIEW */}
-      <section className="container section">
-        <div className="section-head">
-          <div>
-            <span className="eyebrow">Work</span>
-            <h2 className="section-title">Selected projects</h2>
-            <p className="section-subtitle">Recent work — open source &amp; client.</p>
-          </div>
-          <Link to={`/${language}/projects`} className="btn btn-ghost">
-            All projects <FiArrowRight />
-          </Link>
-        </div>
-
-        <div className="home-grid">
-          {pLoading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="glass" style={{ padding: 0, overflow: "hidden" }}>
-                  <Skeleton height={200} radius={0} />
-                  <div style={{ padding: 18 }}>
-                    <Skeleton height={14} width="40%" />
-                    <div style={{ height: 8 }} />
-                    <Skeleton height={20} width="80%" />
-                  </div>
-                </div>
-              ))
-            : projects.slice(0, 4).map((p) => (
-                <ProjectCard
-                  key={p.slug}
-                  project={p}
-                  onClick={(slug) => navigate(`/${language}/projects/${slug}`)}
-                />
-              ))}
-        </div>
-      </section>
-
       {/* ABOUT TEASER */}
       {about && (
         <section className="container section about-teaser">
@@ -105,42 +67,43 @@ export default function Home() {
         </section>
       )}
 
-      {/* ARTICLES PREVIEW */}
+      {/* PROJECTS PREVIEW */}
       <section className="container section">
         <div className="section-head">
           <div>
-            <span className="eyebrow">Writing</span>
-            <h2 className="section-title">Latest publications</h2>
-            <p className="section-subtitle">Notes, research, things I'm learning.</p>
+            <span className="eyebrow">Work</span>
+            <h2 className="section-title">Selected projects</h2>
+            <p className="section-subtitle">Recent work — open source &amp; client.</p>
           </div>
-          <Link to={`/${language}/research`} className="btn btn-ghost">
-            All publications <FiArrowRight />
+          <Link to={`/${language}/projects`} className="btn btn-ghost">
+            All projects <FiArrowRight />
           </Link>
         </div>
 
-        <div className="home-articles">
-          {aLoading
-            ? Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} style={{ display: "flex", gap: 16, padding: 16 }}>
-                  <Skeleton width={140} height={100} />
-                  <div style={{ flex: 1 }}>
-                    <Skeleton height={14} width="30%" />
-                    <div style={{ height: 8 }} />
-                    <Skeleton height={20} width="80%" />
-                    <div style={{ height: 8 }} />
-                    <Skeleton height={14} />
-                  </div>
+        <div className="home-grid">
+          {pLoading
+            ? Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="glass" style={{ padding: 0, overflow: "hidden" }}>
+                <Skeleton height={200} radius={0} />
+                <div style={{ padding: 18 }}>
+                  <Skeleton height={14} width="40%" />
+                  <div style={{ height: 8 }} />
+                  <Skeleton height={20} width="80%" />
                 </div>
-              ))
-            : articles.slice(0, 3).map((a) => (
-                <ArticleCard
-                  key={a.slug}
-                  article={a}
-                  onClick={(slug) => navigate(`/${language}/research/${slug}`)}
-                />
-              ))}
+              </div>
+            ))
+            : projects.slice(0, 4).map((p) => (
+              <ProjectCard
+                key={p.slug}
+                project={p}
+                onClick={(slug) => navigate(`/${language}/projects/${slug}`)}
+              />
+            ))}
         </div>
       </section>
+
+
+
     </div>
   );
 }

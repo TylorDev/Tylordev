@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FiMenu, FiX, FiShield } from "react-icons/fi";
 import { useLanguage } from "../../context/LanguageContext";
@@ -16,13 +16,14 @@ export default function Header() {
   const { data, loading } = usePage<HeaderPage>("Header");
   const { language, setLanguage, supported } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
 
   const handleLang = (next: Locale) => {
     setLanguage(next);
-    const parts = window.location.pathname.split("/").filter(Boolean);
+    const parts = location.pathname.split("/").filter(Boolean);
     parts[0] = next;
-    navigate(`/${parts.join("/")}`);
+    navigate(`/${parts.join("/")}${location.search}${location.hash}`);
   };
 
   const navItems = data?.navItems ?? {
@@ -48,7 +49,6 @@ export default function Header() {
         <nav className={`hdr-nav ${open ? "open" : ""}`}>
           <NavLink to={`/${language}/about`} onClick={() => setOpen(false)}>{navItems.about}</NavLink>
           <NavLink to={`/${language}/projects`} onClick={() => setOpen(false)}>{navItems.projects}</NavLink>
-          <NavLink to={`/${language}/research`} onClick={() => setOpen(false)}>{navItems.research}</NavLink>
           <NavLink to={`/${language}/contact`} onClick={() => setOpen(false)}>{navItems.contact}</NavLink>
 
           <div className="hdr-lang">

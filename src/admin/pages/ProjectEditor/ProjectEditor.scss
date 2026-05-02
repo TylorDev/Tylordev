@@ -1,0 +1,236 @@
+.peditor {
+  min-height: 100vh;
+  padding-bottom: 80px;
+
+  /* ─── Sticky toolbar ─────────────────────────────────────── */
+  &-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba($bg, 0.82);
+    backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom: 1px solid $border;
+
+    &-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+    }
+
+    &-title {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .eyebrow { margin: 0; }
+    }
+
+    &-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &-draft-badge,
+  &-pub-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: $mono;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  &-draft-badge {
+    background: rgba(255, 180, 0, 0.15);
+    color: #f5a623;
+    border: 1px solid rgba(255, 180, 0, 0.3);
+  }
+  &-pub-badge {
+    background: rgba($success, 0.12);
+    color: $success;
+    border: 1px solid rgba($success, 0.3);
+  }
+
+  /* ─── Body: two-column layout ────────────────────────────── */
+  &-body {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 28px;
+    padding-top: 28px;
+    align-items: start;
+
+    @media (max-width: $bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ─── Form column ────────────────────────────────────────── */
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+    border: 1px solid $border;
+    border-radius: $radius;
+    background: $bg-soft;
+
+    &-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+  }
+
+  &-locales {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  &-locale-row {
+    display: inline-flex;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    overflow: hidden;
+    &.small {
+      .peditor-loc { padding: 4px 7px; font-size: 10px; }
+    }
+  }
+
+  &-loc {
+    padding: 6px 10px;
+    font-family: $mono;
+    font-size: 11px;
+    color: $text-faint;
+    border-right: 1px solid $border;
+    background: transparent;
+    transition: color 0.15s ease, background 0.15s ease;
+    &:last-child { border-right: none; }
+    &:hover { color: $text-dim; }
+    &.active { background: $text; color: $bg; }
+  }
+
+  /* ─── Preview sidebar ────────────────────────────────────── */
+  &-preview {
+    position: sticky;
+    top: 72px;
+
+    &-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    &-card {
+      .pcard { cursor: default; }
+    }
+
+    @media (max-width: $bp-md) {
+      position: static;
+    }
+  }
+
+  /* ─── Danger zone ────────────────────────────────────────── */
+  &-danger-zone {
+    margin-top: 16px;
+    padding: 18px;
+    border: 1px solid rgba($danger, 0.3);
+    border-radius: $radius;
+    background: rgba($danger, 0.04);
+
+    h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: $danger;
+      margin-bottom: 12px;
+    }
+  }
+
+  /* ─── Confirm dialog ──────────────────────────────────────── */
+  &-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: 80;
+    animation: scrimIn 0.18s ease;
+  }
+  &-confirm {
+    position: fixed;
+    z-index: 95;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(420px, 92vw);
+    padding: 24px;
+    text-align: center;
+
+    &-icon {
+      font-size: 28px;
+      color: $danger;
+      margin-bottom: 12px;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    p {
+      color: $text-dim;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+    &-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+
+  /* ─── Toast ──────────────────────────────────────────────── */
+  &-toast {
+    position: fixed;
+    z-index: 100;
+    bottom: 24px;
+    right: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: $radius-sm;
+    border: 1px solid $border-strong;
+    background: $bg-elev;
+    color: $text;
+    font-size: 13px;
+    box-shadow: $shadow-lg;
+    animation: fadeIn 0.2s ease;
+
+    button {
+      color: $text-faint;
+      &:hover { color: $text; }
+    }
+    &.ok {
+      border-color: rgba($success, 0.5);
+      svg:first-child { color: $success; }
+    }
+    &.err {
+      border-color: rgba($danger, 0.5);
+      svg:first-child { color: $danger; }
+    }
+  }
+}

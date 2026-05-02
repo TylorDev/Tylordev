@@ -1,0 +1,89 @@
+.pvtbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba($bg, 0.82);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid $border;
+  animation: fadeIn 0.2s ease;
+
+  &-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 24px;
+  }
+
+  &-center {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $mono;
+    font-size: 12px;
+    color: $text-dim;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  &-draft {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    background: rgba(255, 180, 0, 0.15);
+    color: #f5a623;
+    border: 1px solid rgba(255, 180, 0, 0.3);
+  }
+
+  &-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &-locales {
+    display: inline-flex;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    overflow: hidden;
+  }
+
+  &-loc {
+    padding: 5px 8px;
+    font-family: $mono;
+    font-size: 10px;
+    color: $text-faint;
+    border-right: 1px solid $border;
+    background: transparent;
+    transition: color 0.15s ease, background 0.15s ease;
+    &:last-child { border-right: none; }
+    &:hover { color: $text-dim; }
+    &.active { background: $text; color: $bg; }
+  }
+
+  &-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: $text-dim;
+    border: 1px solid $border-strong;
+    border-radius: $radius-sm;
+    background: transparent;
+    transition: all 0.15s ease;
+    &:hover { color: $text; border-color: $text-dim; }
+    &.primary {
+      background: $text;
+      color: $bg;
+      border-color: $text;
+      &:hover { opacity: 0.85; }
+    }
+  }
+}

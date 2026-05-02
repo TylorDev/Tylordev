@@ -15,7 +15,7 @@ export interface RawTranslation {
 }
 
 export interface RawProjectButton {
-  icon?: boolean;
+  icon?: string;
   url?: string;
   translations?: { locale: Locale; text?: string }[];
 }
@@ -44,19 +44,16 @@ export interface RawProject {
   slug: string;
   publishedAt?: string | null;
   shared: {
+    title?: string;
     coverImageSrc?: string;
-    coverImageAlt?: string;
     backgroundImage?: string;
-    backgroundAlt?: string;
+    status?: string;
+    type?: string;
+    technologies?: string;
     buttons?: RawProjectButton[];
   };
   translations: {
     locale: Locale;
-    title?: string;
-    status?: string;
-    type?: string;
-    tags?: string;
-    message?: string;
     subtitle?: string;
   }[];
   sections?: RawProjectSection[];
@@ -89,18 +86,16 @@ export interface Project {
   publishedAt?: string | null;
   data: {
     coverImageSrc?: string;
-    coverImageAlt?: string;
     status: string;
     type: string;
     tittle: string;
-    tags: string;
+    subtitle: string;
+    technologies: string;
     date: string;
+    buttons: ProjectButton[];
   };
   header: {
     backgroundImage?: string;
-    backgroundAlt?: string;
-    message: string;
-    title: string;
     subtitle: string;
     buttons: ProjectButton[];
   };

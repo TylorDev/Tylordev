@@ -302,9 +302,10 @@ export const exampleProjects: RawProject[] = [
     publishedAt: "2026-03-18T00:00:00.000Z",
     shared: {
       coverImageSrc: PROJECT_IMG.streamCover,
-      coverImageAlt: "Stream OS dashboard",
       backgroundImage: PROJECT_IMG.streamBg,
-      backgroundAlt: "Stream OS hero",
+      status: "Live",
+      type: "Web App",
+      technologies: "React, TypeScript",
       buttons: [
         {
           url: "https://example.com/stream-os",
@@ -394,9 +395,10 @@ export const exampleProjects: RawProject[] = [
     publishedAt: "2026-02-04T00:00:00.000Z",
     shared: {
       coverImageSrc: PROJECT_IMG.atlasCover,
-      coverImageAlt: "Atlas CMS editor",
       backgroundImage: PROJECT_IMG.atlasBg,
-      backgroundAlt: "Atlas CMS hero",
+      status: "Beta",
+      type: "Full-stack",
+      technologies: "Node.js, PostgreSQL",
       buttons: [
         {
           url: "https://example.com/atlas-cms",
@@ -478,9 +480,10 @@ export const exampleProjects: RawProject[] = [
     publishedAt: "2025-11-22T00:00:00.000Z",
     shared: {
       coverImageSrc: PROJECT_IMG.northCover,
-      coverImageAlt: "North design system",
       backgroundImage: PROJECT_IMG.northBg,
-      backgroundAlt: "North design system hero",
+      status: "Released",
+      type: "Design System",
+      technologies: "CSS3, React",
       buttons: [
         {
           url: "https://example.com/north-design",
@@ -574,7 +577,7 @@ export const exampleArticles: RawArticle[] = [
     shared: {
       coverImageSrc: ARTICLE_IMG.streamingCover,
       bannerImage: ARTICLE_IMG.streamingBanner,
-      researchStyle: { borderColor: "#2e2e34" },
+      researchStyle: { borderTop: "", borderBottom: "" },
     },
     translations: [
       {
@@ -634,7 +637,7 @@ export const exampleArticles: RawArticle[] = [
     shared: {
       coverImageSrc: ARTICLE_IMG.smallTeamsCover,
       bannerImage: ARTICLE_IMG.smallTeamsBanner,
-      researchStyle: { borderColor: "#2e2e34" },
+      researchStyle: { borderTop: "", borderBottom: "" },
     },
     translations: [
       {
@@ -694,7 +697,7 @@ export const exampleArticles: RawArticle[] = [
     shared: {
       coverImageSrc: ARTICLE_IMG.tsCover,
       bannerImage: ARTICLE_IMG.tsBanner,
-      researchStyle: { borderColor: "#2e2e34" },
+      researchStyle: { borderTop: "", borderBottom: "" },
     },
     translations: [
       {

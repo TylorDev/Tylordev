@@ -23,18 +23,15 @@ export interface RawProject {
   slug: string;
   publishedAt?: string | null;
   shared: {
+    title?: string;
     coverImageSrc?: string;
-    coverImageAlt?: string;
     backgroundImage?: string;
-    backgroundAlt?: string;
+    status?: string;
+    type?: string;
+    technologies?: string;
     buttons?: RawButton[];
   };
   translations: (RawTranslation & {
-    status?: string;
-    type?: string;
-    title?: string;
-    tags?: string;
-    message?: string;
     subtitle?: string;
   })[];
   sections?: RawSection[];
@@ -69,18 +66,16 @@ export interface Project {
   publishedAt?: string | null;
   data: {
     coverImageSrc?: string;
-    coverImageAlt?: string;
     status: string;
     type: string;
     tittle: string;
-    tags: string;
+    subtitle: string;
+    technologies: string;
     date: string;
+    buttons: ProjectButton[];
   };
   header: {
     backgroundImage?: string;
-    backgroundAlt?: string;
-    message: string;
-    title: string;
     subtitle: string;
     buttons: ProjectButton[];
   };

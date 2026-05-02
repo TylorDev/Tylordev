@@ -1,3 +1,5 @@
+@import "../../styles/tokens";
+
 .pdetail {
   &-hero {
     position: relative;
@@ -14,7 +16,7 @@
     &-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.96) 95%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.96) 95%);
     }
 
     &-inner {
@@ -46,20 +48,61 @@
 
   &-buttons {
     display: flex;
-    gap: 8px;
+    gap: 12px;
     flex-wrap: wrap;
     margin-top: 12px;
-  }
 
-  &-message {
-    padding: 40px 24px;
-    p {
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: -0.015em;
-      line-height: 1.45;
-      max-width: 720px;
+    .btn {
+      transition: all 0.2s cubic-bezier(0.2, 1, 0.2, 1);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+      }
+
+      svg {
+        margin-left: 8px;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover svg {
+        transform: translateX(2px) translateY(-2px);
+      }
+    }
+
+    .btn-live {
+      background: $success;
+      border-color: $success;
+      color: #000;
+
+      &:hover {
+        background: lighten($success, 5%);
+        border-color: lighten($success, 5%);
+        box-shadow: 0 0 20px rgba($success, 0.3);
+      }
+    }
+
+    .btn-source {
+      background: $bg-elev;
+      border-color: $border-strong;
       color: $text;
+
+      &:hover {
+        background: $bg-elev-2;
+        border-color: $text-dim;
+      }
+    }
+
+    .btn-docs {
+      background: transparent;
+      border-color: $border-strong;
+      color: $text-dim;
+
+      &:hover {
+        color: $text;
+        border-color: $text;
+        background: rgba(255, 255, 255, 0.05);
+      }
     }
   }
 
@@ -73,7 +116,7 @@
   &-section {
     display: flex;
     align-items: stretch;
-    overflow: hidden;
+
     padding: 0;
 
     @media (max-width: $bp-md) {
@@ -84,7 +127,12 @@
       flex: 1;
       min-height: 240px;
       background: $bg-soft;
-      img { width: 100%; height: 100%; object-fit: cover; }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     &-text {
@@ -95,7 +143,11 @@
       justify-content: center;
       gap: 12px;
 
-      p { color: $text-dim; font-size: 14px; line-height: 1.7; }
+      p {
+        color: $text-dim;
+        font-size: 14px;
+        line-height: 1.7;
+      }
 
       details {
         summary {
@@ -106,8 +158,12 @@
           font-size: 12px;
           padding: 4px 0;
           letter-spacing: 0.02em;
-          &:hover { color: $text-dim; }
+
+          &:hover {
+            color: $text-dim;
+          }
         }
+
         p {
           margin-top: 12px;
           padding: 14px;
@@ -122,6 +178,7 @@
   &-empty {
     padding: 120px 24px;
     text-align: center;
+
     h2 {
       font-size: 22px;
       font-weight: 600;
@@ -129,4 +186,22 @@
       margin-bottom: 24px;
     }
   }
+}
+
+.pdetail-techs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.pdetail-techs span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: transform 0.2s ease;
+}
+
+.pdetail-techs span:hover {
+  transform: scale(1.15);
 }

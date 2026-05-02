@@ -32,7 +32,6 @@ export default function Footer() {
             <h4>Navigate</h4>
             <Link to={`/${language}/about`}>{data.links.about}</Link>
             <Link to={`/${language}/projects`}>{data.links.projects}</Link>
-            <Link to={`/${language}/research`}>{data.links.blog}</Link>
           </div>
           <div>
             <h4>Social</h4>

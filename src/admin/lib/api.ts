@@ -21,8 +21,12 @@ import {
   tmUpdateProject,
 } from "./testMode";
 
+const DEFAULT_API_URL = import.meta.env.DEV
+  ? "http://localhost:4000"
+  : "https://tylordev-backend-production.up.railway.app";
+
 export const API_URL =
-  (import.meta.env.VITE_API_URL as string | undefined) ?? "http://localhost:4000";
+  (import.meta.env.VITE_API_URL as string | undefined) ?? DEFAULT_API_URL;
 
 export const apiUrl = (path: string) => `${API_URL}${path}`;
 

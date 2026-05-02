@@ -2,7 +2,11 @@ import { exampleArticles, exampleProjects, getPageFixture } from "./fixtures";
 import { fetchRemotePage } from "./staticContent";
 import type { Article, Locale, Project, RawArticle, RawProject } from "./types";
 
-const API_URL = (import.meta.env.VITE_API_URL as string) ?? "http://localhost:4000";
+const DEFAULT_API_URL = import.meta.env.DEV
+  ? "http://localhost:4000"
+  : "https://tylordev-backend-production.up.railway.app";
+
+const API_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? DEFAULT_API_URL;
 export const apiUrl = (path: string) => `${API_URL}${path}`;
 
 interface CacheEntry<T> {

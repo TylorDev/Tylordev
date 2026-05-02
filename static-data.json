@@ -1,1 +1,376 @@
-
+{
+  "Header": {
+    "en-us": {
+      "logoSrc": "/logo.svg",
+      "logoAlt": "Logo",
+      "menuLabel": "Menu",
+      "navItems": {
+        "about": "About",
+        "projects": "Projects",
+        "research": "Writing",
+        "resources": "Resources",
+        "contact": "Contact"
+      }
+    },
+    "es-mx": {
+      "logoSrc": "/logo.svg",
+      "logoAlt": "Logo",
+      "menuLabel": "Menú",
+      "navItems": {
+        "about": "Sobre mí",
+        "projects": "Proyectos",
+        "research": "Notas",
+        "resources": "Recursos",
+        "contact": "Contacto"
+      }
+    },
+    "pt-br": {
+      "logoSrc": "/logo.svg",
+      "logoAlt": "Logo",
+      "menuLabel": "Menu",
+      "navItems": {
+        "about": "Sobre",
+        "projects": "Projetos",
+        "research": "Notas",
+        "resources": "Recursos",
+        "contact": "Contato"
+      }
+    }
+  },
+  "Footer": {
+    "en-us": {
+      "logoSrc": "/logo.svg",
+      "logoAlt": "Logo",
+      "links": {
+        "about": "About",
+        "projects": "Projects",
+        "blog": "Writing",
+        "github": "https://github.com/",
+        "linkedIn": "https://www.linkedin.com/",
+        "instagram": "https://www.instagram.com/"
+      },
+      "footerText": "Independent studio. Built with React.",
+      "privacyPolicy": "hello@example.com",
+      "footerDynamicText": "v1.0"
+    },
+    "es-mx": {
+      "logoSrc": "/logo.svg",
+      "logoAlt": "Logo",
+      "links": {
+        "about": "Sobre mí",
+        "projects": "Proyectos",
+        "blog": "Notas",
+        "github": "https://github.com/",
+        "linkedIn": "https://www.linkedin.com/",
+        "instagram": "https://www.instagram.com/"
+      },
+      "footerText": "Estudio independiente. Hecho con React.",
+      "privacyPolicy": "hello@example.com",
+      "footerDynamicText": "v1.0"
+    },
+    "pt-br": {
+      "logoSrc": "/logo.svg",
+      "logoAlt": "Logo",
+      "links": {
+        "about": "Sobre",
+        "projects": "Projetos",
+        "blog": "Notas",
+        "github": "https://github.com/",
+        "linkedIn": "https://www.linkedin.com/",
+        "instagram": "https://www.instagram.com/"
+      },
+      "footerText": "Estúdio independente. Feito com React.",
+      "privacyPolicy": "hello@example.com",
+      "footerDynamicText": "v1.0"
+    }
+  },
+  "Hero": {
+    "en-us": {
+      "hero": {
+        "subtitle": "Independent product engineer. I design and ship interfaces that feel fast.",
+        "title": "Build the web you actually want to use.",
+        "videoSrc": "",
+        "post": {
+          "title": "00/ Intro",
+          "content": "I work end-to-end on small teams: research, design, code, ship. Currently focused on streaming UIs, design systems, and tools that respect the user's time.",
+          "buttonText": "Get in touch"
+        }
+      }
+    },
+    "es-mx": {
+      "hero": {
+        "subtitle": "Ingeniero de producto independiente. Diseño y publico interfaces que se sienten rápidas.",
+        "title": "Construyamos la web que realmente querrías usar.",
+        "videoSrc": "",
+        "post": {
+          "title": "00/ Intro",
+          "content": "Trabajo de punta a punta en equipos chicos: research, diseño, código, deploy. Hoy enfocado en UIs en streaming, design systems y herramientas que respetan el tiempo del usuario.",
+          "buttonText": "Contactar"
+        }
+      }
+    },
+    "pt-br": {
+      "hero": {
+        "subtitle": "Engenheiro de produto independente. Desenho e publico interfaces que parecem rápidas.",
+        "title": "Vamos construir a web que você de fato quer usar.",
+        "videoSrc": "",
+        "post": {
+          "title": "00/ Intro",
+          "content": "Trabalho ponta a ponta em times pequenos: research, design, código, deploy. Foco atual em UIs em streaming, design systems e ferramentas que respeitam o tempo do usuário.",
+          "buttonText": "Falar comigo"
+        }
+      }
+    }
+  },
+  "About": {
+    "en-us": {
+      "header": {
+        "section": "01/",
+        "title": "Profile"
+      },
+      "profile": {
+        "name": "Hello.",
+        "role": "[Engineer · Designer]",
+        "username": "@studio",
+        "imageSrc": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=600&q=80"
+      },
+      "paragraphs": [
+        "I'm an independent product engineer focused on small teams shipping ambitious software. I've spent the last few years building streaming dashboards, content tooling, and design systems for product-led companies.",
+        "My approach: short feedback loops, ruthless scope, taste as a constraint. I prefer one well-built feature over five draft ones.",
+        "I write modern TypeScript on the frontend (React, Vite, SCSS, sometimes Solid), and Node.js or Go on the backend. I care about latency, accessibility, and the long-tail polish that separates good products from forgettable ones.",
+        "Currently open to selective freelance and contract work. If you're building something thoughtful, I'd like to hear about it."
+      ],
+      "History": {
+        "imageSrc": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80",
+        "latest": [
+          {
+            "header": {
+              "section": "02/",
+              "title": "Recent work"
+            },
+            "headerTitle": "History"
+          }
+        ]
+      },
+      "blogHeader": {
+        "section": "03/",
+        "title": "Latest writing"
+      },
+      "blog": {
+        "title": "WRITING",
+        "cornerLink": {
+          "icon": "GoArrowDownLeft"
+        }
+      }
+    },
+    "es-mx": {
+      "header": {
+        "section": "01/",
+        "title": "Perfil"
+      },
+      "profile": {
+        "name": "Hola.",
+        "role": "[Ingeniero · Diseñador]",
+        "username": "@studio",
+        "imageSrc": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=600&q=80"
+      },
+      "paragraphs": [
+        "Soy ingeniero de producto independiente, enfocado en equipos chicos que publican software ambicioso. Los últimos años los pasé construyendo dashboards en streaming, herramientas de contenido y design systems para empresas product-led.",
+        "Mi enfoque: ciclos cortos de feedback, scope acotado y el gusto como restricción. Prefiero una feature bien hecha antes que cinco a medio terminar.",
+        "Escribo TypeScript moderno en frontend (React, Vite, SCSS, a veces Solid) y Node.js o Go en backend. Me importa la latencia, la accesibilidad y el pulido del long-tail que separa el producto bueno del olvidable.",
+        "Abierto a freelance y contratos selectos. Si estás construyendo algo cuidado, escribime."
+      ],
+      "History": {
+        "imageSrc": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80",
+        "latest": [
+          {
+            "header": {
+              "section": "02/",
+              "title": "Trabajo reciente"
+            },
+            "headerTitle": "Historia"
+          }
+        ]
+      },
+      "blogHeader": {
+        "section": "03/",
+        "title": "Notas recientes"
+      },
+      "blog": {
+        "title": "NOTAS",
+        "cornerLink": {
+          "icon": "GoArrowDownLeft"
+        }
+      }
+    },
+    "pt-br": {
+      "header": {
+        "section": "01/",
+        "title": "Perfil"
+      },
+      "profile": {
+        "name": "OJOJOJOJOJJOJOJOJJ",
+        "role": "[Engenheiro · Designer]",
+        "username": "@studio",
+        "imageSrc": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=600&q=80"
+      },
+      "paragraphs": [
+        "Sou engenheiro de produto independente, focado em times pequenos publicando software ambicioso. Passei os últimos anos construindo dashboards em streaming, ferramentas de conteúdo e design systems para empresas product-led.",
+        "Minha abordagem: ciclos curtos de feedback, escopo enxuto e gosto como restrição. Prefiro uma feature bem feita a cinco pela metade.",
+        "Escrevo TypeScript moderno no frontend (React, Vite, SCSS, às vezes Solid) e Node.js ou Go no backend. Latência, acessibilidade e o polimento do long-tail importam.",
+        "Aberto a freelance e contratos selecionados. Se você está construindo algo cuidadoso, me chame."
+      ],
+      "History": {
+        "imageSrc": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80",
+        "latest": [
+          {
+            "header": {
+              "section": "02/",
+              "title": "Trabalho recente"
+            },
+            "headerTitle": "Histórico"
+          }
+        ]
+      },
+      "blogHeader": {
+        "section": "03/",
+        "title": "Notas recentes"
+      },
+      "blog": {
+        "title": "NOTAS",
+        "cornerLink": {
+          "icon": "GoArrowDownLeft"
+        }
+      }
+    }
+  },
+  "Contact": {
+    "en-us": {
+      "contactMeta": {
+        "title": "Get in touch",
+        "email": "hello@example.com"
+      },
+      "formFields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Your name",
+          "errorMessage": "Name is required."
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "you@example.com",
+          "errorMessage": {
+            "required": "Email is required.",
+            "invalid": "That doesn't look like a valid email."
+          }
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Tell me a bit about your project…",
+          "errorMessage": "Message is required."
+        },
+        "submitButton": "Send message"
+      },
+      "thankYouMessage": "Thanks. I'll get back to you within 24 hours."
+    },
+    "es-mx": {
+      "contactMeta": {
+        "title": "Contacto",
+        "email": "hello@example.com"
+      },
+      "formFields": {
+        "name": {
+          "label": "Nombre",
+          "placeholder": "Tu nombre",
+          "errorMessage": "El nombre es obligatorio."
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "tu@ejemplo.com",
+          "errorMessage": {
+            "required": "El email es obligatorio.",
+            "invalid": "Ese email no parece válido."
+          }
+        },
+        "message": {
+          "label": "Mensaje",
+          "placeholder": "Contame un poco sobre tu proyecto…",
+          "errorMessage": "El mensaje es obligatorio."
+        },
+        "submitButton": "Enviar mensaje"
+      },
+      "thankYouMessage": "¡Gracias! Te respondo en menos de 24 horas."
+    },
+    "pt-br": {
+      "contactMeta": {
+        "title": "Contato",
+        "email": "hello@example.com"
+      },
+      "formFields": {
+        "name": {
+          "label": "Nome",
+          "placeholder": "Seu nome",
+          "errorMessage": "O nome é obrigatório."
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "voce@exemplo.com",
+          "errorMessage": {
+            "required": "O email é obrigatório.",
+            "invalid": "Esse email não parece válido."
+          }
+        },
+        "message": {
+          "label": "Mensagem",
+          "placeholder": "Conte um pouco sobre seu projeto…",
+          "errorMessage": "A mensagem é obrigatória."
+        },
+        "submitButton": "Enviar mensagem"
+      },
+      "thankYouMessage": "Obrigado! Respondo em até 24 horas."
+    }
+  },
+  "projectsContent": {
+    "en-us": {
+      "Projects": {
+        "header": {
+          "mainText": "Selected work/",
+          "tittle": "PROJECTS"
+        }
+      }
+    },
+    "es-mx": {
+      "Projects": {
+        "header": {
+          "mainText": "Trabajo seleccionado/",
+          "tittle": "PROYECTOS"
+        }
+      }
+    },
+    "pt-br": {
+      "Projects": {
+        "header": {
+          "mainText": "Trabalhos selecionados/",
+          "tittle": "PROJETOS"
+        }
+      }
+    }
+  },
+  "researchContent": {
+    "en-us": {
+      "Research": {
+        "title": "Writing"
+      }
+    },
+    "es-mx": {
+      "Research": {
+        "title": "Notas"
+      }
+    },
+    "pt-br": {
+      "Research": {
+        "title": "Notas"
+      }
+    }
+  }
+}

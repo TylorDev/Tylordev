@@ -1,5 +1,6 @@
 import { exampleArticles, exampleProjects, getPageFixture } from "./fixtures";
-import { fetchRemotePage } from "./staticContent";
+import { fetchRemoteMarkdownProjects } from "./markdownProjects";
+import { fetchRemotePage, mergePageData } from "./staticContent";
 import type { Article, Locale, Project, RawArticle, RawProject } from "./types";
 
 const DEFAULT_API_URL = import.meta.env.DEV
@@ -8,6 +9,7 @@ const DEFAULT_API_URL = import.meta.env.DEV
 
 const API_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? DEFAULT_API_URL;
 export const apiUrl = (path: string) => `${API_URL}${path}`;
+const shouldFetchApi = Boolean(import.meta.env.VITE_API_URL) || !import.meta.env.DEV;
 
 interface CacheEntry<T> {
   data: T;
@@ -43,9 +45,20 @@ const isPublished = (item: { publishedAt?: string | null }): boolean =>
   Boolean(item.publishedAt);
 
 export const fetchProjects = async (signal?: AbortSignal): Promise<RawProject[]> => {
+  const remoteProjects = await fetchRemoteMarkdownProjects(signal);
+
+  if (remoteProjects.length > 0) {
+    return remoteProjects;
+  }
+
+  if (!shouldFetchApi) {
+    return exampleProjects;
+  }
+
   try {
     const list = await cachedJson<RawProject[]>(apiUrl("/projects"), signal);
-    return list.length > 0 ? list.filter(isPublished) : exampleProjects;
+    const publishedProjects = list.filter(isPublished);
+    return publishedProjects.length > 0 ? publishedProjects : exampleProjects;
   } catch (err) {
     if (isAbort(err)) throw err;
     console.warn("[api] /projects failed, falling back to example projects:", err);
@@ -54,6 +67,15 @@ export const fetchProjects = async (signal?: AbortSignal): Promise<RawProject[]>
 };
 
 export const fetchProject = async (slug: string, signal?: AbortSignal): Promise<RawProject> => {
+  const remoteProject = (await fetchRemoteMarkdownProjects(signal)).find((p) => p.slug === slug);
+  if (remoteProject) return remoteProject;
+
+  if (!shouldFetchApi) {
+    const found = exampleProjects.find((p) => p.slug === slug);
+    if (found) return found;
+    throw new Error(`Project "${slug}" not found.`);
+  }
+
   try {
     const project = await cachedJson<RawProject>(apiUrl(`/projects/${slug}`), signal);
     if (!isPublished(project)) throw new UnpublishedContentError("project");
@@ -103,11 +125,9 @@ export const fetchArticle = async (slug: string, signal?: AbortSignal): Promise<
  */
 export async function fetchPage<T>(lang: string, name: string): Promise<T> {
   const remote = await fetchRemotePage<T>(lang, name);
-  if (remote !== null) return remote;
-
   const fixture = getPageFixture<T>(lang as Locale, name);
   if (!fixture) throw new Error(`Unknown page fixture "${name}"`);
-  return fixture;
+  return mergePageData(fixture, remote);
 }
 
 export function invalidateCache() {

@@ -1,79 +1,391 @@
 /**
- * Static content fetched from GitHub raw.
- * The file `static-data.json` lives at the root of the TylorDev/Tylordev repo.
- * Upload a new version manually to update content for all visitors.
+ * Static content fetched from the TylorDev/Tylordev GitHub wiki.
  *
- * Format matches `examplePages` in fixtures.ts:
- * {
- *   "Header": { "en-us": {...}, "es-mx": {...}, "pt-br": {...} },
- *   "Hero":   { "en-us": {...}, ... },
- *   "About":  { ... },
- *   "Contact":{ ... },
- *   "Footer": { ... }
- * }
- * Any missing section or locale falls back to fixtures.ts.
+ * Base English content lives in `Tylordev.md`; locale-specific files contain
+ * only translated fields and are layered over the base content.
  */
 
-const STATIC_DATA_URL =
-  "https://raw.githubusercontent.com/TylorDev/Tylordev/main/static-data.json";
+const WIKI_RAW_BASE = "https://raw.githubusercontent.com/wiki/TylorDev/Tylordev";
+const WIKI_LOCALE_SEPARATOR = "%E2%80%90";
+const BASE_MARKDOWN_URL = `${WIKI_RAW_BASE}/Tylordev.md`;
+const LOCALE_MARKDOWN_URLS: Record<string, string> = {
+  "es-mx": `${WIKI_RAW_BASE}/Tylordev${WIKI_LOCALE_SEPARATOR}es.md`,
+  "pt-br": `${WIKI_RAW_BASE}/Tylordev${WIKI_LOCALE_SEPARATOR}pt.md`,
+};
 
-// In-memory cache so we only fetch once per page load
-let _cache: Record<string, Record<string, unknown>> | null | "loading" = null;
-let _promise: Promise<Record<string, Record<string, unknown>> | null> | null = null;
+type StaticSection = Record<string, unknown>;
+type StaticContent = Record<string, StaticSection>;
 
-async function loadRemoteData(): Promise<Record<string, Record<string, unknown>> | null> {
-  if (_cache !== null && _cache !== "loading") return _cache;
-  if (_promise) return _promise;
+const PAGE_ALIASES: Record<string, string> = {
+  ProjectsContent: "projectsContent",
+  ResearchContent: "researchContent",
+};
 
-  _cache = "loading";
-  _promise = fetch(STATIC_DATA_URL)
-    .then((res) => {
-      if (!res.ok) {
-        // 404 = file not yet uploaded, treat as "no override"
-        _cache = null;
-        return null;
-      }
-      return res.json() as Promise<Record<string, Record<string, unknown>>>;
-    })
-    .then((data) => {
-      // Handle empty file ({}) or null gracefully
-      _cache = data && Object.keys(data).length > 0 ? data : null;
-      return _cache;
+let _cache: Partial<Record<string, string | null>> = {};
+let _promises: Partial<Record<string, Promise<string | null>>> = {};
+let _contentCache: Partial<Record<string, StaticContent | null>> = {};
+
+function normalizePageName(pageName: string): string {
+  return PAGE_ALIASES[pageName] ?? pageName;
+}
+
+async function fetchText(url: string): Promise<string | null> {
+  if (Object.prototype.hasOwnProperty.call(_cache, url)) return _cache[url] ?? null;
+
+  const existingPromise = _promises[url];
+  if (existingPromise) return existingPromise;
+
+  const promise = fetch(url)
+    .then((res) => (res.ok ? res.text() : null))
+    .then((text) => {
+      _cache[url] = text;
+      return text;
     })
     .catch(() => {
-      _cache = null;
+      _cache[url] = null;
       return null;
     });
 
-  return _promise;
+  _promises[url] = promise;
+  return promise;
 }
 
-/**
- * Returns the content for a specific page + locale.
- * Merges: remote section → fixture fallback.
- * If the remote JSON doesn't have this section, returns null (caller uses fixture).
- */
-export async function fetchRemotePage<T>(
-  lang: string,
-  pageName: string
-): Promise<T | null> {
-  const data = await loadRemoteData();
+function normalizeLines(markdown: string): string[] {
+  const fieldLine = /^\s*(?:-\s*)?[A-Za-z][A-Za-z0-9. /]*:\s*/;
+  const lines: string[] = [];
+
+  for (const rawLine of markdown.replace(/\r\n/g, "\n").split("\n")) {
+    if (!rawLine.trim()) {
+      lines.push("");
+      continue;
+    }
+    if (fieldLine.test(rawLine) || rawLine.trim().startsWith("#") || lines.length === 0) {
+      lines.push(rawLine);
+      continue;
+    }
+    if (lines[lines.length - 1]?.trim().startsWith("- ")) {
+      lines[lines.length - 1] = `${lines[lines.length - 1]} ${rawLine.trim()}`;
+    } else {
+      lines.push(rawLine);
+    }
+  }
+
+  return lines;
+}
+
+function sectionBlocks(markdown: string): Record<string, string[]> {
+  const blocks: Record<string, string[]> = {};
+  let current: string | null = null;
+
+  for (const line of normalizeLines(markdown)) {
+    const heading = line.match(/^##\s+(.+?)\s*$/);
+    if (heading) {
+      current = normalizePageName(heading[1].trim());
+      blocks[current] = [];
+      continue;
+    }
+    if (current) blocks[current].push(line);
+  }
+
+  return blocks;
+}
+
+function setPath(target: StaticSection, path: string, value: unknown) {
+  const parts = path.split(".");
+  let cursor: Record<string, unknown> = target;
+
+  parts.slice(0, -1).forEach((part) => {
+    const existing = cursor[part];
+    if (!existing || typeof existing !== "object" || Array.isArray(existing)) {
+      cursor[part] = {};
+    }
+    cursor = cursor[part] as Record<string, unknown>;
+  });
+
+  cursor[parts[parts.length - 1]] = value;
+}
+
+function extractMarkdownImageSrc(value: string): string {
+  const trimmed = value.trim();
+  const imgMatch = trimmed.match(/<img\b[^>]*\bsrc\s*=\s*(["'])(.*?)\1[^>]*>/i);
+  return imgMatch?.[2]?.trim() || trimmed;
+}
+
+function isImageField(path: string): boolean {
+  const key = path.split(".").at(-1)?.toLowerCase() ?? "";
+  return key === "logosrc" || key === "imagesrc" || key.endsWith("src") || key.endsWith("image");
+}
+
+function parseKeyValueSection(pageName: string, lines: string[]): StaticSection {
+  const section: StaticSection = {};
+  const normalizedPageName = normalizePageName(pageName);
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index].trim();
+    if (!line || line.startsWith("#")) continue;
+
+    if (line === "paragraphs:") {
+      const paragraphs: string[] = [];
+      for (let next = index + 1; next < lines.length; next += 1) {
+        const paragraphLine = lines[next].trim();
+        if (!paragraphLine) continue;
+        if (!paragraphLine.startsWith("- ")) {
+          index = next - 1;
+          break;
+        }
+        paragraphs.push(paragraphLine.slice(2).trim());
+        index = next;
+      }
+      setPath(section, "paragraphs", paragraphs);
+      continue;
+    }
+
+    const match = line.match(/^([A-Za-z][A-Za-z0-9. /]*):\s*(.*)$/);
+    if (!match) continue;
+    const key = match[1].trim();
+    const targetKey = normalizedPageName === "Contact" && key === "email" ? "contactEmail" : key;
+    const value = match[2].trim();
+    setPath(section, targetKey, isImageField(targetKey) ? extractMarkdownImageSrc(value) : value);
+  }
+
+  return section;
+}
+
+function mapHeader(section: StaticSection): StaticSection {
+  return {
+    logoSrc: section.logoSrc,
+    logoAlt: section.logoAlt,
+    menuLabel: section.menuLabel,
+    navItems: section.nav,
+  };
+}
+
+function mapHero(section: StaticSection): StaticSection {
+  return {
+    hero: {
+      subtitle: section.subtitle,
+      title: section.title,
+      videoSrc: section.videoSrc,
+      post: section.post,
+    },
+  };
+}
+
+function mapAbout(section: StaticSection): StaticSection {
+  const history = section.history as StaticSection | undefined;
+  const blog = section.blog as StaticSection | undefined;
+
+  return {
+    header: section.header,
+    profile: section.profile,
+    paragraphs: section.paragraphs,
+    History: history
+      ? {
+          imageSrc: history.imageSrc,
+          latest: [
+            {
+              header: {
+                section: history.section,
+                title: history.title,
+              },
+              headerTitle: history.headerTitle,
+            },
+          ],
+        }
+      : undefined,
+    blogHeader: section.blogHeader,
+    blog: blog
+      ? {
+          title: blog.title,
+          cornerLink: { icon: blog.cornerIcon },
+        }
+      : undefined,
+  };
+}
+
+function mapContact(section: StaticSection): StaticSection {
+  const name = section.name as StaticSection | undefined;
+  const email = section.email as StaticSection | undefined;
+  const message = section.message as StaticSection | undefined;
+
+  return {
+    contactMeta: { title: section.title, email: section.contactEmail },
+    formFields: {
+      name: {
+        label: name?.label,
+        placeholder: name?.placeholder,
+        errorMessage: name?.error,
+      },
+      email: {
+        label: email?.label,
+        placeholder: email?.placeholder,
+        errorMessage: {
+          required: (email?.error as StaticSection | undefined)?.required,
+          invalid: (email?.error as StaticSection | undefined)?.invalid,
+        },
+      },
+      message: {
+        label: message?.label,
+        placeholder: message?.placeholder,
+        errorMessage: message?.error,
+      },
+      submitButton: section.submitButton,
+    },
+    thankYouMessage: section.thankYouMessage,
+  };
+}
+
+function mapFooter(section: StaticSection): StaticSection {
+  return {
+    logoSrc: section.logoSrc,
+    logoAlt: section.logoAlt,
+    links: section.link,
+    footerText: section.footerText,
+    privacyPolicy: section.privacyPolicy,
+    footerDynamicText: section.footerDynamicText,
+  };
+}
+
+function mapProjectsContent(section: StaticSection): StaticSection {
+  return {
+    Projects: {
+      header: {
+        mainText: section.mainText,
+        tittle: section.title,
+      },
+    },
+  };
+}
+
+function mapResearchContent(section: StaticSection): StaticSection {
+  return {
+    Research: {
+      title: section.title,
+    },
+  };
+}
+
+function pruneEmpty<T>(value: T): T | undefined {
+  if (Array.isArray(value)) {
+    const items = value
+      .map((item) => pruneEmpty(item))
+      .filter((item) => item !== undefined);
+    return (items.length > 0 ? items : undefined) as T | undefined;
+  }
+
+  if (value && typeof value === "object") {
+    const entries = Object.entries(value as Record<string, unknown>)
+      .map(([key, item]) => [key, pruneEmpty(item)] as const)
+      .filter(([, item]) => item !== undefined && item !== "");
+
+    if (entries.length === 0) return undefined;
+    return Object.fromEntries(entries) as T;
+  }
+
+  return value === "" || value === undefined ? undefined : value;
+}
+
+function mapSection(pageName: string, section: StaticSection): StaticSection | null {
+  const mapped = (() => {
+    switch (normalizePageName(pageName)) {
+      case "Header":
+        return mapHeader(section);
+      case "Hero":
+        return mapHero(section);
+      case "About":
+        return mapAbout(section);
+      case "Contact":
+        return mapContact(section);
+      case "Footer":
+        return mapFooter(section);
+      case "projectsContent":
+        return mapProjectsContent(section);
+      case "researchContent":
+        return mapResearchContent(section);
+      default:
+        return null;
+    }
+  })();
+
+  return mapped ? pruneEmpty(mapped) ?? null : null;
+}
+
+function parseStaticMarkdown(markdown: string): StaticContent {
+  return Object.fromEntries(
+    Object.entries(sectionBlocks(markdown))
+      .map(([pageName, lines]) => [pageName, mapSection(pageName, parseKeyValueSection(pageName, lines))])
+      .filter((entry): entry is [string, StaticSection] => entry[1] !== null)
+  );
+}
+
+function deepMerge<T>(base: T, patch: unknown): T {
+  if (Array.isArray(base)) {
+    if (!Array.isArray(patch)) return base;
+
+    const shouldMergeItems =
+      base.every((item) => item && typeof item === "object" && !Array.isArray(item)) &&
+      patch.every((item) => item && typeof item === "object" && !Array.isArray(item));
+
+    if (!shouldMergeItems) return patch as T;
+
+    const mergedItems = base.map((item, index) =>
+      index in patch ? deepMerge(item, patch[index]) : item
+    );
+    return [...mergedItems, ...patch.slice(base.length)] as T;
+  }
+
+  if (base && typeof base === "object" && patch && typeof patch === "object" && !Array.isArray(patch)) {
+    const output: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+    Object.entries(patch as Record<string, unknown>).forEach(([key, value]) => {
+      output[key] = key in output ? deepMerge(output[key], value) : value;
+    });
+    return output as T;
+  }
+
+  return (patch ?? base) as T;
+}
+
+async function loadMarkdownContent(lang: string): Promise<StaticContent | null> {
+  if (Object.prototype.hasOwnProperty.call(_contentCache, lang)) return _contentCache[lang] ?? null;
+
+  const baseMarkdown = await fetchText(BASE_MARKDOWN_URL);
+  if (!baseMarkdown) {
+    _contentCache[lang] = null;
+    return null;
+  }
+
+  const baseContent = parseStaticMarkdown(baseMarkdown);
+  const translationUrl = LOCALE_MARKDOWN_URLS[lang];
+  if (!translationUrl) {
+    _contentCache[lang] = baseContent;
+    return baseContent;
+  }
+
+  const translationMarkdown = await fetchText(translationUrl);
+  const translationContent = translationMarkdown ? parseStaticMarkdown(translationMarkdown) : {};
+  const mergedContent = deepMerge(baseContent, translationContent);
+  _contentCache[lang] = mergedContent;
+  return mergedContent;
+}
+
+export async function fetchRemotePage<T>(lang: string, pageName: string): Promise<T | null> {
+  const data = await loadMarkdownContent(lang);
   if (!data) return null;
 
-  const section = data[pageName] as Record<string, T> | undefined;
-  if (!section) return null;
-
-  // Prefer the requested locale, fall back to en-us
-  return (section[lang] ?? section["en-us"] ?? null) as T | null;
+  return (data[normalizePageName(pageName)] ?? null) as T | null;
 }
 
-/** Force re-fetch on next call (e.g. after uploading a new file) */
+export function mergePageData<T>(fixture: T, remote: unknown): T {
+  return remote ? deepMerge(fixture, remote) : fixture;
+}
+
 export function invalidateStaticCache() {
-  _cache = null;
-  _promise = null;
+  _cache = {};
+  _promises = {};
+  _contentCache = {};
 }
 
-/** Export the content object as a downloadable JSON file */
+/** Export the content object as a downloadable JSON file for legacy admin flows. */
 export function exportStaticJson(
   data: Record<string, Record<string, unknown>>,
   filename = "static-data.json"

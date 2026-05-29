@@ -6,9 +6,11 @@ import {
   fetchPage,
   fetchProject,
   fetchProjects,
+  invalidateCache,
   mapArticle,
   mapProject,
 } from "./api";
+import { invalidateStaticCache } from "./staticContent";
 import type { Article, Project } from "./types";
 
 interface AsyncState<T> {
@@ -17,8 +19,40 @@ interface AsyncState<T> {
   error: Error | null;
 }
 
+const TEST_CONTENT_UPDATE_EVENT = "test-content:update";
+let testContentVersion = 0;
+const testContentListeners = new Set<() => void>();
+
+function notifyTestContentUpdate() {
+  testContentVersion += 1;
+  invalidateCache();
+  invalidateStaticCache();
+  testContentListeners.forEach((listener) => listener());
+}
+
+if (import.meta.hot) {
+  import.meta.hot.on(TEST_CONTENT_UPDATE_EVENT, notifyTestContentUpdate);
+}
+
+function useTestContentVersion(): number {
+  const [version, setVersion] = useState(testContentVersion);
+
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+
+    const listener = () => setVersion(testContentVersion);
+    testContentListeners.add(listener);
+    return () => {
+      testContentListeners.delete(listener);
+    };
+  }, []);
+
+  return version;
+}
+
 export function usePage<T>(name: string): AsyncState<T | null> {
   const { language } = useLanguage();
+  const testContentVersion = useTestContentVersion();
   const [state, setState] = useState<AsyncState<T | null>>({
     data: null,
     loading: true,
@@ -38,13 +72,14 @@ export function usePage<T>(name: string): AsyncState<T | null> {
     return () => {
       cancelled = true;
     };
-  }, [language, name]);
+  }, [language, name, testContentVersion]);
 
   return state;
 }
 
 export function useProjects(): AsyncState<Project[]> {
   const { language } = useLanguage();
+  const testContentVersion = useTestContentVersion();
   const [state, setState] = useState<AsyncState<Project[]>>({
     data: [],
     loading: true,
@@ -66,7 +101,7 @@ export function useProjects(): AsyncState<Project[]> {
         if (err.name !== "AbortError") setState({ data: [], loading: false, error: err });
       });
     return () => ctrl.abort();
-  }, [language]);
+  }, [language, testContentVersion]);
 
   return state;
 }
@@ -101,6 +136,7 @@ export function useArticles(): AsyncState<Article[]> {
 
 export function useProject(slug: string | undefined): AsyncState<Project | null> {
   const { language } = useLanguage();
+  const testContentVersion = useTestContentVersion();
   const [state, setState] = useState<AsyncState<Project | null>>({
     data: null,
     loading: true,
@@ -117,7 +153,7 @@ export function useProject(slug: string | undefined): AsyncState<Project | null>
         if (err.name !== "AbortError") setState({ data: null, loading: false, error: err });
       });
     return () => ctrl.abort();
-  }, [slug, language]);
+  }, [slug, language, testContentVersion]);
 
   return state;
 }

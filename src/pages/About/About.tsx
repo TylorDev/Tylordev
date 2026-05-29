@@ -37,17 +37,17 @@ export default function About() {
             height={88}
           />
           <div className="about-id-text">
-            <h1 className="about-name">TylorDev</h1>
+            <h1 className="about-name">{GITHUB_USER}</h1>
             <p className="about-role">{data.profile.role}</p>
             <div className="about-meta">
-              <span className="about-meta-item"><FiMapPin /> Sp, Brasil</span>
+              <span className="about-meta-item"><FiMapPin /> English, Español. Portugues</span>
               <a
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="about-meta-item about-meta-link"
               >
-                <FiGithub /> @{GITHUB_USER}
+                <FiGithub />
               </a>
             </div>
           </div>
@@ -62,15 +62,8 @@ export default function About() {
 
       <section className="container about-stack">
         <header className="about-stack-head">
-          <span className="eyebrow">Stack</span>
-          <h2 className="section-title">Tools I work with</h2>
-          <p className="section-subtitle">
-            What I reach for first — based on what's shipped on{" "}
-            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="about-stack-link">
-              github.com/{GITHUB_USER}
-            </a>
-            .
-          </p>
+        
+        
         </header>
 
         {STACK.map((g) => (

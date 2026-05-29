@@ -7,10 +7,11 @@
 
 const WIKI_RAW_BASE = "https://raw.githubusercontent.com/wiki/TylorDev/Tylordev";
 const WIKI_LOCALE_SEPARATOR = "%E2%80%90";
+const LOCAL_TEST_BASE = "/Test";
 const BASE_MARKDOWN_URL = `${WIKI_RAW_BASE}/Tylordev.md`;
 const LOCALE_MARKDOWN_URLS: Record<string, string> = {
-  "es-mx": `${WIKI_RAW_BASE}/Tylordev${WIKI_LOCALE_SEPARATOR}es.md`,
-  "pt-br": `${WIKI_RAW_BASE}/Tylordev${WIKI_LOCALE_SEPARATOR}pt.md`,
+  "es-mx": import.meta.env.DEV ? `${LOCAL_TEST_BASE}/Tylordev-es.md` : `${WIKI_RAW_BASE}/Tylordev${WIKI_LOCALE_SEPARATOR}es.md`,
+  "pt-br": import.meta.env.DEV ? `${LOCAL_TEST_BASE}/Tylordev-pt.md` : `${WIKI_RAW_BASE}/Tylordev${WIKI_LOCALE_SEPARATOR}pt.md`,
 };
 
 type StaticSection = Record<string, unknown>;
@@ -30,6 +31,12 @@ function normalizePageName(pageName: string): string {
 }
 
 async function fetchText(url: string): Promise<string | null> {
+  if (import.meta.env.DEV && url.startsWith(LOCAL_TEST_BASE)) {
+    return fetch(`${url}?t=${Date.now()}`)
+      .then((res) => (res.ok ? res.text() : null))
+      .catch(() => null);
+  }
+
   if (Object.prototype.hasOwnProperty.call(_cache, url)) return _cache[url] ?? null;
 
   const existingPromise = _promises[url];
@@ -346,9 +353,12 @@ function deepMerge<T>(base: T, patch: unknown): T {
 }
 
 async function loadMarkdownContent(lang: string): Promise<StaticContent | null> {
-  if (Object.prototype.hasOwnProperty.call(_contentCache, lang)) return _contentCache[lang] ?? null;
+  if (!import.meta.env.DEV && Object.prototype.hasOwnProperty.call(_contentCache, lang)) {
+    return _contentCache[lang] ?? null;
+  }
 
-  const baseMarkdown = await fetchText(BASE_MARKDOWN_URL);
+  const baseMarkdownUrl = import.meta.env.DEV ? `${LOCAL_TEST_BASE}/Tylordev.md` : BASE_MARKDOWN_URL;
+  const baseMarkdown = await fetchText(baseMarkdownUrl);
   if (!baseMarkdown) {
     _contentCache[lang] = null;
     return null;
@@ -383,6 +393,12 @@ export function invalidateStaticCache() {
   _cache = {};
   _promises = {};
   _contentCache = {};
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    invalidateStaticCache();
+  });
 }
 
 /** Export the content object as a downloadable JSON file for legacy admin flows. */

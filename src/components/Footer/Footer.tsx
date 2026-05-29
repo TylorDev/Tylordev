@@ -1,4 +1,5 @@
-import { FaGithub, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FiArrowUpRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
 import { usePage } from "../../lib/hooks";
@@ -23,38 +24,41 @@ export default function Footer() {
     <footer className="ftr">
       <div className="container ftr-inner">
         <div className="ftr-brand">
-          <img src={data.logoSrc} alt={data.logoAlt} width={36} height={36} />
-          <p>Built with React. Designed for speed.</p>
+          <span className="ftr-logo">
+            <img src={data.logoSrc} alt={data.logoAlt} width={42} height={42} />
+          </span>
+          <p>{data.footerText}</p>
         </div>
 
-        <div className="ftr-cols">
-          <div>
-            <h4>Navigate</h4>
+        <nav className="ftr-section ftr-nav" aria-label="Footer navigation">
+          <h4>Navigate</h4>
+          <div className="ftr-links">
             <Link to={`/${language}/about`}>{data.links.about}</Link>
             <Link to={`/${language}/projects`}>{data.links.projects}</Link>
           </div>
-          <div>
-            <h4>Social</h4>
-            <a href={data.links.github} target="_blank" rel="noreferrer">
-              <FaGithub /> GitHub
+        </nav>
+
+        <div className="ftr-section ftr-social">
+          <h4>Social</h4>
+          <div className="ftr-social-links">
+            <a href={data.links.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+              <FaGithub />
             </a>
-            <a href={data.links.linkedIn} target="_blank" rel="noreferrer">
-              <FaLinkedin /> LinkedIn
+            <a href={data.links.linkedIn} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <FaLinkedinIn />
             </a>
-            <a href={data.links.instagram} target="_blank" rel="noreferrer">
-              <FaInstagramSquare /> Instagram
+            <a href={data.links.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
+              <FaInstagram />
             </a>
-          </div>
-          <div>
-            <h4>Contact</h4>
-            <a href={`mailto:${data.privacyPolicy}`}>{data.privacyPolicy}</a>
           </div>
         </div>
-      </div>
 
-      <div className="ftr-bottom container">
-        <span>© {new Date().getFullYear()} {data.footerText}</span>
-        <span>{data.footerDynamicText}</span>
+        <div className="ftr-cta">
+         
+          <Link to={`/${language}/contact`} className="ftr-cta-btn">
+             <FiArrowUpRight />
+          </Link>
+        </div>
       </div>
     </footer>
   );

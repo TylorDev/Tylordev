@@ -1,4 +1,4 @@
-@import "../../styles/tokens";
+@use "sass:color";
 
 .pdetail {
   &-hero {
@@ -76,8 +76,8 @@
       color: #000;
 
       &:hover {
-        background: lighten($success, 5%);
-        border-color: lighten($success, 5%);
+        background: color.adjust($success, $lightness: 5%);
+        border-color: color.adjust($success, $lightness: 5%);
         box-shadow: 0 0 20px rgba($success, 0.3);
       }
     }

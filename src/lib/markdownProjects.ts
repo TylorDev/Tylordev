@@ -3,6 +3,7 @@ import type { RawButton, RawProject, RawSection, RawTranslation } from "./types"
 const GITHUB_USER = "TylorDev";
 const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`;
 const WIKI_LOCALE_SEPARATOR = "\u2010";
+const LOCAL_TEST_BASE = "/Test";
 
 const RAW_SHAPE_HEADING = "## RawProject shape in Markdown";
 const TRANSLATION_PATCH_HEADING = "## RawProject translation patch in Markdown";
@@ -626,7 +627,7 @@ export function parseMarkdownProjectTranslationPatch(
 
 async function fetchText(url: string, signal?: AbortSignal): Promise<string | null> {
   try {
-    const res = await fetch(url, { signal });
+    const res = await fetch(url, { signal, cache: import.meta.env.DEV ? "no-store" : "default" });
     if (!res.ok) return null;
     return res.text();
   } catch (err) {
@@ -639,11 +640,33 @@ function wikiMarkdownUrl(repoName: string, fileName: string): string {
   return `https://raw.githubusercontent.com/wiki/${GITHUB_USER}/${repoName}/${encodeURIComponent(fileName)}`;
 }
 
+function localMarkdownFileName(repoName: string, locale?: "Es" | "Pt"): string {
+  return locale ? `${repoName}-${locale}.md` : `${repoName}.md`;
+}
+
+function markdownUrl(repoName: string, locale?: "Es" | "Pt"): string {
+  if (import.meta.env.DEV) {
+    return `${LOCAL_TEST_BASE}/${encodeURIComponent(localMarkdownFileName(repoName, locale))}`;
+  }
+
+  return wikiMarkdownUrl(
+    repoName,
+    locale ? `${repoName}${WIKI_LOCALE_SEPARATOR}${locale}.md` : `${repoName}.md`
+  );
+}
+
+function reposUrl(): string {
+  return import.meta.env.DEV ? `${LOCAL_TEST_BASE}/repos.json` : GITHUB_REPOS_URL;
+}
+
 export async function fetchRemoteMarkdownProjects(
   signal?: AbortSignal
 ): Promise<RawProject[]> {
   try {
-    const reposRes = await fetch(GITHUB_REPOS_URL, { signal });
+    const reposRes = await fetch(reposUrl(), {
+      signal,
+      cache: import.meta.env.DEV ? "no-store" : "default",
+    });
     if (!reposRes.ok) return [];
 
     const repos = (await reposRes.json()) as GithubRepo[];
@@ -651,22 +674,15 @@ export async function fetchRemoteMarkdownProjects(
       repos
         .filter((repo) => repo.name)
         .map(async (repo) => {
-          const markdownUrl = wikiMarkdownUrl(repo.name, `${repo.name}.md`);
-          const markdown = await fetchText(markdownUrl, signal);
+          const markdown = await fetchText(markdownUrl(repo.name), signal);
           const project = markdown ? parseMarkdownProject(markdown) : null;
           if (!project) return null;
 
           const patches = await Promise.all([
-            fetchText(
-              wikiMarkdownUrl(repo.name, `${repo.name}${WIKI_LOCALE_SEPARATOR}Es.md`),
-              signal
-            ).then((patchMarkdown) =>
+            fetchText(markdownUrl(repo.name, "Es"), signal).then((patchMarkdown) =>
               patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "es-mx") : null
             ),
-            fetchText(
-              wikiMarkdownUrl(repo.name, `${repo.name}${WIKI_LOCALE_SEPARATOR}Pt.md`),
-              signal
-            ).then((patchMarkdown) =>
+            fetchText(markdownUrl(repo.name, "Pt"), signal).then((patchMarkdown) =>
               patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "pt-br") : null
             ),
           ]);

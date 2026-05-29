@@ -1,55 +1,36 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import { FiArrowRight, FiDownload } from "react-icons/fi";
+import { FaGithub } from "react-icons/fa";
+import { SiElectron, SiNextdotjs, SiReact, SiTypescript } from "react-icons/si";
 import { useLanguage } from "../../context/LanguageContext";
 import { usePage, useProjects } from "../../lib/hooks";
-import type { HeroPage, AboutPage } from "../../lib/types";
+import type { AboutPage } from "../../lib/types";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import Skeleton from "../../components/Skeleton/Skeleton";
 import "./Home.scss";
 
+const ABOUT_TECHS = [
+  { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+  { name: "React", icon: SiReact, color: "#61DAFB" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+  { name: "Electron", icon: SiElectron, color: "#47848F" },
+];
+
 export default function Home() {
   const { language } = useLanguage();
-  const { data: hero, loading: heroLoading } = usePage<HeroPage>("Hero");
+
   const { data: about } = usePage<AboutPage>("About");
   const { data: projects, loading: pLoading } = useProjects();
   const navigate = useNavigate();
 
   return (
     <div className="home fadeIn">
-      {/* HERO */}
-      <section className="hero">
-        <div className="hero-dots" aria-hidden />
-        <div className="container hero-inner">
-          <span className="eyebrow">React · Next.js · NestJS · TypeScript</span>
-          {heroLoading || !hero ? (
-            <>
-              <Skeleton height={56} radius={6} />
-              <Skeleton height={28} width="80%" radius={6} />
-              <Skeleton height={28} width="60%" radius={6} />
-            </>
-          ) : (
-            <>
-              <h1 className="hero-title">
-                <span className="gradient-text">{hero.hero.title}</span>
-              </h1>
-              <p className="hero-subtitle">{hero.hero.subtitle}</p>
-              <div className="hero-cta">
-                <Link to={`/${language}/projects`} className="btn btn-primary">
-                  {hero.hero.post.buttonText} <FiArrowRight />
-                </Link>
-                <Link to={`/${language}/about`} className="btn">
-                  About <FiArrowUpRight />
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-      </section>
+  
       {/* ABOUT TEASER */}
       {about && (
-        <section className="container section about-teaser">
+        <section className="container about-teaser">
           <div className="glass about-teaser-card">
-            <img src={about.profile.imageSrc} alt={about.profile.name} className="about-teaser-img" />
+            <img src="logo.svg" alt={about.profile.name} className="about-teaser-img" />
             <div>
               <span className="eyebrow">{about.header.title}</span>
               <h2 className="section-title" style={{ marginTop: 12 }}>
@@ -59,21 +40,47 @@ export default function Home() {
               <p style={{ color: "#a1a1aa", marginTop: 12, maxWidth: 560 }}>
                 {about.paragraphs[0]}
               </p>
-              <Link to={`/${language}/about`} className="btn" style={{ marginTop: 20 }}>
-                Read more <FiArrowRight />
-              </Link>
+
+              <div className="about-teaser-techs" aria-label="Technologies">
+                {ABOUT_TECHS.map((tech) => {
+                  const Icon = tech.icon;
+                  return (
+                    <span key={tech.name} className="about-teaser-tech">
+                      <Icon color={tech.color} />
+                      {tech.name}
+                    </span>
+                  );
+                })}
+              </div>
+
+              <div className="about-teaser-actions">
+                <Link to={`/${language}/about`} className="btn">
+                  Read more <FiArrowRight />
+                </Link>
+                <a href="/cv.pdf" download="TylorDev-CV.pdf" className="btn btn-primary">
+                  Download CV <FiDownload />
+                </a>
+                <a
+                  href="https://github.com/TylorDev"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-ghost"
+                >
+                  Github <FaGithub />
+                </a>
+              </div>
             </div>
           </div>
         </section>
       )}
 
       {/* PROJECTS PREVIEW */}
-      <section className="container section">
+      <section className="container">
         <div className="section-head">
           <div>
             <span className="eyebrow">Work</span>
-            <h2 className="section-title">Selected projects</h2>
-            <p className="section-subtitle">Recent work — open source &amp; client.</p>
+    
+
           </div>
           <Link to={`/${language}/projects`} className="btn btn-ghost">
             All projects <FiArrowRight />

@@ -16,9 +16,11 @@ export default function Contact() {
   const { data, loading } = usePage<ContactPage>("Contact");
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const onSubmit = async (form: FormData) => {
     try {
+      setServerError("");
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -28,12 +30,14 @@ export default function Contact() {
       });
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        const errData = await response.json().catch(() => null);
+        throw new Error(errData?.error || `Error: ${response.status}`);
       }
 
       setSubmitted(true);
     } catch (err) {
       console.error("Form submit failed", err);
+      setServerError(err instanceof Error ? err.message : "Algo salió mal al enviar el mensaje.");
     }
   };
 
@@ -92,7 +96,7 @@ export default function Contact() {
               placeholder={data.formFields.email.placeholder}
               {...register("email", {
                 required: data.formFields.email.errorMessage.required,
-                pattern: { value: /^\S+@\S+$/i, message: data.formFields.email.errorMessage.invalid },
+                pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: data.formFields.email.errorMessage.invalid },
               })}
             />
             {errors.email && <span className="contact-error">{errors.email.message}</span>}
@@ -109,6 +113,7 @@ export default function Contact() {
             {errors.message && <span className="contact-error">{errors.message.message}</span>}
           </div>
 
+          {serverError && <div className="contact-error" style={{ marginBottom: 16 }}>{serverError}</div>}
           <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
             {isSubmitting ? data.sendingLabel : data.formFields.submitButton} <FiSend />
           </button>

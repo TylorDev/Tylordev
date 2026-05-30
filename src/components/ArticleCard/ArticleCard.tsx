@@ -12,7 +12,7 @@ export default function ArticleCard({ article, onClick }: Props) {
     <article className="acard fadeIn" onClick={() => onClick(slug)} role="button" tabIndex={0}>
       <div className="acard-cover">
         {data.coverImageSrc ? (
-          <img src={data.coverImageSrc} alt={data.title} loading="lazy" />
+          <img src={data.coverImageSrc} alt={data.title} loading="lazy" decoding="async" />
         ) : (
           <div className="acard-cover-empty" />
         )}

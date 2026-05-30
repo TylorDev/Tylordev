@@ -63,11 +63,12 @@ export default function Projects() {
             </div>
           ))
           : filtered.length > 0
-            ? filtered.map((p) => (
+            ? filtered.map((p, index) => (
               <ProjectCard
                 key={p.slug}
                 project={p}
                 onClick={(slug) => navigate(`/${language}/projects/${slug}`)}
+                priority={index === 0}
               />
             ))
             : (

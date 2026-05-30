@@ -148,8 +148,12 @@
     width: 22px;
     height: 22px;
     flex-shrink: 0;
-    // Color is applied inline (per-brand), so the SVG inherits it.
-    & > svg { display: block; }
+    border: 1px solid currentColor;
+    border-radius: $radius-sm;
+    font-family: $mono;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
   }
 
   &-name {

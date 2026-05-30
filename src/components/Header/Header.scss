@@ -1,13 +1,15 @@
 .hdr {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 120;
   height: $header-h;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid $border;
 
   &-inner {
+    position: relative;
+    z-index: 3;
     height: 100%;
     display: flex;
     align-items: center;
@@ -36,6 +38,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    margin-left: auto;
 
     a {
       color: $text-dim;
@@ -92,26 +95,102 @@
 
   &-burger {
     display: none;
+    position: relative;
+    z-index: 3;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-sm;
     color: $text;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: $accent-soft;
+    }
   }
 
-  @media (max-width: $bp-md) {
-    &-burger { display: block; }
+  &-overlay {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    &-inner {
+      gap: 12px;
+    }
+
+    &-logo {
+      min-width: 0;
+    }
+
+    &-burger {
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+
     &-nav {
       position: fixed;
-      inset: $header-h 0 auto 0;
+      top: calc($header-h + 8px);
+      left: 12px;
+      right: 12px;
       flex-direction: column;
-      align-items: flex-start;
-      padding: 20px 24px;
-      gap: 8px;
-      background: $bg;
-      border-bottom: 1px solid $border;
-      transform: translateY(-110%);
-      transition: transform 0.2s ease;
-      &.open { transform: translateY(0); }
+      align-items: stretch;
+      margin-left: 0;
+      padding: 16px;
+      gap: 10px;
+      background: rgba(10, 10, 10, 0.98);
+      border: 1px solid $border-strong;
+      border-radius: $radius;
+      box-shadow: $shadow-lg;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+      z-index: 3;
 
-      a { width: 100%; padding: 10px 12px; }
+      &.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      a {
+        width: 100%;
+        padding: 12px 14px;
+      }
     }
-    &-lang { margin-left: 0; }
+
+    &-lang {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 100%;
+      margin-left: 0;
+      margin-top: 6px;
+
+      button {
+        min-height: 40px;
+      }
+    }
+
+    &-overlay {
+      display: block;
+      position: fixed;
+      inset: $header-h 0 0 0;
+      border: 0;
+      background: rgba(0, 0, 0, 0.48);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      z-index: 2;
+
+      &.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
   }
 }

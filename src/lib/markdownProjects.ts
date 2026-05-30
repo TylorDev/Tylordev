@@ -4,6 +4,7 @@ const GITHUB_USER = "TylorDev";
 const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`;
 const WIKI_LOCALE_SEPARATOR = "\u2010";
 const LOCAL_TEST_BASE = "/Test";
+const REMOTE_FETCH_TIMEOUT_MS = 3500;
 
 const RAW_SHAPE_HEADING = "## RawProject shape in Markdown";
 const TRANSLATION_PATCH_HEADING = "## RawProject translation patch in Markdown";
@@ -16,6 +17,14 @@ interface GithubRepo {
   homepage: string | null;
   topics: string[];
   pushed_at: string | null;
+}
+
+let remoteProjectsPromise: Promise<RawProject[]> | null = null;
+
+function createTimeoutSignal(timeoutMs: number): AbortSignal {
+  const ctrl = new AbortController();
+  globalThis.setTimeout(() => ctrl.abort(), timeoutMs);
+  return ctrl.signal;
 }
 
 interface ProjectTranslationPatch {
@@ -659,10 +668,9 @@ function reposUrl(): string {
   return import.meta.env.DEV ? `${LOCAL_TEST_BASE}/repos.json` : GITHUB_REPOS_URL;
 }
 
-export async function fetchRemoteMarkdownProjects(
-  signal?: AbortSignal
-): Promise<RawProject[]> {
+async function loadRemoteMarkdownProjects(): Promise<RawProject[]> {
   try {
+    const signal = createTimeoutSignal(REMOTE_FETCH_TIMEOUT_MS);
     const reposRes = await fetch(reposUrl(), {
       signal,
       cache: import.meta.env.DEV ? "no-store" : "default",
@@ -713,7 +721,17 @@ export async function fetchRemoteMarkdownProjects(
 
     return projects.filter((project): project is RawProject => project !== null);
   } catch (err) {
-    if (err instanceof Error && err.name === "AbortError") throw err;
     return [];
   }
+}
+
+export function fetchRemoteMarkdownProjects(): Promise<RawProject[]> {
+  if (!remoteProjectsPromise) {
+    remoteProjectsPromise = loadRemoteMarkdownProjects();
+  }
+  return remoteProjectsPromise;
+}
+
+export function invalidateRemoteMarkdownProjectsCache() {
+  remoteProjectsPromise = null;
 }

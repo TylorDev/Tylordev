@@ -64,9 +64,10 @@
     line-height: 1;
     background: rgba(255, 255, 255, 0.03);
 
-    svg {
-      width: 15px;
-      height: 15px;
+    span {
+      min-width: 16px;
+      font-weight: 600;
+      text-align: center;
       flex: 0 0 auto;
     }
   }

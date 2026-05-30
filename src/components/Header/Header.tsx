@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useLanguage } from "../../context/LanguageContext";
 import { usePage } from "../../lib/hooks";
@@ -18,9 +18,35 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const navId = "site-mobile-nav";
+  const previousOverflow = useRef("");
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.search, location.hash]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    previousOverflow.current = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow.current;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   const handleLang = (next: Locale) => {
     setLanguage(next);
+    setOpen(false);
     const parts = location.pathname.split("/").filter(Boolean);
     parts[0] = next;
     navigate(`/${parts.join("/")}${location.search}${location.hash}`);
@@ -52,7 +78,11 @@ export default function Header() {
         
         </NavLink>
 
-        <nav className={`hdr-nav ${open ? "open" : ""}`}>
+        <nav
+          id={navId}
+          className={`hdr-nav ${open ? "open" : ""}`}
+          aria-hidden={open ? "false" : "true"}
+        >
           <NavLink to={`/${language}/about`} onClick={() => setOpen(false)}>{navItems.about}</NavLink>
           <NavLink to={`/${language}/projects`} onClick={() => setOpen(false)}>{navItems.projects}</NavLink>
           <NavLink to={`/${language}/contact`} onClick={() => setOpen(false)}>{navItems.contact}</NavLink>
@@ -73,13 +103,24 @@ export default function Header() {
         </nav>
 
         <button
+          type="button"
           className="hdr-burger"
           onClick={() => setOpen((v) => !v)}
+          aria-controls={navId}
+          aria-expanded={open}
           aria-label={open ? aria.closeMenu : aria.openMenu}
         >
           {open ? <FiX size={22} /> : <FiMenu size={22} />}
         </button>
       </div>
+      <button
+        type="button"
+        className={`hdr-overlay ${open ? "open" : ""}`}
+        onClick={() => setOpen(false)}
+        aria-hidden={open ? "false" : "true"}
+        aria-label={aria.closeMenu}
+        tabIndex={open ? 0 : -1}
+      />
     </header>
   );
 }

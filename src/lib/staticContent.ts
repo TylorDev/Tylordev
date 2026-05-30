@@ -8,6 +8,7 @@ import type { IdentityContent, Locale } from "./types";
 const WIKI_RAW_BASE = "https://raw.githubusercontent.com/wiki/TylorDev/Tylordev";
 const LOCAL_TEST_BASE = "/Test";
 const BASE_MARKDOWN_URL = `${WIKI_RAW_BASE}/Tylordev.md`;
+const REMOTE_FETCH_TIMEOUT_MS = 2500;
 
 type StaticSection = Record<string, unknown>;
 type StaticContent = Record<string, StaticSection>;
@@ -310,6 +311,7 @@ const SITE_COPY_BY_LOCALE: Record<Locale, StaticContent> = {
 };
 
 let _cache: Partial<Record<string, string | null>> = {};
+let _textPromises: Partial<Record<string, Promise<string | null>>> = {};
 let _promise: Promise<StaticSection | null> | null = null;
 let _githubProfilePromise: Promise<GitHubProfile | null> | null = null;
 let _githubSocialAccountsPromise: Promise<GitHubSocialAccount[]> | null = null;
@@ -346,8 +348,12 @@ async function fetchText(url: string): Promise<string | null> {
   }
 
   if (Object.prototype.hasOwnProperty.call(_cache, url)) return _cache[url] ?? null;
+  if (_textPromises[url]) return _textPromises[url] ?? null;
 
-  return fetch(url)
+  const ctrl = new AbortController();
+  const timer = globalThis.setTimeout(() => ctrl.abort(), REMOTE_FETCH_TIMEOUT_MS);
+
+  _textPromises[url] = fetch(url, { signal: ctrl.signal })
     .then((res) => (res.ok ? res.text() : null))
     .then((text) => {
       _cache[url] = text;
@@ -356,7 +362,13 @@ async function fetchText(url: string): Promise<string | null> {
     .catch(() => {
       _cache[url] = null;
       return null;
+    })
+    .finally(() => {
+      globalThis.clearTimeout(timer);
+      delete _textPromises[url];
     });
+
+  return _textPromises[url] ?? null;
 }
 
 function parseIdentityMarkdown(markdown: string): StaticSection | null {
@@ -408,9 +420,14 @@ async function fetchGitHubProfile(username: string): Promise<GitHubProfile | nul
   if (!username) return null;
   if (_githubProfilePromise) return _githubProfilePromise;
 
-  _githubProfilePromise = fetch(`https://api.github.com/users/${encodeURIComponent(username)}`)
+  const ctrl = new AbortController();
+  const timer = globalThis.setTimeout(() => ctrl.abort(), REMOTE_FETCH_TIMEOUT_MS);
+  _githubProfilePromise = fetch(`https://api.github.com/users/${encodeURIComponent(username)}`, {
+    signal: ctrl.signal,
+  })
     .then((res) => (res.ok ? res.json() as Promise<GitHubProfile> : null))
-    .catch(() => null);
+    .catch(() => null)
+    .finally(() => globalThis.clearTimeout(timer));
 
   return _githubProfilePromise;
 }
@@ -419,9 +436,14 @@ async function fetchGitHubSocialAccounts(username: string): Promise<GitHubSocial
   if (!username) return [];
   if (_githubSocialAccountsPromise) return _githubSocialAccountsPromise;
 
-  _githubSocialAccountsPromise = fetch(`https://api.github.com/users/${encodeURIComponent(username)}/social_accounts`)
+  const ctrl = new AbortController();
+  const timer = globalThis.setTimeout(() => ctrl.abort(), REMOTE_FETCH_TIMEOUT_MS);
+  _githubSocialAccountsPromise = fetch(`https://api.github.com/users/${encodeURIComponent(username)}/social_accounts`, {
+    signal: ctrl.signal,
+  })
     .then((res) => (res.ok ? res.json() as Promise<GitHubSocialAccount[]> : []))
-    .catch(() => []);
+    .catch(() => [])
+    .finally(() => globalThis.clearTimeout(timer));
 
   return _githubSocialAccountsPromise;
 }
@@ -570,6 +592,7 @@ export async function fetchRemotePage<T>(lang: string, pageName: string): Promis
 
 export function invalidateStaticCache() {
   _cache = {};
+  _textPromises = {};
   _promise = null;
   _githubProfilePromise = null;
   _githubSocialAccountsPromise = null;

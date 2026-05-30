@@ -20,7 +20,7 @@ export default function TechSelector({ value, onChange }: TechSelectorProps) {
     .filter(Boolean);
 
   const selectedTechs = selectedNames
-    .map((name) => FLAT_STACK.find((t) => t.name === name) || { name, icon: () => null, color: "#fff" })
+    .map((name) => FLAT_STACK.find((t) => t.name === name) || { name, label: name.slice(0, 2).toUpperCase(), color: "#fff" })
     .filter(Boolean) as Tech[];
 
   // Close dropdown on click outside
@@ -59,7 +59,7 @@ export default function TechSelector({ value, onChange }: TechSelectorProps) {
           {selectedTechs.length === 0 && <span className="tech-placeholder">Select technologies...</span>}
           {selectedTechs.map((tech) => (
             <span key={tech.name} className="tech-tag" style={{ "--c": tech.color } as any}>
-              <tech.icon size={12} />
+              <span className="tech-mini">{tech.label}</span>
               {tech.name}
               <button
                 type="button"
@@ -99,7 +99,7 @@ export default function TechSelector({ value, onChange }: TechSelectorProps) {
                   onClick={() => toggle(tech.name)}
                 >
                   <span className="tech-icon" style={{ color: tech.color }}>
-                    <tech.icon size={16} />
+                    {tech.label}
                   </span>
                   {tech.name}
                 </button>

@@ -4,8 +4,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Skeleton from "./components/Skeleton/Skeleton";
-import type { Locale } from "./lib/types";
-
+import { isSupportedLocale, resolvePreferredLocale } from "./lib/locale";
 const Home = lazy(() => import("./pages/Home/Home"));
 const Projects = lazy(() => import("./pages/Projects/Projects"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail/ProjectDetail"));
@@ -13,12 +12,15 @@ const About = lazy(() => import("./pages/About/About"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
-const SUPPORTED: Locale[] = ["en-us", "es-mx", "pt-br"];
-
 function LangGuard({ children }: { children: ReactNode }) {
   const { lang } = useParams();
-  if (!SUPPORTED.includes(lang as Locale)) return <Navigate to="/en-us" replace />;
+  if (!isSupportedLocale(lang)) return <Navigate to="/en-us" replace />;
   return <>{children}</>;
+}
+
+function LocaleRedirect() {
+  const locale = resolvePreferredLocale();
+  return <Navigate to={`/${locale}`} replace />;
 }
 
 function SiteLayout() {
@@ -48,7 +50,7 @@ export default function App() {
     <LanguageProvider>
       <Suspense fallback={<PageFallback />}>
         <Routes>
-          <Route path="/" element={<Navigate to="/en-us" replace />} />
+          <Route path="/" element={<LocaleRedirect />} />
 
           <Route
             path="/:lang"

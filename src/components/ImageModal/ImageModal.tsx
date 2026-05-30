@@ -2,7 +2,6 @@ import type React from "react";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import { FiX, FiDownload, FiZoomIn, FiZoomOut } from "react-icons/fi";
-import { useDominantColor } from "../../lib/useDominantColor";
 import "./ImageModal.scss";
 
 const MIN_ZOOM  = 0.5;
@@ -199,6 +198,7 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
           alt={alt}
           className="img-modal-img"
           draggable={false}
+          decoding="async"
           onLoad={onImgLoad}
           style={{ transform, transition: isDragging ? "none" : "transform 0.18s cubic-bezier(0.4,0,0.2,1)" }}
         />
@@ -223,7 +223,6 @@ interface ArticleImageProps {
 
 export default function ArticleImage({ src, alt }: ArticleImageProps) {
   const [open, setOpen] = useState(false);
-  const color = useDominantColor(src);
 
   return (
     <>
@@ -233,10 +232,11 @@ export default function ArticleImage({ src, alt }: ArticleImageProps) {
         className="article-img-trigger"
         onClick={() => setOpen(true)}
         loading="lazy"
+        decoding="async"
         title="Click to enlarge"
         style={{
-          "--img-accent":     color.hex,
-          "--img-accent-rgb": color.rgb,
+          "--img-accent": "#2e2e34",
+          "--img-accent-rgb": "46, 46, 52",
         } as React.CSSProperties}
       />
       {open && <ImageModal src={src} alt={alt} onClose={() => setOpen(false)} />}

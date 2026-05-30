@@ -1,29 +1,24 @@
-// LiquidMetalDivider — full-width animated divider
-// The library (@paper-design/shaders) manages all canvas sizing via its own
-// ResizeObserver + injected CSS. We only control the wrapper geometry here.
-
 .liquid-metal-divider {
-  // Full-width break-out: works even when parent has a max-width container
   position: relative;
   left: 50%;
   width: 100vw;
-  transform: translateX(-50%);
-
-  // Height is controlled by the --lmd-height CSS custom property,
-  // set inline by the React component.
   height: var(--lmd-height, 5px);
   min-height: var(--lmd-height, 5px);
-
-  // The library adds `position: relative; isolation: isolate` to the
-  // parentElement ([data-paper-shader]) — we don't need overflow: hidden
-  // since the canvas is already confined by contain: strict.
   overflow: hidden;
+  transform: translateX(-50%);
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.78), transparent),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.2));
+  background-size: 180% 100%, 100% 100%;
+  animation: liquid-metal-sweep var(--lmd-speed, 0.6s) linear infinite;
+}
 
+@keyframes liquid-metal-sweep {
+  from {
+    background-position: 180% 0, 0 0;
+  }
 
-
-  canvas {
-
-    width: 100000vw;
-    height: 100%;
+  to {
+    background-position: -180% 0, 0 0;
   }
 }

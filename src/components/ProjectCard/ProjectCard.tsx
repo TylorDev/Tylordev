@@ -3,12 +3,12 @@ import type { Project } from "../../lib/types";
 import { FLAT_STACK } from "../../lib/tech";
 import { getTypeIcon } from "../../lib/typeIcons";
 import { useLanguage } from "../../context/LanguageContext";
-import { useDominantColor } from "../../lib/useDominantColor";
 import "./ProjectCard.scss";
 
 interface Props {
   project: Project;
   onClick: (slug: string) => void;
+  priority?: boolean;
 }
 
 const LABELS = {
@@ -17,12 +17,26 @@ const LABELS = {
   "pt-br": { preview: "Pré-visualização", source: "Código Fonte" },
 } as const;
 
-export default function ProjectCard({ project, onClick }: Props) {
+const TYPE_ACCENTS: Record<string, { hex: string; rgb: string }> = {
+  backend: { hex: "#22c55e", rgb: "34, 197, 94" },
+  desktop: { hex: "#38bdf8", rgb: "56, 189, 248" },
+  discord: { hex: "#5865f2", rgb: "88, 101, 242" },
+  frontend: { hex: "#a78bfa", rgb: "167, 139, 250" },
+  mobile: { hex: "#f97316", rgb: "249, 115, 22" },
+};
+
+function getAccent(type: string | undefined, techColor: string | undefined) {
+  const normalized = (type ?? "").toLowerCase();
+  const match = Object.entries(TYPE_ACCENTS).find(([key]) => normalized.includes(key));
+  const hex = match?.[1].hex ?? techColor ?? "#2e2e34";
+  const rgb = match?.[1].rgb ?? "46, 46, 52";
+  return { hex, rgb };
+}
+
+export default function ProjectCard({ project, onClick, priority = false }: Props) {
   const { data, slug } = project;
   const { language } = useLanguage();
   const labels = LABELS[language] ?? LABELS["en-us"];
-
-  const colors = useDominantColor(data.coverImageSrc);
 
   const techNames = (data.technologies ?? "")
     .split(",")
@@ -32,6 +46,7 @@ export default function ProjectCard({ project, onClick }: Props) {
   const techIcons = techNames
     .map(name => FLAT_STACK.find(t => t.name === name))
     .filter(Boolean) as typeof FLAT_STACK;
+  const colors = getAccent(data.type, techIcons[0]?.color);
 
   const previewBtn = data.buttons?.[0];
   const sourceBtn = data.buttons?.[1];
@@ -52,7 +67,11 @@ export default function ProjectCard({ project, onClick }: Props) {
           <img
             src={data.coverImageSrc}
             alt={data.tittle}
-            loading="lazy"
+            loading={priority ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={priority ? "high" : "auto"}
+            width={640}
+            height={400}
           />
         ) : (
           <div className="pcard-cover-empty" />
@@ -81,7 +100,7 @@ export default function ProjectCard({ project, onClick }: Props) {
           <div className="pcard-techs">
             {techIcons.map(tech => (
               <span key={tech.name} style={{ color: tech.color }} title={tech.name}>
-                <tech.icon size={16} />
+                {tech.label}
               </span>
             ))}
           </div>

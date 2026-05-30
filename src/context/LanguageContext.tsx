@@ -1,8 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import type { Locale } from "../lib/types";
-
-const SUPPORTED: Locale[] = ["en-us", "es-mx", "pt-br"];
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES, isSupportedLocale, writeStoredLocale } from "../lib/locale";
 
 interface LanguageCtx {
   language: Locale;
@@ -13,18 +12,23 @@ interface LanguageCtx {
 const LanguageContext = createContext<LanguageCtx | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Locale>("en-us");
+  const [language, setLanguage] = useState<Locale>(DEFAULT_LOCALE);
   const location = useLocation();
 
   useEffect(() => {
     const [, maybe] = location.pathname.split("/");
-    if (SUPPORTED.includes(maybe as Locale) && maybe !== language) {
-      setLanguage(maybe as Locale);
+    if (isSupportedLocale(maybe) && maybe !== language) {
+      setLanguage(maybe);
     }
   }, [location.pathname, language]);
 
+  useEffect(() => {
+    writeStoredLocale(language);
+    document.documentElement.lang = language;
+  }, [language]);
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, supported: SUPPORTED }}>
+    <LanguageContext.Provider value={{ language, setLanguage, supported: SUPPORTED_LOCALES }}>
       {children}
     </LanguageContext.Provider>
   );

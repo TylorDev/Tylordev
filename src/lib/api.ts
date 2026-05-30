@@ -1,5 +1,5 @@
 import { exampleArticles, exampleProjects } from "./fixtures";
-import { fetchRemoteMarkdownProjects } from "./markdownProjects";
+import { fetchRemoteMarkdownProjects, invalidateRemoteMarkdownProjectsCache } from "./markdownProjects";
 import { fetchRemotePage } from "./staticContent";
 import type { Article, Locale, Project, RawArticle, RawProject } from "./types";
 
@@ -17,7 +17,9 @@ interface CacheEntry<T> {
 }
 
 const cache = new Map<string, CacheEntry<unknown>>();
+const pagePromiseCache = new Map<string, Promise<unknown>>();
 const TTL = 5 * 60 * 1000;
+const REMOTE_PROJECTS_FALLBACK_MS = 1200;
 
 async function cachedJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   const hit = cache.get(url) as CacheEntry<T> | undefined;
@@ -27,6 +29,15 @@ async function cachedJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   const data = (await res.json()) as T;
   cache.set(url, { data, t: Date.now() });
   return data;
+}
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | null> {
+  return Promise.race([
+    promise,
+    new Promise<null>((resolve) => {
+      globalThis.setTimeout(() => resolve(null), ms);
+    }),
+  ]);
 }
 
 // Projects + articles: live Railway API with fixture fallback so the
@@ -45,9 +56,9 @@ const isPublished = (item: { publishedAt?: string | null }): boolean =>
   Boolean(item.publishedAt);
 
 export const fetchProjects = async (signal?: AbortSignal): Promise<RawProject[]> => {
-  const remoteProjects = await fetchRemoteMarkdownProjects(signal);
+  const remoteProjects = await withTimeout(fetchRemoteMarkdownProjects(), REMOTE_PROJECTS_FALLBACK_MS);
 
-  if (remoteProjects.length > 0) {
+  if (remoteProjects && remoteProjects.length > 0) {
     return remoteProjects;
   }
 
@@ -67,7 +78,7 @@ export const fetchProjects = async (signal?: AbortSignal): Promise<RawProject[]>
 };
 
 export const fetchProject = async (slug: string, signal?: AbortSignal): Promise<RawProject> => {
-  const remoteProject = (await fetchRemoteMarkdownProjects(signal)).find((p) => p.slug === slug);
+  const remoteProject = (await fetchRemoteMarkdownProjects()).find((p) => p.slug === slug);
   if (remoteProject) return remoteProject;
 
   if (!shouldFetchApi) {
@@ -122,13 +133,20 @@ export const fetchArticle = async (slug: string, signal?: AbortSignal): Promise<
  * Page content: fixed local copy plus remote Identity overlay from the wiki.
  */
 export async function fetchPage<T>(lang: string, name: string): Promise<T> {
-  const page = await fetchRemotePage<T>(lang, name);
+  const key = `${lang}:${name}`;
+  if (!pagePromiseCache.has(key)) {
+    pagePromiseCache.set(key, fetchRemotePage<T>(lang, name));
+  }
+
+  const page = await pagePromiseCache.get(key) as T | null;
   if (!page) throw new Error(`Unknown page "${name}"`);
   return page;
 }
 
 export function invalidateCache() {
   cache.clear();
+  pagePromiseCache.clear();
+  invalidateRemoteMarkdownProjectsCache();
 }
 
 const formatDate = (s?: string | null): string => {

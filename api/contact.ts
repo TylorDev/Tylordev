@@ -8,7 +8,20 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const { name, email, message } = req.body;
+    let { name, email, message } = req.body || {};
+
+    name = typeof name === 'string' ? name.trim() : '';
+    email = typeof email === 'string' ? email.trim() : '';
+    message = typeof message === 'string' ? message.trim() : '';
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
 
     // TODO: Update the 'to' address to the email where you want to receive messages.
     // Ensure you have verified your domain in Resend if you want to use a custom 'from' address.

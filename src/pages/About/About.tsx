@@ -76,10 +76,10 @@ export default function About() {
           <div key={g.group} className="about-stack-group">
             <h4>{g.group}</h4>
             <div className="about-stack-grid">
-              {g.items.map(({ name, icon: Icon, color }) => (
+              {g.items.map(({ name, label, color }) => (
                 <div key={name} className="tech" title={name}>
                   <span className="tech-icon" style={{ color }}>
-                    <Icon size={18} />
+                    {label}
                   </span>
                   <span className="tech-name">{name}</span>
                 </div>

@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiDownload } from "react-icons/fi";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
-import { SiElectron, SiNextdotjs, SiReact, SiTypescript } from "react-icons/si";
 import { useLanguage } from "../../context/LanguageContext";
 import { usePage, useProjects } from "../../lib/hooks";
 import type { AboutPage, HomePage } from "../../lib/types";
@@ -10,10 +9,10 @@ import Skeleton from "../../components/Skeleton/Skeleton";
 import "./Home.scss";
 
 const ABOUT_TECHS = [
-  { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
-  { name: "React", icon: SiReact, color: "#61DAFB" },
-  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-  { name: "Electron", icon: SiElectron, color: "#47848F" },
+  { name: "Next.js", label: "N", color: "#ffffff" },
+  { name: "React", label: "R", color: "#61DAFB" },
+  { name: "TypeScript", label: "TS", color: "#3178C6" },
+  { name: "Electron", label: "E", color: "#47848F" },
 ];
 
 export default function Home() {
@@ -44,10 +43,9 @@ export default function Home() {
 
               <div className="about-teaser-techs" aria-label="Technologies">
                 {ABOUT_TECHS.map((tech) => {
-                  const Icon = tech.icon;
                   return (
                     <span key={tech.name} className="about-teaser-tech">
-                      <Icon color={tech.color} />
+                      <span style={{ color: tech.color }}>{tech.label}</span>
                       {tech.name}
                     </span>
                   );
@@ -116,11 +114,12 @@ export default function Home() {
                 </div>
               </div>
             ))
-            : projects.slice(0, 4).map((p) => (
+            : projects.slice(0, 4).map((p, index) => (
               <ProjectCard
                 key={p.slug}
                 project={p}
                 onClick={(slug) => navigate(`/${language}/projects/${slug}`)}
+                priority={index === 0}
               />
             ))}
         </div>

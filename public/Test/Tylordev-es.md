@@ -8,33 +8,31 @@ nav.projects: Proyectos
 nav.research: Escritos
 nav.resources: Recursos
 nav.contact: Contacto
-
-## Hero
-
-subtitle: Desarrollador independiente enfocado en productos digitales.
-title: Construye productos que la gente realmente disfrute usar.
-post.title: 00/ Intro
-post.content: Diseño y desarrollo experiencias web modernas, desde la estrategia del producto hasta la arquitectura frontend.
-post.buttonText: Contactar
+aria.home: Inicio
+aria.openMenu: Abrir menú
+aria.closeMenu: Cerrar menú
+aria.switchTo: Cambiar a
 
 ## About
 
 header.title: Perfil
-profile.name: Hola, soy Taylor.
-profile.role: [Ingeniero · Diseñador de Producto]
+profile.name: Hola, soy TylorDev.
+profile.role: Fullstack - AI Engineer
+profile.languages: English, Español, Português
+
 paragraphs:
 
-- Soy un desarrollador enfocado en crear aplicaciones web pulidas, rápidas y centradas en la experiencia del usuario.
-- Disfruto combinar ingeniería, diseño de interfaces y visión de producto para construir sistemas intuitivos y eficientes.
-- Mi trabajo suele explorar escalabilidad, sistemas de monetización, arquitectura UI y experiencias digitales pensadas para crecer a largo plazo.
-  history.title: Trabajo reciente
-  history.headerTitle: Historia
-  blogHeader.title: Últimos escritos
-  blog.title: ESCRITOS
+- Desarrollador Full-Stack especializado en crear aplicaciones modernas con Next.js. Construyo y gestiono infraestructuras backend y monitoreo con Railway, asegurando despliegues de producción fluidos mediante Vercel. Mantengo flujos automatizados y eficientes con GitHub para el control de versiones.
+- Complemento esta base técnica con mi experiencia en diseño gráfico y edición. Esta combinación me permite conectar rendimiento backend sólido con interfaces visualmente atractivas y excelentes experiencias de usuario.
+- Cuando no estoy escribiendo código u optimizando hardware de PC, dedico tiempo a mejorar mi portugués, explorar economías impulsadas por jugadores y competir en Counter-Strike.
 
 ## Contact
 
 title: Contacto
+pageHeader.eyebrow: Contacto
+pageHeader.title: Construyamos algo.
+replyTime: Respuesta promedio en menos de 24 horas.
+sendingLabel: Enviando...
 name.label: Nombre
 name.placeholder: Tu nombre
 name.error: El nombre es obligatorio.
@@ -52,14 +50,30 @@ thankYouMessage: Gracias por escribir. Te responderé pronto.
 
 link.about: Sobre mí
 link.projects: Proyectos
-link.blog: Escritos
+headings.navigate: Navegar
+headings.social: Social
 footerText: Estudio independiente de desarrollo. Hecho con React.
+
+## Home
+
+about.readMore: Leer más
+about.downloadCv: Descargar CV
+about.githubLabel: Github
+projects.eyebrow: Trabajo
+projects.allProjects: Todos los proyectos
 
 ## ProjectsContent
 
 mainText: Trabajo seleccionado/
 title: PROYECTOS
+filters.all: Todos
+empty: Todavía no hay proyectos.
 
-## ResearchContent
+## ProjectDetailContent
 
-title: Escritos
+allProjects: Todos los proyectos
+defaultType: Proyecto
+readMore: Leer más
+notFound: Proyecto no encontrado
+backToProjects: Volver a proyectos
+sectionAlt: Sección {number}

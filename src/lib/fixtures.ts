@@ -4,7 +4,10 @@ import type {
   FooterPage,
   HeaderPage,
   HeroPage,
+  HomePage,
   Locale,
+  ProjectDetailContentPage,
+  ProjectsContentPage,
   RawArticle,
   RawProject,
 } from "./types";
@@ -33,6 +36,12 @@ export const examplePages = {
         resources: "Resources",
         contact: "Contact",
       },
+      aria: {
+        home: "Home",
+        openMenu: "Open menu",
+        closeMenu: "Close menu",
+        switchTo: "Switch to",
+      },
     } satisfies HeaderPage,
     "es-mx": {
       logoSrc: LOGO,
@@ -44,6 +53,12 @@ export const examplePages = {
         research: "Notas",
         resources: "Recursos",
         contact: "Contacto",
+      },
+      aria: {
+        home: "Inicio",
+        openMenu: "Abrir menú",
+        closeMenu: "Cerrar menú",
+        switchTo: "Cambiar a",
       },
     } satisfies HeaderPage,
     "pt-br": {
@@ -57,6 +72,12 @@ export const examplePages = {
         resources: "Recursos",
         contact: "Contato",
       },
+      aria: {
+        home: "Início",
+        openMenu: "Abrir menu",
+        closeMenu: "Fechar menu",
+        switchTo: "Mudar para",
+      },
     } satisfies HeaderPage,
   },
 
@@ -67,11 +88,11 @@ export const examplePages = {
       links: {
         about: "About",
         projects: "Projects",
-        blog: "Writing",
-        github: "https://github.com/",
+        github: "https://github.com/TylorDev",
         linkedIn: "https://www.linkedin.com/",
         instagram: "https://www.instagram.com/",
       },
+      headings: { navigate: "Navigate", social: "Social" },
       footerText: "Independent studio. Built with React.",
       privacyPolicy: "hello@example.com",
       footerDynamicText: "v1.0",
@@ -82,11 +103,11 @@ export const examplePages = {
       links: {
         about: "Sobre mí",
         projects: "Proyectos",
-        blog: "Notas",
-        github: "https://github.com/",
+        github: "https://github.com/TylorDev",
         linkedIn: "https://www.linkedin.com/",
         instagram: "https://www.instagram.com/",
       },
+      headings: { navigate: "Navegar", social: "Social" },
       footerText: "Estudio independiente. Hecho con React.",
       privacyPolicy: "hello@example.com",
       footerDynamicText: "v1.0",
@@ -97,11 +118,11 @@ export const examplePages = {
       links: {
         about: "Sobre",
         projects: "Projetos",
-        blog: "Notas",
-        github: "https://github.com/",
+        github: "https://github.com/TylorDev",
         linkedIn: "https://www.linkedin.com/",
         instagram: "https://www.instagram.com/",
       },
+      headings: { navigate: "Navegar", social: "Social" },
       footerText: "Estúdio independente. Feito com React.",
       privacyPolicy: "hello@example.com",
       footerDynamicText: "v1.0",
@@ -153,7 +174,16 @@ export const examplePages = {
   About: {
     "en-us": {
       header: { section: "01/", title: "Profile" },
-      profile: { name: "Hello.", role: "[Engineer · Designer]", username: "@studio", imageSrc: IMG.about },
+      profile: {
+        name: "Hello, I'm TylorDev.",
+        role: "Fullstack - AI Engineer",
+        username: "@TylorDev",
+        imageSrc: IMG.about,
+        displayName: "TylorDev",
+        avatarSrc: "https://avatars.githubusercontent.com/u/107888704?v=4",
+        githubUrl: "https://github.com/TylorDev",
+        languages: "English, Español, Português",
+      },
       paragraphs: [
         "I'm an independent product engineer focused on small teams shipping ambitious software. I've spent the last few years building streaming dashboards, content tooling, and design systems for product-led companies.",
         "My approach: short feedback loops, ruthless scope, taste as a constraint. I prefer one well-built feature over five draft ones.",
@@ -169,7 +199,16 @@ export const examplePages = {
     } satisfies AboutPage,
     "es-mx": {
       header: { section: "01/", title: "Perfil" },
-      profile: { name: "Hola.", role: "[Ingeniero · Diseñador]", username: "@studio", imageSrc: IMG.about },
+      profile: {
+        name: "Hola, soy TylorDev.",
+        role: "Fullstack - AI Engineer",
+        username: "@TylorDev",
+        imageSrc: IMG.about,
+        displayName: "TylorDev",
+        avatarSrc: "https://avatars.githubusercontent.com/u/107888704?v=4",
+        githubUrl: "https://github.com/TylorDev",
+        languages: "English, Español, Português",
+      },
       paragraphs: [
         "Soy ingeniero de producto independiente, enfocado en equipos chicos que publican software ambicioso. Los últimos años los pasé construyendo dashboards en streaming, herramientas de contenido y design systems para empresas product-led.",
         "Mi enfoque: ciclos cortos de feedback, scope acotado y el gusto como restricción. Prefiero una feature bien hecha antes que cinco a medio terminar.",
@@ -185,7 +224,16 @@ export const examplePages = {
     } satisfies AboutPage,
     "pt-br": {
       header: { section: "01/", title: "Perfil" },
-      profile: { name: "Olá.", role: "[Engenheiro · Designer]", username: "@studio", imageSrc: IMG.about },
+      profile: {
+        name: "Olá, eu sou TylorDev.",
+        role: "Fullstack - AI Engineer",
+        username: "@TylorDev",
+        imageSrc: IMG.about,
+        displayName: "TylorDev",
+        avatarSrc: "https://avatars.githubusercontent.com/u/107888704?v=4",
+        githubUrl: "https://github.com/TylorDev",
+        languages: "English, Español, Português",
+      },
       paragraphs: [
         "Sou engenheiro de produto independente, focado em times pequenos publicando software ambicioso. Passei os últimos anos construindo dashboards em streaming, ferramentas de conteúdo e design systems para empresas product-led.",
         "Minha abordagem: ciclos curtos de feedback, escopo enxuto e gosto como restrição. Prefiro uma feature bem feita a cinco pela metade.",
@@ -204,6 +252,7 @@ export const examplePages = {
   Contact: {
     "en-us": {
       contactMeta: { title: "Get in touch", email: "hello@example.com" },
+      pageHeader: { eyebrow: "Get in touch", title: "Let's build something." },
       formFields: {
         name: { label: "Name", placeholder: "Your name", errorMessage: "Name is required." },
         email: {
@@ -214,10 +263,13 @@ export const examplePages = {
         message: { label: "Message", placeholder: "Tell me a bit about your project…", errorMessage: "Message is required." },
         submitButton: "Send message",
       },
+      replyTime: "Average reply within 24 hours.",
+      sendingLabel: "Sending...",
       thankYouMessage: "Thanks. I'll get back to you within 24 hours.",
     } satisfies ContactPage,
     "es-mx": {
       contactMeta: { title: "Contacto", email: "hello@example.com" },
+      pageHeader: { eyebrow: "Contacto", title: "Construyamos algo." },
       formFields: {
         name: { label: "Nombre", placeholder: "Tu nombre", errorMessage: "El nombre es obligatorio." },
         email: {
@@ -228,10 +280,13 @@ export const examplePages = {
         message: { label: "Mensaje", placeholder: "Contame un poco sobre tu proyecto…", errorMessage: "El mensaje es obligatorio." },
         submitButton: "Enviar mensaje",
       },
+      replyTime: "Respuesta promedio en menos de 24 horas.",
+      sendingLabel: "Enviando...",
       thankYouMessage: "¡Gracias! Te respondo en menos de 24 horas.",
     } satisfies ContactPage,
     "pt-br": {
       contactMeta: { title: "Contato", email: "hello@example.com" },
+      pageHeader: { eyebrow: "Contato", title: "Vamos construir algo." },
       formFields: {
         name: { label: "Nome", placeholder: "Seu nome", errorMessage: "O nome é obrigatório." },
         email: {
@@ -242,14 +297,97 @@ export const examplePages = {
         message: { label: "Mensagem", placeholder: "Conte um pouco sobre seu projeto…", errorMessage: "A mensagem é obrigatória." },
         submitButton: "Enviar mensagem",
       },
+      replyTime: "Resposta média em até 24 horas.",
+      sendingLabel: "Enviando...",
       thankYouMessage: "Obrigado! Respondo em até 24 horas.",
     } satisfies ContactPage,
   },
 
+  Home: {
+    "en-us": {
+      about: {
+        readMore: "Read more",
+        downloadCv: "Download CV",
+        cvHref: "/cv.pdf",
+        cvFilename: "TylorDev-CV.pdf",
+        githubLabel: "Github",
+        githubUrl: "https://github.com/TylorDev",
+      },
+      projects: { eyebrow: "Work", allProjects: "All projects" },
+    } satisfies HomePage,
+    "es-mx": {
+      about: {
+        readMore: "Leer más",
+        downloadCv: "Descargar CV",
+        cvHref: "/cv.pdf",
+        cvFilename: "TylorDev-CV.pdf",
+        githubLabel: "Github",
+        githubUrl: "https://github.com/TylorDev",
+      },
+      projects: { eyebrow: "Trabajo", allProjects: "Todos los proyectos" },
+    } satisfies HomePage,
+    "pt-br": {
+      about: {
+        readMore: "Ler mais",
+        downloadCv: "Baixar CV",
+        cvHref: "/cv.pdf",
+        cvFilename: "TylorDev-CV.pdf",
+        githubLabel: "Github",
+        githubUrl: "https://github.com/TylorDev",
+      },
+      projects: { eyebrow: "Trabalho", allProjects: "Todos os projetos" },
+    } satisfies HomePage,
+  },
+
   projectsContent: {
-    "en-us": { Projects: { header: { mainText: "Selected work/", tittle: "PROJECTS" } } },
-    "es-mx": { Projects: { header: { mainText: "Trabajo seleccionado/", tittle: "PROYECTOS" } } },
-    "pt-br": { Projects: { header: { mainText: "Trabalhos selecionados/", tittle: "PROJETOS" } } },
+    "en-us": {
+      Projects: {
+        header: { mainText: "Selected work/", tittle: "PROJECTS" },
+        filters: { all: "All" },
+        empty: "No projects yet.",
+      },
+    } satisfies ProjectsContentPage,
+    "es-mx": {
+      Projects: {
+        header: { mainText: "Trabajo seleccionado/", tittle: "PROYECTOS" },
+        filters: { all: "Todos" },
+        empty: "Todavía no hay proyectos.",
+      },
+    } satisfies ProjectsContentPage,
+    "pt-br": {
+      Projects: {
+        header: { mainText: "Trabalhos selecionados/", tittle: "PROJETOS" },
+        filters: { all: "Todos" },
+        empty: "Ainda não há projetos.",
+      },
+    } satisfies ProjectsContentPage,
+  },
+
+  ProjectDetailContent: {
+    "en-us": {
+      allProjects: "All projects",
+      defaultType: "Project",
+      readMore: "Read more",
+      notFound: "Project not found",
+      backToProjects: "Back to projects",
+      sectionAlt: "Section {number}",
+    } satisfies ProjectDetailContentPage,
+    "es-mx": {
+      allProjects: "Todos los proyectos",
+      defaultType: "Proyecto",
+      readMore: "Leer más",
+      notFound: "Proyecto no encontrado",
+      backToProjects: "Volver a proyectos",
+      sectionAlt: "Sección {number}",
+    } satisfies ProjectDetailContentPage,
+    "pt-br": {
+      allProjects: "Todos os projetos",
+      defaultType: "Projeto",
+      readMore: "Ler mais",
+      notFound: "Projeto não encontrado",
+      backToProjects: "Voltar aos projetos",
+      sectionAlt: "Seção {number}",
+    } satisfies ProjectDetailContentPage,
   },
 
   researchContent: {

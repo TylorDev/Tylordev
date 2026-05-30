@@ -2,7 +2,7 @@
 
 ## Header
 
-logoSrc: <img width="127" height="123" alt="image" src="https://github.com/user-attachments/assets/26b2fb16-a088-4bb1-977d-620aa9632099" />
+logoSrc: /logo.svg
 logoAlt: TylorDev Logo
 menuLabel: Menu
 nav.about: About
@@ -10,44 +10,38 @@ nav.projects: Projects
 nav.research: Writing
 nav.resources: Resources
 nav.contact: Contact
-
-## Hero
-
-subtitle: Independent developer crafting systems, interfaces, and digital products.
-title: Build products people actually enjoy using.
-videoSrc:
-post.title: 00/ Intro
-post.content: I design and engineer modern web experiences, from product strategy and UI systems to scalable frontend architecture.
-post.buttonText: Get in touch
+aria.home: Home
+aria.openMenu: Open menu
+aria.closeMenu: Close menu
+aria.switchTo: Switch to
 
 ## About
 
 header.section: 01/
 header.title: Profile
-profile.name: Hello, I'm Jhon Tylor.
+profile.name: Hello, I'm TylorDev.
 profile.role: Fullstack - AI Engineer
 profile.username: @TylorDev
-profile.imageSrc: https://example.com/profile.jpg
+profile.imageSrc: /logo.svg
+profile.displayName: TylorDev
+profile.avatarSrc: https://avatars.githubusercontent.com/u/107888704?v=4
+profile.githubUrl: https://github.com/TylorDev
+profile.languages: English, Español, Português
+
 paragraphs:
 
 - Full-Stack Web Developer specializing in crafting modern applications with Next.js. I build and manage backend infrastructures and monitoring using Railway, ensuring seamless production deployments via Vercel. I maintain efficient, automated workflows relying on GitHub for version control, always operating from an optimized development environment.
-
-- I complement this technical foundation with my background in graphic design and editing. This unique combination allows me to go beyond just writing code, ensuring that robust backend performance translates into visually engaging interfaces and excellent user experiences.
-
-- When I'm not writing code or building and optimizing my PC hardware, I spend my time improving my Portuguese, delving into the player-driven economy of Albion Online, or competing in Counter-Strike. long-term growth.
-
-history.imageSrc: https://placehold.co/600x400?text=History
-history.section: 02/
-history.title: Recent work
-history.headerTitle: History
-blogHeader.title: Latest writing
-blog.title: WRITING
-blog.cornerIcon: arrow
+- I complement this technical foundation with my background in graphic design and editing. This combination helps me connect robust backend performance with visually engaging interfaces and excellent user experiences.
+- When I'm not writing code or optimizing my PC hardware, I spend time improving my Portuguese, exploring player-driven economies, and competing in Counter-Strike.
 
 ## Contact
 
 title: Contact
-email: hello@tylordev.local
+email: hello@tylordev.dev
+pageHeader.eyebrow: Get in touch
+pageHeader.title: Let's build something.
+replyTime: Average reply within 24 hours.
+sendingLabel: Sending...
 name.label: Name
 name.placeholder: Your name
 name.error: Name is required.
@@ -67,16 +61,36 @@ logoSrc: /logo.svg
 logoAlt: TylorDev Logo
 link.about: About
 link.projects: Projects
-link.blog: Writing
+link.github: https://github.com/TylorDev
+link.linkedIn: https://www.linkedin.com/
+link.instagram: https://www.instagram.com/
+headings.navigate: Navigate
+headings.social: Social
 footerText: Independent development studio. Built with React.
-privacyPolicy: Privacy Policy
-footerDynamicText: Available for selected projects.
+
+## Home
+
+about.readMore: Read more
+about.downloadCv: Download CV
+about.cvHref: /cv.pdf
+about.cvFilename: TylorDev-CV.pdf
+about.githubLabel: Github
+about.githubUrl: https://github.com/TylorDev
+projects.eyebrow: Work
+projects.allProjects: All projects
 
 ## ProjectsContent
 
 mainText: Selected work/
 title: PROJECTS
+filters.all: All
+empty: No projects yet.
 
-## ResearchContent
+## ProjectDetailContent
 
-title: Writing
+allProjects: All projects
+defaultType: Project
+readMore: Read more
+notFound: Project not found
+backToProjects: Back to projects
+sectionAlt: Section {number}

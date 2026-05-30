@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 import { SiElectron, SiNextdotjs, SiReact, SiTypescript } from "react-icons/si";
 import { useLanguage } from "../../context/LanguageContext";
 import { usePage, useProjects } from "../../lib/hooks";
-import type { AboutPage } from "../../lib/types";
+import type { AboutPage, HomePage } from "../../lib/types";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import Skeleton from "../../components/Skeleton/Skeleton";
 import "./Home.scss";
@@ -20,6 +20,7 @@ export default function Home() {
   const { language } = useLanguage();
 
   const { data: about } = usePage<AboutPage>("About");
+  const { data: content } = usePage<HomePage>("Home");
   const { data: projects, loading: pLoading } = useProjects();
   const navigate = useNavigate();
 
@@ -55,18 +56,22 @@ export default function Home() {
 
               <div className="about-teaser-actions">
                 <Link to={`/${language}/about`} className="btn">
-                  Read more <FiArrowRight />
+                  {content?.about.readMore ?? "Read more"} <FiArrowRight />
                 </Link>
-                <a href="/cv.pdf" download="TylorDev-CV.pdf" className="btn btn-primary">
-                  Download CV <FiDownload />
+                <a
+                  href={content?.about.cvHref ?? "/cv.pdf"}
+                  download={content?.about.cvFilename ?? "TylorDev-CV.pdf"}
+                  className="btn btn-primary"
+                >
+                  {content?.about.downloadCv ?? "Download CV"} <FiDownload />
                 </a>
                 <a
-                  href="https://github.com/TylorDev"
+                  href={content?.about.githubUrl ?? "https://github.com/TylorDev"}
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-ghost"
                 >
-                  Github <FaGithub />
+                  {content?.about.githubLabel ?? "Github"} <FaGithub />
                 </a>
               </div>
             </div>
@@ -78,12 +83,12 @@ export default function Home() {
       <section className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">Work</span>
+            <span className="eyebrow">{content?.projects.eyebrow ?? "Work"}</span>
     
 
           </div>
           <Link to={`/${language}/projects`} className="btn btn-ghost">
-            All projects <FiArrowRight />
+            {content?.projects.allProjects ?? "All projects"} <FiArrowRight />
           </Link>
         </div>
 

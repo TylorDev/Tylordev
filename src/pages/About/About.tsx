@@ -5,10 +5,6 @@ import type { AboutPage } from "../../lib/types";
 import Skeleton from "../../components/Skeleton/Skeleton";
 import "./About.scss";
 
-const GITHUB_USER = "TylorDev";
-const GITHUB_AVATAR = "https://avatars.githubusercontent.com/u/107888704?v=4";
-const GITHUB_URL = `https://github.com/${GITHUB_USER}`;
-
 export default function About() {
   const { data, loading } = usePage<AboutPage>("About");
 
@@ -29,20 +25,20 @@ export default function About() {
 
         <div className="about-id">
           <img
-            src={GITHUB_AVATAR}
-            alt="TylorDev"
+            src={data.profile.avatarSrc}
+            alt={data.profile.displayName}
             className="about-avatar"
             loading="lazy"
             width={88}
             height={88}
           />
           <div className="about-id-text">
-            <h1 className="about-name">{GITHUB_USER}</h1>
+            <h1 className="about-name">{data.profile.displayName}</h1>
             <p className="about-role">{data.profile.role}</p>
             <div className="about-meta">
-              <span className="about-meta-item"><FiMapPin /> English, Español. Portugues</span>
+              <span className="about-meta-item"><FiMapPin /> {data.profile.languages}</span>
               <a
-                href={GITHUB_URL}
+                href={data.profile.githubUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="about-meta-item about-meta-link"

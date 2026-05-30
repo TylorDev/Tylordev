@@ -1,6 +1,6 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FiMenu, FiX, FiShield } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import { useLanguage } from "../../context/LanguageContext";
 import { usePage } from "../../lib/hooks";
 import type { HeaderPage, Locale } from "../../lib/types";
@@ -33,11 +33,17 @@ export default function Header() {
     resources: "Resources",
     contact: "Contact",
   };
+  const aria = data?.aria ?? {
+    home: "Home",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    switchTo: "Switch to",
+  };
 
   return (
     <header className="hdr">
       <div className="hdr-inner container">
-        <NavLink to={`/${language}`} className="hdr-logo" aria-label="Home">
+        <NavLink to={`/${language}`} className="hdr-logo" aria-label={aria.home}>
           {loading ? (
             <div className="skeleton" style={{ width: 32, height: 32, borderRadius: 8 }} />
           ) : (
@@ -57,27 +63,19 @@ export default function Header() {
                 key={l}
                 className={l === language ? "active" : ""}
                 onClick={() => handleLang(l)}
-                aria-label={`Switch to ${l}`}
+                aria-label={`${aria.switchTo} ${l}`}
               >
                 {langLabel[l]}
               </button>
             ))}
           </div>
 
-          <NavLink
-            className="hdr-admin"
-            to="/admin"
-            aria-label="Admin"
-            onClick={() => setOpen(false)}
-          >
-            <FiShield /> Admin
-          </NavLink>
         </nav>
 
         <button
           className="hdr-burger"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? aria.closeMenu : aria.openMenu}
         >
           {open ? <FiX size={22} /> : <FiMenu size={22} />}
         </button>

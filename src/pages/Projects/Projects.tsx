@@ -1,14 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import { useProjects, usePage } from "../../lib/hooks";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import Skeleton from "../../components/Skeleton/Skeleton";
+import type { ProjectsContentPage } from "../../lib/types";
 import "./Projects.scss";
-
-interface ProjectsContentPage {
-  Projects: { header: { mainText: string; tittle: string } };
-}
 
 export default function Projects() {
   const { language } = useLanguage();
@@ -16,15 +13,20 @@ export default function Projects() {
   const { data, loading } = useProjects();
   const { data: content } = usePage<ProjectsContentPage>("projectsContent");
 
-  const [filter, setFilter] = useState<string>("All");
+  const allLabel = content?.Projects.filters.all ?? "All";
+  const [filter, setFilter] = useState<string>(allLabel);
+
+  useEffect(() => {
+    setFilter(allLabel);
+  }, [allLabel]);
 
   const types = useMemo(() => {
-    const set = new Set<string>(["All"]);
+    const set = new Set<string>([allLabel]);
     data.forEach((p) => p.data.type && set.add(p.data.type));
     return Array.from(set);
-  }, [data]);
+  }, [data, allLabel]);
 
-  const filtered = filter === "All" ? data : data.filter((p) => p.data.type === filter);
+  const filtered = filter === allLabel ? data : data.filter((p) => p.data.type === filter);
 
   return (
     <div className="projects fadeIn">
@@ -70,7 +72,7 @@ export default function Projects() {
             ))
             : (
               <div className="projects-empty glass">
-                <p>No projects yet.</p>
+                <p>{content?.Projects.empty ?? "No projects yet."}</p>
               </div>
             )}
       </section>

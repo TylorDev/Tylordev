@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
 
         <nav className="ftr-section ftr-nav" aria-label="Footer navigation">
-          <h4>Navigate</h4>
+          <h4>{data.headings.navigate}</h4>
           <div className="ftr-links">
             <Link to={`/${language}/about`}>{data.links.about}</Link>
             <Link to={`/${language}/projects`}>{data.links.projects}</Link>
@@ -39,7 +39,7 @@ export default function Footer() {
         </nav>
 
         <div className="ftr-section ftr-social">
-          <h4>Social</h4>
+          <h4>{data.headings.social}</h4>
           <div className="ftr-social-links">
             <a href={data.links.github} target="_blank" rel="noreferrer" aria-label="GitHub">
               <FaGithub />

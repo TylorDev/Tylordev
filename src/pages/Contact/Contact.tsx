@@ -53,8 +53,8 @@ export default function Contact() {
   return (
     <div className="contact fadeIn">
       <header className="container contact-head">
-        <span className="eyebrow">Get in touch</span>
-        <h1 className="section-title gradient-text">Let's build something.</h1>
+        <span className="eyebrow">{data.pageHeader.eyebrow}</span>
+        <h1 className="section-title gradient-text">{data.pageHeader.title}</h1>
       </header>
 
       <div className="container contact-grid">
@@ -63,7 +63,7 @@ export default function Contact() {
           <a href={`mailto:${data.contactMeta.email}`} className="contact-email">
             <FiMail /> {data.contactMeta.email}
           </a>
-          <p>Average reply within 24 hours.</p>
+          <p>{data.replyTime}</p>
         </aside>
 
         <form className="contact-form glass" onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -104,7 +104,7 @@ export default function Contact() {
           </div>
 
           <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-            {isSubmitting ? "Sending…" : data.formFields.submitButton} <FiSend />
+            {isSubmitting ? data.sendingLabel : data.formFields.submitButton} <FiSend />
           </button>
         </form>
       </div>

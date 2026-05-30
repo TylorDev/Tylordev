@@ -108,6 +108,8 @@ export interface Article {
   researchProps: { style: Record<string, string> };
 }
 
+// Legacy Admin/Articles content can still compile, but it is not used by the
+// active public pages.
 export interface HeroPage {
   hero: {
     subtitle: string;
@@ -122,31 +124,51 @@ export interface HeaderPage {
   logoAlt: string;
   menuLabel: string;
   navItems: Record<string, string>;
+  aria: {
+    home: string;
+    openMenu: string;
+    closeMenu: string;
+    switchTo: string;
+  };
 }
 
 export interface FooterPage {
   logoSrc: string;
   logoAlt: string;
   links: Record<string, string>;
+  headings: {
+    navigate: string;
+    social: string;
+  };
   footerText: string;
-  privacyPolicy: string;
-  footerDynamicText: string;
+  privacyPolicy?: string;
+  footerDynamicText?: string;
 }
 
 export interface AboutPage {
   header: { section: string; title: string };
-  profile: { name: string; role: string; username: string; imageSrc: string };
+  profile: {
+    name: string;
+    role: string;
+    username: string;
+    imageSrc: string;
+    displayName: string;
+    avatarSrc: string;
+    githubUrl: string;
+    languages: string;
+  };
   paragraphs: string[];
-  History: {
+  History?: {
     imageSrc: string;
     latest: { header: { section: string; title: string }; headerTitle: string }[];
   };
-  blogHeader: { section: string; title: string };
-  blog: { title: string; cornerLink: { icon: string } };
+  blogHeader?: { section: string; title: string };
+  blog?: { title: string; cornerLink: { icon: string } };
 }
 
 export interface ContactPage {
   contactMeta: { title: string; email: string };
+  pageHeader: { eyebrow: string; title: string };
   formFields: {
     name: { label: string; placeholder: string; errorMessage: string };
     email: {
@@ -157,5 +179,44 @@ export interface ContactPage {
     message: { label: string; placeholder: string; errorMessage: string };
     submitButton: string;
   };
+  replyTime: string;
+  sendingLabel: string;
   thankYouMessage: string;
+}
+
+export interface HomePage {
+  about: {
+    readMore: string;
+    downloadCv: string;
+    cvHref: string;
+    cvFilename: string;
+    githubLabel: string;
+    githubUrl: string;
+  };
+  projects: {
+    eyebrow: string;
+    allProjects: string;
+  };
+}
+
+export interface ProjectsContentPage {
+  Projects: {
+    header: {
+      mainText: string;
+      tittle: string;
+    };
+    filters: {
+      all: string;
+    };
+    empty: string;
+  };
+}
+
+export interface ProjectDetailContentPage {
+  allProjects: string;
+  defaultType: string;
+  readMore: string;
+  notFound: string;
+  backToProjects: string;
+  sectionAlt: string;
 }

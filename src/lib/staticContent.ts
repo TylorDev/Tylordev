@@ -19,7 +19,6 @@ type StaticContent = Record<string, StaticSection>;
 
 const PAGE_ALIASES: Record<string, string> = {
   ProjectsContent: "projectsContent",
-  ResearchContent: "researchContent",
 };
 
 let _cache: Partial<Record<string, string | null>> = {};
@@ -164,17 +163,14 @@ function mapHeader(section: StaticSection): StaticSection {
     logoAlt: section.logoAlt,
     menuLabel: section.menuLabel,
     navItems: section.nav,
+    aria: section.aria,
   };
 }
 
-function mapHero(section: StaticSection): StaticSection {
+function mapHome(section: StaticSection): StaticSection {
   return {
-    hero: {
-      subtitle: section.subtitle,
-      title: section.title,
-      videoSrc: section.videoSrc,
-      post: section.post,
-    },
+    about: section.about,
+    projects: section.projects,
   };
 }
 
@@ -217,6 +213,7 @@ function mapContact(section: StaticSection): StaticSection {
 
   return {
     contactMeta: { title: section.title, email: section.contactEmail },
+    pageHeader: section.pageHeader,
     formFields: {
       name: {
         label: name?.label,
@@ -238,6 +235,8 @@ function mapContact(section: StaticSection): StaticSection {
       },
       submitButton: section.submitButton,
     },
+    replyTime: section.replyTime,
+    sendingLabel: section.sendingLabel,
     thankYouMessage: section.thankYouMessage,
   };
 }
@@ -247,9 +246,8 @@ function mapFooter(section: StaticSection): StaticSection {
     logoSrc: section.logoSrc,
     logoAlt: section.logoAlt,
     links: section.link,
+    headings: section.headings,
     footerText: section.footerText,
-    privacyPolicy: section.privacyPolicy,
-    footerDynamicText: section.footerDynamicText,
   };
 }
 
@@ -260,16 +258,18 @@ function mapProjectsContent(section: StaticSection): StaticSection {
         mainText: section.mainText,
         tittle: section.title,
       },
+      filters: section.filters,
+      empty: section.empty,
     },
   };
 }
 
-function mapResearchContent(section: StaticSection): StaticSection {
-  return {
-    Research: {
-      title: section.title,
-    },
-  };
+function mapProjectDetailContent(section: StaticSection): StaticSection {
+  return section;
+}
+
+function mapCommonUi(section: StaticSection): StaticSection {
+  return section;
 }
 
 function pruneEmpty<T>(value: T): T | undefined {
@@ -297,8 +297,8 @@ function mapSection(pageName: string, section: StaticSection): StaticSection | n
     switch (normalizePageName(pageName)) {
       case "Header":
         return mapHeader(section);
-      case "Hero":
-        return mapHero(section);
+      case "Home":
+        return mapHome(section);
       case "About":
         return mapAbout(section);
       case "Contact":
@@ -307,8 +307,10 @@ function mapSection(pageName: string, section: StaticSection): StaticSection | n
         return mapFooter(section);
       case "projectsContent":
         return mapProjectsContent(section);
-      case "researchContent":
-        return mapResearchContent(section);
+      case "ProjectDetailContent":
+        return mapProjectDetailContent(section);
+      case "CommonUi":
+        return mapCommonUi(section);
       default:
         return null;
     }

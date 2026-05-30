@@ -1,6 +1,6 @@
-import { exampleArticles, exampleProjects, getPageFixture } from "./fixtures";
+import { exampleArticles, exampleProjects } from "./fixtures";
 import { fetchRemoteMarkdownProjects } from "./markdownProjects";
-import { fetchRemotePage, mergePageData } from "./staticContent";
+import { fetchRemotePage } from "./staticContent";
 import type { Article, Locale, Project, RawArticle, RawProject } from "./types";
 
 const DEFAULT_API_URL = import.meta.env.DEV
@@ -119,15 +119,12 @@ export const fetchArticle = async (slug: string, signal?: AbortSignal): Promise<
 };
 
 /**
- * Page content: remote GitHub raw first, fixture fallback.
- * The remote JSON merges section by section — if the remote has "Hero" but
- * not "About", About still comes from fixtures.ts.
+ * Page content: fixed local copy plus remote Identity overlay from the wiki.
  */
 export async function fetchPage<T>(lang: string, name: string): Promise<T> {
-  const remote = await fetchRemotePage<T>(lang, name);
-  const fixture = getPageFixture<T>(lang as Locale, name);
-  if (!fixture) throw new Error(`Unknown page fixture "${name}"`);
-  return mergePageData(fixture, remote);
+  const page = await fetchRemotePage<T>(lang, name);
+  if (!page) throw new Error(`Unknown page "${name}"`);
+  return page;
 }
 
 export function invalidateCache() {

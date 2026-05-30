@@ -145,16 +145,28 @@ export interface FooterPage {
   footerDynamicText?: string;
 }
 
+export interface IdentityContent {
+  displayName: string;
+  githubUsername: string;
+  username: string;
+  avatarSrc: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  contactEmail: string;
+  role: string;
+}
+
 export interface AboutPage {
   header: { section: string; title: string };
   profile: {
-    name: string;
+    name?: string;
     role: string;
     username: string;
     imageSrc: string;
     displayName: string;
     avatarSrc: string;
     githubUrl: string;
+    linkedinUrl: string;
     languages: string;
   };
   paragraphs: string[];
@@ -192,6 +204,8 @@ export interface HomePage {
     cvFilename: string;
     githubLabel: string;
     githubUrl: string;
+    linkedinLabel: string;
+    linkedinUrl: string;
   };
   projects: {
     eyebrow: string;

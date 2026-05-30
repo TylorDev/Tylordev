@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiDownload } from "react-icons/fi";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { SiElectron, SiNextdotjs, SiReact, SiTypescript } from "react-icons/si";
 import { useLanguage } from "../../context/LanguageContext";
 import { usePage, useProjects } from "../../lib/hooks";
@@ -31,11 +31,11 @@ export default function Home() {
       {about && (
         <section className="container about-teaser">
           <div className="glass about-teaser-card">
-            <img src="logo.svg" alt={about.profile.name} className="about-teaser-img" />
+            <img src="logo.svg" alt={about.profile.displayName} className="about-teaser-img" />
             <div>
               <span className="eyebrow">{about.header.title}</span>
               <h2 className="section-title" style={{ marginTop: 12 }}>
-                {about.profile.name}{" "}
+                {about.profile.displayName}{" "}
                 <span style={{ color: "var(--text-dim, #a1a1aa)" }}>{about.profile.role}</span>
               </h2>
               <p style={{ color: "#a1a1aa", marginTop: 12, maxWidth: 560 }}>
@@ -65,14 +65,26 @@ export default function Home() {
                 >
                   {content?.about.downloadCv ?? "Download CV"} <FiDownload />
                 </a>
-                <a
-                  href={content?.about.githubUrl ?? "https://github.com/TylorDev"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-ghost"
-                >
-                  {content?.about.githubLabel ?? "Github"} <FaGithub />
-                </a>
+                {content?.about.githubUrl && (
+                  <a
+                    href={content.about.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-ghost"
+                  >
+                    {content.about.githubLabel} <FaGithub />
+                  </a>
+                )}
+                {content?.about.linkedinUrl && (
+                  <a
+                    href={content.about.linkedinUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-ghost"
+                  >
+                    {content.about.linkedinLabel} <FaLinkedinIn />
+                  </a>
+                )}
               </div>
             </div>
           </div>

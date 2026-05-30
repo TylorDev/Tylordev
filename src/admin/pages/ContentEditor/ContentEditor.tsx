@@ -207,12 +207,13 @@ function FooterEditor({ data, onChange }: {
     obj[keys[keys.length - 1]] = val;
     onChange(next);
   };
+  const legacyFooter = data as typeof data & { footerDynamicText?: string; privacyPolicy?: string };
 
   return (
     <div className="ce-fields">
       <Field label="Footer Text" value={data.footerText} onChange={v => set("footerText", v)} />
-      <Field label="Footer Version / Dynamic Text" value={data.footerDynamicText} onChange={v => set("footerDynamicText", v)} />
-      <Field label="Contact Email" value={data.privacyPolicy} onChange={v => set("privacyPolicy", v)} />
+      <Field label="Footer Version / Dynamic Text" value={legacyFooter.footerDynamicText ?? ""} onChange={v => set("footerDynamicText", v)} />
+      <Field label="Contact Email" value={legacyFooter.privacyPolicy ?? ""} onChange={v => set("privacyPolicy", v)} />
       <div className="ce-section-label">Social Links (shared across locales)</div>
       <Field label="GitHub URL" value={data.links.github} onChange={v => set("links.github", v)} />
       <Field label="LinkedIn URL" value={data.links.linkedIn} onChange={v => set("links.linkedIn", v)} />

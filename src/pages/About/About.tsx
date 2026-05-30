@@ -1,4 +1,4 @@
-import { FiGithub, FiMapPin } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMapPin } from "react-icons/fi";
 import { STACK } from "../../lib/tech";
 import { usePage } from "../../lib/hooks";
 import type { AboutPage } from "../../lib/types";
@@ -42,8 +42,18 @@ export default function About() {
                 target="_blank"
                 rel="noreferrer"
                 className="about-meta-item about-meta-link"
+                aria-label="GitHub"
               >
                 <FiGithub />
+              </a>
+              <a
+                href={data.profile.linkedinUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="about-meta-item about-meta-link"
+                aria-label="LinkedIn"
+              >
+                <FiLinkedin />
               </a>
             </div>
           </div>

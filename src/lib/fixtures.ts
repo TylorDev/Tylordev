@@ -5,12 +5,12 @@ import type {
   HeaderPage,
   HeroPage,
   HomePage,
-  Locale,
   ProjectDetailContentPage,
   ProjectsContentPage,
   RawArticle,
   RawProject,
 } from "./types";
+import { DEFAULT_IDENTITY } from "./staticContent";
 
 // Local logo asset served from /public — no external dependency.
 const LOGO = "/logo.svg";
@@ -19,6 +19,12 @@ const LOGO = "/logo.svg";
 const IMG = {
   about: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=600&q=80",
   history: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80",
+};
+
+const LEGACY_SOCIAL_LINKS = {
+  github: DEFAULT_IDENTITY.githubUrl,
+  linkedIn: DEFAULT_IDENTITY.linkedinUrl,
+  instagram: "https://www.instagram.com/",
 };
 
 // Page-content fixtures: served locally for static UI copy (Header, Hero, About, Footer, Banner, Contact).
@@ -88,14 +94,10 @@ export const examplePages = {
       links: {
         about: "About",
         projects: "Projects",
-        github: "https://github.com/TylorDev",
-        linkedIn: "https://www.linkedin.com/",
-        instagram: "https://www.instagram.com/",
+        ...LEGACY_SOCIAL_LINKS,
       },
       headings: { navigate: "Navigate", social: "Social" },
-      footerText: "Independent studio. Built with React.",
-      privacyPolicy: "hello@example.com",
-      footerDynamicText: "v1.0",
+      footerText: "Built with React.",
     } satisfies FooterPage,
     "es-mx": {
       logoSrc: LOGO,
@@ -103,14 +105,10 @@ export const examplePages = {
       links: {
         about: "Sobre mí",
         projects: "Proyectos",
-        github: "https://github.com/TylorDev",
-        linkedIn: "https://www.linkedin.com/",
-        instagram: "https://www.instagram.com/",
+        ...LEGACY_SOCIAL_LINKS,
       },
       headings: { navigate: "Navegar", social: "Social" },
-      footerText: "Estudio independiente. Hecho con React.",
-      privacyPolicy: "hello@example.com",
-      footerDynamicText: "v1.0",
+      footerText: "Hecho con React.",
     } satisfies FooterPage,
     "pt-br": {
       logoSrc: LOGO,
@@ -118,14 +116,10 @@ export const examplePages = {
       links: {
         about: "Sobre",
         projects: "Projetos",
-        github: "https://github.com/TylorDev",
-        linkedIn: "https://www.linkedin.com/",
-        instagram: "https://www.instagram.com/",
+        ...LEGACY_SOCIAL_LINKS,
       },
       headings: { navigate: "Navegar", social: "Social" },
-      footerText: "Estúdio independente. Feito com React.",
-      privacyPolicy: "hello@example.com",
-      footerDynamicText: "v1.0",
+      footerText: "Feito com React.",
     } satisfies FooterPage,
   },
 
@@ -175,13 +169,14 @@ export const examplePages = {
     "en-us": {
       header: { section: "01/", title: "Profile" },
       profile: {
-        name: "Hello, I'm TylorDev.",
-        role: "Fullstack - AI Engineer",
-        username: "@TylorDev",
+        name: `Hello, I'm ${DEFAULT_IDENTITY.displayName}.`,
+        role: DEFAULT_IDENTITY.role,
+        username: DEFAULT_IDENTITY.username,
         imageSrc: IMG.about,
-        displayName: "TylorDev",
-        avatarSrc: "https://avatars.githubusercontent.com/u/107888704?v=4",
-        githubUrl: "https://github.com/TylorDev",
+        displayName: DEFAULT_IDENTITY.displayName,
+        avatarSrc: DEFAULT_IDENTITY.avatarSrc,
+        githubUrl: DEFAULT_IDENTITY.githubUrl,
+        linkedinUrl: DEFAULT_IDENTITY.linkedinUrl,
         languages: "English, Español, Português",
       },
       paragraphs: [
@@ -200,13 +195,14 @@ export const examplePages = {
     "es-mx": {
       header: { section: "01/", title: "Perfil" },
       profile: {
-        name: "Hola, soy TylorDev.",
-        role: "Fullstack - AI Engineer",
-        username: "@TylorDev",
+        name: `Hola, soy ${DEFAULT_IDENTITY.displayName}.`,
+        role: DEFAULT_IDENTITY.role,
+        username: DEFAULT_IDENTITY.username,
         imageSrc: IMG.about,
-        displayName: "TylorDev",
-        avatarSrc: "https://avatars.githubusercontent.com/u/107888704?v=4",
-        githubUrl: "https://github.com/TylorDev",
+        displayName: DEFAULT_IDENTITY.displayName,
+        avatarSrc: DEFAULT_IDENTITY.avatarSrc,
+        githubUrl: DEFAULT_IDENTITY.githubUrl,
+        linkedinUrl: DEFAULT_IDENTITY.linkedinUrl,
         languages: "English, Español, Português",
       },
       paragraphs: [
@@ -225,13 +221,14 @@ export const examplePages = {
     "pt-br": {
       header: { section: "01/", title: "Perfil" },
       profile: {
-        name: "Olá, eu sou TylorDev.",
-        role: "Fullstack - AI Engineer",
-        username: "@TylorDev",
+        name: `Olá, eu sou ${DEFAULT_IDENTITY.displayName}.`,
+        role: DEFAULT_IDENTITY.role,
+        username: DEFAULT_IDENTITY.username,
         imageSrc: IMG.about,
-        displayName: "TylorDev",
-        avatarSrc: "https://avatars.githubusercontent.com/u/107888704?v=4",
-        githubUrl: "https://github.com/TylorDev",
+        displayName: DEFAULT_IDENTITY.displayName,
+        avatarSrc: DEFAULT_IDENTITY.avatarSrc,
+        githubUrl: DEFAULT_IDENTITY.githubUrl,
+        linkedinUrl: DEFAULT_IDENTITY.linkedinUrl,
         languages: "English, Español, Português",
       },
       paragraphs: [
@@ -251,7 +248,7 @@ export const examplePages = {
 
   Contact: {
     "en-us": {
-      contactMeta: { title: "Get in touch", email: "hello@example.com" },
+      contactMeta: { title: "Get in touch", email: DEFAULT_IDENTITY.contactEmail },
       pageHeader: { eyebrow: "Get in touch", title: "Let's build something." },
       formFields: {
         name: { label: "Name", placeholder: "Your name", errorMessage: "Name is required." },
@@ -268,7 +265,7 @@ export const examplePages = {
       thankYouMessage: "Thanks. I'll get back to you within 24 hours.",
     } satisfies ContactPage,
     "es-mx": {
-      contactMeta: { title: "Contacto", email: "hello@example.com" },
+      contactMeta: { title: "Contacto", email: DEFAULT_IDENTITY.contactEmail },
       pageHeader: { eyebrow: "Contacto", title: "Construyamos algo." },
       formFields: {
         name: { label: "Nombre", placeholder: "Tu nombre", errorMessage: "El nombre es obligatorio." },
@@ -285,7 +282,7 @@ export const examplePages = {
       thankYouMessage: "¡Gracias! Te respondo en menos de 24 horas.",
     } satisfies ContactPage,
     "pt-br": {
-      contactMeta: { title: "Contato", email: "hello@example.com" },
+      contactMeta: { title: "Contato", email: DEFAULT_IDENTITY.contactEmail },
       pageHeader: { eyebrow: "Contato", title: "Vamos construir algo." },
       formFields: {
         name: { label: "Nome", placeholder: "Seu nome", errorMessage: "O nome é obrigatório." },
@@ -311,7 +308,9 @@ export const examplePages = {
         cvHref: "/cv.pdf",
         cvFilename: "TylorDev-CV.pdf",
         githubLabel: "Github",
-        githubUrl: "https://github.com/TylorDev",
+        githubUrl: DEFAULT_IDENTITY.githubUrl,
+        linkedinLabel: "LinkedIn",
+        linkedinUrl: DEFAULT_IDENTITY.linkedinUrl,
       },
       projects: { eyebrow: "Work", allProjects: "All projects" },
     } satisfies HomePage,
@@ -322,7 +321,9 @@ export const examplePages = {
         cvHref: "/cv.pdf",
         cvFilename: "TylorDev-CV.pdf",
         githubLabel: "Github",
-        githubUrl: "https://github.com/TylorDev",
+        githubUrl: DEFAULT_IDENTITY.githubUrl,
+        linkedinLabel: "LinkedIn",
+        linkedinUrl: DEFAULT_IDENTITY.linkedinUrl,
       },
       projects: { eyebrow: "Trabajo", allProjects: "Todos los proyectos" },
     } satisfies HomePage,
@@ -333,7 +334,9 @@ export const examplePages = {
         cvHref: "/cv.pdf",
         cvFilename: "TylorDev-CV.pdf",
         githubLabel: "Github",
-        githubUrl: "https://github.com/TylorDev",
+        githubUrl: DEFAULT_IDENTITY.githubUrl,
+        linkedinLabel: "LinkedIn",
+        linkedinUrl: DEFAULT_IDENTITY.linkedinUrl,
       },
       projects: { eyebrow: "Trabalho", allProjects: "Todos os projetos" },
     } satisfies HomePage,
@@ -396,15 +399,6 @@ export const examplePages = {
     "pt-br": { Research: { title: "Notas" } },
   },
 } as const;
-
-type PageName = keyof typeof examplePages;
-
-export function getPageFixture<T>(lang: Locale, name: string): T | null {
-  const dict = examplePages[name as PageName];
-  if (!dict) return null;
-  const byLang = (dict as Record<string, unknown>)[lang] ?? (dict as Record<string, unknown>)["en-us"];
-  return (byLang as T) ?? null;
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Example projects + articles. Used as fallback when the API is unreachable

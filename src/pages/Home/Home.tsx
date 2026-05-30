@@ -31,7 +31,7 @@ export default function Home() {
       {about && (
         <section className="container about-teaser">
           <div className="glass about-teaser-card">
-            <img src="logo.svg" alt={about.profile.displayName} className="about-teaser-img" />
+            <img src="/logo.svg" alt={about.profile.displayName} className="about-teaser-img" />
             <div>
               <span className="eyebrow">{about.header.title}</span>
               <h2 className="section-title" style={{ marginTop: 12 }}>

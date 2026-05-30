@@ -220,12 +220,3 @@ export const mapArticle = (article: RawArticle, locale: Locale): Article => {
     researchProps: { style: article.shared?.researchStyle ?? {} },
   };
 };
-
-export const CONTACT_FORM_URL =
-  "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe90nNoZ9Ro9VquD51WqJwE_yUUJvYTQ3N7WQ_wU0Hbs8lEPw/formResponse";
-
-export const CONTACT_FIELDS = {
-  name: "entry.1873119902",
-  email: "entry.1965438775",
-  message: "entry.1909091615",
-} as const;

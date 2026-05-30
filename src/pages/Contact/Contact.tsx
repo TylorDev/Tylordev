@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiCheckCircle, FiMail, FiSend } from "react-icons/fi";
-import { CONTACT_FIELDS, CONTACT_FORM_URL } from "../../lib/api";
 import { usePage } from "../../lib/hooks";
 import type { ContactPage } from "../../lib/types";
 import Skeleton from "../../components/Skeleton/Skeleton";
@@ -19,12 +18,19 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = async (form: FormData) => {
-    const fd = new FormData();
-    fd.append(CONTACT_FIELDS.name, form.name);
-    fd.append(CONTACT_FIELDS.email, form.email);
-    fd.append(CONTACT_FIELDS.message, form.message);
     try {
-      await fetch(CONTACT_FORM_URL, { method: "POST", body: fd, mode: "no-cors" });
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
       setSubmitted(true);
     } catch (err) {
       console.error("Form submit failed", err);

@@ -7,6 +7,7 @@ import "./ImageModal.scss";
 const MIN_ZOOM  = 0.5;
 const MAX_ZOOM  = 5;
 const ZOOM_DBL  = 2.5;
+const ZOOM_EPSILON = 0.05;
 
 interface ImageModalProps {
   src: string;
@@ -21,9 +22,22 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
 
   const stageRef    = useRef<HTMLDivElement>(null);
   const imgRef      = useRef<HTMLImageElement>(null);
-  const dragStart   = useRef<{ mx: number; my: number; px: number; py: number } | null>(null);
+  const activePointers = useRef(new Map<number, { x: number; y: number }>());
+  const gestureStart = useRef<
+    | { type: "pan"; pointerId: number; x: number; y: number; pan: { x: number; y: number } }
+    | {
+        type: "pinch";
+        distance: number;
+        center: { x: number; y: number };
+        zoom: number;
+        pan: { x: number; y: number };
+      }
+    | null
+  >(null);
   // Store image rendered size at zoom=1 so clamping is accurate
   const imgBaseSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
+
+  const constrainZoom = (value: number) => Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, value));
 
   const onImgLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
@@ -35,7 +49,7 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
     const targetW  = window.innerWidth  * 0.92;
     const zoomByH  = targetH / img.naturalHeight;
     const zoomByW  = targetW / img.naturalWidth;
-    const initZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, Math.min(zoomByH, zoomByW)));
+    const initZoom = constrainZoom(Math.min(zoomByH, zoomByW));
     setZoom(initZoom);
   };
 
@@ -55,6 +69,34 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
     };
   }, []);
 
+  const getStagePoint = useCallback((x: number, y: number) => {
+    const stage = stageRef.current;
+    if (!stage) return { x: 0, y: 0 };
+    const { left, top, width, height } = stage.getBoundingClientRect();
+    return {
+      x: x - left - width / 2,
+      y: y - top - height / 2,
+    };
+  }, []);
+
+  const getPointerPair = useCallback(() => {
+    const [first, second] = Array.from(activePointers.current.values());
+    if (!first || !second) return null;
+
+    const dx = second.x - first.x;
+    const dy = second.y - first.y;
+    return {
+      distance: Math.hypot(dx, dy),
+      center: getStagePoint((first.x + second.x) / 2, (first.y + second.y) / 2),
+    };
+  }, [getStagePoint]);
+
+  const resetGesture = useCallback(() => {
+    activePointers.current.clear();
+    gestureStart.current = null;
+    setDrag(false);
+  }, []);
+
   // ── ESC + scroll lock ─────────────────────────────────────────────────────
   useEffect(() => {
     const orig = document.body.style.overflow;
@@ -64,12 +106,13 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
     return () => {
       document.body.style.overflow = orig;
       document.removeEventListener("keydown", onKey);
+      resetGesture();
     };
-  }, [onClose]);
+  }, [onClose, resetGesture]);
 
   // ── Apply zoom helper (button clicks) ─────────────────────────────────────
   const applyZoom = (next: number) => {
-    const z = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, next));
+    const z = constrainZoom(next);
     if (z <= MIN_ZOOM) { setZoom(MIN_ZOOM); setPan({ x: 0, y: 0 }); return; }
     setZoom(z);
     setPan(p => clampPan(p.x, p.y, z));
@@ -80,7 +123,7 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
     e.preventDefault();
     const delta = e.deltaY < 0 ? 1.12 : 1 / 1.12; // multiplicative step
     setZoom(prev => {
-      const next = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, prev * delta));
+      const next = constrainZoom(prev * delta);
       if (next <= MIN_ZOOM) { setPan({ x: 0, y: 0 }); return MIN_ZOOM; }
       setPan(p => clampPan(p.x, p.y, next));
       return next;
@@ -96,7 +139,7 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
     const cx = e.clientX - left - sw / 2;
     const cy = e.clientY - top  - sh / 2;
     setZoom(prev => {
-      const next = prev > MIN_ZOOM + 0.05 ? MIN_ZOOM : ZOOM_DBL;
+      const next = prev > MIN_ZOOM + ZOOM_EPSILON ? MIN_ZOOM : ZOOM_DBL;
       if (next === MIN_ZOOM) { setPan({ x: 0, y: 0 }); return MIN_ZOOM; }
       const scale = next / prev;
       setPan(p => clampPan(
@@ -109,24 +152,116 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
   }, [clampPan]);
 
   // ── Drag-to-pan ───────────────────────────────────────────────────────────
-  const startDrag = useCallback((e: React.MouseEvent) => {
-    if (zoom <= MIN_ZOOM) return;
-    e.preventDefault();
+  const startPanGesture = useCallback((pointerId: number, point: { x: number; y: number }) => {
+    if (zoom <= MIN_ZOOM + ZOOM_EPSILON) {
+      gestureStart.current = null;
+      setDrag(false);
+      return;
+    }
+
+    gestureStart.current = { type: "pan", pointerId, x: point.x, y: point.y, pan };
     setDrag(true);
-    dragStart.current = { mx: e.clientX, my: e.clientY, px: pan.x, py: pan.y };
   }, [zoom, pan]);
 
-  const onDrag = useCallback((e: React.MouseEvent) => {
-    if (!dragStart.current) return;
-    const dx = e.clientX - dragStart.current.mx;
-    const dy = e.clientY - dragStart.current.my;
-    setPan(clampPan(dragStart.current.px + dx, dragStart.current.py + dy, zoom));
-  }, [zoom, clampPan]);
+  const startPinchGesture = useCallback(() => {
+    const pair = getPointerPair();
+    if (!pair || pair.distance <= 0) return;
 
-  const endDrag = useCallback(() => {
+    gestureStart.current = {
+      type: "pinch",
+      distance: pair.distance,
+      center: pair.center,
+      zoom,
+      pan,
+    };
+    setDrag(true);
+  }, [getPointerPair, zoom, pan]);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.currentTarget.setPointerCapture(e.pointerId);
+
+    activePointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (activePointers.current.size >= 2) {
+      startPinchGesture();
+      return;
+    }
+
+    startPanGesture(e.pointerId, { x: e.clientX, y: e.clientY });
+  }, [startPanGesture, startPinchGesture]);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (!activePointers.current.has(e.pointerId)) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    activePointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    const gesture = gestureStart.current;
+    if (!gesture) return;
+
+    if (activePointers.current.size >= 2) {
+      if (gesture.type !== "pinch") {
+        startPinchGesture();
+        return;
+      }
+
+      const pair = getPointerPair();
+      if (!pair || pair.distance <= 0) return;
+
+      const nextZoom = constrainZoom(gesture.zoom * (pair.distance / gesture.distance));
+      if (nextZoom <= MIN_ZOOM) {
+        setZoom(MIN_ZOOM);
+        setPan({ x: 0, y: 0 });
+        return;
+      }
+
+      const scale = nextZoom / gesture.zoom;
+      setZoom(nextZoom);
+      setPan(clampPan(
+        pair.center.x - (gesture.center.x - gesture.pan.x) * scale,
+        pair.center.y - (gesture.center.y - gesture.pan.y) * scale,
+        nextZoom,
+      ));
+      return;
+    }
+
+    if (gesture.type !== "pan" || gesture.pointerId !== e.pointerId) return;
+
+    const dx = e.clientX - gesture.x;
+    const dy = e.clientY - gesture.y;
+    setPan(clampPan(gesture.pan.x + dx, gesture.pan.y + dy, zoom));
+  }, [clampPan, getPointerPair, startPinchGesture, zoom]);
+
+  const handlePointerEnd = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+
+    activePointers.current.delete(e.pointerId);
+
+    if (activePointers.current.size >= 2) {
+      startPinchGesture();
+      return;
+    }
+
+    const [remaining] = Array.from(activePointers.current.entries());
+    if (remaining) {
+      const [pointerId, point] = remaining;
+      startPanGesture(pointerId, point);
+      return;
+    }
+
+    gestureStart.current = null;
     setDrag(false);
-    dragStart.current = null;
-  }, []);
+  }, [startPanGesture, startPinchGesture]);
 
   // ── Download ──────────────────────────────────────────────────────────────
   const handleDownload = (e: React.MouseEvent) => {
@@ -140,7 +275,7 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
   };
 
   const transform = `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`;
-  const isZoomed  = zoom > MIN_ZOOM + 0.05;
+  const isZoomed  = zoom > MIN_ZOOM + ZOOM_EPSILON;
 
   const modal = (
     <div className="img-modal-overlay" onClick={onClose}>
@@ -186,10 +321,11 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
         onClick={e => e.stopPropagation()}
         onDoubleClick={handleDblClick}
         onWheel={handleWheel}
-        onMouseDown={startDrag}
-        onMouseMove={onDrag}
-        onMouseUp={endDrag}
-        onMouseLeave={endDrag}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerEnd}
+        onLostPointerCapture={handlePointerEnd}
         style={{ cursor: isZoomed ? (isDragging ? "grabbing" : "grab") : "zoom-in" }}
       >
         <img
@@ -206,7 +342,7 @@ function ImageModal({ src, alt, onClose }: ImageModalProps) {
 
       {/* ── Hint ── */}
       {!isZoomed && (
-        <div className="img-modal-hint">Double-click or scroll to zoom</div>
+        <div className="img-modal-hint">Double-click, scroll, or pinch to zoom</div>
       )}
     </div>
   );

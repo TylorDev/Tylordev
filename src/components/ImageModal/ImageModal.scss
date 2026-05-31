@@ -32,6 +32,9 @@
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
   animation: img-fade-in 0.2s ease-out both;
 }
 
@@ -83,6 +86,9 @@
   justify-content: center;
   overflow: hidden;          // ← no scrollbars ever
   user-select: none;
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
 
   &.is-dragging {
     .img-modal-img {
@@ -214,5 +220,14 @@
     border-radius: 999px;
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .img-modal-slider-wrap,
+  .img-modal-hint {
+    bottom: 92px;
+  }
+
+  .img-modal-slider-wrap {
+    max-width: calc(100vw - 32px);
   }
 }

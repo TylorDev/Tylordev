@@ -43,13 +43,7 @@
       height: 16px;
       display: inline-grid;
       place-items: center;
-      padding: 0 3px;
-      border: 1px solid currentColor;
-      border-radius: 3px;
       color: var(--c);
-      font-size: 8px;
-      font-weight: 700;
-      line-height: 1;
     }
 
     &-remove {
@@ -129,16 +123,10 @@
     }
 
     .tech-icon {
-      min-width: 20px;
-      height: 20px;
       display: inline-grid;
       place-items: center;
-      padding: 0 4px;
-      border: 1px solid currentColor;
-      border-radius: 4px;
-      font-size: 9px;
-      font-weight: 700;
-      line-height: 1;
+      min-width: 20px;
+      height: 20px;
     }
   }
 }

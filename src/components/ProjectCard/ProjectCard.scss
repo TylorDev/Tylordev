@@ -231,15 +231,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 4px;
-  border: 1px solid currentColor;
-  border-radius: $radius-sm;
-  font-family: $mono;
-  font-size: 9px;
-  font-weight: 600;
-  line-height: 1;
   opacity: 0.8;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }

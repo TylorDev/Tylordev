@@ -73,7 +73,10 @@ export default function Header() {
           {loading ? (
             <div className="skeleton" style={{ width: 32, height: 32, borderRadius: 8 }} />
           ) : (
-            <img src={data?.logoSrc ?? "/logo.svg"} alt={data?.logoAlt ?? "logo"} width={32} height={32} />
+            <>
+              <img src={data?.logoSrc ?? "/logo.svg"} alt={data?.logoAlt ?? "logo"} width={32} height={32} />
+              <span className="hdr-logo-hint" aria-hidden="true">{aria.home}</span>
+            </>
           )}
         
         </NavLink>

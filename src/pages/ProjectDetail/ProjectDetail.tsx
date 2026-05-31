@@ -56,7 +56,7 @@ export function ProjectDetailView({
             <div className="pdetail-techs">
               {techIcons.map((tech) => (
                 <span key={tech.name} style={{ color: tech.color }} title={tech.name}>
-                  {tech.label}
+                  <tech.icon size={20} />
                 </span>
               ))}
             </div>

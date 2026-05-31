@@ -1,9 +1,9 @@
 [
   {
-    "name": "mock-project",
-    "description": "A mocked project for local development",
-    "homepage": "https://github.com",
-    "topics": ["react", "typescript"],
-    "pushed_at": "2026-05-29T00:00:00Z"
+    "name": "Elevate",
+    "description": "Elevate is a versatile music management application that puts you in control of your listening experience. With comprehensive playlist management, smart song resumption across multiple sources, and intuitive library organization, Elevate transforms how you interact with your music collection.",
+    "homepage": "https://www.youtube.com/",
+    "topics": ["electron", "music", "music-player", "offline", "prisma", "react"],
+    "pushed_at": "2026-05-29T15:24:58Z"
   }
 ]

@@ -1,7 +1,34 @@
+import type { ComponentType } from "react";
+import {
+  SiCplusplus,
+  SiCss,
+  SiDocker,
+  SiDotnet,
+  SiElectron,
+  SiExpress,
+  SiGit,
+  SiGithubpages,
+  SiHtml5,
+  SiJavascript,
+  SiMongodb,
+  SiMysql,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPrisma,
+  SiReact,
+  SiReacthookform,
+  SiTailwindcss,
+  SiTypeorm,
+  SiTypescript,
+  SiVite,
+} from "react-icons/si";
+
 export interface Tech {
   name: string;
+  icon: ComponentType<{ size?: number; color?: string; className?: string }>;
   color: string;
-  label: string;
 }
 
 // Brand colors from Simple Icons (simpleicons.org). Where the brand is pure
@@ -10,49 +37,49 @@ export const STACK: { group: string; items: Tech[] }[] = [
   {
     group: "Frontend",
     items: [
-      { name: "React", color: "#61DAFB", label: "R" },
-      { name: "Next.js", color: "#FFFFFF", label: "N" },
-      { name: "TypeScript", color: "#3178C6", label: "TS" },
-      { name: "JavaScript", color: "#F7DF1E", label: "JS" },
-      { name: "Tailwind CSS", color: "#06B6D4", label: "TW" },
-      { name: "Vite", color: "#646CFF", label: "V" },
-      { name: "React Hook Form", color: "#EC5990", label: "RH" },
-      { name: "HTML5", color: "#E34F26", label: "H" },
-      { name: "CSS3", color: "#1572B6", label: "C" },
+      { name: "React", icon: SiReact, color: "#61DAFB" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
+      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+      { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "Vite", icon: SiVite, color: "#646CFF" },
+      { name: "React Hook Form", icon: SiReacthookform, color: "#EC5990" },
+      { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
+      { name: "CSS3", icon: SiCss, color: "#1572B6" },
     ],
   },
   {
     group: "Backend",
     items: [
-      { name: "NestJS", color: "#E0234E", label: "N" },
-      { name: "Node.js", color: "#339933", label: "ND" },
-      { name: "Express", color: "#FFFFFF", label: "EX" },
+      { name: "NestJS", icon: SiNestjs, color: "#E0234E" },
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+      { name: "Express", icon: SiExpress, color: "#FFFFFF" },
     ],
   },
   {
     group: "Databases & ORMs",
     items: [
-      { name: "PostgreSQL", color: "#4169E1", label: "PG" },
-      { name: "MySQL", color: "#4479A1", label: "MY" },
-      { name: "MongoDB", color: "#47A248", label: "MO" },
-      { name: "Prisma", color: "#FFFFFF", label: "PR" },
-      { name: "TypeORM", color: "#FE0902", label: "TO" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "Prisma", icon: SiPrisma, color: "#FFFFFF" },
+      { name: "TypeORM", icon: SiTypeorm, color: "#FE0902" },
     ],
   },
   {
     group: "Tooling & DevOps",
     items: [
-      { name: "Docker", color: "#2496ED", label: "D" },
-      { name: "Git", color: "#F05032", label: "G" },
-      { name: "Electron", color: "#47848F", label: "E" },
-      { name: "GitHub Pages", color: "#FFFFFF", label: "GH" },
+      { name: "Docker", icon: SiDocker, color: "#2496ED" },
+      { name: "Git", icon: SiGit, color: "#F05032" },
+      { name: "Electron", icon: SiElectron, color: "#47848F" },
+      { name: "GitHub Pages", icon: SiGithubpages, color: "#FFFFFF" },
     ],
   },
   {
     group: "Other languages",
     items: [
-      { name: "C# / .NET", color: "#512BD4", label: "C#" },
-      { name: "C++", color: "#00599C", label: "C++" },
+      { name: "C# / .NET", icon: SiDotnet, color: "#512BD4" },
+      { name: "C++", icon: SiCplusplus, color: "#00599C" },
     ],
   },
 ];

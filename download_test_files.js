@@ -53,19 +53,19 @@ async function run() {
     }
 
     // Fetch Spanish markdown
-    const esUrl = `${WIKI_RAW_BASE}/${name}/${encodeURIComponent(name)}%E2%80%90Es.md`;
+    const esUrl = `${WIKI_RAW_BASE}/${name}/${encodeURIComponent(name)}%E2%80%90es.md`;
     const esMd = await fetch(esUrl);
     if (esMd) {
-      console.log(`Saved ${name}-Es.md`);
-      fs.writeFileSync(path.join(TEST_DIR, `${name}-Es.md`), esMd);
+      console.log(`Saved ${name}-es.md`);
+      fs.writeFileSync(path.join(TEST_DIR, `${name}-es.md`), esMd);
     }
 
     // Fetch Portuguese markdown
-    const ptUrl = `${WIKI_RAW_BASE}/${name}/${encodeURIComponent(name)}%E2%80%90Pt.md`;
+    const ptUrl = `${WIKI_RAW_BASE}/${name}/${encodeURIComponent(name)}%E2%80%90pt.md`;
     const ptMd = await fetch(ptUrl);
     if (ptMd) {
-      console.log(`Saved ${name}-Pt.md`);
-      fs.writeFileSync(path.join(TEST_DIR, `${name}-Pt.md`), ptMd);
+      console.log(`Saved ${name}-pt.md`);
+      fs.writeFileSync(path.join(TEST_DIR, `${name}-pt.md`), ptMd);
     }
   }
 

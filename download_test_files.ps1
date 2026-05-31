@@ -28,19 +28,19 @@ foreach ($repo in $repos) {
     } catch { }
 
     # Es
-    $esUrl = "$WikiRawBase/$encodedName/${encodedName}%E2%80%90Es.md"
+    $esUrl = "$WikiRawBase/$encodedName/${encodedName}%E2%80%90es.md"
     try {
         $esMd = Invoke-RestMethod -Uri $esUrl -Method Get -ErrorAction Stop
-        Set-Content -Path (Join-Path $TestDir "$name-Es.md") -Value $esMd
-        Write-Host "Saved $name-Es.md"
+        Set-Content -Path (Join-Path $TestDir "$name-es.md") -Value $esMd
+        Write-Host "Saved $name-es.md"
     } catch { }
 
     # Pt
-    $ptUrl = "$WikiRawBase/$encodedName/${encodedName}%E2%80%90Pt.md"
+    $ptUrl = "$WikiRawBase/$encodedName/${encodedName}%E2%80%90pt.md"
     try {
         $ptMd = Invoke-RestMethod -Uri $ptUrl -Method Get -ErrorAction Stop
-        Set-Content -Path (Join-Path $TestDir "$name-Pt.md") -Value $ptMd
-        Write-Host "Saved $name-Pt.md"
+        Set-Content -Path (Join-Path $TestDir "$name-pt.md") -Value $ptMd
+        Write-Host "Saved $name-pt.md"
     } catch { }
 }
 

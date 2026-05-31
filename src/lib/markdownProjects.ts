@@ -4,6 +4,7 @@ const GITHUB_USER = "TylorDev";
 const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`;
 const WIKI_LOCALE_SEPARATOR = "\u2010";
 const LOCAL_TEST_BASE = "/Test";
+const LOCAL_PROJECTS_INDEX_URL = `${LOCAL_TEST_BASE}/projects-index.json`;
 const REMOTE_FETCH_TIMEOUT_MS = 3500;
 
 const RAW_SHAPE_HEADING = "## RawProject shape in Markdown";
@@ -17,6 +18,11 @@ interface GithubRepo {
   homepage: string | null;
   topics: string[];
   pushed_at: string | null;
+}
+
+interface LocalProjectIndexEntry {
+  name: string;
+  fileName: string;
 }
 
 let remoteProjectsPromise: Promise<RawProject[]> | null = null;
@@ -649,11 +655,11 @@ function wikiMarkdownUrl(repoName: string, fileName: string): string {
   return `https://raw.githubusercontent.com/wiki/${GITHUB_USER}/${repoName}/${encodeURIComponent(fileName)}`;
 }
 
-function localMarkdownFileName(repoName: string, locale?: "Es" | "Pt"): string {
+function localMarkdownFileName(repoName: string, locale?: "es" | "pt"): string {
   return locale ? `${repoName}-${locale}.md` : `${repoName}.md`;
 }
 
-function markdownUrl(repoName: string, locale?: "Es" | "Pt"): string {
+function markdownUrl(repoName: string, locale?: "es" | "pt"): string {
   if (import.meta.env.DEV) {
     return `${LOCAL_TEST_BASE}/${encodeURIComponent(localMarkdownFileName(repoName, locale))}`;
   }
@@ -668,16 +674,56 @@ function reposUrl(): string {
   return import.meta.env.DEV ? `${LOCAL_TEST_BASE}/repos.json` : GITHUB_REPOS_URL;
 }
 
+function normalizeGithubRepo(repo: Partial<GithubRepo>, name: string): GithubRepo {
+  return {
+    name,
+    description: typeof repo.description === "string" ? repo.description : null,
+    homepage: typeof repo.homepage === "string" ? repo.homepage : null,
+    topics: Array.isArray(repo.topics) ? repo.topics.filter((topic) => typeof topic === "string") : [],
+    pushed_at: typeof repo.pushed_at === "string" ? repo.pushed_at : null,
+  };
+}
+
+async function loadLocalTestRepos(signal: AbortSignal): Promise<GithubRepo[]> {
+  const [indexRes, templateRes] = await Promise.all([
+    fetch(LOCAL_PROJECTS_INDEX_URL, {
+      signal,
+      cache: "no-store",
+    }),
+    fetch(reposUrl(), {
+      signal,
+      cache: "no-store",
+    }),
+  ]);
+
+  if (!indexRes.ok) return [];
+
+  const index = (await indexRes.json()) as LocalProjectIndexEntry[];
+  const templates = templateRes.ok ? ((await templateRes.json()) as Partial<GithubRepo>[]) : [];
+  const template = templates[0] ?? {};
+
+  return index
+    .filter((entry) => entry.name && entry.fileName)
+    .map((entry) => normalizeGithubRepo(template, entry.name));
+}
+
+async function loadGithubRepos(signal: AbortSignal): Promise<GithubRepo[]> {
+  const reposRes = await fetch(reposUrl(), {
+    signal,
+    cache: "default",
+  });
+  if (!reposRes.ok) return [];
+
+  return (await reposRes.json()) as GithubRepo[];
+}
+
 async function loadRemoteMarkdownProjects(): Promise<RawProject[]> {
   try {
     const signal = createTimeoutSignal(REMOTE_FETCH_TIMEOUT_MS);
-    const reposRes = await fetch(reposUrl(), {
-      signal,
-      cache: import.meta.env.DEV ? "no-store" : "default",
-    });
-    if (!reposRes.ok) return [];
+    const repos = import.meta.env.DEV
+      ? await loadLocalTestRepos(signal)
+      : await loadGithubRepos(signal);
 
-    const repos = (await reposRes.json()) as GithubRepo[];
     const projects = await Promise.all(
       repos
         .filter((repo) => repo.name)
@@ -687,10 +733,10 @@ async function loadRemoteMarkdownProjects(): Promise<RawProject[]> {
           if (!project) return null;
 
           const patches = await Promise.all([
-            fetchText(markdownUrl(repo.name, "Es"), signal).then((patchMarkdown) =>
+            fetchText(markdownUrl(repo.name, "es"), signal).then((patchMarkdown) =>
               patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "es-mx") : null
             ),
-            fetchText(markdownUrl(repo.name, "Pt"), signal).then((patchMarkdown) =>
+            fetchText(markdownUrl(repo.name, "pt"), signal).then((patchMarkdown) =>
               patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "pt-br") : null
             ),
           ]);

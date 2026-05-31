@@ -100,7 +100,7 @@ export default function ProjectCard({ project, onClick, priority = false }: Prop
           <div className="pcard-techs">
             {techIcons.map(tech => (
               <span key={tech.name} style={{ color: tech.color }} title={tech.name}>
-                {tech.label}
+                <tech.icon size={16} />
               </span>
             ))}
           </div>

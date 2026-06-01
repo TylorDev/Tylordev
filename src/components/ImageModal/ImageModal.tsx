@@ -359,6 +359,36 @@ interface ArticleImageProps {
 
 export default function ArticleImage({ src, alt }: ArticleImageProps) {
   const [open, setOpen] = useState(false);
+  const modalHistoryActive = useRef(false);
+
+  const openModal = useCallback(() => {
+    if (!modalHistoryActive.current) {
+      window.history.pushState({ imageModal: true }, "", window.location.href);
+      modalHistoryActive.current = true;
+    }
+    setOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setOpen(false);
+
+    if (modalHistoryActive.current) {
+      modalHistoryActive.current = false;
+      window.history.back();
+    }
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (!modalHistoryActive.current) return;
+
+      modalHistoryActive.current = false;
+      setOpen(false);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   return (
     <>
@@ -366,7 +396,7 @@ export default function ArticleImage({ src, alt }: ArticleImageProps) {
         src={src}
         alt={alt}
         className="article-img-trigger"
-        onClick={() => setOpen(true)}
+        onClick={openModal}
         loading="lazy"
         decoding="async"
         title="Click to enlarge"
@@ -375,7 +405,7 @@ export default function ArticleImage({ src, alt }: ArticleImageProps) {
           "--img-accent-rgb": "46, 46, 52",
         } as React.CSSProperties}
       />
-      {open && <ImageModal src={src} alt={alt} onClose={() => setOpen(false)} />}
+      {open && <ImageModal src={src} alt={alt} onClose={closeModal} />}
     </>
   );
 }

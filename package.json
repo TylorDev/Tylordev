@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build --config vite.config.ts",
     "preview": "vite preview",
     "test:content": "node download_test_files.js",
+    "test:project-md": "node scripts/validate-project-md.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

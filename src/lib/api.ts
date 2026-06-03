@@ -1,5 +1,10 @@
-import { exampleArticles, exampleProjects } from "./fixtures";
-import { fetchRemoteMarkdownProjects, invalidateRemoteMarkdownProjectsCache } from "./markdownProjects";
+import { exampleArticles } from "./fixtures";
+import {
+  fetchRemoteMarkdownProjects,
+  invalidateRemoteMarkdownProjectsCache,
+  isWhitelistedProjectRepoName,
+  isWhitelistedProjectSlug,
+} from "./markdownProjects";
 import { fetchRemotePage } from "./staticContent";
 import type { Article, Locale, Project, RawArticle, RawProject } from "./types";
 
@@ -19,7 +24,6 @@ interface CacheEntry<T> {
 const cache = new Map<string, CacheEntry<unknown>>();
 const pagePromiseCache = new Map<string, Promise<unknown>>();
 const TTL = 5 * 60 * 1000;
-const REMOTE_PROJECTS_FALLBACK_MS = 1200;
 
 async function cachedJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   const hit = cache.get(url) as CacheEntry<T> | undefined;
@@ -31,18 +35,8 @@ async function cachedJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   return data;
 }
 
-function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | null> {
-  return Promise.race([
-    promise,
-    new Promise<null>((resolve) => {
-      globalThis.setTimeout(() => resolve(null), ms);
-    }),
-  ]);
-}
-
-// Projects + articles: live Railway API with fixture fallback so the
-// portfolio never renders an empty state when the API is unreachable
-// (e.g. CORS misconfiguration, network error) or returns an empty list.
+// Projects come from real whitelisted markdown/wiki content. Articles still
+// keep fixture fallback so non-project pages can remain populated offline.
 const isAbort = (err: unknown): boolean =>
   err instanceof Error && err.name === "AbortError";
 
@@ -55,49 +49,54 @@ class UnpublishedContentError extends Error {
 const isPublished = (item: { publishedAt?: string | null }): boolean =>
   Boolean(item.publishedAt);
 
+const isWhitelistedProject = (project: RawProject): boolean =>
+  isWhitelistedProjectSlug(project.slug) ||
+  isWhitelistedProjectRepoName(project.shared?.title);
+
+const filterPublishedWhitelistedProjects = (projects: RawProject[]): RawProject[] =>
+  projects.filter(isPublished).filter(isWhitelistedProject);
+
 export const fetchProjects = async (signal?: AbortSignal): Promise<RawProject[]> => {
-  const remoteProjects = await withTimeout(fetchRemoteMarkdownProjects(), REMOTE_PROJECTS_FALLBACK_MS);
+  const remoteProjects = await fetchRemoteMarkdownProjects();
 
   if (remoteProjects && remoteProjects.length > 0) {
     return remoteProjects;
   }
 
   if (!shouldFetchApi) {
-    return exampleProjects;
+    return [];
   }
 
   try {
     const list = await cachedJson<RawProject[]>(apiUrl("/projects"), signal);
-    const publishedProjects = list.filter(isPublished);
-    return publishedProjects.length > 0 ? publishedProjects : exampleProjects;
+    return filterPublishedWhitelistedProjects(list);
   } catch (err) {
     if (isAbort(err)) throw err;
-    console.warn("[api] /projects failed, falling back to example projects:", err);
-    return exampleProjects;
+    console.warn("[api] /projects failed, returning no projects:", err);
+    return [];
   }
 };
 
 export const fetchProject = async (slug: string, signal?: AbortSignal): Promise<RawProject> => {
+  if (!isWhitelistedProjectSlug(slug)) {
+    throw new Error(`Project "${slug}" not found.`);
+  }
+
   const remoteProject = (await fetchRemoteMarkdownProjects()).find((p) => p.slug === slug);
   if (remoteProject) return remoteProject;
 
   if (!shouldFetchApi) {
-    const found = exampleProjects.find((p) => p.slug === slug);
-    if (found) return found;
     throw new Error(`Project "${slug}" not found.`);
   }
 
   try {
     const project = await cachedJson<RawProject>(apiUrl(`/projects/${slug}`), signal);
-    if (!isPublished(project)) throw new UnpublishedContentError("project");
+    if (!isPublished(project) || !isWhitelistedProject(project)) {
+      throw new UnpublishedContentError("project");
+    }
     return project;
   } catch (err) {
     if (isAbort(err) || err instanceof UnpublishedContentError) throw err;
-    const found = exampleProjects.find((p) => p.slug === slug);
-    if (found) {
-      console.warn(`[api] /projects/${slug} failed, falling back to example project:`, err);
-      return found;
-    }
     throw err;
   }
 };

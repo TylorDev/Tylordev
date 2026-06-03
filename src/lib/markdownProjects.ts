@@ -6,6 +6,7 @@ const WIKI_LOCALE_SEPARATOR = "\u2010";
 const LOCAL_TEST_BASE = "/Test";
 const LOCAL_PROJECTS_INDEX_URL = `${LOCAL_TEST_BASE}/projects-index.json`;
 const REMOTE_FETCH_TIMEOUT_MS = 3500;
+export const PROJECT_REPO_WHITELIST = ["Elevate", "WhoDownloads"] as const;
 
 const RAW_SHAPE_HEADING = "## RawProject shape in Markdown";
 const TRANSLATION_PATCH_HEADING = "## RawProject translation patch in Markdown";
@@ -26,6 +27,32 @@ interface LocalProjectIndexEntry {
 }
 
 let remoteProjectsPromise: Promise<RawProject[]> | null = null;
+
+function normalizeRepoKey(name: string): string {
+  return name.trim().toLowerCase();
+}
+
+const PROJECT_REPO_WHITELIST_KEYS = PROJECT_REPO_WHITELIST.map(normalizeRepoKey);
+const PROJECT_REPO_WHITELIST_SET = new Set(PROJECT_REPO_WHITELIST_KEYS);
+
+export function isWhitelistedProjectRepoName(name: string | null | undefined): boolean {
+  return typeof name === "string" && PROJECT_REPO_WHITELIST_SET.has(normalizeRepoKey(name));
+}
+
+export function isWhitelistedProjectSlug(slug: string | null | undefined): boolean {
+  return typeof slug === "string" && PROJECT_REPO_WHITELIST.some((name) => slugifyRepoName(name) === slug);
+}
+
+function whitelistedRepoOrder(name: string): number {
+  const index = PROJECT_REPO_WHITELIST_KEYS.indexOf(normalizeRepoKey(name));
+  return index === -1 ? PROJECT_REPO_WHITELIST.length : index;
+}
+
+function filterWhitelistedRepos(repos: GithubRepo[]): GithubRepo[] {
+  return repos
+    .filter((repo) => isWhitelistedProjectRepoName(repo.name))
+    .sort((a, b) => whitelistedRepoOrder(a.name) - whitelistedRepoOrder(b.name));
+}
 
 function createTimeoutSignal(timeoutMs: number): AbortSignal {
   const ctrl = new AbortController();
@@ -700,11 +727,22 @@ async function loadLocalTestRepos(signal: AbortSignal): Promise<GithubRepo[]> {
 
   const index = (await indexRes.json()) as LocalProjectIndexEntry[];
   const templates = templateRes.ok ? ((await templateRes.json()) as Partial<GithubRepo>[]) : [];
-  const template = templates[0] ?? {};
 
-  return index
+  const repos = index
     .filter((entry) => entry.name && entry.fileName)
-    .map((entry) => normalizeGithubRepo(template, entry.name));
+    .map((entry) => {
+      const template =
+        templates.find(
+          (repo) =>
+            isWhitelistedProjectRepoName(repo.name) &&
+            normalizeRepoKey(repo.name ?? "") === normalizeRepoKey(entry.name)
+        ) ??
+        {};
+
+      return normalizeGithubRepo(template, entry.name);
+    });
+
+  return filterWhitelistedRepos(repos);
 }
 
 async function loadGithubRepos(signal: AbortSignal): Promise<GithubRepo[]> {
@@ -714,7 +752,7 @@ async function loadGithubRepos(signal: AbortSignal): Promise<GithubRepo[]> {
   });
   if (!reposRes.ok) return [];
 
-  return (await reposRes.json()) as GithubRepo[];
+  return filterWhitelistedRepos((await reposRes.json()) as GithubRepo[]);
 }
 
 async function loadRemoteMarkdownProjects(): Promise<RawProject[]> {

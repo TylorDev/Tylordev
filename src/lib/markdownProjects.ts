@@ -720,6 +720,10 @@ function normalizeGithubRepo(repo: Partial<GithubRepo>, name: string): GithubRep
   };
 }
 
+function normalizeRepoNameKey(name: string): string {
+  return name.trim().toLowerCase();
+}
+
 function githubRepoApiUrl(repoName: string): string {
   return `https://api.github.com/repos/${GITHUB_USER}/${encodeURIComponent(repoName)}`;
 }
@@ -765,10 +769,11 @@ async function loadWhitelistedGithubRepos(signal: AbortSignal): Promise<Whitelis
         if (!repoRes.ok) return null;
 
         const repo = (await repoRes.json()) as Partial<GithubRepo>;
-        if (repo.name !== entry.name) return null;
+        if (typeof repo.name !== "string") return null;
+        if (normalizeRepoNameKey(repo.name) !== normalizeRepoNameKey(entry.name)) return null;
 
         return {
-          repo: normalizeGithubRepo(repo, entry.name),
+          repo: normalizeGithubRepo(repo, repo.name),
           assets: normalizeProjectAssets(entry),
         };
       } catch (err) {

@@ -1,7 +1,6 @@
 import type { RawButton, RawProject, RawSection, RawTranslation } from "./types";
 
 const GITHUB_USER = "TylorDev";
-const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`;
 const WIKI_LOCALE_SEPARATOR = "\u2010";
 const LOCAL_TEST_BASE = "/Test";
 const PROJECTS_BASE = "/Projects";
@@ -711,10 +710,6 @@ function markdownUrl(repoName: string, locale?: "es" | "pt"): string {
   );
 }
 
-function reposUrl(): string {
-  return GITHUB_REPOS_URL;
-}
-
 function normalizeGithubRepo(repo: Partial<GithubRepo>, name: string): GithubRepo {
   return {
     name,
@@ -723,6 +718,10 @@ function normalizeGithubRepo(repo: Partial<GithubRepo>, name: string): GithubRep
     topics: Array.isArray(repo.topics) ? repo.topics.filter((topic) => typeof topic === "string") : [],
     pushed_at: typeof repo.pushed_at === "string" ? repo.pushed_at : null,
   };
+}
+
+function githubRepoApiUrl(repoName: string): string {
+  return `https://api.github.com/repos/${GITHUB_USER}/${encodeURIComponent(repoName)}`;
 }
 
 function normalizeProjectAssets(entry: LocalProjectWhitelistEntry): ProjectAssetManifest {
@@ -752,40 +751,34 @@ async function loadLocalProjectWhitelist(signal: AbortSignal): Promise<LocalProj
   }
 }
 
-function matchWhitelistedRepos(
-  repos: GithubRepo[],
-  whitelist: LocalProjectWhitelistEntry[]
-): WhitelistedGithubRepo[] {
-  const reposByExactName = new Map(repos.map((repo) => [repo.name, repo]));
-
-  return whitelist
-    .map((entry) => {
-      const repo = reposByExactName.get(entry.name);
-      if (!repo) return null;
-
-      return {
-        repo,
-        assets: normalizeProjectAssets(entry),
-      };
-    })
-    .filter((entry): entry is WhitelistedGithubRepo => entry !== null);
-}
-
 async function loadWhitelistedGithubRepos(signal: AbortSignal): Promise<WhitelistedGithubRepo[]> {
   const whitelist = await loadLocalProjectWhitelist(signal);
   if (whitelist.length === 0) return [];
 
-  const reposRes = await fetch(reposUrl(), {
-    signal,
-    cache: "default",
-  });
-  if (!reposRes.ok) return [];
+  const repos = await Promise.all(
+    whitelist.map(async (entry): Promise<WhitelistedGithubRepo | null> => {
+      try {
+        const repoRes = await fetch(githubRepoApiUrl(entry.name), {
+          signal,
+          cache: "default",
+        });
+        if (!repoRes.ok) return null;
 
-  const repos = ((await reposRes.json()) as Partial<GithubRepo>[])
-    .filter((repo): repo is Partial<GithubRepo> & { name: string } => typeof repo.name === "string")
-    .map((repo) => normalizeGithubRepo(repo, repo.name));
+        const repo = (await repoRes.json()) as Partial<GithubRepo>;
+        if (repo.name !== entry.name) return null;
 
-  return matchWhitelistedRepos(repos, whitelist);
+        return {
+          repo: normalizeGithubRepo(repo, entry.name),
+          assets: normalizeProjectAssets(entry),
+        };
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") throw err;
+        return null;
+      }
+    })
+  );
+
+  return repos.filter((entry): entry is WhitelistedGithubRepo => entry !== null);
 }
 
 function applyLocalProjectAssets(project: RawProject, assets: ProjectAssetManifest): RawProject {

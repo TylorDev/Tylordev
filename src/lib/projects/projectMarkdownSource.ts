@@ -19,15 +19,28 @@ function localMarkdownFileName(repoName: string, locale?: "es" | "pt"): string {
   return locale ? `${repoName}-${locale}.md` : `${repoName}.md`;
 }
 
-function markdownUrl(repoName: string, locale?: "es" | "pt"): string {
+function translationMarkdownFileNames(repoName: string, locale: "es" | "pt"): string[] {
+  const lowercaseRepoName = repoName.toLowerCase();
+  const candidates = [
+    `${repoName}-${locale}.md`,
+    `${lowercaseRepoName}-${locale}.md`,
+    `${repoName} ${locale}.md`,
+    `${lowercaseRepoName} ${locale}.md`,
+  ];
+
+  return candidates.filter((fileName, index) => candidates.indexOf(fileName) === index);
+}
+
+function markdownFileNames(repoName: string, locale?: "es" | "pt"): string[] {
+  return locale ? translationMarkdownFileNames(repoName, locale) : [localMarkdownFileName(repoName)];
+}
+
+function markdownUrl(repoName: string, fileName: string): string {
   if (import.meta.env.DEV) {
-    return `${LOCAL_TEST_BASE}/${encodeURIComponent(localMarkdownFileName(repoName, locale))}`;
+    return `${LOCAL_TEST_BASE}/${encodeURIComponent(fileName)}`;
   }
 
-  return wikiMarkdownUrl(
-    repoName,
-    locale ? `${repoName}${WIKI_LOCALE_SEPARATOR}${locale}.md` : `${repoName}.md`
-  );
+  return wikiMarkdownUrl(repoName, fileName);
 }
 
 export function markdownNameCandidates(repoName: string, folderName: string): string[] {
@@ -45,8 +58,19 @@ export async function fetchFirstMarkdown(
   locale?: "es" | "pt"
 ): Promise<string | null> {
   for (const name of names) {
-    const markdown = await fetchText(markdownUrl(name, locale), signal);
-    if (markdown) return markdown;
+    const fileNames = import.meta.env.DEV
+      ? markdownFileNames(name, locale)
+      : locale
+        ? [
+            `${name}${WIKI_LOCALE_SEPARATOR}${locale}.md`,
+            ...translationMarkdownFileNames(name, locale),
+          ]
+        : markdownFileNames(name);
+
+    for (const fileName of fileNames) {
+      const markdown = await fetchText(markdownUrl(name, fileName), signal);
+      if (markdown) return markdown;
+    }
   }
 
   return null;

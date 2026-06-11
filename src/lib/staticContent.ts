@@ -416,13 +416,17 @@ function nonEmptyString(value: unknown): string | undefined {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
 
+function githubApiUrl(path: string): string {
+  return import.meta.env.DEV ? `/__dev/github-api${path}` : `https://api.github.com${path}`;
+}
+
 async function fetchGitHubProfile(username: string): Promise<GitHubProfile | null> {
   if (!username) return null;
   if (_githubProfilePromise) return _githubProfilePromise;
 
   const ctrl = new AbortController();
   const timer = globalThis.setTimeout(() => ctrl.abort(), REMOTE_FETCH_TIMEOUT_MS);
-  _githubProfilePromise = fetch(`https://api.github.com/users/${encodeURIComponent(username)}`, {
+  _githubProfilePromise = fetch(githubApiUrl(`/users/${encodeURIComponent(username)}`), {
     signal: ctrl.signal,
   })
     .then((res) => (res.ok ? res.json() as Promise<GitHubProfile> : null))
@@ -438,7 +442,7 @@ async function fetchGitHubSocialAccounts(username: string): Promise<GitHubSocial
 
   const ctrl = new AbortController();
   const timer = globalThis.setTimeout(() => ctrl.abort(), REMOTE_FETCH_TIMEOUT_MS);
-  _githubSocialAccountsPromise = fetch(`https://api.github.com/users/${encodeURIComponent(username)}/social_accounts`, {
+  _githubSocialAccountsPromise = fetch(githubApiUrl(`/users/${encodeURIComponent(username)}/social_accounts`), {
     signal: ctrl.signal,
   })
     .then((res) => (res.ok ? res.json() as Promise<GitHubSocialAccount[]> : []))

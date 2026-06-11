@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react-swc";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const DEV_GITHUB_API_PREFIX = "/__dev/github-api";
+
 interface ProjectAssetIndexEntry {
   name: string;
   coverImageSrc?: string;
@@ -21,6 +23,71 @@ async function pathExists(filePath: string): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+function readLocalEnvValue(envText: string, key: string): string | undefined {
+  const line = envText
+    .split(/\r?\n/)
+    .map((entry) => entry.trim())
+    .find((entry) => entry && !entry.startsWith("#") && entry.startsWith(`${key}=`));
+
+  if (!line) return undefined;
+
+  const value = line.slice(key.length + 1).trim();
+  return value.replace(/^["']|["']$/g, "") || undefined;
+}
+
+async function readLocalGithubToken(): Promise<string | undefined> {
+  const envFiles = [".env.local", ".env"];
+
+  for (const fileName of envFiles) {
+    try {
+      const envText = await fs.readFile(path.resolve(__dirname, fileName), "utf8");
+      const token = readLocalEnvValue(envText, "GITHUB_TOKEN");
+      if (token) return token;
+    } catch {
+      // Missing local env files are fine in dev.
+    }
+  }
+
+  return undefined;
+}
+
+function githubDevProxy(): Plugin {
+  return {
+    name: "github-dev-proxy",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use(DEV_GITHUB_API_PREFIX, async (req, res) => {
+        try {
+          const rawUrl = req.url ?? "";
+          const githubPath = rawUrl.startsWith("/") ? rawUrl : `/${rawUrl}`;
+          const targetUrl = `https://api.github.com${githubPath}`;
+          const token = await readLocalGithubToken();
+          const headers: HeadersInit = {
+            Accept: "application/vnd.github+json",
+            "User-Agent": "Tylordev-local-dev",
+          };
+
+          if (token) {
+            headers.Authorization = `Bearer ${token}`;
+          }
+
+          const response = await fetch(targetUrl, { headers });
+          const body = await response.arrayBuffer();
+
+          res.statusCode = response.status;
+          res.setHeader("Content-Type", response.headers.get("content-type") ?? "application/json; charset=utf-8");
+          res.setHeader("Cache-Control", "no-store");
+          res.end(Buffer.from(body));
+        } catch {
+          res.statusCode = 502;
+          res.setHeader("Content-Type", "application/json; charset=utf-8");
+          res.end(JSON.stringify({ error: "Failed to proxy GitHub API request." }));
+        }
+      });
+    },
+  };
 }
 
 function projectsWhitelistIndex(): Plugin {
@@ -185,7 +252,7 @@ function testContentWatcher(): Plugin {
 
 export default defineConfig({
   base: "/",
-  plugins: [react(), projectsWhitelistIndex(), testContentWatcher()],
+  plugins: [react(), githubDevProxy(), projectsWhitelistIndex(), testContentWatcher()],
   resolve: {
     alias: { "@": path.resolve(__dirname, "src") },
   },

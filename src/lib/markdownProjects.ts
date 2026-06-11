@@ -4,9 +4,9 @@ const GITHUB_USER = "TylorDev";
 const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`;
 const WIKI_LOCALE_SEPARATOR = "\u2010";
 const LOCAL_TEST_BASE = "/Test";
-const LOCAL_PROJECTS_INDEX_URL = `${LOCAL_TEST_BASE}/projects-index.json`;
+const PROJECTS_BASE = "/Projects";
+const LOCAL_PROJECTS_INDEX_URL = `${PROJECTS_BASE}/projects-index.json`;
 const REMOTE_FETCH_TIMEOUT_MS = 3500;
-export const PROJECT_REPO_WHITELIST = ["Elevate", "WhoDownloads"] as const;
 
 const RAW_SHAPE_HEADING = "## RawProject shape in Markdown";
 const TRANSLATION_PATCH_HEADING = "## RawProject translation patch in Markdown";
@@ -21,38 +21,25 @@ interface GithubRepo {
   pushed_at: string | null;
 }
 
-interface LocalProjectIndexEntry {
+interface ProjectAssetManifest {
+  coverImageSrc?: string;
+  bannerImage?: string;
+  sectionImages: string[];
+}
+
+interface LocalProjectWhitelistEntry {
   name: string;
-  fileName: string;
+  coverImageSrc?: string;
+  bannerImage?: string;
+  sectionImages?: string[];
+}
+
+interface WhitelistedGithubRepo {
+  repo: GithubRepo;
+  assets: ProjectAssetManifest;
 }
 
 let remoteProjectsPromise: Promise<RawProject[]> | null = null;
-
-function normalizeRepoKey(name: string): string {
-  return name.trim().toLowerCase();
-}
-
-const PROJECT_REPO_WHITELIST_KEYS = PROJECT_REPO_WHITELIST.map(normalizeRepoKey);
-const PROJECT_REPO_WHITELIST_SET = new Set(PROJECT_REPO_WHITELIST_KEYS);
-
-export function isWhitelistedProjectRepoName(name: string | null | undefined): boolean {
-  return typeof name === "string" && PROJECT_REPO_WHITELIST_SET.has(normalizeRepoKey(name));
-}
-
-export function isWhitelistedProjectSlug(slug: string | null | undefined): boolean {
-  return typeof slug === "string" && PROJECT_REPO_WHITELIST.some((name) => slugifyRepoName(name) === slug);
-}
-
-function whitelistedRepoOrder(name: string): number {
-  const index = PROJECT_REPO_WHITELIST_KEYS.indexOf(normalizeRepoKey(name));
-  return index === -1 ? PROJECT_REPO_WHITELIST.length : index;
-}
-
-function filterWhitelistedRepos(repos: GithubRepo[]): GithubRepo[] {
-  return repos
-    .filter((repo) => isWhitelistedProjectRepoName(repo.name))
-    .sort((a, b) => whitelistedRepoOrder(a.name) - whitelistedRepoOrder(b.name));
-}
 
 function createTimeoutSignal(timeoutMs: number): AbortSignal {
   const ctrl = new AbortController();
@@ -609,6 +596,33 @@ function applyRemoteRepoPublishedAt(project: RawProject, pushedAt: string | null
   };
 }
 
+function createBaseGithubProject(repo: GithubRepo, assets: ProjectAssetManifest): RawProject {
+  const sectionImages = assets.sectionImages;
+
+  return {
+    slug: slugifyRepoName(repo.name),
+    publishedAt: repo.pushed_at,
+    shared: {
+      title: repo.name,
+      coverImageSrc: assets.coverImageSrc,
+      backgroundImage: assets.bannerImage,
+    },
+    translations: repo.description
+      ? [
+          {
+            locale: "en-us",
+            subtitle: repo.description,
+          },
+        ]
+      : [],
+    sections: sectionImages.map((coverImage, index) => ({
+      flexDirection: index % 2 === 0 ? "row" : "row-reverse",
+      coverImage,
+      translations: [],
+    })),
+  };
+}
+
 export function parseMarkdownProject(markdown: string): RawProject | null {
   const rawShape = getRawShape(markdown);
   if (!rawShape) return null;
@@ -698,7 +712,7 @@ function markdownUrl(repoName: string, locale?: "es" | "pt"): string {
 }
 
 function reposUrl(): string {
-  return import.meta.env.DEV ? `${LOCAL_TEST_BASE}/repos.json` : GITHUB_REPOS_URL;
+  return GITHUB_REPOS_URL;
 }
 
 function normalizeGithubRepo(repo: Partial<GithubRepo>, name: string): GithubRepo {
@@ -711,82 +725,118 @@ function normalizeGithubRepo(repo: Partial<GithubRepo>, name: string): GithubRep
   };
 }
 
-async function loadLocalTestRepos(signal: AbortSignal): Promise<GithubRepo[]> {
-  const [indexRes, templateRes] = await Promise.all([
-    fetch(LOCAL_PROJECTS_INDEX_URL, {
-      signal,
-      cache: "no-store",
-    }),
-    fetch(reposUrl(), {
-      signal,
-      cache: "no-store",
-    }),
-  ]);
-
-  if (!indexRes.ok) return [];
-
-  const index = (await indexRes.json()) as LocalProjectIndexEntry[];
-  const templates = templateRes.ok ? ((await templateRes.json()) as Partial<GithubRepo>[]) : [];
-
-  const repos = index
-    .filter((entry) => entry.name && entry.fileName)
-    .map((entry) => {
-      const template =
-        templates.find(
-          (repo) =>
-            isWhitelistedProjectRepoName(repo.name) &&
-            normalizeRepoKey(repo.name ?? "") === normalizeRepoKey(entry.name)
-        ) ??
-        {};
-
-      return normalizeGithubRepo(template, entry.name);
-    });
-
-  return filterWhitelistedRepos(repos);
+function normalizeProjectAssets(entry: LocalProjectWhitelistEntry): ProjectAssetManifest {
+  return {
+    coverImageSrc: typeof entry.coverImageSrc === "string" ? entry.coverImageSrc : undefined,
+    bannerImage: typeof entry.bannerImage === "string" ? entry.bannerImage : undefined,
+    sectionImages: Array.isArray(entry.sectionImages)
+      ? entry.sectionImages.filter((image) => typeof image === "string")
+      : [],
+  };
 }
 
-async function loadGithubRepos(signal: AbortSignal): Promise<GithubRepo[]> {
+async function loadLocalProjectWhitelist(signal: AbortSignal): Promise<LocalProjectWhitelistEntry[]> {
+  try {
+    const indexRes = await fetch(LOCAL_PROJECTS_INDEX_URL, {
+      signal,
+      cache: import.meta.env.DEV ? "no-store" : "default",
+    });
+
+    if (!indexRes.ok) return [];
+
+    const entries = (await indexRes.json()) as LocalProjectWhitelistEntry[];
+    return entries.filter((entry) => typeof entry.name === "string" && entry.name.trim() === entry.name);
+  } catch (err) {
+    if (err instanceof Error && err.name === "AbortError") throw err;
+    return [];
+  }
+}
+
+function matchWhitelistedRepos(
+  repos: GithubRepo[],
+  whitelist: LocalProjectWhitelistEntry[]
+): WhitelistedGithubRepo[] {
+  const reposByExactName = new Map(repos.map((repo) => [repo.name, repo]));
+
+  return whitelist
+    .map((entry) => {
+      const repo = reposByExactName.get(entry.name);
+      if (!repo) return null;
+
+      return {
+        repo,
+        assets: normalizeProjectAssets(entry),
+      };
+    })
+    .filter((entry): entry is WhitelistedGithubRepo => entry !== null);
+}
+
+async function loadWhitelistedGithubRepos(signal: AbortSignal): Promise<WhitelistedGithubRepo[]> {
+  const whitelist = await loadLocalProjectWhitelist(signal);
+  if (whitelist.length === 0) return [];
+
   const reposRes = await fetch(reposUrl(), {
     signal,
     cache: "default",
   });
   if (!reposRes.ok) return [];
 
-  return filterWhitelistedRepos((await reposRes.json()) as GithubRepo[]);
+  const repos = ((await reposRes.json()) as Partial<GithubRepo>[])
+    .filter((repo): repo is Partial<GithubRepo> & { name: string } => typeof repo.name === "string")
+    .map((repo) => normalizeGithubRepo(repo, repo.name));
+
+  return matchWhitelistedRepos(repos, whitelist);
+}
+
+function applyLocalProjectAssets(project: RawProject, assets: ProjectAssetManifest): RawProject {
+  const coverImage = assets.coverImageSrc;
+  const bannerImage = assets.bannerImage;
+  const sectionImages = assets.sectionImages;
+
+  return {
+    ...project,
+    shared: {
+      ...project.shared,
+      coverImageSrc: coverImage ?? project.shared.coverImageSrc,
+      backgroundImage: bannerImage ?? project.shared.backgroundImage,
+    },
+    sections: (project.sections ?? []).map((section, index) => ({
+      ...section,
+      coverImage: sectionImages[index] ?? section.coverImage,
+    })),
+  };
 }
 
 async function loadRemoteMarkdownProjects(): Promise<RawProject[]> {
   try {
     const signal = createTimeoutSignal(REMOTE_FETCH_TIMEOUT_MS);
-    const repos = import.meta.env.DEV
-      ? await loadLocalTestRepos(signal)
-      : await loadGithubRepos(signal);
+    const whitelistedRepos = await loadWhitelistedGithubRepos(signal);
 
     const projects = await Promise.all(
-      repos
-        .filter((repo) => repo.name)
-        .map(async (repo) => {
+      whitelistedRepos
+        .filter(({ repo }) => repo.name)
+        .map(async ({ repo, assets }) => {
           const markdown = await fetchText(markdownUrl(repo.name), signal);
           const project = markdown ? parseMarkdownProject(markdown) : null;
-          if (!project) return null;
 
-          const patches = await Promise.all([
-            fetchText(markdownUrl(repo.name, "es"), signal).then((patchMarkdown) =>
-              patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "es-mx") : null
-            ),
-            fetchText(markdownUrl(repo.name, "pt"), signal).then((patchMarkdown) =>
-              patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "pt-br") : null
-            ),
-          ]);
+          const patches: (ProjectTranslationPatch | null)[] = project
+            ? await Promise.all([
+                fetchText(markdownUrl(repo.name, "es"), signal).then((patchMarkdown) =>
+                  patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "es-mx") : null
+                ),
+                fetchText(markdownUrl(repo.name, "pt"), signal).then((patchMarkdown) =>
+                  patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "pt-br") : null
+                ),
+              ])
+            : [];
+          const validPatches = patches.filter((patch): patch is ProjectTranslationPatch => patch !== null);
 
-          const mergedProject = patches
-            .filter((patch): patch is ProjectTranslationPatch => patch !== null)
-            .reduce(
-              (nextProject, patch) => applyTranslationPatch(nextProject, patch),
-              { ...project, slug: slugifyRepoName(repo.name) }
-            );
+          const mergedProject = validPatches.reduce(
+            (nextProject, patch) => applyTranslationPatch(nextProject, patch),
+            project ? { ...project, slug: slugifyRepoName(repo.name) } : createBaseGithubProject(repo, assets)
+          );
 
-          return applyRemoteRepoIdentity(
+          const remoteProject = applyRemoteRepoIdentity(
             applyRemoteRepoPublishedAt(
               applyRemoteRepoType(
                 applyRemoteRepoTechnologies(
@@ -800,6 +850,8 @@ async function loadRemoteMarkdownProjects(): Promise<RawProject[]> {
             repo.name,
             repo.homepage
           );
+
+          return applyLocalProjectAssets(remoteProject, assets);
         })
     );
 

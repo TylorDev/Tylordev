@@ -2,8 +2,6 @@ import { exampleArticles } from "./fixtures";
 import {
   fetchRemoteMarkdownProjects,
   invalidateRemoteMarkdownProjectsCache,
-  isWhitelistedProjectRepoName,
-  isWhitelistedProjectSlug,
 } from "./markdownProjects";
 import { fetchRemotePage } from "./staticContent";
 import type { Article, Locale, Project, RawArticle, RawProject } from "./types";
@@ -14,7 +12,6 @@ const DEFAULT_API_URL = import.meta.env.DEV
 
 const API_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? DEFAULT_API_URL;
 export const apiUrl = (path: string) => `${API_URL}${path}`;
-const shouldFetchApi = Boolean(import.meta.env.VITE_API_URL) || !import.meta.env.DEV;
 
 interface CacheEntry<T> {
   data: T;
@@ -49,56 +46,23 @@ class UnpublishedContentError extends Error {
 const isPublished = (item: { publishedAt?: string | null }): boolean =>
   Boolean(item.publishedAt);
 
-const isWhitelistedProject = (project: RawProject): boolean =>
-  isWhitelistedProjectSlug(project.slug) ||
-  isWhitelistedProjectRepoName(project.shared?.title);
-
-const filterPublishedWhitelistedProjects = (projects: RawProject[]): RawProject[] =>
-  projects.filter(isPublished).filter(isWhitelistedProject);
-
 export const fetchProjects = async (signal?: AbortSignal): Promise<RawProject[]> => {
+  if (signal?.aborted) throw new DOMException("The operation was aborted.", "AbortError");
   const remoteProjects = await fetchRemoteMarkdownProjects();
 
   if (remoteProjects && remoteProjects.length > 0) {
     return remoteProjects;
   }
 
-  if (!shouldFetchApi) {
-    return [];
-  }
-
-  try {
-    const list = await cachedJson<RawProject[]>(apiUrl("/projects"), signal);
-    return filterPublishedWhitelistedProjects(list);
-  } catch (err) {
-    if (isAbort(err)) throw err;
-    console.warn("[api] /projects failed, returning no projects:", err);
-    return [];
-  }
+  return [];
 };
 
 export const fetchProject = async (slug: string, signal?: AbortSignal): Promise<RawProject> => {
-  if (!isWhitelistedProjectSlug(slug)) {
-    throw new Error(`Project "${slug}" not found.`);
-  }
-
+  if (signal?.aborted) throw new DOMException("The operation was aborted.", "AbortError");
   const remoteProject = (await fetchRemoteMarkdownProjects()).find((p) => p.slug === slug);
   if (remoteProject) return remoteProject;
 
-  if (!shouldFetchApi) {
-    throw new Error(`Project "${slug}" not found.`);
-  }
-
-  try {
-    const project = await cachedJson<RawProject>(apiUrl(`/projects/${slug}`), signal);
-    if (!isPublished(project) || !isWhitelistedProject(project)) {
-      throw new UnpublishedContentError("project");
-    }
-    return project;
-  } catch (err) {
-    if (isAbort(err) || err instanceof UnpublishedContentError) throw err;
-    throw err;
-  }
+  throw new Error(`Project "${slug}" not found.`);
 };
 
 export const fetchArticles = async (signal?: AbortSignal): Promise<RawArticle[]> => {

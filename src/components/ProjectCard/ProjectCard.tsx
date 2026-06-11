@@ -69,7 +69,7 @@ export default function ProjectCard({ project, onClick, priority = false }: Prop
             alt={data.tittle}
             loading={priority ? "eager" : "lazy"}
             decoding="async"
-            fetchPriority={priority ? "high" : "auto"}
+            {...({ fetchpriority: priority ? "high" : "auto" } as Record<string, string>)}
             width={640}
             height={400}
           />

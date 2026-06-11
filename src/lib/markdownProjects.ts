@@ -35,6 +35,7 @@ interface LocalProjectWhitelistEntry {
 
 interface WhitelistedGithubRepo {
   repo: GithubRepo;
+  folderName: string;
   assets: ProjectAssetManifest;
 }
 
@@ -710,6 +711,28 @@ function markdownUrl(repoName: string, locale?: "es" | "pt"): string {
   );
 }
 
+function markdownNameCandidates(repoName: string, folderName: string): string[] {
+  const seen = new Set<string>();
+  return [repoName, folderName].filter((name) => {
+    if (seen.has(name)) return false;
+    seen.add(name);
+    return true;
+  });
+}
+
+async function fetchFirstMarkdown(
+  names: string[],
+  signal: AbortSignal,
+  locale?: "es" | "pt"
+): Promise<string | null> {
+  for (const name of names) {
+    const markdown = await fetchText(markdownUrl(name, locale), signal);
+    if (markdown) return markdown;
+  }
+
+  return null;
+}
+
 function normalizeGithubRepo(repo: Partial<GithubRepo>, name: string): GithubRepo {
   return {
     name,
@@ -774,6 +797,7 @@ async function loadWhitelistedGithubRepos(signal: AbortSignal): Promise<Whitelis
 
         return {
           repo: normalizeGithubRepo(repo, repo.name),
+          folderName: entry.name,
           assets: normalizeProjectAssets(entry),
         };
       } catch (err) {
@@ -813,16 +837,17 @@ async function loadRemoteMarkdownProjects(): Promise<RawProject[]> {
     const projects = await Promise.all(
       whitelistedRepos
         .filter(({ repo }) => repo.name)
-        .map(async ({ repo, assets }) => {
-          const markdown = await fetchText(markdownUrl(repo.name), signal);
+        .map(async ({ repo, folderName, assets }) => {
+          const markdownCandidates = markdownNameCandidates(repo.name, folderName);
+          const markdown = await fetchFirstMarkdown(markdownCandidates, signal);
           const project = markdown ? parseMarkdownProject(markdown) : null;
 
           const patches: (ProjectTranslationPatch | null)[] = project
             ? await Promise.all([
-                fetchText(markdownUrl(repo.name, "es"), signal).then((patchMarkdown) =>
+                fetchFirstMarkdown(markdownCandidates, signal, "es").then((patchMarkdown) =>
                   patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "es-mx") : null
                 ),
-                fetchText(markdownUrl(repo.name, "pt"), signal).then((patchMarkdown) =>
+                fetchFirstMarkdown(markdownCandidates, signal, "pt").then((patchMarkdown) =>
                   patchMarkdown ? parseMarkdownProjectTranslationPatch(patchMarkdown, "pt-br") : null
                 ),
               ])

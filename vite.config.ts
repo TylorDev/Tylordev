@@ -12,8 +12,17 @@ interface ProjectAssetIndexEntry {
   sectionImages: string[];
 }
 
+const PROJECT_IMAGE_EXTENSIONS = ["avif", "webp", "png", "jpeg", "jpg"] as const;
+
 function publicProjectUrl(projectName: string, fileName: string): string {
   return `/Projects/${encodeURIComponent(projectName)}/${encodeURIComponent(fileName)}`;
+}
+
+function preferredProjectImage(baseName: string, fileNames: string[]): string | undefined {
+  const availableFiles = new Set(fileNames);
+  return PROJECT_IMAGE_EXTENSIONS
+    .map((extension) => `${baseName}.${extension}`)
+    .find((fileName) => availableFiles.has(fileName));
 }
 
 async function pathExists(filePath: string): Promise<boolean> {
@@ -105,23 +114,26 @@ function projectsWhitelistIndex(): Plugin {
           const projectDir = path.join(projectsDir, entry.name);
           const files = await fs.readdir(projectDir, { withFileTypes: true });
           const fileNames = files.filter((file) => file.isFile()).map((file) => file.name);
-          const sectionImages = fileNames
-            .map((fileName) => {
-              const match = fileName.match(/^Seccion_(\d+)\.png$/);
-              return match ? { fileName, index: Number(match[1]) } : null;
-            })
-            .filter((file): file is { fileName: string; index: number } => file !== null)
-            .sort((a, b) => a.index - b.index)
-            .map(({ fileName }) => publicProjectUrl(entry.name, fileName));
+          const sectionIndexes = Array.from(
+            new Set(
+              fileNames
+                .map((fileName) => fileName.match(/^Seccion_(\d+)\.(?:avif|webp|png|jpeg|jpg)$/)?.[1])
+                .filter((index): index is string => index !== undefined)
+                .map(Number)
+            )
+          ).sort((a, b) => a - b);
+
+          const sectionImages = sectionIndexes
+            .map((index) => preferredProjectImage(`Seccion_${index}`, fileNames))
+            .filter((fileName): fileName is string => fileName !== undefined)
+            .map((fileName) => publicProjectUrl(entry.name, fileName));
+          const coverImage = preferredProjectImage("Portada", fileNames);
+          const bannerImage = preferredProjectImage("Banner", fileNames);
 
           return {
             name: entry.name,
-            coverImageSrc: fileNames.includes("Portada.png")
-              ? publicProjectUrl(entry.name, "Portada.png")
-              : undefined,
-            bannerImage: fileNames.includes("Banner.png")
-              ? publicProjectUrl(entry.name, "Banner.png")
-              : undefined,
+            coverImageSrc: coverImage ? publicProjectUrl(entry.name, coverImage) : undefined,
+            bannerImage: bannerImage ? publicProjectUrl(entry.name, bannerImage) : undefined,
             sectionImages,
           };
         })
